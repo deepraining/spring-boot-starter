@@ -1,0 +1,102 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+    jcenter()
+    mavenCentral()
+    maven { url 'https://plugins.gradle.org/m2/' }
+  }
+}
+
+plugins {
+  id 'java'
+  id 'application'
+  id 'checkstyle'
+  id 'com.github.sherter.google-java-format' version '0.8'
+  id 'org.springframework.boot' version '2.1.4.RELEASE'
+  id "io.freefair.lombok" version "3.5.2"
+  id "io.spring.dependency-management" version "1.0.7.RELEASE"
+}
+
+allprojects {
+  repositories {
+    mavenLocal()
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+    jcenter()
+    mavenCentral()
+    maven { url 'http://repo.spring.io/release' }
+    maven { url 'http://repo.spring.io/milestone' }
+    maven { url 'http://repo.spring.io/snapshot' }
+  }
+}
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'application'
+  apply plugin: 'io.freefair.lombok'
+
+  /**
+   * Watch java files' changes, and recompile
+   *
+   * ```
+   * ./gradlew pro-*:watchJava -t
+   * ./gradlew pro-*:watchJava --continuous
+   * ```
+   */
+  // noinspection GroovyAssignabilityCheck
+  task watchJava(type: GradleBuild) {
+    description "Watch java files' changes, and recompile."
+    inputs.files 'src/main/java'
+    tasks = ['compileJava']
+  }
+}
+
+def genMapperExcludePath = 'pro-gen/src/main/java/senntyou/sbs/gen/mapper/'
+def genModelExcludePath = 'pro-gen/src/main/java/senntyou/sbs/gen/model/'
+
+googleJavaFormat {
+  toolVersion = "1.7"
+  exclude genMapperExcludePath
+  exclude genModelExcludePath
+}
+
+checkstyle {
+  toolVersion '8.21'
+}
+
+/**
+ * checkstyle all java files
+ *
+ * @note - Task[Checkstyle] depends on Plugin[checkstyle]
+ *       - Checkstyle does not have functionality of auto-fixing
+ */
+// noinspection GroovyAssignabilityCheck
+task checkJava(type: Checkstyle) {
+  configFile = file('config/checkstyle/checkstyle.xml')
+  classpath = files()
+  source './'
+  exclude genMapperExcludePath
+  exclude genModelExcludePath
+
+  if (System.properties.checkJavaInclude != null) {
+    def s = ((String)System.properties.checkJavaInclude).split(',')
+    def i = Arrays.asList(s)
+    include i
+  }
+}
+
+/**
+ * Git pre-commit hook installation
+ *
+ * ```
+ * from: https://github.com/uber/NullAway
+ * ```
+ */
+// noinspection GroovyAssignabilityCheck
+task installGitHooks(type: Copy) {
+  from(file('config/hooks/pre-commit-stub')) {
+    rename 'pre-commit-stub', 'pre-commit'
+  }
+  into file('.git/hooks')
+  fileMode 0777
+}

@@ -1,0 +1,5 @@
+dependencies {
+  implementation 'org.springframework.data:spring-data-commons:2.1.8.RELEASE'
+  implementation 'com.github.pagehelper:pagehelper:5.1.9'
+  implementation 'org.projectlombok:lombok:1.18.8'
+}

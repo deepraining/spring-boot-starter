@@ -1,0 +1,24 @@
+sudo: false
+
+language: java
+
+jdk:
+  - oraclejdk8
+  - openjdk11
+
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
+cache:
+  directories:
+    - $HOME/.m2
+
+branches:
+  only:
+    - master
+
+notifications:
+  email:
+    - your.email@gmail.com

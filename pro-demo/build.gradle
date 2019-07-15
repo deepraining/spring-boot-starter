@@ -1,0 +1,57 @@
+plugins {
+  id 'org.springframework.boot'
+  id "io.spring.dependency-management"
+}
+
+group = 'senntyou.sbs'
+version = 'latest'
+archivesBaseName = 'demo'
+sourceCompatibility = 1.8
+description = 'Spring Boot Starter Demo Application.'
+
+mainClassName = 'senntyou.sbs.demo.App'
+
+dependencies {
+  // spring boot
+  implementation('org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE') {
+    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+  }
+  implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.1.4.RELEASE'
+  implementation 'org.springframework.boot:spring-boot-devtools:2.1.4.RELEASE'
+  implementation 'org.springframework.data:spring-data-commons:2.1.8.RELEASE'
+  implementation 'org.springframework.boot:spring-boot-starter-aop:2.1.4.RELEASE'
+  implementation 'org.springframework.boot:spring-boot-starter-logging:2.1.4.RELEASE'
+  implementation 'org.springframework.boot:spring-boot-starter-actuator:2.1.4.RELEASE'
+  implementation 'org.springframework.boot:spring-boot-starter-security:2.1.4.RELEASE'
+  implementation 'org.springframework.boot:spring-boot-starter-undertow:2.1.4.RELEASE'
+
+  // database
+  implementation 'org.mybatis:mybatis:3.5.1'
+  implementation 'mysql:mysql-connector-java:8.0.16'
+  implementation 'com.zaxxer:HikariCP:3.3.1'
+
+  // tool
+  implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.11'
+  implementation 'com.github.pagehelper:pagehelper:5.1.9'
+  implementation 'org.projectlombok:lombok:1.18.8'
+  implementation 'io.springfox:springfox-swagger2:2.9.2'
+  implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+  implementation 'net.logstash.logback:logstash-logback-encoder:6.0'
+
+  // util
+//  implementation 'com.google.guava:guava:27.1-jre'
+//  implementation 'org.apache.commons:commons-collections4:4.3'
+//  implementation 'org.apache.commons:commons-lang3:3.9'
+//  implementation 'cn.hutool:hutool-core:4.5.10'
+//  implementation 'cn.hutool:hutool-http:4.5.10'
+//  implementation 'cn.hutool:hutool-json:4.5.10'
+//  implementation 'cn.hutool:hutool-extra:4.5.10'
+
+  // projects
+  implementation project(':pro-gen')
+  implementation project(':pro-common')
+
+  // test
+  testImplementation 'junit:junit:4.12'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test:2.1.4.RELEASE'
+}

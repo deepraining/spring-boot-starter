@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="senntyou.sbs.demo.dao.ArticleDao">
+  <resultMap id="recordMap" type="senntyou.sbs.demo.dto.ArticleResult"
+             extends="senntyou.sbs.gen.mapper.ArticleMapper.ResultMapWithBLOBs">
+  </resultMap>
+
+  <select id="getRecord" resultMap="recordMap">
+    SELECT *
+    FROM article
+    WHERE uuid=#{uuid};
+  </select>
+</mapper>
