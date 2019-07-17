@@ -47,8 +47,3 @@ logging:
 management:
   server:
     port: 9001
-
-# springfox configuration
-springfox:
-  swagger2:
-    enabled: true

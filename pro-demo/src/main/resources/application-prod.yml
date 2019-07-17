@@ -20,8 +20,3 @@ logging:
   level:
     org.springframework.web: ERROR
     senntyou.sbs: ERROR
-
-# springfox configuration
-springfox:
-  swagger2:
-    enabled: false
