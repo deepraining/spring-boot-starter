@@ -1,5 +1,7 @@
 package senntyou.sbs.demo.dto;
 
-public class ArticleResult extends ArticleParam {
+import senntyou.sbs.gen.model.Article;
+
+public class ArticleResult extends Article {
   //
 }

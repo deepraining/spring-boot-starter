@@ -37,9 +37,11 @@ public class ArticleController {
     if (user == null) {
       return CommonResult.unauthorized("Not Logged-in");
     }
-    articleParam.setCreateUserUuid(user.getUuid());
 
-    int count = articleService.create(articleParam);
+    Article article = articleParam.toArticle();
+    article.setCreateUserUuid(user.getUuid());
+
+    int count = articleService.create(article);
     if (count > 0) {
       return CommonResult.success(count);
     } else {
@@ -64,7 +66,9 @@ public class ArticleController {
       return CommonResult.forbidden("No privileges");
     }
 
-    int count = articleService.update(uuid, articleParam);
+    Article newArticle = articleParam.toArticle();
+
+    int count = articleService.update(uuid, newArticle);
     if (count > 0) {
       return CommonResult.success(count);
     } else {

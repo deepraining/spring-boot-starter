@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import senntyou.sbs.demo.dao.ArticleDao;
-import senntyou.sbs.demo.dto.ArticleParam;
 import senntyou.sbs.demo.dto.ArticleQueryParam;
 import senntyou.sbs.demo.dto.ArticleResult;
 import senntyou.sbs.demo.service.ArticleService;
@@ -20,7 +19,7 @@ public class ArticleServiceImpl implements ArticleService {
   @Autowired private ArticleDao articleDao;
 
   @Override
-  public int create(ArticleParam article) {
+  public int create(Article article) {
     article.setId(null);
     articleMapper.insertSelective(article);
 
@@ -45,7 +44,7 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
-  public int update(String uuid, ArticleParam article) {
+  public int update(String uuid, Article article) {
     ArticleExample example = new ArticleExample();
     example.createCriteria().andUuidEqualTo(uuid);
 
