@@ -1,6 +1,7 @@
 package senntyou.sbs.demo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,10 +26,21 @@ import senntyou.sbs.gen.model.User;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+  // Whether enable swagger2
+  @Value("${springfox.swagger2.enabled}")
+  private String enabled;
+
   @Autowired private UserService userService;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    if (!enabled.equals("true")) {
+      http.authorizeRequests()
+          .antMatchers(
+              HttpMethod.GET, "/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs/**")
+          .denyAll();
+    }
+
     http.authorizeRequests()
         .antMatchers("/user", "/api/user/**/*")
         .authenticated()

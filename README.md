@@ -79,11 +79,16 @@ Install Git `pre-commit` Hook.
 Create database and tables.
 
 ```
-# Default config file is flyway.conf
+# For local environment: default config file is flyway.conf
 flyway migrate
 
-# Config file of production environment is flyway-prod.conf
+# For online test environment
+flyway migrate -configFiles=flyway-test.conf
+
+# For online production environment
 flyway migrate -configFiles=flyway-prod.conf
+
+# If you want more environments, you can add one by yourself 
 ```
 
 Generate Mybatis model files.
@@ -94,7 +99,7 @@ Generate Mybatis model files.
 
 ## Run project
 
-Develop and debug `pro-demo` sub project in local environment.
+Develop and debug `pro-demo` sub project in local environment, then open `http://localhost:9000` in browser.
 
 ```
 ./gradlew pro-demo:bootRun
@@ -116,25 +121,26 @@ Build this project when finish developing.
 
 Create a `serverDirName` directory in a proper place of server machine.
 
-Upload `pro-demo/build/libs/demo-latest.jar, bin/demo.sh` in local to `serverDirName` directory in server machine,
+Upload `pro-demo/build/libs/demo-latest.jar, bin/demo-*.sh` in local to `serverDirName` directory in server machine,
 and also upload `html` files of frontend to `serverDirName/templates` directory.
 
 ```
 - serverDirName/
-  - demo.sh
+  - demo-test.sh
+  - demo-prod.sh
   - demo-latest.jar
   - templates/
 ```
 
-Related commands of running.
+Related commands of running (take `demo-prod.sh` for example).
 
 ```
 cd serverDirName
 
-sh demo.sh start        # start running
-sh demo.sh stop         # stop running
-sh demo.sh restart      # restart running
-sh demo.sh status       # see the status
+sh demo-prod.sh start        # start running
+sh demo-prod.sh stop         # stop running
+sh demo-prod.sh restart      # restart running
+sh demo-prod.sh status       # see the status
 ```
 
 ## Referred projects

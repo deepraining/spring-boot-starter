@@ -15,13 +15,3 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
-
-logging:
-  level:
-    org.springframework.web: ERROR
-    senntyou.sbs: ERROR
-
-# springfox configuration
-springfox:
-  swagger2:
-    enabled: false

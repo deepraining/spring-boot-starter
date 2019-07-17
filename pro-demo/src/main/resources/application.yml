@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9000
   use-forward-headers: true
   undertow:
     io-threads: 2
@@ -43,3 +43,12 @@ logging:
     org.springframework.web: ERROR
     senntyou.sbs: DEBUG
   file: ./logs/log.log
+
+management:
+  server:
+    port: 9001
+
+# springfox configuration
+springfox:
+  swagger2:
+    enabled: true

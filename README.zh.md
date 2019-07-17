@@ -79,11 +79,16 @@ git init
 创建数据库与表结构
 
 ```
-# 默认 flyway.conf 配置文件
+# 本地环境：默认 flyway.conf 配置文件
 flyway migrate
 
-# 产品环境 flyway-prod.conf 配置文件
+# 线上测试环境
+flyway migrate -configFiles=flyway-test.conf
+
+# 线上产品环境
 flyway migrate -configFiles=flyway-prod.conf
+
+# 如果你需要配置更多的环境，可以自己添加
 ```
 
 执行自动生成 Mybatis 模型文件的命令
@@ -94,7 +99,7 @@ flyway migrate -configFiles=flyway-prod.conf
 
 ## 运行项目
 
-执行本地开发调试 `pro-demo` 子项目的命令
+执行本地开发调试 `pro-demo` 子项目的命令，然后在浏览器中打开 `http://localhost:9000`
 
 ```
 ./gradlew pro-demo:bootRun
@@ -116,25 +121,26 @@ flyway migrate -configFiles=flyway-prod.conf
 
 在服务器上，找个合适的地方创建 `serverDirName` 目录
 
-把本地 `pro-demo/build/libs/demo-latest.jar, bin/demo.sh` 上传到 `serverDirName` 目录，
+把本地 `pro-demo/build/libs/demo-latest.jar, bin/demo-*.sh` 上传到 `serverDirName` 目录，
 并把前端的 `html` 文件都上传到 `serverDirName/templates` 目录下
 
 ```
 - serverDirName/
-  - demo.sh
+  - demo-test.sh
+  - demo-prod.sh
   - demo-latest.jar
   - templates/
 ```
 
-运行程序相关命令
+运行程序相关命令（以 `demo-prod.sh` 为例）
 
 ```
 cd serverDirName
 
-sh demo.sh start        # 运行程序
-sh demo.sh stop         # 停止程序
-sh demo.sh restart      # 重启程序
-sh demo.sh status       # 查看程序状态
+sh demo-prod.sh start        # 运行程序
+sh demo-prod.sh stop         # 停止程序
+sh demo-prod.sh restart      # 重启程序
+sh demo-prod.sh status       # 查看程序状态
 ```
 
 ## 参考项目
