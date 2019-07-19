@@ -47,3 +47,9 @@ logging:
 management:
   server:
     port: 9006
+
+jwt:
+  tokenHeader: Authorization
+  secret: secret
+  expiration: 604800
+  tokenHead: Bearer
