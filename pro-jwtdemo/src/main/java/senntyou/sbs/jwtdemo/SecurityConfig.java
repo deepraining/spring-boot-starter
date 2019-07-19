@@ -1,4 +1,4 @@
-package senntyou.sbs.demo.config;
+package senntyou.sbs.jwtdemo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -13,14 +13,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import senntyou.sbs.demo.bo.UserInfo;
-import senntyou.sbs.demo.component.GoAccessDeniedHandler;
-import senntyou.sbs.demo.component.GoAuthenticationEntryPoint;
-import senntyou.sbs.demo.component.GoAuthenticationFailureHandler;
-import senntyou.sbs.demo.component.GoAuthenticationSuccessHandler;
-import senntyou.sbs.demo.component.GoLogoutSuccessHandler;
-import senntyou.sbs.demo.service.UserService;
 import senntyou.sbs.gen.model.User;
+import senntyou.sbs.jwtdemo.bo.UserInfo;
+import senntyou.sbs.jwtdemo.component.GoAccessDeniedHandler;
+import senntyou.sbs.jwtdemo.component.GoAuthenticationEntryPoint;
+import senntyou.sbs.jwtdemo.component.GoAuthenticationFailureHandler;
+import senntyou.sbs.jwtdemo.component.GoAuthenticationSuccessHandler;
+import senntyou.sbs.jwtdemo.component.GoLogoutSuccessHandler;
+import senntyou.sbs.jwtdemo.service.UserService;
 
 @Configuration
 @EnableWebSecurity

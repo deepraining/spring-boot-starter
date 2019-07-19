@@ -1,4 +1,4 @@
-package senntyou.sbs.demo.service.impl;
+package senntyou.sbs.jwtdemo.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.demo.bo.UserInfo;
-import senntyou.sbs.demo.service.UserService;
 import senntyou.sbs.gen.mapper.UserMapper;
 import senntyou.sbs.gen.model.User;
 import senntyou.sbs.gen.model.UserExample;
+import senntyou.sbs.jwtdemo.bo.UserInfo;
+import senntyou.sbs.jwtdemo.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

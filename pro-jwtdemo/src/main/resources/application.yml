@@ -1,0 +1,49 @@
+server:
+  port: 9005
+  use-forward-headers: true
+  undertow:
+    io-threads: 2
+    worker-threads: 36
+    buffer-size: 1024
+    directBuffers: true
+  servlet:
+    session:
+      timeout: 86400s
+      cookie:
+        http-only: true
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+
+spring:
+  profiles:
+    active: dev
+  output:
+    ansi:
+      enabled: always
+  thymeleaf:
+    cache: false
+    # external templates directory(not in jar files)
+    prefix: file:./templates/
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/**/*.xml
+    - classpath*:senntyou/sbs/gen/mapper/*.xml
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    senntyou.sbs: DEBUG
+  file: ./logs/log.log
+
+management:
+  server:
+    port: 9006

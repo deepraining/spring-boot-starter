@@ -1,5 +1,6 @@
 include ':pro-gen'
 include ':pro-common'
 include ':pro-demo'
+include ':pro-jwtdemo'
 
 rootProject.name = 'spring-boot-starter'
