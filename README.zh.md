@@ -121,26 +121,26 @@ flyway migrate -configFiles=flyway-prod.conf
 
 在服务器上，找个合适的地方创建 `serverDirName` 目录
 
-把本地 `pro-demo/build/libs/demo-latest.jar, bin/demo-*.sh` 上传到 `serverDirName` 目录，
+把本地 `pro-demo/build/libs/demo-latest.jar, pro-demo/bin/*.sh` 上传到 `serverDirName` 目录，
 并把前端的 `html` 文件都上传到 `serverDirName/templates` 目录下
 
 ```
 - serverDirName/
-  - demo-test.sh
-  - demo-prod.sh
+  - test.sh
+  - prod.sh
   - demo-latest.jar
   - templates/
 ```
 
-运行程序相关命令（以 `demo-prod.sh` 为例）
+运行程序相关命令（以 `prod.sh` 为例）
 
 ```
 cd serverDirName
 
-sh demo-prod.sh start        # 运行程序
-sh demo-prod.sh stop         # 停止程序
-sh demo-prod.sh restart      # 重启程序
-sh demo-prod.sh status       # 查看程序状态
+sh prod.sh start        # 运行程序
+sh prod.sh stop         # 停止程序
+sh prod.sh restart      # 重启程序
+sh prod.sh status       # 查看程序状态
 ```
 
 ## 参考项目

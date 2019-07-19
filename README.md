@@ -121,26 +121,26 @@ Build this project when finish developing.
 
 Create a `serverDirName` directory in a proper place of server machine.
 
-Upload `pro-demo/build/libs/demo-latest.jar, bin/demo-*.sh` in local to `serverDirName` directory in server machine,
+Upload `pro-demo/build/libs/demo-latest.jar, pro-demo/bin/*.sh` in local to `serverDirName` directory in server machine,
 and also upload `html` files of frontend to `serverDirName/templates` directory.
 
 ```
 - serverDirName/
-  - demo-test.sh
-  - demo-prod.sh
+  - test.sh
+  - prod.sh
   - demo-latest.jar
   - templates/
 ```
 
-Related commands of running (take `demo-prod.sh` for example).
+Related commands of running (take `prod.sh` for example).
 
 ```
 cd serverDirName
 
-sh demo-prod.sh start        # start running
-sh demo-prod.sh stop         # stop running
-sh demo-prod.sh restart      # restart running
-sh demo-prod.sh status       # see the status
+sh prod.sh start        # start running
+sh prod.sh stop         # stop running
+sh prod.sh restart      # restart running
+sh prod.sh status       # see the status
 ```
 
 ## Referred projects
