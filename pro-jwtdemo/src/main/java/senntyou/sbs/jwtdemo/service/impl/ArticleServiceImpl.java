@@ -9,7 +9,6 @@ import senntyou.sbs.gen.model.Article;
 import senntyou.sbs.gen.model.ArticleExample;
 import senntyou.sbs.jwtdemo.dao.ArticleDao;
 import senntyou.sbs.jwtdemo.dto.ArticleQueryParam;
-import senntyou.sbs.jwtdemo.dto.ArticleResult;
 import senntyou.sbs.jwtdemo.service.ArticleService;
 
 @Service
@@ -18,7 +17,7 @@ public class ArticleServiceImpl implements ArticleService {
   @Autowired private ArticleDao articleDao;
 
   @Override
-  public ArticleResult getRecord(String uuid) {
+  public Article getRecord(String uuid) {
     return articleDao.getRecord(uuid);
   }
 

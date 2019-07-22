@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import senntyou.sbs.demo.dto.ArticleQueryParam;
-import senntyou.sbs.demo.dto.ArticleResult;
 import senntyou.sbs.gen.model.Article;
 
 public interface ArticleService {
@@ -14,7 +13,7 @@ public interface ArticleService {
 
   Article getByUuid(String uuid);
 
-  ArticleResult getRecord(String uuid);
+  Article getRecord(String uuid);
 
   @Transactional
   int update(String uuid, Article article);

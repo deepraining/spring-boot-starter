@@ -16,7 +16,6 @@ import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.demo.dto.ArticleParam;
 import senntyou.sbs.demo.dto.ArticleQueryParam;
-import senntyou.sbs.demo.dto.ArticleResult;
 import senntyou.sbs.demo.service.ArticleService;
 import senntyou.sbs.demo.service.UserService;
 import senntyou.sbs.gen.model.Article;
@@ -83,15 +82,15 @@ public class ArticleController {
       ArticleQueryParam articleQueryParam,
       @RequestParam(value = "pageSize", defaultValue = "10") Integer pageSize,
       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-    List<Article> productList = articleService.list(articleQueryParam, pageSize, pageNum);
-    return CommonResult.success(CommonPage.toPage(productList));
+    List<Article> queryList = articleService.list(articleQueryParam, pageSize, pageNum);
+    return CommonResult.success(CommonPage.toPage(queryList));
   }
 
   @ApiOperation("Get a record")
   @RequestMapping(value = "/record/{uuid}", method = RequestMethod.GET)
   @ResponseBody
-  public CommonResult<ArticleResult> record(@PathVariable String uuid) {
-    ArticleResult articleResult = articleService.getRecord(uuid);
-    return CommonResult.success(articleResult);
+  public CommonResult<Article> record(@PathVariable String uuid) {
+    Article article = articleService.getRecord(uuid);
+    return CommonResult.success(article);
   }
 }

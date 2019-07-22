@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import senntyou.sbs.demo.dao.ArticleDao;
 import senntyou.sbs.demo.dto.ArticleQueryParam;
-import senntyou.sbs.demo.dto.ArticleResult;
 import senntyou.sbs.demo.service.ArticleService;
 import senntyou.sbs.gen.mapper.ArticleMapper;
 import senntyou.sbs.gen.model.Article;
@@ -39,7 +38,7 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
-  public ArticleResult getRecord(String uuid) {
+  public Article getRecord(String uuid) {
     return articleDao.getRecord(uuid);
   }
 

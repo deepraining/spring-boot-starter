@@ -33,7 +33,7 @@ public class UserController {
       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
     User user = userService.getCurrentUser();
     articleQueryParam.setCreateUserUuid(user.getUuid());
-    List<Article> productList = articleService.list(articleQueryParam, pageSize, pageNum);
-    return CommonResult.success(CommonPage.toPage(productList));
+    List<Article> queryList = articleService.list(articleQueryParam, pageSize, pageNum);
+    return CommonResult.success(CommonPage.toPage(queryList));
   }
 }
