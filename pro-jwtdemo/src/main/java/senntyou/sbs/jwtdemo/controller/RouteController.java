@@ -11,39 +11,4 @@ public class RouteController {
   public String index() {
     return "index";
   }
-
-  @RequestMapping(value = "account/login", method = RequestMethod.GET)
-  public String accountLogin() {
-    return "account/login";
-  }
-
-  @RequestMapping(value = "account/register", method = RequestMethod.GET)
-  public String accountRegister() {
-    return "account/register";
-  }
-
-  @RequestMapping(value = "account/updatePassword", method = RequestMethod.GET)
-  public String accountUpdatePassword() {
-    return "account/updatePassword";
-  }
-
-  @RequestMapping(value = "user", method = RequestMethod.GET)
-  public String user() {
-    return "user/index";
-  }
-
-  @RequestMapping(value = "article/create", method = RequestMethod.GET)
-  public String articleCreate() {
-    return "article/create";
-  }
-
-  @RequestMapping(value = "article/update/{id}", method = RequestMethod.GET)
-  public String articleUpdate() {
-    return "article/update";
-  }
-
-  @RequestMapping(value = "article/record/{id}", method = RequestMethod.GET)
-  public String articleRecord() {
-    return "article/record";
-  }
 }

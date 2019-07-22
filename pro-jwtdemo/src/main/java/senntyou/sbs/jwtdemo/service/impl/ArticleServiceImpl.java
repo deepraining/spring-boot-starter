@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import senntyou.sbs.gen.mapper.ArticleMapper;
 import senntyou.sbs.gen.model.Article;
 import senntyou.sbs.gen.model.ArticleExample;
@@ -17,26 +16,6 @@ import senntyou.sbs.jwtdemo.service.ArticleService;
 public class ArticleServiceImpl implements ArticleService {
   @Autowired private ArticleMapper articleMapper;
   @Autowired private ArticleDao articleDao;
-
-  @Override
-  public int create(Article article) {
-    article.setId(null);
-    articleMapper.insertSelective(article);
-
-    return 1;
-  }
-
-  @Override
-  public Article getByUuid(String uuid) {
-    ArticleExample example = new ArticleExample();
-    example.createCriteria().andUuidEqualTo(uuid);
-    List<Article> articles = articleMapper.selectByExample(example);
-
-    if (!CollectionUtils.isEmpty(articles)) {
-      return articles.get(0);
-    }
-    return null;
-  }
 
   @Override
   public ArticleResult getRecord(String uuid) {

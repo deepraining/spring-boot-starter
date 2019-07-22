@@ -28,8 +28,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired private UserService userService;
 
   @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
+  protected void configure(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity
+        .authorizeRequests()
         .antMatchers("/user", "/api/user/**/*")
         .authenticated()
         .anyRequest()

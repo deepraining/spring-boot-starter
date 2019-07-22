@@ -1,24 +1,15 @@
 package senntyou.sbs.jwtdemo.service;
 
+import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
-import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.gen.model.User;
+import senntyou.sbs.jwtdemo.dto.UserQueryParam;
 
 public interface UserService {
-  /** Get user by username */
-  User getByUsername(String username);
+  User getRecord(String uuid);
 
-  /** Get user by uuid */
-  User getByUuid(String uuid);
-
-  /** Sign up */
   @Transactional
-  CommonResult register(String username, String password, String email);
+  int update(String uuid, User user);
 
-  /** Update password */
-  @Transactional
-  CommonResult updatePassword(String email, String password);
-
-  /** Get current user information */
-  User getCurrentUser();
+  List<User> list(UserQueryParam userQueryParam, Integer pageSize, Integer pageNum);
 }

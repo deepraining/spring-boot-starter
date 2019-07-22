@@ -41,7 +41,7 @@ public class JwtToken {
     try {
       claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     } catch (Exception e) {
-      log.info("JWT verify failed: {}", token);
+      log.info("JWT verify failed, token:{}", token);
     }
     return claims;
   }

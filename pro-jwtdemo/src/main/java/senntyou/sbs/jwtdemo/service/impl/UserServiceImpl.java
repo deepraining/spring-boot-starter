@@ -1,42 +1,26 @@
 package senntyou.sbs.jwtdemo.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.gen.mapper.UserMapper;
 import senntyou.sbs.gen.model.User;
 import senntyou.sbs.gen.model.UserExample;
-import senntyou.sbs.jwtdemo.bo.UserInfo;
+import senntyou.sbs.jwtdemo.dto.UserQueryParam;
 import senntyou.sbs.jwtdemo.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
   @Autowired private UserMapper userMapper;
-  @Autowired private PasswordEncoder passwordEncoder;
 
   @Override
-  public User getByUsername(String username) {
-    UserExample example = new UserExample();
-    example.createCriteria().andUsernameEqualTo(username);
-    List<User> users = userMapper.selectByExample(example);
-    if (!CollectionUtils.isEmpty(users)) {
-      return users.get(0);
-    }
-    return null;
-  }
-
-  @Override
-  public User getByUuid(String uuid) {
+  public User getRecord(String uuid) {
     UserExample example = new UserExample();
     example.createCriteria().andUuidEqualTo(uuid);
     List<User> users = userMapper.selectByExample(example);
+
     if (!CollectionUtils.isEmpty(users)) {
       return users.get(0);
     }
@@ -44,49 +28,28 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public CommonResult register(String username, String password, String email) {
-    // check if the username existed
+  public int update(String uuid, User user) {
     UserExample example = new UserExample();
-    example.createCriteria().andUsernameEqualTo(username);
-    example.or(example.createCriteria().andEmailEqualTo(email));
-    List<User> users = userMapper.selectByExample(example);
-    if (!CollectionUtils.isEmpty(users)) {
-      return CommonResult.failed("User '" + username + "' existed");
-    }
+    example.createCriteria().andUuidEqualTo(uuid);
 
-    // Add the user
-    User user = new User();
-    user.setUsername(username);
-    user.setEmail(email);
-    user.setPassword(passwordEncoder.encode(password));
-    userMapper.insertSelective(user);
-    return CommonResult.success(null, "Sign up succeeded");
+    userMapper.updateByExampleSelective(user, example);
+
+    return 1;
   }
 
   @Override
-  public CommonResult updatePassword(String email, String password) {
+  public List<User> list(UserQueryParam userQueryParam, Integer pageSize, Integer pageNum) {
+    PageHelper.startPage(pageNum, pageSize);
     UserExample example = new UserExample();
-    example.createCriteria().andEmailEqualTo(email);
-    List<User> users = userMapper.selectByExample(example);
-    if (CollectionUtils.isEmpty(users)) {
-      return CommonResult.failed("Account not existed");
+    UserExample.Criteria criteria = example.createCriteria();
+
+    criteria.andDeletedEqualTo(false);
+    if (userQueryParam.getUsername() != null) {
+      criteria.andUsernameLike("%" + userQueryParam.getUsername() + "%");
     }
-    User user = users.get(0);
-    user.setPassword(passwordEncoder.encode(password));
-    userMapper.updateByPrimaryKeySelective(user);
-    return CommonResult.success(null, "Update password succeeded");
-  }
-
-  @Override
-  public User getCurrentUser() {
-    SecurityContext ctx = SecurityContextHolder.getContext();
-    Authentication auth = ctx.getAuthentication();
-
-    if (auth == null || !auth.isAuthenticated() || auth instanceof AnonymousAuthenticationToken) {
-      return null;
+    if (userQueryParam.getEmail() != null) {
+      criteria.andEmailEqualTo(userQueryParam.getEmail());
     }
-
-    UserInfo userInfo = (UserInfo) auth.getPrincipal();
-    return userInfo.getUser();
+    return userMapper.selectByExample(example);
   }
 }

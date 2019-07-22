@@ -5,54 +5,69 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import senntyou.sbs.gen.model.User;
 import senntyou.sbs.jwtdemo.bo.UserInfo;
-import senntyou.sbs.jwtdemo.component.GoAccessDeniedHandler;
-import senntyou.sbs.jwtdemo.component.GoAuthenticationEntryPoint;
-import senntyou.sbs.jwtdemo.component.GoAuthenticationFailureHandler;
-import senntyou.sbs.jwtdemo.component.GoAuthenticationSuccessHandler;
-import senntyou.sbs.jwtdemo.component.GoLogoutSuccessHandler;
+import senntyou.sbs.jwtdemo.component.JwtAuthenticationTokenFilter;
+import senntyou.sbs.jwtdemo.component.RestAuthenticationEntryPoint;
+import senntyou.sbs.jwtdemo.component.RestfulAccessDeniedHandler;
 import senntyou.sbs.jwtdemo.service.UserService;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired private UserService userService;
+  @Autowired private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
+  @Autowired private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
   @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-        .antMatchers("/user", "/api/user/**/*")
-        .authenticated()
-        .anyRequest()
+  protected void configure(HttpSecurity httpSecurity) throws Exception {
+    httpSecurity
+        .csrf() // JWT does not need csrf
+        .disable()
+        .sessionManagement() // JWT does not need session
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        .and()
+        .authorizeRequests()
+        .antMatchers(
+            HttpMethod.GET,
+            "/",
+            "/*.html",
+            "/favicon.ico",
+            "/**/*.html",
+            "/**/*.css",
+            "/**/*.js",
+            "/swagger-resources/**",
+            "/v2/api-docs/**")
+        .permitAll()
+        .antMatchers("/account/login", "/account/register")
         .permitAll()
         // Every cross origin request will make a OPTIONS request before its real request
         .antMatchers(HttpMethod.OPTIONS)
         .permitAll()
-        .and()
+        .anyRequest()
+        .authenticated();
+    // Disable cache
+    httpSecurity.headers().cacheControl();
+    // Add JWT filter
+    httpSecurity.addFilterBefore(
+        jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    // Add custom exception handler
+    httpSecurity
         .exceptionHandling()
-        .accessDeniedHandler(new GoAccessDeniedHandler())
-        .authenticationEntryPoint(new GoAuthenticationEntryPoint())
-        .and()
-        .formLogin()
-        .loginPage("/account/login")
-        .loginProcessingUrl("/api/account/login")
-        .successHandler(new GoAuthenticationSuccessHandler())
-        .failureHandler(new GoAuthenticationFailureHandler())
-        .and()
-        .logout()
-        .logoutUrl("/api/account/logout")
-        .logoutSuccessHandler(new GoLogoutSuccessHandler())
-        .invalidateHttpSession(true)
-        .deleteCookies("JSESSIONID");
+        .accessDeniedHandler(restfulAccessDeniedHandler)
+        .authenticationEntryPoint(restAuthenticationEntryPoint);
   }
 
   @Override
@@ -63,6 +78,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
+  }
+
+  @Bean
+  public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
+    return new JwtAuthenticationTokenFilter();
   }
 
   @Bean
