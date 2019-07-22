@@ -5,5 +5,95 @@
   <title>Spring Boot Starter JWT Demo Application</title>
 </head>
 <body>
+<div id="not-logged-in" style="display: none;">
+  <div id="register-section" data-section="register">
+    <p>Username: <input id="register-username" type="text"/></p>
+    <p>Password: <input id="register-password" type="password"/></p>
+    <p>Confirm Password: <input name="register-password2" id="register-password2" type="password"/></p>
+    <p>
+      <button type="submit" id="register-submit">Register</button>
+    </p>
+  </div>
+  <div id="login-section" data-section="login">
+    <p>Username: <input id="login-username" type="text"/></p>
+    <p>Password: <input id="login-password" type="password"/></p>
+    <p>
+      <button type="submit" id="login-submit">Login</button>
+    </p>
+  </div>
+</div>
+<div id="logged-in" style="display: none;">
+  <div id="username-section">
+    <span>Current JWT username:</span>
+    <span id="current-username"></span>
+  </div>
+  <div id="update-password-section" style="display: none;" data-section="update-password">
+    <p>Username: <input id="update-password-username" type="text"/></p>
+    <p>Password: <input id="update-password-password" type="password"/></p>
+    <p>
+      <button type="submit" id="update-password-submit">OK</button>
+    </p>
+  </div>
+  <div id="article-section" style="display: none;">
+    <h2>Article</h2>
+    <p id="article-info"></p>
+    <table style="width: 100%;">
+      <thead>
+      <tr>
+        <td>Uuid</td>
+        <td>Title</td>
+        <td>Read Count</td>
+        <td>Support Count</td>
+        <td>Article Summary</td>
+        <td>Creator User Uuid</td>
+        <td>Create Time</td>
+        <td>Update Time</td>
+        <td>Operations</td>
+      </tr>
+      </thead>
+      <tbody id="article-tbody"></tbody>
+    </table>
+  </div>
+  <div id="user-section" style="display: none;">
+    <h2>User</h2>
+    <p id="user-info"></p>
+    <table style="width: 100%;">
+      <thead>
+      <tr>
+        <td>Uuid</td>
+        <td>Username</td>
+        <td>Create Time</td>
+        <td>Update Time</td>
+        <td>Operations</td>
+      </tr>
+      </thead>
+      <tbody id="user-tbody"></tbody>
+    </table>
+  </div>
+</div>
 </body>
+<script>
+const loggedIn = document.getElementById('logged-in');
+const notLoggedIn = document.getElementById('not-logged-in');
+const wFetch = (url, params) => {
+  return window.fetch(url, params).then(res => res.json()).then(res => {
+    if (res.code === 401) {
+      loggedIn.style.display = 'none';
+      notLoggedIn.style.display = 'block';
+    }
+    else {
+      loggedIn.style.display = 'block';
+      notLoggedIn.style.display = 'none';
+    }
+    return res;
+  });
+};
+</script>
+<script>
+  wFetch('/account/currentUser').then(res => {
+    if (res.code < 300) {
+      document.getElementById('current-username').innerText = res.data.username;
+    }
+  });
+</script>
 </html>

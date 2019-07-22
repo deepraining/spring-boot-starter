@@ -64,9 +64,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public CommonResult updatePassword(String email, String password) {
+  public CommonResult updatePassword(String username, String password) {
     UserExample example = new UserExample();
-    example.createCriteria().andEmailEqualTo(email);
+    example.createCriteria().andUsernameEqualTo(username);
     List<User> users = userMapper.selectByExample(example);
     if (CollectionUtils.isEmpty(users)) {
       return CommonResult.failed("Account not existed");

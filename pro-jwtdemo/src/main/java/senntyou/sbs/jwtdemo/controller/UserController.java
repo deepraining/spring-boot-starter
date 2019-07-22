@@ -21,7 +21,7 @@ import senntyou.sbs.jwtdemo.service.UserService;
 
 @RestController
 @Api(tags = "UserController", description = "User management")
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 public class UserController {
   @Autowired private UserService userService;
 

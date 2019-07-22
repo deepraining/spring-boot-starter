@@ -2,23 +2,33 @@ package senntyou.sbs.jwtdemo.service;
 
 import org.springframework.transaction.annotation.Transactional;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.gen.model.User;
+import senntyou.sbs.gen.model.JwtUser;
 
 public interface JwtUserService {
   /** Get user by username */
-  User getByUsername(String username);
+  JwtUser getByUsername(String username);
 
   /** Get user by uuid */
-  User getByUuid(String uuid);
+  JwtUser getByUuid(String uuid);
 
   /** Sign up */
-  @Transactional
-  CommonResult register(String username, String password, String email);
+  CommonResult register(String username, String password);
+
+  /**
+   * Login
+   *
+   * @param username Username
+   * @param password Password
+   * @return JWT token
+   */
+  String login(String username, String password);
+
+  String refreshToken(String oldToken);
 
   /** Update password */
   @Transactional
-  CommonResult updatePassword(String email, String password);
+  CommonResult updatePassword(String username, String password);
 
   /** Get current user information */
-  User getCurrentUser();
+  JwtUser getCurrentUser();
 }

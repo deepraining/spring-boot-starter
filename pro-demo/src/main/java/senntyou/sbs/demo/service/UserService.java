@@ -17,7 +17,7 @@ public interface UserService {
 
   /** Update password */
   @Transactional
-  CommonResult updatePassword(String email, String password);
+  CommonResult updatePassword(String username, String password);
 
   /** Get current user information */
   User getCurrentUser();

@@ -21,7 +21,7 @@ import senntyou.sbs.jwtdemo.service.ArticleService;
 
 @RestController
 @Api(tags = "ArticleController", description = "Article management")
-@RequestMapping("/api/article")
+@RequestMapping("/article")
 public class ArticleController {
   @Autowired private ArticleService articleService;
 

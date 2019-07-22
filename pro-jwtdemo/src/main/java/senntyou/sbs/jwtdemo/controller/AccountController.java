@@ -9,27 +9,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.jwtdemo.service.UserService;
+import senntyou.sbs.jwtdemo.service.JwtUserService;
 
 @RestController
 @Api(tags = "AccountController", description = "Sign up, Login, Password management")
-@RequestMapping("/api/account")
+@RequestMapping("/account")
 public class AccountController {
-  @Autowired private UserService userService;
+  @Autowired private JwtUserService userService;
 
   @ApiOperation("Sign up")
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult register(
-      @RequestParam String username, @RequestParam String password, @RequestParam String email) {
-    return userService.register(username, password, email);
+  public CommonResult register(@RequestParam String username, @RequestParam String password) {
+    return userService.register(username, password);
   }
 
   @ApiOperation("Update password")
   @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult updatePassword(@RequestParam String email, @RequestParam String password) {
-    return userService.updatePassword(email, password);
+  public CommonResult updatePassword(@RequestParam String username, @RequestParam String password) {
+    return userService.updatePassword(username, password);
   }
 
   @ApiOperation("Current user information")

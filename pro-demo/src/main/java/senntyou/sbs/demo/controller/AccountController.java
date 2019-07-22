@@ -28,8 +28,8 @@ public class AccountController {
   @ApiOperation("Update password")
   @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult updatePassword(@RequestParam String email, @RequestParam String password) {
-    return userService.updatePassword(email, password);
+  public CommonResult updatePassword(@RequestParam String username, @RequestParam String password) {
+    return userService.updatePassword(username, password);
   }
 
   @ApiOperation("Current user information")

@@ -16,18 +16,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import senntyou.sbs.gen.model.User;
+import senntyou.sbs.gen.model.JwtUser;
 import senntyou.sbs.jwtdemo.bo.UserInfo;
 import senntyou.sbs.jwtdemo.component.JwtAuthenticationTokenFilter;
 import senntyou.sbs.jwtdemo.component.RestAuthenticationEntryPoint;
 import senntyou.sbs.jwtdemo.component.RestfulAccessDeniedHandler;
-import senntyou.sbs.jwtdemo.service.UserService;
+import senntyou.sbs.jwtdemo.service.JwtUserService;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-  @Autowired private UserService userService;
+  @Autowired private JwtUserService userService;
   @Autowired private RestfulAccessDeniedHandler restfulAccessDeniedHandler;
   @Autowired private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
@@ -91,7 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     return new UserDetailsService() {
       @Override
       public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.getByUsername(username);
+        JwtUser user = userService.getByUsername(username);
         if (user != null) {
           return new UserInfo(user);
         }
