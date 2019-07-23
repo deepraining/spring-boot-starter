@@ -20,9 +20,12 @@ A boilerplate for creating a [Spring Boot](https://spring.io/projects/spring-boo
 
 - Mysql: 8+ (some sql sentences cant be run in `5.x`)
 
-## Some restraint
+## Sub projects
 
-- All API should start with `/api/`.
+- `pro-common`: Common codes to share between sub projects
+- `pro-gen`: Mybatis Generator
+- `pro-demo`: Demo application using session to remember logged-in status
+- `pro-jwtdemo`: Demo application using JWT to remember logged-in status
 
 ## Gradle Tasks created by this project
 
@@ -99,6 +102,8 @@ Generate Mybatis model files.
 
 ## Run project
 
+Take `pro-demo` for example:
+
 Develop and debug `pro-demo` sub project in local environment, then open `http://localhost:9000` in browser.
 
 ```
@@ -118,6 +123,8 @@ Build this project when finish developing.
 ```
 
 ## Deploy project
+
+Take `pro-demo` for example:
 
 Create a `serverDirName` directory in a proper place of server machine.
 

@@ -20,9 +20,12 @@
 
 - Mysql: 8+ (有些语句在 `5.x` 的版本下不能运行)
 
-## 一些约束
+## 子项目
 
-- 所有的接口都要以 `/api/` 开头
+- `pro-common`: 通用代码
+- `pro-gen`: Mybatis Generator
+- `pro-demo`: 使用 Session 保持登陆状态的 Demo 应用
+- `pro-jwtdemo`: 使用 JWT 保持登陆状态的 Demo 应用
 
 ## 扩展 Gradle Tasks
 
@@ -99,6 +102,8 @@ flyway migrate -configFiles=flyway-prod.conf
 
 ## 运行项目
 
+以 `pro-demo` 为例:
+
 执行本地开发调试 `pro-demo` 子项目的命令，然后在浏览器中打开 `http://localhost:9000`
 
 ```
@@ -118,6 +123,8 @@ flyway migrate -configFiles=flyway-prod.conf
 ```
 
 ## 部署项目
+
+以 `pro-demo` 为例:
 
 在服务器上，找个合适的地方创建 `serverDirName` 目录
 
