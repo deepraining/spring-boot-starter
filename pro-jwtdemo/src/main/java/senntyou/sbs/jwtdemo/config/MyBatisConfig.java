@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan({"senntyou.sbs.gen.mapper", "senntyou.sbs.jwtdemo.dao"})
+@MapperScan({"senntyou.sbs.mbg.mapper", "senntyou.sbs.jwtdemo.dao"})
 public class MyBatisConfig {
   //
 }

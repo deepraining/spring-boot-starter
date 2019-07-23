@@ -8,9 +8,9 @@ import org.springframework.util.CollectionUtils;
 import senntyou.sbs.demo.dao.ArticleDao;
 import senntyou.sbs.demo.dto.ArticleQueryParam;
 import senntyou.sbs.demo.service.ArticleService;
-import senntyou.sbs.gen.mapper.ArticleMapper;
-import senntyou.sbs.gen.model.Article;
-import senntyou.sbs.gen.model.ArticleExample;
+import senntyou.sbs.mbg.mapper.ArticleMapper;
+import senntyou.sbs.mbg.model.Article;
+import senntyou.sbs.mbg.model.ArticleExample;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {

@@ -23,7 +23,7 @@
 ## 子项目
 
 - `pro-common`: 通用代码
-- `pro-gen`: Mybatis Generator
+- `pro-mbg`: Mybatis Generator
 - `pro-demo`: 使用 Session 保持登陆状态的 Demo 应用
 - `pro-jwtdemo`: 使用 JWT 保持登陆状态的 Demo 应用
 
@@ -97,7 +97,7 @@ flyway migrate -configFiles=flyway-prod.conf
 执行自动生成 Mybatis 模型文件的命令
 
 ```
-./gradlew pro-gen:run
+./gradlew pro-mbg:run
 ```
 
 ## 运行项目

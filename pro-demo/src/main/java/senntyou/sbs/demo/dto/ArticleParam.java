@@ -2,7 +2,7 @@ package senntyou.sbs.demo.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import senntyou.sbs.gen.model.Article;
+import senntyou.sbs.mbg.model.Article;
 
 @Data
 public class ArticleParam {

@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import senntyou.sbs.gen.mapper.UserMapper;
-import senntyou.sbs.gen.model.User;
-import senntyou.sbs.gen.model.UserExample;
 import senntyou.sbs.jwtdemo.dto.UserQueryParam;
 import senntyou.sbs.jwtdemo.service.UserService;
+import senntyou.sbs.mbg.mapper.UserMapper;
+import senntyou.sbs.mbg.model.User;
+import senntyou.sbs.mbg.model.UserExample;
 
 @Service
 public class UserServiceImpl implements UserService {

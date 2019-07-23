@@ -14,8 +14,8 @@ import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.demo.dto.ArticleQueryParam;
 import senntyou.sbs.demo.service.ArticleService;
 import senntyou.sbs.demo.service.UserService;
-import senntyou.sbs.gen.model.Article;
-import senntyou.sbs.gen.model.User;
+import senntyou.sbs.mbg.model.Article;
+import senntyou.sbs.mbg.model.User;
 
 @RestController
 @Api(tags = "UserController", description = "User management")

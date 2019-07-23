@@ -2,7 +2,7 @@ package senntyou.sbs.jwtdemo.service;
 
 import org.springframework.transaction.annotation.Transactional;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.gen.model.JwtUser;
+import senntyou.sbs.mbg.model.JwtUser;
 
 public interface JwtUserService {
   /** Get user by username */

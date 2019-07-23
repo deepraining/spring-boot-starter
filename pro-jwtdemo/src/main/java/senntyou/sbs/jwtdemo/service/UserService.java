@@ -2,8 +2,8 @@ package senntyou.sbs.jwtdemo.service;
 
 import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
-import senntyou.sbs.gen.model.User;
 import senntyou.sbs.jwtdemo.dto.UserQueryParam;
+import senntyou.sbs.mbg.model.User;
 
 public interface UserService {
   User getRecord(String uuid);

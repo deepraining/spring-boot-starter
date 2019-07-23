@@ -17,12 +17,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.gen.mapper.JwtUserMapper;
-import senntyou.sbs.gen.model.JwtUser;
-import senntyou.sbs.gen.model.JwtUserExample;
 import senntyou.sbs.jwtdemo.bo.UserInfo;
 import senntyou.sbs.jwtdemo.component.JwtToken;
 import senntyou.sbs.jwtdemo.service.JwtUserService;
+import senntyou.sbs.mbg.mapper.JwtUserMapper;
+import senntyou.sbs.mbg.model.JwtUser;
+import senntyou.sbs.mbg.model.JwtUserExample;
 
 @Service
 @Slf4j

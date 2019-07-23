@@ -2,7 +2,7 @@ package senntyou.sbs.demo.service;
 
 import org.springframework.transaction.annotation.Transactional;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.gen.model.User;
+import senntyou.sbs.mbg.model.User;
 
 public interface UserService {
   /** Get user by username */

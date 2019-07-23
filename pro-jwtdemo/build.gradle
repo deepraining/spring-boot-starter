@@ -49,7 +49,7 @@ dependencies {
 //  implementation 'cn.hutool:hutool-extra:4.5.10'
 
   // projects
-  implementation project(':pro-gen')
+  implementation project(':pro-mbg')
   implementation project(':pro-common')
 
   // test

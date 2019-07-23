@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.gen.model.Article;
 import senntyou.sbs.jwtdemo.dto.ArticleParam;
 import senntyou.sbs.jwtdemo.dto.ArticleQueryParam;
 import senntyou.sbs.jwtdemo.service.ArticleService;
+import senntyou.sbs.mbg.model.Article;
 
 @RestController
 @Api(tags = "ArticleController", description = "Article management")

@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import senntyou.sbs.demo.dto.ArticleQueryParam;
-import senntyou.sbs.gen.model.Article;
+import senntyou.sbs.mbg.model.Article;
 
 public interface ArticleService {
   @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)

@@ -20,7 +20,7 @@ import senntyou.sbs.demo.component.GoAuthenticationFailureHandler;
 import senntyou.sbs.demo.component.GoAuthenticationSuccessHandler;
 import senntyou.sbs.demo.component.GoLogoutSuccessHandler;
 import senntyou.sbs.demo.service.UserService;
-import senntyou.sbs.gen.model.User;
+import senntyou.sbs.mbg.model.User;
 
 @Configuration
 @EnableWebSecurity

@@ -12,9 +12,9 @@ import org.springframework.util.CollectionUtils;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.demo.bo.UserInfo;
 import senntyou.sbs.demo.service.UserService;
-import senntyou.sbs.gen.mapper.UserMapper;
-import senntyou.sbs.gen.model.User;
-import senntyou.sbs.gen.model.UserExample;
+import senntyou.sbs.mbg.mapper.UserMapper;
+import senntyou.sbs.mbg.model.User;
+import senntyou.sbs.mbg.model.UserExample;
 
 @Service
 public class UserServiceImpl implements UserService {

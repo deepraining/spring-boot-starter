@@ -1,4 +1,4 @@
-include ':pro-gen'
+include ':pro-mbg'
 include ':pro-common'
 include ':pro-demo'
 include ':pro-jwtdemo'

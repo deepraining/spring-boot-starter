@@ -5,7 +5,7 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import senntyou.sbs.gen.model.User;
+import senntyou.sbs.mbg.model.User;
 
 public class UserInfo implements UserDetails {
   private User user;

@@ -16,12 +16,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import senntyou.sbs.gen.model.JwtUser;
 import senntyou.sbs.jwtdemo.bo.UserInfo;
 import senntyou.sbs.jwtdemo.component.JwtAuthenticationTokenFilter;
 import senntyou.sbs.jwtdemo.component.RestAuthenticationEntryPoint;
 import senntyou.sbs.jwtdemo.component.RestfulAccessDeniedHandler;
 import senntyou.sbs.jwtdemo.service.JwtUserService;
+import senntyou.sbs.mbg.model.JwtUser;
 
 @Configuration
 @EnableWebSecurity

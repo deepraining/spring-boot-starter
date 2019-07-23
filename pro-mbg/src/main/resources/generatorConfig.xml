@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <properties resource="generator.properties"/>
+  <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+    <property name="beginningDelimiter" value="`"/>
+    <property name="endingDelimiter" value="`"/>
+    <property name="javaFileEncoding" value="UTF-8"/>
+
+    <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+    <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+    <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+    <commentGenerator type="senntyou.sbs.mbg.CommentGenerator">
+      <property name="suppressAllComments" value="true"/>
+      <property name="suppressDate" value="true"/>
+      <!-- whether add column comment in database to java class fields by @ApiModelProperty -->
+      <property name="addRemarkComments" value="true"/>
+      <!-- fields to ignore when serialize object to json string -->
+      <property name="ignoreFields" value="id,password"/>
+    </commentGenerator>
+
+    <jdbcConnection driverClass="${jdbc.driverClass}"
+                    connectionURL="${jdbc.connectionURL}"
+                    userId="${jdbc.userId}"
+                    password="${jdbc.password}">
+      <property name="nullCatalogMeansCurrent" value="true"/>
+    </jdbcConnection>
+
+    <javaModelGenerator targetPackage="senntyou.sbs.mbg.model" targetProject="src/main/java"/>
+
+    <sqlMapGenerator targetPackage="senntyou.sbs.mbg.mapper" targetProject="src/main/resources"/>
+
+    <javaClientGenerator type="XMLMAPPER" targetPackage="senntyou.sbs.mbg.mapper"
+                         targetProject="src/main/java"/>
+
+    <table tableName="%">
+      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+    </table>
+  </context>
+</generatorConfiguration>

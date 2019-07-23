@@ -2,7 +2,7 @@ package senntyou.sbs.jwtdemo.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import senntyou.sbs.gen.model.User;
+import senntyou.sbs.mbg.model.User;
 
 @Data
 public class UserParam {

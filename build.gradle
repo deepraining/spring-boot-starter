@@ -51,8 +51,8 @@ subprojects {
   }
 }
 
-def genMapperExcludePath = 'pro-gen/src/main/java/senntyou/sbs/gen/mapper/'
-def genModelExcludePath = 'pro-gen/src/main/java/senntyou/sbs/gen/model/'
+def genMapperExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/mapper/'
+def genModelExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/model/'
 
 googleJavaFormat {
   toolVersion = "1.7"

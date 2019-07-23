@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.gen.model.User;
 import senntyou.sbs.jwtdemo.dto.UserParam;
 import senntyou.sbs.jwtdemo.dto.UserQueryParam;
 import senntyou.sbs.jwtdemo.service.UserService;
+import senntyou.sbs.mbg.model.User;
 
 @RestController
 @Api(tags = "UserController", description = "User management")

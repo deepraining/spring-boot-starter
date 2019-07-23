@@ -4,12 +4,12 @@ import com.github.pagehelper.PageHelper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import senntyou.sbs.gen.mapper.ArticleMapper;
-import senntyou.sbs.gen.model.Article;
-import senntyou.sbs.gen.model.ArticleExample;
 import senntyou.sbs.jwtdemo.dao.ArticleDao;
 import senntyou.sbs.jwtdemo.dto.ArticleQueryParam;
 import senntyou.sbs.jwtdemo.service.ArticleService;
+import senntyou.sbs.mbg.mapper.ArticleMapper;
+import senntyou.sbs.mbg.model.Article;
+import senntyou.sbs.mbg.model.ArticleExample;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {

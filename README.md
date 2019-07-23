@@ -23,7 +23,7 @@ A boilerplate for creating a [Spring Boot](https://spring.io/projects/spring-boo
 ## Sub projects
 
 - `pro-common`: Common codes to share between sub projects
-- `pro-gen`: Mybatis Generator
+- `pro-mbg`: Mybatis Generator
 - `pro-demo`: Demo application using session to remember logged-in status
 - `pro-jwtdemo`: Demo application using JWT to remember logged-in status
 
@@ -97,7 +97,7 @@ flyway migrate -configFiles=flyway-prod.conf
 Generate Mybatis model files.
 
 ```
-./gradlew pro-gen:run
+./gradlew pro-mbg:run
 ```
 
 ## Run project
