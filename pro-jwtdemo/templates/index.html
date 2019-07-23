@@ -27,14 +27,17 @@
     <span>Current JWT username:</span>
     <span id="current-username"></span>
   </div>
-  <div id="update-password-section" style="display: none;" data-section="update-password">
+  <div>
+    <button type="submit" id="logout">Logout</button>
+  </div>
+  <div id="update-password-section" data-section="update-password">
     <p>Username: <input id="update-password-username" type="text"/></p>
     <p>Password: <input id="update-password-password" type="password"/></p>
     <p>
       <button type="submit" id="update-password-submit">OK</button>
     </p>
   </div>
-  <div id="article-section" style="display: none;">
+  <div id="article-section">
     <h2>Article</h2>
     <p id="article-info"></p>
     <table style="width: 100%;">
@@ -54,7 +57,7 @@
       <tbody id="article-tbody"></tbody>
     </table>
   </div>
-  <div id="user-section" style="display: none;">
+  <div id="user-section">
     <h2>User</h2>
     <p id="user-info"></p>
     <table style="width: 100%;">
@@ -72,28 +75,256 @@
   </div>
 </div>
 </body>
+<!-- base -->
 <script>
+const globalData = {
+  tokenHeader: '',
+  tokenHead: '',
+  token: '',
+};
+
+if (window.localStorage.tokenHeader) globalData.tokenHeader = window.localStorage.tokenHeader;
+if (window.localStorage.tokenHead) globalData.tokenHead = window.localStorage.tokenHead;
+if (window.localStorage.token) globalData.token = window.localStorage.token;
+
+const storeToken = data => {
+  globalData.tokenHeader = data.tokenHeader;
+  globalData.tokenHead = data.tokenHead;
+  globalData.token = data.token;
+  window.localStorage.tokenHeader = data.tokenHeader;
+  window.localStorage.tokenHead = data.tokenHead;
+  window.localStorage.token = data.token;
+};
+
+const removeToken = () => {
+  globalData.tokenHeader = '';
+  globalData.tokenHead = '';
+  globalData.token = '';
+  window.localStorage.removeItem('tokenHeader');
+  window.localStorage.removeItem('tokenHead');
+  window.localStorage.removeItem('token');
+};
+
 const loggedIn = document.getElementById('logged-in');
 const notLoggedIn = document.getElementById('not-logged-in');
 const wFetch = (url, params) => {
-  return window.fetch(url, params).then(res => res.json()).then(res => {
+  const options = {...(params || {})};
+  if (!options.headers) options.headers = {};
+  if (globalData.tokenHeader && globalData.tokenHead && globalData.token)
+    options.headers[globalData.tokenHeader] = `${globalData.tokenHead} ${globalData.token}`;
+
+  return window.fetch(url, options).then(res => res.json()).then(res => {
     if (res.code === 401) {
       loggedIn.style.display = 'none';
       notLoggedIn.style.display = 'block';
     }
-    else {
+    return res;
+  });
+};
+
+const getCurrentUser = () => {
+  return wFetch('/account/currentUser').then(res => {
+    if (res.code < 300) {
+      document.getElementById('current-username').innerText = res.data.username;
       loggedIn.style.display = 'block';
       notLoggedIn.style.display = 'none';
     }
     return res;
   });
 };
+
+wFetch('/account/refreshToken').then(res => {
+  if (res.code < 300) {
+    storeToken(res.data);
+    loggedIn.style.display = 'block';
+    notLoggedIn.style.display = 'none';
+    getCurrentUser();
+  }
+  else {
+    removeToken();
+    loggedIn.style.display = 'none';
+    notLoggedIn.style.display = 'block';
+  }
+});
 </script>
+<!-- register  -->
 <script>
-  wFetch('/account/currentUser').then(res => {
-    if (res.code < 300) {
-      document.getElementById('current-username').innerText = res.data.username;
+  document.getElementById('register-submit').addEventListener('click', () => {
+    const username = document.getElementById('register-username').value;
+    const password = document.getElementById('register-password').value;
+    const password2 = document.getElementById('register-password2').value;
+
+    let error = '';
+    if (!username) error = 'Username cant be empty.';
+    else if (!password) error = 'Password cant be empty.';
+    else if (password !== password2) error = 'Confirm Password is not equal to password.';
+
+    if (error) {
+      alert(error);
+      return;
     }
-  });
+
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    fetch('/account/register', {
+      method: 'post',
+      body: formData
+    }).then(res => res.json()).then(res => {
+      if (res.code < 300) alert('Register succeeded');
+      else if (res.message) alert(res.message);
+    });
+  }, !1);
+</script>
+<!-- login -->
+<script>
+  document.getElementById('login-submit').addEventListener('click', () => {
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+
+    let error = '';
+    if (!username) error = 'Username cant be empty.';
+    else if (!password) error = 'Password cant be empty.';
+
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    fetch('/account/login', {
+      method: 'post',
+      body: formData
+    }).then(res => res.json()).then(res => {
+      if (res.code < 300) {
+        loggedIn.style.display = 'block';
+        notLoggedIn.style.display = 'none';
+        storeToken(res.data);
+        getCurrentUser();
+        alert('Login Succeeded');
+      }
+      else if (res.message) alert(res.message);
+    });
+  }, !1);
+</script>
+<!-- logout -->
+<script>
+  document.getElementById('logout').addEventListener('click', () => {
+    removeToken();
+    loggedIn.style.display = 'none';
+    notLoggedIn.style.display = 'block';
+  }, !1);
+</script>
+<!-- update password -->
+<script>
+  document.getElementById('update-password-submit').addEventListener('click', () => {
+    const username = document.getElementById('update-password-username').value;
+    const password = document.getElementById('update-password-password').value;
+
+    let error = '';
+    if (!username) error = 'Username cant be empty.';
+    else if (!password) error = 'Password cant be empty.';
+
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    wFetch('/account/updatePassword', {
+      method: 'post',
+      body: formData
+    }).then(res => {
+      if (res.code < 300) {
+        alert('Update password succeeded');
+        removeToken();
+        loggedIn.style.display = 'none';
+        notLoggedIn.style.display = 'block';
+      }
+      else if (res.message) alert(res.message);
+    });
+  }, !1);
+</script>
+<!-- article -->
+<script>
+  const deleteArticle = e => {
+    const uuid = e.target.getAttribute('data-delete');
+    wFetch(`/article/delete/${uuid}`, {method: 'post'}).then(res => {
+      if (res.code < 300) {
+        alert('Delete succeeded');
+        getArticles();
+      }
+      else if (res.message) alert(res.message);
+    });
+  };
+  const articleBody = document.getElementById('article-tbody');
+  const getArticles = () => {
+    wFetch('/article/list').then(res => {
+      articleBody.innerHTML = res.data.list.map(item => `
+        <tr>
+          <td>${item.uuid}</td>
+          <td>${item.title}</td>
+          <td>${item.readCount}</td>
+          <td>${item.supportCount}</td>
+          <td>${item.intro}</td>
+          <td>${item.createUserUuid}</td>
+          <td>${item.createTime}</td>
+          <td>${item.updateTime}</td>
+          <td><button data-delete="${item.uuid}">Delete</button></td>
+        </tr>
+      `).join('');
+      articleBody.querySelectorAll('[data-delete]').forEach(el => {
+        el.addEventListener('click', deleteArticle, !1);
+      });
+      document.getElementById('article-info').innerText = `pageNum: ${
+        res.data.pageNum
+        }, pageSize: ${res.data.pageSize}, pages: ${res.data.pages}, total: ${
+        res.data.total
+        }`;
+    });
+  };
+
+  getArticles();
+</script>
+<!-- user -->
+<script>
+  const deleteUser = e => {
+    const uuid = e.target.getAttribute('data-delete');
+    wFetch(`/user/delete/${uuid}`, {method: 'post'}).then(res => {
+      if (res.code < 300) {
+        alert('Delete succeeded');
+        getUsers();
+      }
+      else if (res.message) alert(res.message);
+    });
+  };
+  const userBody = document.getElementById('user-tbody');
+  const getUsers = () => {
+    wFetch('/user/list').then(res => {
+      userBody.innerHTML = res.data.list.map(item => `
+        <tr>
+          <td>${item.uuid}</td>
+          <td>${item.username}</td>
+          <td>${item.createTime}</td>
+          <td>${item.updateTime}</td>
+          <td><button data-delete="${item.uuid}">Delete</button></td>
+        </tr>
+      `).join('');
+      userBody.querySelectorAll('[data-delete]').forEach(el => {
+        el.addEventListener('click', deleteUser, !1);
+      });
+      document.getElementById('user-info').innerText = `pageNum: ${
+        res.data.pageNum
+        }, pageSize: ${res.data.pageSize}, pages: ${res.data.pages}, total: ${
+        res.data.total
+        }`;
+    });
+  };
+
+  getUsers();
 </script>
 </html>

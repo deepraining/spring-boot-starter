@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class JwtToken {
-  private static final String CLAIM_KEY_USERNAME = "username";
+  private static final String CLAIM_KEY_USERNAME = "sub";
   private static final String CLAIM_KEY_CREATED = "created";
 
   @Value("${jwt.secret}")

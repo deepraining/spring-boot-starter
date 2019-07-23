@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +27,7 @@ public class UserController {
   @ApiOperation("Update user")
   @RequestMapping(value = "/update/{uuid}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(
-      @PathVariable String uuid, @RequestBody UserParam userParam, BindingResult bindingResult) {
+  public CommonResult update(@PathVariable String uuid, @RequestBody UserParam userParam) {
 
     User newUser = userParam.toUser();
 
@@ -58,5 +56,21 @@ public class UserController {
   public CommonResult<User> record(@PathVariable String uuid) {
     User user = userService.getRecord(uuid);
     return CommonResult.success(user);
+  }
+
+  @ApiOperation("Delete user")
+  @RequestMapping(value = "/delete/{uuid}", method = RequestMethod.POST)
+  @ResponseBody
+  public CommonResult delete(@PathVariable String uuid) {
+
+    User user = new User();
+    user.setDeleted(true);
+
+    int count = userService.update(uuid, user);
+    if (count > 0) {
+      return CommonResult.success(count);
+    } else {
+      return CommonResult.failed();
+    }
   }
 }

@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,7 @@ public class ArticleController {
   @ApiOperation("Create article")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(@RequestBody ArticleParam articleParam, BindingResult bindingResult) {
+  public CommonResult create(@RequestBody ArticleParam articleParam) {
     User user = userService.getCurrentUser();
     if (user == null) {
       return CommonResult.unauthorized("Not Logged-in");
@@ -51,10 +50,7 @@ public class ArticleController {
   @ApiOperation("Update article")
   @RequestMapping(value = "/update/{uuid}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(
-      @PathVariable String uuid,
-      @RequestBody ArticleParam articleParam,
-      BindingResult bindingResult) {
+  public CommonResult update(@PathVariable String uuid, @RequestBody ArticleParam articleParam) {
     User user = userService.getCurrentUser();
     if (user == null) {
       return CommonResult.unauthorized("Not logged in");
