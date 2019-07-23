@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    installed_rank, version, description, type, script, checksum, installed_by, installed_on,
+    installed_rank, version, description, type, script, checksum, installed_by, installed_on, 
     execution_time, success
   </sql>
   <select id="selectByExample" parameterType="senntyou.sbs.mbg.model.FlywaySchemaHistoryExample" resultMap="BaseResultMap">
@@ -90,7 +90,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
+    select 
     <include refid="Base_Column_List" />
     from flyway_schema_history
     where installed_rank = #{installedRank,jdbcType=INTEGER}
@@ -106,13 +106,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="senntyou.sbs.mbg.model.FlywaySchemaHistory">
-    insert into flyway_schema_history (installed_rank, version, description,
-      type, script, checksum,
-      installed_by, installed_on, execution_time,
+    insert into flyway_schema_history (installed_rank, version, description, 
+      type, script, checksum, 
+      installed_by, installed_on, execution_time, 
       success)
-    values (#{installedRank,jdbcType=INTEGER}, #{version,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
-      #{type,jdbcType=VARCHAR}, #{script,jdbcType=VARCHAR}, #{checksum,jdbcType=INTEGER},
-      #{installedBy,jdbcType=VARCHAR}, #{installedOn,jdbcType=TIMESTAMP}, #{executionTime,jdbcType=INTEGER},
+    values (#{installedRank,jdbcType=INTEGER}, #{version,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{script,jdbcType=VARCHAR}, #{checksum,jdbcType=INTEGER}, 
+      #{installedBy,jdbcType=VARCHAR}, #{installedOn,jdbcType=TIMESTAMP}, #{executionTime,jdbcType=INTEGER}, 
       #{success,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="senntyou.sbs.mbg.model.FlywaySchemaHistory">
