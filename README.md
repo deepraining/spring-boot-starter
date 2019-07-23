@@ -1,37 +1,37 @@
 # spring-boot-starter
 
-[中文文档](./README.zh.md)
+[English Documentation](./README.en.md)
 
-A boilerplate for creating a [Spring Boot](https://spring.io/projects/spring-boot) application, using [Gradle](https://gradle.org/).
+用于快速创建 [Spring Boot](https://spring.io/projects/spring-boot) 应用的模板脚手架，使用 [Gradle](https://gradle.org/) 构建项目。
 
-## Features
+## 特性
 
-- Use [Gradle](https://gradle.org/) to build the whole project.
-- Support multiple sub projects, and you can add infinite custom sub projects as needed.
-- Use [CheckStyle](https://checkstyle.org/) to check whether Java codes are written compliantly with specified rules, and use [google-java-format](https://github.com/google/google-java-format) to optimize Java codes' format.
-- Use [Git pre-commit hook](./config/hooks) to pre-checking Java codes before `git commit`. If there are some Java codes which are not compliant with specified rules, Git commit will fail.
-- Use [Flyway](https://flywaydb.org/) to manage database tables' versions.
-- Completely separate frontend and backend, and this project is only for backend Java codes. Frontend codes need another project.
-- Use [Mybatis](https://www.mybatis.org/) as database connection layer, and use [Mybatis Generator](http://www.mybatis.org/generator/) to automatically generate model files.
-- Use `uuid` to substitute `id`, and to avoid malicious accessing of data in database.
-- Deeply integrate with [Swagger](https://swagger.io/), to conveniently generate API documentation and provide data-mocking service.
+- 使用 [Gradle](https://gradle.org/) 构建整个项目
+- 多项目模式，可以根据需要自行添加多个子项目
+- 使用 [CheckStyle](https://checkstyle.org/) 检查 Java 代码规范，使用 [google-java-format](https://github.com/google/google-java-format) 优化 Java 代码格式
+- 使用 [Git pre-commit hook](./config/hooks) 在 `git commit` 之前对代码预检，如果有不符合规范的代码，将不予提交
+- 使用 [Flyway](https://flywaydb.org/) 进行数据库版本化管理
+- 前后端完全分离，本项目将只用于写后端 Java 代码，前端代码需要另外建立一个项目
+- 使用 [Mybatis](https://www.mybatis.org/) 作为数据库链接层，使用 [Mybatis Generator](http://www.mybatis.org/generator/) 自动生成模型文件
+- 使用 `uuid` 代替 `id`，可以防止数据被恶意遍历获取
+- 深度整合 [Swagger](https://swagger.io/)，便于生成 API 接口文档和数据 Mock 服务
 
-## Runtime Environment
+## 运行环境
 
-- Mysql: 8+ (some sql sentences cant be run in `5.x`)
+- Mysql: 8+ (有些语句在 `5.x` 的版本下不能运行)
 
-## Sub projects
+## 子项目
 
-- `pro-common`: Common codes to share between sub projects
+- `pro-common`: 通用代码
 - `pro-mbg`: Mybatis Generator
-- `pro-demo`: Demo application using session to remember logged-in status
-- `pro-jwtdemo`: Demo application using JWT to remember logged-in status
+- `pro-demo`: 使用 Session 保持登陆状态的 Demo 应用
+- `pro-jwtdemo`: 使用 JWT 保持登陆状态的 Demo 应用
 
-## Gradle Tasks created by this project
+## 扩展 Gradle Tasks
 
 ### checkJava
 
-Check whether Java codes are written compliantly with specified rules.
+用于检查整个项目的 Java 代码是否符合规范
 
 ```
 ./gradlew checkJava 
@@ -39,7 +39,7 @@ Check whether Java codes are written compliantly with specified rules.
 
 ### installGitHooks
 
-Install Git `pre-commit` Hook.
+安装 Git `pre-commit` Hook
 
 ```
 ./gradlew installGitHooks 
@@ -47,17 +47,17 @@ Install Git `pre-commit` Hook.
 
 ### pro-*:watchJava
 
-Watch Java files' changes, and automatically compile them to `build` directory (some IDE also provide this feature).
+用于监听 Java 文件变动，然后自动编译到 `build` 目录下（有些集成开发工具已经自带这个功能）
 
-(work with `spring-boot-devtools`)
+(配合 `spring-boot-devtools` 一起用)
 
 ```
 ./gradlew pro-*:watchJava -t
 ```
 
-## Create project
+## 创建项目
 
-Clone this project, then modify codes and project as needed.
+克隆代码，然后根据需要调整项目与代码
 
 ```
 git clone https://github.com/senntyou/spring-boot-starter.git yourProName --depth=1
@@ -65,7 +65,7 @@ git clone https://github.com/senntyou/spring-boot-starter.git yourProName --dept
 cd yourProName
 ```
 
-Remove existed git information and re-init it.
+去掉原有的 Git 信息，并重新初始化
 
 ```
 rm -rf .git
@@ -73,63 +73,63 @@ rm -rf .git
 git init
 ```
 
-Install Git `pre-commit` Hook.
+安装 Git `pre-commit` Hook
 
 ```
 ./gradlew installGitHooks 
 ```
 
-Create database and tables.
+创建数据库与表结构
 
 ```
-# For local environment: default config file is flyway.conf
+# 本地环境：默认 flyway.conf 配置文件
 flyway migrate
 
-# For online test environment
+# 线上测试环境
 flyway migrate -configFiles=flyway-test.conf
 
-# For online production environment
+# 线上产品环境
 flyway migrate -configFiles=flyway-prod.conf
 
-# If you want more environments, you can add one by yourself 
+# 如果你需要配置更多的环境，可以自己添加
 ```
 
-Generate Mybatis model files.
+执行自动生成 Mybatis 模型文件的命令
 
 ```
 ./gradlew pro-mbg:run
 ```
 
-## Run project
+## 运行项目
 
-Take `pro-demo` for example:
+以 `pro-demo` 为例:
 
-Develop and debug `pro-demo` sub project in local environment, then open `http://localhost:9000` in browser.
+执行本地开发调试 `pro-demo` 子项目的命令，然后在浏览器中打开 `http://localhost:9000`
 
 ```
 ./gradlew pro-demo:bootRun
 ```
 
-If your IDE does not provide the functionality of watching Java files' changes, you can use command blow.
+如果集成开发工具不支持监听 Java 文件变动并自动编译的功能，可以运行下面的命令
 
 ```
 ./gradlew pro-demo:watchJava -t
 ```
 
-Build this project when finish developing.
+开发完毕之后执行构建
 
 ```
 ./gradlew pro-demo:build
 ```
 
-## Deploy project
+## 部署项目
 
-Take `pro-demo` for example:
+以 `pro-demo` 为例:
 
-Create a `serverDirName` directory in a proper place of server machine.
+在服务器上，找个合适的地方创建 `serverDirName` 目录
 
-Upload `pro-demo/build/libs/demo-latest.jar, pro-demo/bin/*.sh` in local to `serverDirName` directory in server machine,
-and also upload `html` files of frontend to `serverDirName/templates` directory.
+把本地 `pro-demo/build/libs/demo-latest.jar, pro-demo/bin/*.sh` 上传到 `serverDirName` 目录，
+并把前端的 `html` 文件都上传到 `serverDirName/templates` 目录下
 
 ```
 - serverDirName/
@@ -139,18 +139,18 @@ and also upload `html` files of frontend to `serverDirName/templates` directory.
   - templates/
 ```
 
-Related commands of running (take `prod.sh` for example).
+运行程序相关命令（以 `prod.sh` 为例）
 
 ```
 cd serverDirName
 
-sh prod.sh start        # start running
-sh prod.sh stop         # stop running
-sh prod.sh restart      # restart running
-sh prod.sh status       # see the status
+sh prod.sh start        # 运行程序
+sh prod.sh stop         # 停止程序
+sh prod.sh restart      # 重启程序
+sh prod.sh status       # 查看程序状态
 ```
 
-## Referred projects
+## 参考项目
 
 - [mall](https://github.com/macrozheng/mall)
 - [halo](https://github.com/halo-dev/halo)
