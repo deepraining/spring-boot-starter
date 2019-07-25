@@ -18,16 +18,16 @@ public class CommentGenerator extends DefaultCommentGenerator {
   private static final String EXAMPLE_SUFFIX = "Example";
   private static final String API_MODEL_PROPERTY_FULL_CLASS_NAME =
       "io.swagger.annotations.ApiModelProperty";
-  private static final String JACKSON_JSON_IGNORE_FULL_CLASS_NAME =
+  private static final String JSON_IGNORE_FULL_CLASS_NAME =
       "com.fasterxml.jackson.annotation.JsonIgnore";
 
   @Override
   public void addConfigurationProperties(Properties properties) {
     super.addConfigurationProperties(properties);
     this.addRemarkComments = StringUtility.isTrue(properties.getProperty("addRemarkComments"));
-    String ignoreFieldsStr = properties.getProperty("ignoreFields");
-    if (ignoreFieldsStr != null && ignoreFieldsStr.length() > 0) {
-      ignoreFields = ignoreFieldsStr.split(",");
+    String ignoreFieldsString = properties.getProperty("ignoreFields");
+    if (ignoreFieldsString != null && ignoreFieldsString.length() > 0) {
+      ignoreFields = ignoreFieldsString.split(",");
     }
   }
 
@@ -70,12 +70,12 @@ public class CommentGenerator extends DefaultCommentGenerator {
 
     if (!compilationUnit.isJavaInterface()
         && !compilationUnit.getType().getFullyQualifiedName().contains(EXAMPLE_SUFFIX)) {
+      // ApiModelProperty
       compilationUnit.addImportedType(
           new FullyQualifiedJavaType(API_MODEL_PROPERTY_FULL_CLASS_NAME));
 
-      // Jackson JsonIgnore
-      compilationUnit.addImportedType(
-          new FullyQualifiedJavaType(JACKSON_JSON_IGNORE_FULL_CLASS_NAME));
+      // JsonIgnore
+      compilationUnit.addImportedType(new FullyQualifiedJavaType(JSON_IGNORE_FULL_CLASS_NAME));
     }
   }
 }

@@ -1,4 +1,4 @@
-package senntyou.sbs.demo.bo;
+package senntyou.sbs.common.bo;
 
 import lombok.Data;
 

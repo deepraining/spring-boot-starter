@@ -8,7 +8,7 @@ files=$((git diff --cached --name-only --diff-filter=ACMR | grep -Ei "\.java$") 
 if [ ! -z "${files}" ]; then
   comma_files=$(echo "$files" | paste -s -d "," -)
 
-  # Checkstyle does not have functionality of auto-fixing.
+  # Checkstyle does not have the functionality of auto-fixing.
   # So run `goJF` before `checkJava`.
   "${REPO_ROOT_DIR}/gradlew" goJF -DgoogleJavaFormat.include="$comma_files"
   "${REPO_ROOT_DIR}/gradlew" checkJava -DcheckJavaInclude="$comma_files"

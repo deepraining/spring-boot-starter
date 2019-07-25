@@ -51,13 +51,13 @@ subprojects {
   }
 }
 
-def genMapperExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/mapper/'
-def genModelExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/model/'
+def mbgMapperExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/mapper/'
+def mbgModelExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/model/'
 
 googleJavaFormat {
   toolVersion = "1.7"
-  exclude genMapperExcludePath
-  exclude genModelExcludePath
+  exclude mbgMapperExcludePath
+  exclude mbgModelExcludePath
 }
 
 checkstyle {
@@ -75,8 +75,8 @@ task checkJava(type: Checkstyle) {
   configFile = file('config/checkstyle/checkstyle.xml')
   classpath = files()
   source './'
-  exclude genMapperExcludePath
-  exclude genModelExcludePath
+  exclude mbgMapperExcludePath
+  exclude mbgModelExcludePath
 
   if (System.properties.checkJavaInclude != null) {
     def s = ((String)System.properties.checkJavaInclude).split(',')

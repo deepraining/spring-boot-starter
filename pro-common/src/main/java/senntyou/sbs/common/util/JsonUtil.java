@@ -1,4 +1,4 @@
-package senntyou.sbs.jwtdemo.util;
+package senntyou.sbs.common.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;

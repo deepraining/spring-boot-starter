@@ -8,7 +8,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.jwtdemo.util.JsonUtil;
+import senntyou.sbs.common.util.JsonUtil;
 
 @Component
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {

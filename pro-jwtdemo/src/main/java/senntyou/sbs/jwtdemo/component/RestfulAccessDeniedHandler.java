@@ -8,7 +8,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.jwtdemo.util.JsonUtil;
+import senntyou.sbs.common.util.JsonUtil;
 
 @Component
 public class RestfulAccessDeniedHandler implements AccessDeniedHandler {

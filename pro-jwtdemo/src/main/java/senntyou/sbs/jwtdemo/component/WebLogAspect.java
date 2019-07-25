@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import senntyou.sbs.jwtdemo.bo.WebLog;
-import senntyou.sbs.jwtdemo.util.JsonUtil;
-import senntyou.sbs.jwtdemo.util.RequestUtil;
+import senntyou.sbs.common.bo.WebLog;
+import senntyou.sbs.common.util.JsonUtil;
+import senntyou.sbs.common.util.RequestUtil;
 
 /** global log handling aspect */
 @Aspect

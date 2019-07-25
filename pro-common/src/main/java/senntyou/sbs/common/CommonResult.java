@@ -54,13 +54,13 @@ public class CommonResult<T> {
     return failed(ResultCode.FAILED);
   }
 
-  /** Parameters checking failed */
+  /** Check parameters failed */
   public static <T> CommonResult<T> validateFailed() {
     return new CommonResult<T>(
         ResultCode.VALIDATE_FAILED.getCode(), ResultCode.VALIDATE_FAILED.getMessage(), null);
   }
 
-  /** Parameters checking failed */
+  /** Check parameters failed */
   public static <T> CommonResult<T> validateFailed(String message) {
     return new CommonResult<T>(ResultCode.VALIDATE_FAILED.getCode(), message, null);
   }

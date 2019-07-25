@@ -1,4 +1,4 @@
-package senntyou.sbs.jwtdemo.util;
+package senntyou.sbs.common.util;
 
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -6,24 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 public class RequestUtil {
-  /** Remove specified parameter */
-  public String removeParam(HttpServletRequest request, String paramName) {
-    String queryString = "";
-    Enumeration keys = request.getParameterNames();
-    while (keys.hasMoreElements()) {
-      String key = (String) keys.nextElement();
-      if (key.equals(paramName)) {
-        continue;
-      }
-      if ("".equals(queryString)) {
-        queryString = key + "=" + request.getParameter(key);
-      } else {
-        queryString += "&" + key + "=" + request.getParameter(key);
-      }
-    }
-    return queryString;
-  }
-
   /** Get url basePath, scheme://domain:port */
   public static String getBasePath(HttpServletRequest request) {
     StringBuffer basePath = new StringBuffer();
