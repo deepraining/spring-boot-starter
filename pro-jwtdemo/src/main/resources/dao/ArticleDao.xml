@@ -8,6 +8,6 @@
   <select id="getRecord" resultMap="recordMap">
     SELECT *
     FROM article
-    WHERE uuid=#{uuid};
+    WHERE id=#{id};
   </select>
 </mapper>

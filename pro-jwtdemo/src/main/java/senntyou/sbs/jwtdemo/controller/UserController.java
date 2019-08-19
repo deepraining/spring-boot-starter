@@ -25,13 +25,13 @@ public class UserController {
   @Autowired private UserService userService;
 
   @ApiOperation("Update user")
-  @RequestMapping(value = "/update/{uuid}", method = RequestMethod.POST)
+  @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(@PathVariable String uuid, @RequestBody UserParam userParam) {
+  public CommonResult update(@PathVariable long id, @RequestBody UserParam userParam) {
 
     User newUser = userParam.toUser();
 
-    int count = userService.update(uuid, newUser);
+    int count = userService.update(id, newUser);
     if (count > 0) {
       return CommonResult.success(count);
     } else {
@@ -51,22 +51,22 @@ public class UserController {
   }
 
   @ApiOperation("Get a record")
-  @RequestMapping(value = "/record/{uuid}", method = RequestMethod.GET)
+  @RequestMapping(value = "/record/{id}", method = RequestMethod.GET)
   @ResponseBody
-  public CommonResult<User> record(@PathVariable String uuid) {
-    User user = userService.getRecord(uuid);
+  public CommonResult<User> record(@PathVariable long id) {
+    User user = userService.getRecord(id);
     return CommonResult.success(user);
   }
 
   @ApiOperation("Delete user")
-  @RequestMapping(value = "/delete/{uuid}", method = RequestMethod.POST)
+  @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult delete(@PathVariable String uuid) {
+  public CommonResult delete(@PathVariable long id) {
 
     User user = new User();
-    user.setDeleted(true);
+    user.setDeleted(1);
 
-    int count = userService.update(uuid, user);
+    int count = userService.update(id, user);
     if (count > 0) {
       return CommonResult.success(count);
     } else {

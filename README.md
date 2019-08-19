@@ -13,7 +13,6 @@
 - 使用 [Flyway](https://flywaydb.org/) 进行数据库版本化管理
 - 前后端完全分离，本项目将只用于写后端 Java 代码，前端代码需要另外建立一个项目
 - 使用 [Mybatis](https://www.mybatis.org/) 作为数据库链接层，使用 [Mybatis Generator](http://www.mybatis.org/generator/) 自动生成模型文件
-- 使用 `uuid` 代替 `id`，可以防止数据被恶意遍历获取
 - 深度整合 [Swagger](https://swagger.io/)，便于生成 API 接口文档和数据 Mock 服务
 
 ## 运行环境

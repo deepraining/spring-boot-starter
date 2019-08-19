@@ -10,7 +10,7 @@ public interface JwtUserMapper {
 
     int deleteByExample(JwtUserExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(JwtUser record);
 
@@ -18,7 +18,7 @@ public interface JwtUserMapper {
 
     List<JwtUser> selectByExample(JwtUserExample example);
 
-    JwtUser selectByPrimaryKey(Integer id);
+    JwtUser selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") JwtUser record, @Param("example") JwtUserExample example);
 

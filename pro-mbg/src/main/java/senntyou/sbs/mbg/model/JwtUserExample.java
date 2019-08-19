@@ -115,123 +115,53 @@ public class JwtUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Integer value) {
+        public Criteria andIdEqualTo(Long value) {
             addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Integer value) {
+        public Criteria andIdNotEqualTo(Long value) {
             addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Integer value) {
+        public Criteria andIdGreaterThan(Long value) {
             addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andIdGreaterThanOrEqualTo(Long value) {
             addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Integer value) {
+        public Criteria andIdLessThan(Long value) {
             addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Integer value) {
+        public Criteria andIdLessThanOrEqualTo(Long value) {
             addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Integer> values) {
+        public Criteria andIdIn(List<Long> values) {
             addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Integer> values) {
+        public Criteria andIdNotIn(List<Long> values) {
             addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Integer value1, Integer value2) {
+        public Criteria andIdBetween(Long value1, Long value2) {
             addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andIdNotBetween(Long value1, Long value2) {
             addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidIsNull() {
-            addCriterion("uuid is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidIsNotNull() {
-            addCriterion("uuid is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidEqualTo(String value) {
-            addCriterion("uuid =", value, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidNotEqualTo(String value) {
-            addCriterion("uuid <>", value, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidGreaterThan(String value) {
-            addCriterion("uuid >", value, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidGreaterThanOrEqualTo(String value) {
-            addCriterion("uuid >=", value, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidLessThan(String value) {
-            addCriterion("uuid <", value, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidLessThanOrEqualTo(String value) {
-            addCriterion("uuid <=", value, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidLike(String value) {
-            addCriterion("uuid like", value, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidNotLike(String value) {
-            addCriterion("uuid not like", value, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidIn(List<String> values) {
-            addCriterion("uuid in", values, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidNotIn(List<String> values) {
-            addCriterion("uuid not in", values, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidBetween(String value1, String value2) {
-            addCriterion("uuid between", value1, value2, "uuid");
-            return (Criteria) this;
-        }
-
-        public Criteria andUuidNotBetween(String value1, String value2) {
-            addCriterion("uuid not between", value1, value2, "uuid");
             return (Criteria) this;
         }
 
@@ -385,52 +315,52 @@ public class JwtUserExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeletedEqualTo(Boolean value) {
+        public Criteria andDeletedEqualTo(Integer value) {
             addCriterion("deleted =", value, "deleted");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedNotEqualTo(Boolean value) {
+        public Criteria andDeletedNotEqualTo(Integer value) {
             addCriterion("deleted <>", value, "deleted");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedGreaterThan(Boolean value) {
+        public Criteria andDeletedGreaterThan(Integer value) {
             addCriterion("deleted >", value, "deleted");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andDeletedGreaterThanOrEqualTo(Integer value) {
             addCriterion("deleted >=", value, "deleted");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedLessThan(Boolean value) {
+        public Criteria andDeletedLessThan(Integer value) {
             addCriterion("deleted <", value, "deleted");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedLessThanOrEqualTo(Boolean value) {
+        public Criteria andDeletedLessThanOrEqualTo(Integer value) {
             addCriterion("deleted <=", value, "deleted");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedIn(List<Boolean> values) {
+        public Criteria andDeletedIn(List<Integer> values) {
             addCriterion("deleted in", values, "deleted");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedNotIn(List<Boolean> values) {
+        public Criteria andDeletedNotIn(List<Integer> values) {
             addCriterion("deleted not in", values, "deleted");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedBetween(Boolean value1, Boolean value2) {
+        public Criteria andDeletedBetween(Integer value1, Integer value2) {
             addCriterion("deleted between", value1, value2, "deleted");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andDeletedNotBetween(Integer value1, Integer value2) {
             addCriterion("deleted not between", value1, value2, "deleted");
             return (Criteria) this;
         }

@@ -11,12 +11,12 @@ public interface ArticleService {
   @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)
   int create(Article article);
 
-  Article getByUuid(String uuid);
+  Article getById(long id);
 
-  Article getRecord(String uuid);
+  Article getRecord(long id);
 
   @Transactional
-  int update(String uuid, Article article);
+  int update(long id, Article article);
 
   List<Article> list(ArticleQueryParam articleQueryParam, Integer pageSize, Integer pageNum);
 }

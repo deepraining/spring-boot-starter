@@ -13,7 +13,6 @@ A boilerplate for creating a [Spring Boot](https://spring.io/projects/spring-boo
 - Use [Flyway](https://flywaydb.org/) to manage database tables' versions.
 - Completely separate frontend and backend, and this project is only for backend Java codes. Frontend codes need another project.
 - Use [Mybatis](https://www.mybatis.org/) as database connection layer, and use [Mybatis Generator](http://www.mybatis.org/generator/) to automatically generate model files.
-- Use `uuid` to substitute `id`, and to avoid malicious accessing of data in database.
 - Deeply integrate with [Swagger](https://swagger.io/), to conveniently generate API documentation and provide data-mocking service.
 
 ## Runtime Environment

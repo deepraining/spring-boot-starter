@@ -26,9 +26,9 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
-  public Article getByUuid(String uuid) {
+  public Article getById(long id) {
     ArticleExample example = new ArticleExample();
-    example.createCriteria().andUuidEqualTo(uuid);
+    example.createCriteria().andIdEqualTo(id);
     List<Article> articles = articleMapper.selectByExample(example);
 
     if (!CollectionUtils.isEmpty(articles)) {
@@ -38,14 +38,14 @@ public class ArticleServiceImpl implements ArticleService {
   }
 
   @Override
-  public Article getRecord(String uuid) {
-    return articleDao.getRecord(uuid);
+  public Article getRecord(long id) {
+    return articleDao.getRecord(id);
   }
 
   @Override
-  public int update(String uuid, Article article) {
+  public int update(long id, Article article) {
     ArticleExample example = new ArticleExample();
-    example.createCriteria().andUuidEqualTo(uuid);
+    example.createCriteria().andIdEqualTo(id);
 
     articleMapper.updateByExampleSelective(article, example);
 
@@ -59,12 +59,12 @@ public class ArticleServiceImpl implements ArticleService {
     ArticleExample example = new ArticleExample();
     ArticleExample.Criteria criteria = example.createCriteria();
 
-    criteria.andDeletedEqualTo(false);
+    criteria.andDeletedEqualTo(0);
     if (articleQueryParam.getTitle() != null) {
       criteria.andTitleLike("%" + articleQueryParam.getTitle() + "%");
     }
-    if (articleQueryParam.getCreateUserUuid() != null) {
-      criteria.andCreateUserUuidEqualTo(articleQueryParam.getCreateUserUuid());
+    if (articleQueryParam.getCreateUserId() != null) {
+      criteria.andCreateUserIdEqualTo(articleQueryParam.getCreateUserId());
     }
     return articleMapper.selectByExample(example);
   }

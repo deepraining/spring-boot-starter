@@ -6,16 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
-    @JsonIgnore
-    private Integer id;
-
-    /**
-     * uuid
-     *
-     * @mbg.generated
-     */
-    @ApiModelProperty(value = "uuid")
-    private String uuid;
+    private Long id;
 
     /**
      * username
@@ -48,7 +39,7 @@ public class User implements Serializable {
      * @mbg.generated
      */
     @ApiModelProperty(value = "deleted or not")
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * create time
@@ -68,20 +59,12 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public String getUsername() {
@@ -108,11 +91,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public Boolean getDeleted() {
+    public Integer getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setDeleted(Integer deleted) {
         this.deleted = deleted;
     }
 
@@ -139,7 +122,6 @@ public class User implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", uuid=").append(uuid);
         sb.append(", username=").append(username);
         sb.append(", email=").append(email);
         sb.append(", password=").append(password);

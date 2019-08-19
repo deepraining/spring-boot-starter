@@ -6,16 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Article implements Serializable {
-    @JsonIgnore
-    private Integer id;
-
-    /**
-     * uuid
-     *
-     * @mbg.generated
-     */
-    @ApiModelProperty(value = "uuid")
-    private String uuid;
+    private Long id;
 
     /**
      * title
@@ -50,12 +41,12 @@ public class Article implements Serializable {
     private String intro;
 
     /**
-     * creator user_uuid
+     * creator user_id
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "creator user_uuid")
-    private String createUserUuid;
+    @ApiModelProperty(value = "creator user_id")
+    private Long createUserId;
 
     /**
      * deleted or not
@@ -63,7 +54,7 @@ public class Article implements Serializable {
      * @mbg.generated
      */
     @ApiModelProperty(value = "deleted or not")
-    private Boolean deleted;
+    private Integer deleted;
 
     /**
      * create time
@@ -91,20 +82,12 @@ public class Article implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public String getTitle() {
@@ -139,19 +122,19 @@ public class Article implements Serializable {
         this.intro = intro;
     }
 
-    public String getCreateUserUuid() {
-        return createUserUuid;
+    public Long getCreateUserId() {
+        return createUserId;
     }
 
-    public void setCreateUserUuid(String createUserUuid) {
-        this.createUserUuid = createUserUuid;
+    public void setCreateUserId(Long createUserId) {
+        this.createUserId = createUserId;
     }
 
-    public Boolean getDeleted() {
+    public Integer getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setDeleted(Integer deleted) {
         this.deleted = deleted;
     }
 
@@ -186,12 +169,11 @@ public class Article implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", uuid=").append(uuid);
         sb.append(", title=").append(title);
         sb.append(", readCount=").append(readCount);
         sb.append(", supportCount=").append(supportCount);
         sb.append(", intro=").append(intro);
-        sb.append(", createUserUuid=").append(createUserUuid);
+        sb.append(", createUserId=").append(createUserId);
         sb.append(", deleted=").append(deleted);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);

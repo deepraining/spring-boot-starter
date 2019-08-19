@@ -20,7 +20,7 @@
       <!-- whether add column comment in database to java class fields by @ApiModelProperty -->
       <property name="addRemarkComments" value="true"/>
       <!-- fields to ignore when serialize object to json string -->
-      <property name="ignoreFields" value="id,password"/>
+      <property name="ignoreFields" value="password"/>
     </commentGenerator>
 
     <jdbcConnection driverClass="${jdbc.driverClass}"

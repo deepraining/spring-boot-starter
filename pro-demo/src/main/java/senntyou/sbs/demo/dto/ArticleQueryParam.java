@@ -8,6 +8,6 @@ public class ArticleQueryParam {
   @ApiModelProperty("Title")
   private String title;
 
-  @ApiModelProperty("Creator userUuid")
-  private String createUserUuid;
+  @ApiModelProperty("Creator userId")
+  private Long createUserId;
 }

@@ -37,7 +37,7 @@ public class ArticleController {
     }
 
     Article article = articleParam.toArticle();
-    article.setCreateUserUuid(user.getUuid());
+    article.setCreateUserId(user.getId());
 
     int count = articleService.create(article);
     if (count > 0) {
@@ -48,22 +48,22 @@ public class ArticleController {
   }
 
   @ApiOperation("Update article")
-  @RequestMapping(value = "/update/{uuid}", method = RequestMethod.POST)
+  @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(@PathVariable String uuid, @RequestBody ArticleParam articleParam) {
+  public CommonResult update(@PathVariable long id, @RequestBody ArticleParam articleParam) {
     User user = userService.getCurrentUser();
     if (user == null) {
       return CommonResult.unauthorized("Not logged in");
     }
 
-    Article article = articleService.getByUuid(uuid);
-    if (!article.getCreateUserUuid().equals(user.getUuid())) {
+    Article article = articleService.getById(id);
+    if (!article.getCreateUserId().equals(user.getId())) {
       return CommonResult.forbidden("No privileges");
     }
 
     Article newArticle = articleParam.toArticle();
 
-    int count = articleService.update(uuid, newArticle);
+    int count = articleService.update(id, newArticle);
     if (count > 0) {
       return CommonResult.success(count);
     } else {
@@ -83,10 +83,10 @@ public class ArticleController {
   }
 
   @ApiOperation("Get a record")
-  @RequestMapping(value = "/record/{uuid}", method = RequestMethod.GET)
+  @RequestMapping(value = "/record/{id}", method = RequestMethod.GET)
   @ResponseBody
-  public CommonResult<Article> record(@PathVariable String uuid) {
-    Article article = articleService.getRecord(uuid);
+  public CommonResult<Article> record(@PathVariable long id) {
+    Article article = articleService.getRecord(id);
     return CommonResult.success(article);
   }
 }

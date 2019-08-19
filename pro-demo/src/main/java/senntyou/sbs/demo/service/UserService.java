@@ -8,8 +8,8 @@ public interface UserService {
   /** Get user by username */
   User getByUsername(String username);
 
-  /** Get user by uuid */
-  User getByUuid(String uuid);
+  /** Get user by id */
+  User getById(long id);
 
   /** Sign up */
   @Transactional

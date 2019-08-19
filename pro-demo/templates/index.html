@@ -28,12 +28,12 @@
 <table style="width: 100%;">
   <thead>
   <tr>
-    <td>Uuid</td>
+    <td>Id</td>
     <td>Title</td>
     <td>Read Count</td>
     <td>Support Count</td>
     <td>Article Summary</td>
-    <td>Creator User Uuid</td>
+    <td>Creator User Id</td>
     <td>Create Time</td>
     <td>Update Time</td>
     <td>Operations</td>
@@ -49,15 +49,15 @@
   fetch('/api/article/list').then(res => res.json()).then(res => {
     document.getElementById('article-tbody').innerHTML = res.data.list.map(item => `
       <tr>
-        <td>${item.uuid}</td>
+        <td>${item.id}</td>
         <td>${item.title}</td>
         <td>${item.readCount}</td>
         <td>${item.supportCount}</td>
         <td>${item.intro}</td>
-        <td>${item.createUserUuid}</td>
+        <td>${item.createUserId}</td>
         <td>${item.createTime}</td>
         <td>${item.updateTime}</td>
-        <td><a href="/article/record/${item.uuid}">Detail</a></td>
+        <td><a href="/article/record/${item.id}">Detail</a></td>
       </tr>
     `).join('');
     document.getElementById('article-info').innerText = `pageNum: ${
@@ -87,7 +87,7 @@
     if (res.data) {
       userLoggedIn.style.display = 'block';
       userLogin.style.display = 'none';
-      userInfo.innerHTML = `Uuid: ${res.data.uuid}, Username: ${res.data.username}, Email: ${res.data.email}`;
+      userInfo.innerHTML = `Id: ${res.data.id}, Username: ${res.data.username}, Email: ${res.data.email}`;
     }
   });
 </script>

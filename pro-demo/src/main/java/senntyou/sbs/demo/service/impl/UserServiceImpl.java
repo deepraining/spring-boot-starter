@@ -33,9 +33,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User getByUuid(String uuid) {
+  public User getById(long id) {
     UserExample example = new UserExample();
-    example.createCriteria().andUuidEqualTo(uuid);
+    example.createCriteria().andIdEqualTo(id);
     List<User> users = userMapper.selectByExample(example);
     if (!CollectionUtils.isEmpty(users)) {
       return users.get(0);

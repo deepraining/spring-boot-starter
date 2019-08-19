@@ -2,14 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="senntyou.sbs.mbg.mapper.ArticleMapper">
   <resultMap id="BaseResultMap" type="senntyou.sbs.mbg.model.Article">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
+    <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="read_count" jdbcType="INTEGER" property="readCount" />
     <result column="support_count" jdbcType="INTEGER" property="supportCount" />
     <result column="intro" jdbcType="VARCHAR" property="intro" />
-    <result column="create_user_uuid" jdbcType="VARCHAR" property="createUserUuid" />
-    <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="create_user_id" jdbcType="BIGINT" property="createUserId" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -75,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, uuid, title, read_count, support_count, intro, create_user_uuid, deleted, create_time, 
+    id, title, read_count, support_count, intro, create_user_id, deleted, create_time, 
     update_time
   </sql>
   <sql id="Blob_Column_List">
@@ -111,17 +110,17 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from article
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from article
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="senntyou.sbs.mbg.model.ArticleExample">
     delete from article
@@ -130,27 +129,24 @@
     </if>
   </delete>
   <insert id="insert" parameterType="senntyou.sbs.mbg.model.Article">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into article (uuid, title, read_count, 
-      support_count, intro, create_user_uuid, 
-      deleted, create_time, update_time, 
-      content)
-    values (#{uuid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{readCount,jdbcType=INTEGER}, 
-      #{supportCount,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR}, #{createUserUuid,jdbcType=VARCHAR}, 
-      #{deleted,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{content,jdbcType=LONGVARCHAR})
+    insert into article (title, read_count, support_count, 
+      intro, create_user_id, deleted, 
+      create_time, update_time, content
+      )
+    values (#{title,jdbcType=VARCHAR}, #{readCount,jdbcType=INTEGER}, #{supportCount,jdbcType=INTEGER}, 
+      #{intro,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, #{deleted,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="senntyou.sbs.mbg.model.Article">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into article
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        uuid,
-      </if>
       <if test="title != null">
         title,
       </if>
@@ -163,8 +159,8 @@
       <if test="intro != null">
         intro,
       </if>
-      <if test="createUserUuid != null">
-        create_user_uuid,
+      <if test="createUserId != null">
+        create_user_id,
       </if>
       <if test="deleted != null">
         deleted,
@@ -180,9 +176,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
-      </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
@@ -195,11 +188,11 @@
       <if test="intro != null">
         #{intro,jdbcType=VARCHAR},
       </if>
-      <if test="createUserUuid != null">
-        #{createUserUuid,jdbcType=VARCHAR},
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=BIGINT},
       </if>
       <if test="deleted != null">
-        #{deleted,jdbcType=BIT},
+        #{deleted,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -222,10 +215,7 @@
     update article
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.uuid != null">
-        uuid = #{record.uuid,jdbcType=VARCHAR},
+        id = #{record.id,jdbcType=BIGINT},
       </if>
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
@@ -239,11 +229,11 @@
       <if test="record.intro != null">
         intro = #{record.intro,jdbcType=VARCHAR},
       </if>
-      <if test="record.createUserUuid != null">
-        create_user_uuid = #{record.createUserUuid,jdbcType=VARCHAR},
+      <if test="record.createUserId != null">
+        create_user_id = #{record.createUserId,jdbcType=BIGINT},
       </if>
       <if test="record.deleted != null">
-        deleted = #{record.deleted,jdbcType=BIT},
+        deleted = #{record.deleted,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -261,14 +251,13 @@
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map">
     update article
-    set id = #{record.id,jdbcType=INTEGER},
-      uuid = #{record.uuid,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       read_count = #{record.readCount,jdbcType=INTEGER},
       support_count = #{record.supportCount,jdbcType=INTEGER},
       intro = #{record.intro,jdbcType=VARCHAR},
-      create_user_uuid = #{record.createUserUuid,jdbcType=VARCHAR},
-      deleted = #{record.deleted,jdbcType=BIT},
+      create_user_id = #{record.createUserId,jdbcType=BIGINT},
+      deleted = #{record.deleted,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       content = #{record.content,jdbcType=LONGVARCHAR}
@@ -278,14 +267,13 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update article
-    set id = #{record.id,jdbcType=INTEGER},
-      uuid = #{record.uuid,jdbcType=VARCHAR},
+    set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       read_count = #{record.readCount,jdbcType=INTEGER},
       support_count = #{record.supportCount,jdbcType=INTEGER},
       intro = #{record.intro,jdbcType=VARCHAR},
-      create_user_uuid = #{record.createUserUuid,jdbcType=VARCHAR},
-      deleted = #{record.deleted,jdbcType=BIT},
+      create_user_id = #{record.createUserId,jdbcType=BIGINT},
+      deleted = #{record.deleted,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -295,9 +283,6 @@
   <update id="updateByPrimaryKeySelective" parameterType="senntyou.sbs.mbg.model.Article">
     update article
     <set>
-      <if test="uuid != null">
-        uuid = #{uuid,jdbcType=VARCHAR},
-      </if>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
@@ -310,11 +295,11 @@
       <if test="intro != null">
         intro = #{intro,jdbcType=VARCHAR},
       </if>
-      <if test="createUserUuid != null">
-        create_user_uuid = #{createUserUuid,jdbcType=VARCHAR},
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=BIGINT},
       </if>
       <if test="deleted != null">
-        deleted = #{deleted,jdbcType=BIT},
+        deleted = #{deleted,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -326,33 +311,31 @@
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="senntyou.sbs.mbg.model.Article">
     update article
-    set uuid = #{uuid,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
+    set title = #{title,jdbcType=VARCHAR},
       read_count = #{readCount,jdbcType=INTEGER},
       support_count = #{supportCount,jdbcType=INTEGER},
       intro = #{intro,jdbcType=VARCHAR},
-      create_user_uuid = #{createUserUuid,jdbcType=VARCHAR},
-      deleted = #{deleted,jdbcType=BIT},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      deleted = #{deleted,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="senntyou.sbs.mbg.model.Article">
     update article
-    set uuid = #{uuid,jdbcType=VARCHAR},
-      title = #{title,jdbcType=VARCHAR},
+    set title = #{title,jdbcType=VARCHAR},
       read_count = #{readCount,jdbcType=INTEGER},
       support_count = #{supportCount,jdbcType=INTEGER},
       intro = #{intro,jdbcType=VARCHAR},
-      create_user_uuid = #{createUserUuid,jdbcType=VARCHAR},
-      deleted = #{deleted,jdbcType=BIT},
+      create_user_id = #{createUserId,jdbcType=BIGINT},
+      deleted = #{deleted,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

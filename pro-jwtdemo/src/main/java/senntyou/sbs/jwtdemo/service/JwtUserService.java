@@ -8,8 +8,8 @@ public interface JwtUserService {
   /** Get user by username */
   JwtUser getByUsername(String username);
 
-  /** Get user by uuid */
-  JwtUser getByUuid(String uuid);
+  /** Get user by id */
+  JwtUser getById(long id);
 
   /** Sign up */
   CommonResult register(String username, String password);

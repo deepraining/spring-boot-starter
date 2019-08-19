@@ -43,12 +43,12 @@
     <table style="width: 100%;">
       <thead>
       <tr>
-        <td>Uuid</td>
+        <td>Id</td>
         <td>Title</td>
         <td>Read Count</td>
         <td>Support Count</td>
         <td>Article Summary</td>
-        <td>Creator User Uuid</td>
+        <td>Creator User Id</td>
         <td>Create Time</td>
         <td>Update Time</td>
         <td>Operations</td>
@@ -63,7 +63,7 @@
     <table style="width: 100%;">
       <thead>
       <tr>
-        <td>Uuid</td>
+        <td>Id</td>
         <td>Username</td>
         <td>Create Time</td>
         <td>Update Time</td>
@@ -252,8 +252,8 @@ wFetch('/account/refreshToken').then(res => {
 <!-- article -->
 <script>
   const deleteArticle = e => {
-    const uuid = e.target.getAttribute('data-delete');
-    wFetch(`/article/delete/${uuid}`, {method: 'post'}).then(res => {
+    const id = e.target.getAttribute('data-delete');
+    wFetch(`/article/delete/${id}`, {method: 'post'}).then(res => {
       if (res.code < 300) {
         alert('Delete succeeded');
         getArticles();
@@ -266,15 +266,15 @@ wFetch('/account/refreshToken').then(res => {
     wFetch('/article/list').then(res => {
       articleBody.innerHTML = res.data.list.map(item => `
         <tr>
-          <td>${item.uuid}</td>
+          <td>${item.id}</td>
           <td>${item.title}</td>
           <td>${item.readCount}</td>
           <td>${item.supportCount}</td>
           <td>${item.intro}</td>
-          <td>${item.createUserUuid}</td>
+          <td>${item.createUserId}</td>
           <td>${item.createTime}</td>
           <td>${item.updateTime}</td>
-          <td><button data-delete="${item.uuid}">Delete</button></td>
+          <td><button data-delete="${item.id}">Delete</button></td>
         </tr>
       `).join('');
       articleBody.querySelectorAll('[data-delete]').forEach(el => {
@@ -293,8 +293,8 @@ wFetch('/account/refreshToken').then(res => {
 <!-- user -->
 <script>
   const deleteUser = e => {
-    const uuid = e.target.getAttribute('data-delete');
-    wFetch(`/user/delete/${uuid}`, {method: 'post'}).then(res => {
+    const id = e.target.getAttribute('data-delete');
+    wFetch(`/user/delete/${id}`, {method: 'post'}).then(res => {
       if (res.code < 300) {
         alert('Delete succeeded');
         getUsers();
@@ -307,11 +307,11 @@ wFetch('/account/refreshToken').then(res => {
     wFetch('/user/list').then(res => {
       userBody.innerHTML = res.data.list.map(item => `
         <tr>
-          <td>${item.uuid}</td>
+          <td>${item.id}</td>
           <td>${item.username}</td>
           <td>${item.createTime}</td>
           <td>${item.updateTime}</td>
-          <td><button data-delete="${item.uuid}">Delete</button></td>
+          <td><button data-delete="${item.id}">Delete</button></td>
         </tr>
       `).join('');
       userBody.querySelectorAll('[data-delete]').forEach(el => {

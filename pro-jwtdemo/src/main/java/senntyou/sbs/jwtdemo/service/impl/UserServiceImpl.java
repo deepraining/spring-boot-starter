@@ -16,9 +16,9 @@ public class UserServiceImpl implements UserService {
   @Autowired private UserMapper userMapper;
 
   @Override
-  public User getRecord(String uuid) {
+  public User getRecord(long id) {
     UserExample example = new UserExample();
-    example.createCriteria().andUuidEqualTo(uuid);
+    example.createCriteria().andIdEqualTo(id);
     List<User> users = userMapper.selectByExample(example);
 
     if (!CollectionUtils.isEmpty(users)) {
@@ -28,9 +28,9 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public int update(String uuid, User user) {
+  public int update(long id, User user) {
     UserExample example = new UserExample();
-    example.createCriteria().andUuidEqualTo(uuid);
+    example.createCriteria().andIdEqualTo(id);
 
     userMapper.updateByExampleSelective(user, example);
 
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     UserExample example = new UserExample();
     UserExample.Criteria criteria = example.createCriteria();
 
-    criteria.andDeletedEqualTo(false);
+    criteria.andDeletedEqualTo(0);
     if (userQueryParam.getUsername() != null) {
       criteria.andUsernameLike("%" + userQueryParam.getUsername() + "%");
     }

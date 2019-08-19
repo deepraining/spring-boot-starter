@@ -47,9 +47,9 @@ public class JwtUserServiceImpl implements JwtUserService {
   }
 
   @Override
-  public JwtUser getByUuid(String uuid) {
+  public JwtUser getById(long id) {
     JwtUserExample example = new JwtUserExample();
-    example.createCriteria().andUuidEqualTo(uuid);
+    example.createCriteria().andIdEqualTo(id);
     List<JwtUser> users = jwtUserMapper.selectByExample(example);
     if (!CollectionUtils.isEmpty(users)) {
       return users.get(0);
