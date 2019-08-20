@@ -19,7 +19,6 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Override
   public int create(Article article) {
-    article.setId(null);
     articleMapper.insertSelective(article);
 
     return 1;
