@@ -15,10 +15,6 @@ A boilerplate for creating a [Spring Boot](https://spring.io/projects/spring-boo
 - Use [Mybatis](https://www.mybatis.org/) as database connection layer, and use [Mybatis Generator](http://www.mybatis.org/generator/) to automatically generate model files.
 - Deeply integrate with [Swagger](https://swagger.io/), to conveniently generate API documentation and provide data-mocking service.
 
-## Runtime Environment
-
-- Mysql: 8+ (some sql sentences cant be run in `5.x`)
-
 ## Sub projects
 
 - `pro-common`: Common codes to share between sub projects

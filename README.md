@@ -15,10 +15,6 @@
 - 使用 [Mybatis](https://www.mybatis.org/) 作为数据库链接层，使用 [Mybatis Generator](http://www.mybatis.org/generator/) 自动生成模型文件
 - 深度整合 [Swagger](https://swagger.io/)，便于生成 API 接口文档和数据 Mock 服务
 
-## 运行环境
-
-- Mysql: 8+ (有些语句在 `5.x` 的版本下不能运行)
-
 ## 子项目
 
 - `pro-common`: 通用代码
