@@ -1,7 +1,9 @@
 package senntyou.sbs.demo.service.impl;
 
+import com.baidu.fsg.uid.impl.CachedUidGenerator;
 import com.github.pagehelper.PageHelper;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -16,9 +18,11 @@ import senntyou.sbs.mbg.model.ArticleExample;
 public class ArticleServiceImpl implements ArticleService {
   @Autowired private ArticleMapper articleMapper;
   @Autowired private ArticleDao articleDao;
+  @Resource private CachedUidGenerator cachedUidGenerator;
 
   @Override
   public int create(Article article) {
+    article.setId(cachedUidGenerator.getUID());
     articleMapper.insertSelective(article);
 
     return 1;

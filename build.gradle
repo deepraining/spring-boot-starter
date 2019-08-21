@@ -53,11 +53,13 @@ subprojects {
 
 def mbgMapperExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/mapper/'
 def mbgModelExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/model/'
+def uidGeneratorExcludePath = 'uid-generator/'
 
 googleJavaFormat {
   toolVersion = "1.7"
   exclude mbgMapperExcludePath
   exclude mbgModelExcludePath
+  exclude uidGeneratorExcludePath
 }
 
 checkstyle {
@@ -77,6 +79,7 @@ task checkJava(type: Checkstyle) {
   source './'
   exclude mbgMapperExcludePath
   exclude mbgModelExcludePath
+  exclude uidGeneratorExcludePath
 
   if (System.properties.checkJavaInclude != null) {
     def s = ((String)System.properties.checkJavaInclude).split(',')

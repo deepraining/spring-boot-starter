@@ -18,7 +18,7 @@ dependencies {
   }
   implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.1.4.RELEASE'
   implementation 'org.springframework.boot:spring-boot-devtools:2.1.4.RELEASE'
-  implementation 'org.springframework.data:spring-data-commons:2.1.8.RELEASE'
+  implementation 'org.springframework.data:spring-data-commons:2.1.4.RELEASE'
   implementation 'org.springframework.boot:spring-boot-starter-aop:2.1.4.RELEASE'
   implementation 'org.springframework.boot:spring-boot-starter-logging:2.1.4.RELEASE'
   implementation 'org.springframework.boot:spring-boot-starter-actuator:2.1.4.RELEASE'
@@ -39,6 +39,7 @@ dependencies {
   implementation 'net.logstash.logback:logstash-logback-encoder:6.0'
 
   // util
+  implementation 'commons-lang:commons-lang:2.6'
 //  implementation 'com.google.guava:guava:27.1-jre'
 //  implementation 'org.apache.commons:commons-collections4:4.3'
 //  implementation 'org.apache.commons:commons-lang3:3.9'
@@ -48,6 +49,7 @@ dependencies {
 //  implementation 'cn.hutool:hutool-extra:4.5.10'
 
   // projects
+  implementation project(':uid-generator')
   implementation project(':pro-mbg')
   implementation project(':pro-common')
 

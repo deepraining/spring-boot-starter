@@ -101,20 +101,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="senntyou.sbs.mbg.model.JwtUser">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into jwt_user (username, password, deleted, 
-      create_time, update_time)
-    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{deleted,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+    insert into jwt_user (id, username, password, 
+      deleted, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{deleted,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="senntyou.sbs.mbg.model.JwtUser">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into jwt_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
       <if test="username != null">
         username,
       </if>
@@ -132,6 +131,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>

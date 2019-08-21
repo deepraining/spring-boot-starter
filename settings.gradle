@@ -1,3 +1,4 @@
+include ':uid-generator'
 include ':pro-mbg'
 include ':pro-common'
 include ':pro-demo'

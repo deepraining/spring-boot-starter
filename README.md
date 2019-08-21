@@ -14,6 +14,7 @@
 - 前后端完全分离，本项目将只用于写后端 Java 代码，前端代码需要另外建立一个项目
 - 使用 [Mybatis](https://www.mybatis.org/) 作为数据库链接层，使用 [Mybatis Generator](http://www.mybatis.org/generator/) 自动生成模型文件
 - 深度整合 [Swagger](https://swagger.io/)，便于生成 API 接口文档和数据 Mock 服务
+- 使用 [uid-generator](https://github.com/baidu/uid-generator) 生成分布式唯一 ID.
 
 ## 子项目
 

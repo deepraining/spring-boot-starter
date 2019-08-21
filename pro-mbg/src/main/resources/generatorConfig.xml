@@ -38,7 +38,8 @@
                          targetProject="src/main/java"/>
 
     <table tableName="%">
-      <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+      <!-- to insert id by uid-generator, not by auto_increment of mysql -->
+      <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
     </table>
   </context>
 </generatorConfiguration>
