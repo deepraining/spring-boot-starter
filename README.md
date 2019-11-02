@@ -112,7 +112,7 @@ flyway migrate -configFiles=flyway-prod.conf
 ./gradlew pro-demo:watchJava -t
 ```
 
-开发完毕之后执行构建
+开发完毕之后执行构建(可以使用 shell 脚本把已经构建好的 html 文件复制到 `resources/templates` 目录下)
 
 ```
 ./gradlew pro-demo:build
@@ -124,15 +124,13 @@ flyway migrate -configFiles=flyway-prod.conf
 
 在服务器上，找个合适的地方创建 `serverDirName` 目录
 
-把本地 `pro-demo/build/libs/demo-latest.jar, pro-demo/bin/*.sh` 上传到 `serverDirName` 目录，
-并把前端的 `html` 文件都上传到 `serverDirName/templates` 目录下
+把本地 `pro-demo/build/libs/demo-latest.jar, pro-demo/bin/*.sh` 上传到 `serverDirName` 目录
 
 ```
 - serverDirName/
   - test.sh
   - prod.sh
   - demo-latest.jar
-  - templates/
 ```
 
 运行程序相关命令（以 `prod.sh` 为例）
@@ -144,6 +142,18 @@ sh prod.sh start        # 运行程序
 sh prod.sh stop         # 停止程序
 sh prod.sh restart      # 重启程序
 sh prod.sh status       # 查看程序状态
+```
+
+## 前端与后端分开部署(html 文件不打包进 jar 文件)
+
+`application.yml`: 
+
+```
+spring:
+  thymeleaf:
+-   prefix: classpath:templates/
++   prefix: file:./templates/
++   cache: false
 ```
 
 ## 参考项目

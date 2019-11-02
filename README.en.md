@@ -112,7 +112,7 @@ If your IDE does not provide the functionality of watching Java files' changes, 
 ./gradlew pro-demo:watchJava -t
 ```
 
-Build this project when finish developing.
+Build this project when finish developing(you can copy html files which built by web tools to `resources/templates` directory by shell script).
 
 ```
 ./gradlew pro-demo:build
@@ -124,15 +124,13 @@ Take `pro-demo` for example:
 
 Create a `serverDirName` directory in a proper place of server machine.
 
-Upload `pro-demo/build/libs/demo-latest.jar, pro-demo/bin/*.sh` in local to `serverDirName` directory in server machine,
-and also upload `html` files of frontend to `serverDirName/templates` directory.
+Upload `pro-demo/build/libs/demo-latest.jar, pro-demo/bin/*.sh` in local to `serverDirName` directory in server machine.
 
 ```
 - serverDirName/
   - test.sh
   - prod.sh
   - demo-latest.jar
-  - templates/
 ```
 
 Related commands of running (take `prod.sh` for example).
@@ -144,6 +142,18 @@ sh prod.sh start        # start running
 sh prod.sh stop         # stop running
 sh prod.sh restart      # restart running
 sh prod.sh status       # see the status
+```
+
+## Deploy html files separately(not in jar files)
+
+`application.yml`: 
+
+```
+spring:
+  thymeleaf:
+-   prefix: classpath:templates/
++   prefix: file:./templates/
++   cache: false
 ```
 
 ## Referred projects
