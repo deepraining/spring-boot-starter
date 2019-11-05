@@ -124,24 +124,22 @@ Take `pro-demo` for example:
 
 Create a `serverDirName` directory in a proper place of server machine.
 
-Upload `pro-demo/build/libs/demo-latest.jar, pro-demo/bin/*.sh` in local to `serverDirName` directory in server machine.
+Upload `pro-demo/build/libs/*.jar, bin/run.sh` in local to `serverDirName` directory in server machine.
 
 ```
 - serverDirName/
-  - test.sh
-  - prod.sh
-  - demo-latest.jar
+  - run.sh              # you can modify the value of variable SERVER_ENV according to the reality
+  - libs　
+    - *.jar
 ```
-
-Related commands of running (take `prod.sh` for example).
 
 ```
 cd serverDirName
 
-sh prod.sh start        # start running
-sh prod.sh stop         # stop running
-sh prod.sh restart      # restart running
-sh prod.sh status       # see the status
+sh run.sh start        # start running
+sh run.sh stop         # stop running
+sh run.sh restart      # restart running
+sh run.sh status       # see the status
 ```
 
 ## Deploy html files separately(not in jar files)

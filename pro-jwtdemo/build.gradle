@@ -4,8 +4,8 @@ plugins {
 }
 
 group = 'senntyou.sbs'
-version = 'latest'
-archivesBaseName = 'jwtdemo'
+version = '0.1.0'
+archivesBaseName = 'sbs-jwtdemo'
 sourceCompatibility = 1.8
 description = 'Spring Boot Starter JWT Demo Application.'
 

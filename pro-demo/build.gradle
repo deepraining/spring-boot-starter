@@ -4,8 +4,8 @@ plugins {
 }
 
 group = 'senntyou.sbs'
-version = 'latest'
-archivesBaseName = 'demo'
+version = '0.1.0'
+archivesBaseName = 'sbs-demo'
 sourceCompatibility = 1.8
 description = 'Spring Boot Starter Demo Application.'
 
