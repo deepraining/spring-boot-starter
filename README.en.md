@@ -15,6 +15,7 @@ A boilerplate for creating a [Spring Boot](https://spring.io/projects/spring-boo
 - Use [Mybatis](https://www.mybatis.org/) as database connection layer, and use [Mybatis Generator](http://www.mybatis.org/generator/) to automatically generate model files.
 - Deeply integrate with [Swagger](https://swagger.io/), to conveniently generate API documentation and provide data-mocking service.
 - Use [uid-generator](https://github.com/baidu/uid-generator) to generate distributed unique id.
+- Support [docker](https://www.docker.com/) deployment.
 
 ## Sub projects
 
@@ -153,6 +154,10 @@ spring:
 +   prefix: file:./templates/
 +   cache: false
 ```
+
+## Docker deployment
+
+See [pro-demo Dockerfile](./pro-demo/Dockerfile).
 
 ## Referred projects
 
