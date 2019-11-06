@@ -14,7 +14,7 @@
 -- ----------------------------
 -- Database definition
 -- ----------------------------
--- CREATE DATABASE `starter` DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+-- CREATE DATABASE `starter` DEFAULT CHARSET=utf8mb4 COLLATE=utf8_general_ci;
 
 -- ----------------------------
 -- Table structure for user
@@ -30,7 +30,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_username` (`username`),
   UNIQUE KEY `idx_email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='user';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='user';
 
 -- ----------------------------
 -- Table structure for article
@@ -48,4 +48,4 @@ CREATE TABLE `article` (
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update time',
   PRIMARY KEY (`id`),
   KEY `idx_create_user_id` (`create_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='article';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='article';
