@@ -101,7 +101,7 @@ flyway migrate -configFiles=flyway-prod.conf
 
 以 `pro-demo` 为例:
 
-执行本地开发调试 `pro-demo` 子项目的命令，然后在浏览器中打开 `http://localhost:9000`
+执行本地开发调试 `pro-demo` 子项目的命令，然后在浏览器中打开 `http://127.0.0.1:9000`
 
 ```
 ./gradlew pro-demo:bootRun
@@ -155,9 +155,15 @@ spring:
 +   cache: false
 ```
 
+## 配置文件与 jar 文件分开部署(yml 文件不打包进 jar 文件)
+
+你可以把配置文件部署到 `~/.sbs-demo/application*.yml`，就可以覆盖 `src/main/resources/application*.yml` 的配置. 
+
 ## Docker 部署
 
 参看 [pro-demo Dockerfile](./pro-demo/Dockerfile).
+
+## 配置文件与
 
 ## 参考项目
 

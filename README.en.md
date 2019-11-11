@@ -101,7 +101,7 @@ Generate Mybatis model files.
 
 Take `pro-demo` for example:
 
-Develop and debug `pro-demo` sub project in local environment, then open `http://localhost:9000` in browser.
+Develop and debug `pro-demo` sub project in local environment, then open `http://127.0.0.1:9000` in browser.
 
 ```
 ./gradlew pro-demo:bootRun
@@ -154,6 +154,10 @@ spring:
 +   prefix: file:./templates/
 +   cache: false
 ```
+
+## Deploy `application*.yml` config files separately(not in jar files)
+
+You can deploy config files into `~/.sbs-demo/application*.yml`, and it will override `src/main/resources/application*.yml`. 
 
 ## Docker deployment
 
