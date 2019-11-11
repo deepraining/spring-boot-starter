@@ -2,7 +2,7 @@ FROM openjdk:8-jre-alpine
 
 VOLUME /tmp
 
-ARG JAR_FILE=build/libs/sbs-jwtdemo-0.1.0.jar
+ARG JAR_FILE=build/libs/sbs-jwtdemo.jar
 ARG PORT=9005
 ARG TIME_ZONE=Asia/Shanghai
 

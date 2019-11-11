@@ -2,7 +2,7 @@ FROM openjdk:8-jre-alpine
 
 VOLUME /tmp
 
-ARG JAR_FILE=build/libs/sbs-demo-0.1.0.jar
+ARG JAR_FILE=build/libs/sbs-demo.jar
 ARG PORT=9000
 ARG TIME_ZONE=Asia/Shanghai
 
