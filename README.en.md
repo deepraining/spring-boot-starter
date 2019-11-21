@@ -34,14 +34,6 @@ Check whether Java codes are written compliantly with specified rules.
 ./gradlew checkJava 
 ```
 
-### installGitHooks
-
-Install Git `pre-commit` Hook.
-
-```
-./gradlew installGitHooks 
-```
-
 ### pro-*:watchJava
 
 Watch Java files' changes, and automatically compile them to `build` directory (some IDE also provide this feature).
@@ -68,12 +60,6 @@ Remove existed git information and re-init it.
 rm -rf .git
 
 git init
-```
-
-Install Git `pre-commit` Hook.
-
-```
-./gradlew installGitHooks 
 ```
 
 Create database and tables.

@@ -6,7 +6,13 @@ buildscript {
     mavenCentral()
     maven { url 'https://plugins.gradle.org/m2/' }
   }
+
+  dependencies {
+    classpath 'cn.hutool:hutool-core:4.5.10'
+  }
 }
+
+import cn.hutool.core.io.FileUtil;
 
 plugins {
   id 'java'
@@ -88,18 +94,7 @@ task checkJava(type: Checkstyle) {
   }
 }
 
-/**
- * Git pre-commit hook installation
- *
- * ```
- * from: https://github.com/uber/NullAway
- * ```
- */
-// noinspection GroovyAssignabilityCheck
-task installGitHooks(type: Copy) {
-  from(file('config/hooks/pre-commit-stub')) {
-    rename 'pre-commit-stub', 'pre-commit'
-  }
-  into file('.git/hooks')
-  fileMode 0777
+// Copy git pre-commit hook
+if (FileUtil.exist('.git') && !FileUtil.exist('.git/hooks/pre-commit')) {
+  FileUtil.copyFile('config/hooks/pre-commit-stub', '.git/hooks/pre-commit');
 }

@@ -34,14 +34,6 @@
 ./gradlew checkJava 
 ```
 
-### installGitHooks
-
-安装 Git `pre-commit` Hook
-
-```
-./gradlew installGitHooks 
-```
-
 ### pro-*:watchJava
 
 用于监听 Java 文件变动，然后自动编译到 `build` 目录下（有些集成开发工具已经自带这个功能）
@@ -68,12 +60,6 @@ cd yourProName
 rm -rf .git
 
 git init
-```
-
-安装 Git `pre-commit` Hook
-
-```
-./gradlew installGitHooks 
 ```
 
 创建数据库与表结构
