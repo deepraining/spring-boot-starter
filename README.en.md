@@ -68,10 +68,7 @@ Create database and tables.
 # For local environment: default config file is flyway.conf
 flyway migrate
 
-# For online test environment
-flyway migrate -configFiles=flyway-test.conf
-
-# For online production environment
+# For online environment
 flyway migrate -configFiles=flyway-prod.conf
 
 # If you want more environments, you can add one by yourself 

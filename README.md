@@ -68,10 +68,7 @@ git init
 # 本地环境：默认 flyway.conf 配置文件
 flyway migrate
 
-# 线上测试环境
-flyway migrate -configFiles=flyway-test.conf
-
-# 线上产品环境
+# 线上环境
 flyway migrate -configFiles=flyway-prod.conf
 
 # 如果你需要配置更多的环境，可以自己添加
@@ -148,8 +145,6 @@ spring:
 ## Docker 部署
 
 参看 [pro-demo Dockerfile](./pro-demo/Dockerfile).
-
-## 配置文件与
 
 ## 参考项目
 
