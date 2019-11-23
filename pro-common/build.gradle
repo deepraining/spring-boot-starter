@@ -6,4 +6,5 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-undertow:2.1.4.RELEASE'
   implementation 'com.github.pagehelper:pagehelper:5.1.9'
   implementation 'org.projectlombok:lombok:1.18.8'
+  implementation 'cn.hutool:hutool-core:4.5.10'
 }

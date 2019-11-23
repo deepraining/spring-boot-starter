@@ -38,7 +38,7 @@
                          targetProject="src/main/java"/>
 
     <table tableName="%">
-      <!-- to insert id by uid-generator, not by auto_increment of mysql -->
+      <!-- to insert id by snowflake, not by auto_increment of mysql -->
       <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
     </table>
   </context>

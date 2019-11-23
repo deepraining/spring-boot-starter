@@ -1,8 +1,0 @@
-dependencies {
-  implementation('org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE') {
-    exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-  }
-  implementation 'org.mybatis:mybatis:3.5.1'
-  implementation 'commons-lang:commons-lang:2.6'
-  implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.11'
-}

@@ -1,8 +1,6 @@
 package senntyou.sbs.demo.service.impl;
 
-import com.baidu.fsg.uid.impl.CachedUidGenerator;
 import java.util.List;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import senntyou.sbs.common.CommonResult;
+import senntyou.sbs.common.util.UuidUtil;
 import senntyou.sbs.demo.bo.UserInfo;
 import senntyou.sbs.demo.service.UserService;
 import senntyou.sbs.mbg.mapper.UserMapper;
@@ -22,7 +21,6 @@ import senntyou.sbs.mbg.model.UserExample;
 public class UserServiceImpl implements UserService {
   @Autowired private UserMapper userMapper;
   @Autowired private PasswordEncoder passwordEncoder;
-  @Resource private CachedUidGenerator cachedUidGenerator;
 
   @Override
   public User getByUsername(String username) {
@@ -59,7 +57,7 @@ public class UserServiceImpl implements UserService {
 
     // Add the user
     User user = new User();
-    user.setId(cachedUidGenerator.getUID());
+    user.setId(UuidUtil.getId());
     user.setUsername(username);
     user.setEmail(email);
     user.setPassword(passwordEncoder.encode(password));

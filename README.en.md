@@ -14,7 +14,7 @@ A boilerplate for creating a [Spring Boot](https://spring.io/projects/spring-boo
 - Completely separate frontend and backend, and this project is only for backend Java codes. Frontend codes need another project.
 - Use [Mybatis](https://www.mybatis.org/) as database connection layer, and use [Mybatis Generator](http://www.mybatis.org/generator/) to automatically generate model files.
 - Deeply integrate with [Swagger](https://swagger.io/), to conveniently generate API documentation and provide data-mocking service.
-- Use [uid-generator](https://github.com/baidu/uid-generator) to generate distributed unique id.
+- Use [snowflake](https://github.com/twitter-archive/snowflake) algorithm to generate distributed unique id.
 - Support [docker](https://www.docker.com/) deployment.
 
 ## Sub projects
