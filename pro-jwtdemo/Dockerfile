@@ -13,4 +13,4 @@ COPY ${JAR_FILE} sbs-jwtdemo.jar
 
 EXPOSE ${PORT}
 
-ENTRYPOINT java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -server -jar sbs-jwtdemo.jar
+ENTRYPOINT java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom --spring.profiles.active=prod -server -jar sbs-jwtdemo.jar
