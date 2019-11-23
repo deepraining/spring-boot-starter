@@ -78,4 +78,3 @@ atlassian-ide-plugin.xml
 
 # flyway
 flyway*.conf
-!flyway-tpl.conf
