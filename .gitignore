@@ -75,3 +75,7 @@ atlassian-ide-plugin.xml
 
 # gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.jar
+
+# flyway
+flyway*.conf
+!flyway-tpl.conf
