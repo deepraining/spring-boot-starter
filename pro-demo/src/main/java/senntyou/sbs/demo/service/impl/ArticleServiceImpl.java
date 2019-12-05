@@ -20,7 +20,7 @@ public class ArticleServiceImpl implements ArticleService {
 
   @Override
   public int create(Article article) {
-    article.setId(UuidUtil.getId());
+    article.setId(UuidUtil.nextId());
     articleMapper.insertSelective(article);
 
     return 1;

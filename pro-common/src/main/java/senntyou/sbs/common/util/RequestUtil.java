@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestUtil {
   /** Get url basePath, scheme://domain:port */
   public static String getBasePath(HttpServletRequest request) {
-    StringBuffer basePath = new StringBuffer();
+    StringBuilder basePath = new StringBuilder();
     String scheme = request.getScheme();
     String domain = request.getServerName();
     int port = request.getServerPort();

@@ -11,24 +11,17 @@ public class JsonUtil {
   /** Transform Object to Json string */
   public static String objectToJson(Object data) {
     try {
-      String string = MAPPER.writeValueAsString(data);
-      return string;
+      return MAPPER.writeValueAsString(data);
     } catch (JsonProcessingException e) {
       e.printStackTrace();
     }
     return null;
   }
 
-  /**
-   * Transform Json string to Object
-   *
-   * @param jsonData Json string
-   * @param beanType Object type
-   */
+  /** Transform Json string to Object */
   public static <T> T jsonToPojo(String jsonData, Class<T> beanType) {
     try {
-      T t = MAPPER.readValue(jsonData, beanType);
-      return t;
+      return MAPPER.readValue(jsonData, beanType);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -39,8 +32,7 @@ public class JsonUtil {
   public static <T> List<T> jsonToList(String jsonData, Class<T> beanType) {
     JavaType javaType = MAPPER.getTypeFactory().constructParametricType(List.class, beanType);
     try {
-      List<T> list = MAPPER.readValue(jsonData, javaType);
-      return list;
+      return MAPPER.readValue(jsonData, javaType);
     } catch (Exception e) {
       e.printStackTrace();
     }
