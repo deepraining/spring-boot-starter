@@ -41,6 +41,40 @@ subprojects {
   apply plugin: 'application'
   apply plugin: 'io.freefair.lombok'
 
+  dependencies {
+    // spring boot
+    implementation('org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE') {
+      exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.1.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-devtools:2.1.4.RELEASE'
+    implementation 'org.springframework.data:spring-data-commons:2.1.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-aop:2.1.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-logging:2.1.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:2.1.4.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-undertow:2.1.4.RELEASE'
+
+    // database
+    implementation 'org.mybatis:mybatis:3.5.1'
+    implementation 'mysql:mysql-connector-java:8.0.16'
+    implementation 'com.zaxxer:HikariCP:3.3.1'
+
+    // tool
+    implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.2.11'
+    implementation 'com.github.pagehelper:pagehelper:5.1.9'
+    implementation 'org.projectlombok:lombok:1.18.8'
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+
+    // util
+    implementation 'commons-lang:commons-lang:2.6'
+    implementation 'cn.hutool:hutool-core:4.5.10'
+
+    // test
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.1.4.RELEASE'
+  }
+
   /**
    * Watch java files' changes, and recompile
    *
