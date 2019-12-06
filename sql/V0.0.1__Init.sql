@@ -28,8 +28,8 @@ CREATE TABLE `user` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update time',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_username` (`username`),
-  UNIQUE KEY `idx_email` (`email`)
+  UNIQUE KEY `user_idx_username` (`username`),
+  UNIQUE KEY `user_idx_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='user';
 
 -- ----------------------------
@@ -47,5 +47,5 @@ CREATE TABLE `article` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update time',
   PRIMARY KEY (`id`),
-  KEY `idx_create_user_id` (`create_user_id`)
+  KEY `article_idx_create_user_id` (`create_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='article';
