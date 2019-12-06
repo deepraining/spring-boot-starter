@@ -132,8 +132,7 @@ sh run.sh status       # 查看程序状态
 
 ```
 spring:
-  thymeleaf:
--   prefix: classpath:templates/
++ thymeleaf:
 +   prefix: file:./templates/
 +   cache: false
 ```

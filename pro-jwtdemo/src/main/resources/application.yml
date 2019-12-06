@@ -21,8 +21,7 @@ spring:
   output:
     ansi:
       enabled: always
-  thymeleaf:
-    prefix: classpath:templates/
+  # thymeleaf:
     # if you want to deploy html files separately(not in jar files), uncomment below
     # prefix: file:./templates/
     # cache: false
