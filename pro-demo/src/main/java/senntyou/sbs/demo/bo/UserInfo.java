@@ -17,7 +17,7 @@ public class UserInfo implements UserDetails {
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     // get current user's privileges
-    return Arrays.asList(new SimpleGrantedAuthority("TEST"));
+    return Arrays.asList(new SimpleGrantedAuthority("NONE"));
   }
 
   @Override

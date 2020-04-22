@@ -53,3 +53,8 @@ jwt:
   secret: secret
   expiration: 604800
   tokenHead: Bearer
+
+app:
+  # snowflake workerId and dataCenterId, see "hutool IdUtil.createSnowflake(workerId, dataCenterId)"
+  workerId: 1
+  dataCenterId: 1

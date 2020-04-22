@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import senntyou.sbs.common.CommonResult;
+import senntyou.sbs.common.util.UuidUtil;
 import senntyou.sbs.jwtdemo.bo.UserInfo;
 import senntyou.sbs.jwtdemo.component.JwtToken;
 import senntyou.sbs.jwtdemo.service.JwtUserService;
@@ -69,6 +70,7 @@ public class JwtUserServiceImpl implements JwtUserService {
 
     // Add the user
     JwtUser user = new JwtUser();
+    user.setId(UuidUtil.nextId());
     user.setUsername(username);
     user.setPassword(passwordEncoder.encode(password));
     jwtUserMapper.insertSelective(user);

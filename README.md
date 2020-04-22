@@ -21,7 +21,7 @@
 
 - `pro-common`: 通用代码
 - `pro-mbg`: Mybatis Generator
-- `pro-demo`: 使用 Session 保持登陆状态的 Demo 应用
+- `pro-demo`: 使用 Session-Cookie 保持登陆状态的 Demo 应用
 - `pro-jwtdemo`: 使用 JWT 保持登陆状态的 Demo 应用
 
 ## 扩展 Gradle Tasks

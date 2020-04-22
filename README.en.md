@@ -21,7 +21,7 @@ A boilerplate for creating a [Spring Boot](https://spring.io/projects/spring-boo
 
 - `pro-common`: Common codes to share between sub projects
 - `pro-mbg`: Mybatis Generator
-- `pro-demo`: Demo application using session to remember logged-in status
+- `pro-demo`: Demo application using Session-Cookie to remember logged-in status
 - `pro-jwtdemo`: Demo application using JWT to remember logged-in status
 
 ## Gradle Tasks created by this project

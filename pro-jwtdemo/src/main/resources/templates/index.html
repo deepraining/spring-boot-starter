@@ -24,8 +24,8 @@
 </div>
 <div id="logged-in" style="display: none;">
   <div id="username-section">
-    <span>Current JWT username:</span>
-    <span id="current-username"></span>
+    <span>Current JWT user:</span>
+    <span id="current-user"></span>
   </div>
   <div>
     <button type="submit" id="logout">Logout</button>
@@ -125,7 +125,7 @@ const wFetch = (url, params) => {
 const getCurrentUser = () => {
   return wFetch('/account/currentUser').then(res => {
     if (res.code < 300) {
-      document.getElementById('current-username').innerText = res.data.username;
+      document.getElementById('current-user').innerText = `${res.data.username}(${res.data.id})`;
       loggedIn.style.display = 'block';
       notLoggedIn.style.display = 'none';
     }

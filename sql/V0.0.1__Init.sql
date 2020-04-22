@@ -14,7 +14,7 @@
 -- ----------------------------
 -- Database definition
 -- ----------------------------
--- CREATE DATABASE `starter` DEFAULT CHARSET=utf8mb4 COLLATE=utf8_general_ci;
+-- CREATE DATABASE `starter` DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Table structure for user
@@ -49,3 +49,17 @@ CREATE TABLE `article` (
   PRIMARY KEY (`id`),
   KEY `article_idx_create_user_id` (`create_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='article';
+
+-- ----------------------------
+-- Table structure for jwt_user
+-- ----------------------------
+CREATE TABLE `jwt_user` (
+  `id` bigint(20) NOT NULL,
+  `username` varchar(64) NOT NULL COMMENT 'username',
+  `password` varchar(64) NOT NULL COMMENT 'password(encrypted)',
+  `deleted` int(1) DEFAULT 0 COMMENT 'deleted or not',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update time',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `jwt_user_idx_username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='jwt_user';
