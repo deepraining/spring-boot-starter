@@ -21,7 +21,7 @@ CREATE TABLE `admin_user` (
 -- ----------------------------
 CREATE TABLE `admin_login_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `admin_user_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
   `ip` varchar(64) DEFAULT NULL COMMENT 'ip地址',
   `address` varchar(100) DEFAULT NULL COMMENT '地址',
   `user_agent` varchar(100) DEFAULT NULL COMMENT '浏览器登录类型',
@@ -36,7 +36,7 @@ CREATE TABLE `admin_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL COMMENT '名称',
   `description` varchar(500) DEFAULT NULL COMMENT '描述',
-  `admin_user_count` int(11) DEFAULT NULL COMMENT '后台用户数量',
+  `user_count` int(11) DEFAULT NULL COMMENT '后台用户数量',
   `status` int(1) DEFAULT 1 COMMENT '启用状态：0->禁用；1->启用',
   `sort` int(11) DEFAULT 0 COMMENT '排序值',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -67,8 +67,8 @@ CREATE TABLE `admin_permission` (
 -- ----------------------------
 CREATE TABLE `admin_user_role_relation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `admin_user_id` bigint(20) DEFAULT NULL,
-  `admin_role_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `role_id` bigint(20) DEFAULT NULL,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='后台用户和角色关系表';
@@ -78,8 +78,8 @@ CREATE TABLE `admin_user_role_relation` (
 -- ----------------------------
 CREATE TABLE `admin_user_permission_relation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `admin_user_id` bigint(20) NOT NULL,
-  `admin_permission_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `permission_id` bigint(20) NOT NULL,
   `type` int(1) DEFAULT NULL COMMENT '类型：1->增加权限，-1->减少权限',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
@@ -90,8 +90,8 @@ CREATE TABLE `admin_user_permission_relation` (
 -- ----------------------------
 CREATE TABLE `admin_role_permission_relation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `admin_role_id` bigint(20) DEFAULT NULL,
-  `admin_permission_id` bigint(20) DEFAULT NULL,
+  `role_id` bigint(20) DEFAULT NULL,
+  `permission_id` bigint(20) DEFAULT NULL,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='后台用户角色和权限关系表';

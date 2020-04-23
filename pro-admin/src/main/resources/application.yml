@@ -1,0 +1,88 @@
+server:
+  port: 9005
+  use-forward-headers: true
+  undertow:
+    io-threads: 2
+    worker-threads: 36
+    buffer-size: 1024
+    directBuffers: true
+  servlet:
+    session:
+      timeout: 86400s
+      cookie:
+        http-only: true
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+
+spring:
+  profiles:
+    active: dev
+  output:
+    ansi:
+      enabled: always
+  # thymeleaf:
+    # if you want to deploy html files separately(not in jar files), uncomment below
+    # prefix: file:./templates/
+    # cache: false
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/**/*.xml
+    - classpath*:senntyou/sbs/mbg/mapper/*.xml
+
+redis:
+  database: starter
+  key:
+    admin: 'admin'
+    resourceList: 'resourceList'
+  expire:
+    common: 86400 # 24小时
+
+secure:
+  ignored:
+    urls: # 安全路径白名单
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /swagger/**
+      - /**/v2/api-docs
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /webjars/springfox-swagger-ui/**
+      - /actuator/**
+      - /druid/**
+      - /admin/login
+      - /admin/register
+      - /admin/info
+      - /admin/logout
+      - /minio/upload
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    senntyou.sbs: DEBUG
+  file: ./logs/log.log
+
+management:
+  server:
+    port: 9006
+
+jwt:
+  tokenHeader: Authorization
+  secret: secret
+  expiration: 604800
+  tokenHead: Bearer
+
+app:
+  # snowflake workerId and dataCenterId, see "hutool IdUtil.createSnowflake(workerId, dataCenterId)"
+  workerId: 1
+  dataCenterId: 1

@@ -2,5 +2,7 @@ include ':pro-mbg'
 include ':pro-common'
 include ':pro-demo'
 include ':pro-jwtdemo'
+include ':pro-security'
+include ':pro-admin'
 
 rootProject.name = 'spring-boot-starter'

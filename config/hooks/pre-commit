@@ -11,7 +11,7 @@ if [ ! -z "${files}" ]; then
   # Checkstyle does not have the functionality of auto-fixing.
   # So run `goJF` before `checkJava`.
   "${REPO_ROOT_DIR}/gradlew" goJF -DgoogleJavaFormat.include="$comma_files"
-  "${REPO_ROOT_DIR}/gradlew" checkJava -DcheckJavaInclude="$comma_files"
+  # "${REPO_ROOT_DIR}/gradlew" checkJava -DcheckJavaInclude="$comma_files"
 
   git add $(echo "$files" | paste -s -d " " -)
 fi
