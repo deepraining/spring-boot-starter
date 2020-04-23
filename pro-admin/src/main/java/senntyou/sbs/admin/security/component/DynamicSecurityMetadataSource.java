@@ -1,4 +1,4 @@
-package senntyou.sbs.security.component;
+package senntyou.sbs.admin.security.component;
 
 import cn.hutool.core.util.URLUtil;
 import java.util.ArrayList;

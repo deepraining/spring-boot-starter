@@ -1,4 +1,4 @@
-package senntyou.sbs.security.component;
+package senntyou.sbs.admin.security.component;
 
 import java.util.Map;
 import org.springframework.security.access.ConfigAttribute;

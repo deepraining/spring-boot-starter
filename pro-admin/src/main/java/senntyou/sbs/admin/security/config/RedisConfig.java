@@ -1,4 +1,4 @@
-package senntyou.sbs.security.config;
+package senntyou.sbs.admin.security.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

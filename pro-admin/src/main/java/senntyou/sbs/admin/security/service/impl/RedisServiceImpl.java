@@ -1,4 +1,4 @@
-package senntyou.sbs.security.service.impl;
+package senntyou.sbs.admin.security.service.impl;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import senntyou.sbs.security.service.RedisService;
+import senntyou.sbs.admin.security.service.RedisService;
 
 /** redis操作实现类 Created by macro on 2020/3/3. */
 @Service

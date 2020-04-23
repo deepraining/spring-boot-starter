@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import senntyou.sbs.admin.dao.AdminUserRoleRelationDao;
+import senntyou.sbs.admin.security.service.RedisService;
 import senntyou.sbs.admin.service.AdminUserCacheService;
 import senntyou.sbs.admin.service.AdminUserService;
 import senntyou.sbs.mbg.mapper.AdminUserRoleRelationMapper;
@@ -14,7 +15,6 @@ import senntyou.sbs.mbg.model.AdminResource;
 import senntyou.sbs.mbg.model.AdminUser;
 import senntyou.sbs.mbg.model.AdminUserRoleRelation;
 import senntyou.sbs.mbg.model.AdminUserRoleRelationExample;
-import senntyou.sbs.security.service.RedisService;
 
 /** AdminUserCacheService实现类 Created by macro on 2020/3/13. */
 @Service

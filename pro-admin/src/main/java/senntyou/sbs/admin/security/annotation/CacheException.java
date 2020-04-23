@@ -1,4 +1,4 @@
-package senntyou.sbs.security.annotation;
+package senntyou.sbs.admin.security.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

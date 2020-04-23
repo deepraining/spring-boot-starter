@@ -1,4 +1,4 @@
-package senntyou.sbs.security.util;
+package senntyou.sbs.admin.security.util;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;

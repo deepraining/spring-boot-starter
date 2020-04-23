@@ -1,4 +1,4 @@
-package senntyou.sbs.security.aspect;
+package senntyou.sbs.admin.security.aspect;
 
 import java.lang.reflect.Method;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import senntyou.sbs.security.annotation.CacheException;
+import senntyou.sbs.admin.security.annotation.CacheException;
 
 /** Redis缓存切面，防止Redis宕机影响正常业务逻辑 Created by macro on 2020/3/17. */
 @Aspect

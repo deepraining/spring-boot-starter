@@ -1,4 +1,4 @@
-package senntyou.sbs.security.component;
+package senntyou.sbs.admin.security.component;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
-import senntyou.sbs.security.util.JwtTokenUtil;
+import senntyou.sbs.admin.security.util.JwtTokenUtil;
 
 /** JWT登录授权过滤器 Created by macro on 2018/4/26. */
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {

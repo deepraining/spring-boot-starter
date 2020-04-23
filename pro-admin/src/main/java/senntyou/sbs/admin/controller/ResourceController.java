@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import senntyou.sbs.admin.security.component.DynamicSecurityMetadataSource;
 import senntyou.sbs.admin.service.AdminResourceService;
 import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.mbg.model.AdminResource;
-import senntyou.sbs.security.component.DynamicSecurityMetadataSource;
 
 /** 后台资源管理Controller Created by macro on 2020/2/4. */
 @Controller

@@ -1,4 +1,4 @@
-package senntyou.sbs.security.util;
+package senntyou.sbs.admin.security.util;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

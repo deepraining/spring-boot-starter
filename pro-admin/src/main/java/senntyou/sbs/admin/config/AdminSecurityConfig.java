@@ -10,11 +10,11 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import senntyou.sbs.admin.security.component.DynamicSecurityService;
+import senntyou.sbs.admin.security.config.SecurityConfig;
 import senntyou.sbs.admin.service.AdminResourceService;
 import senntyou.sbs.admin.service.AdminUserService;
 import senntyou.sbs.mbg.model.AdminResource;
-import senntyou.sbs.security.component.DynamicSecurityService;
-import senntyou.sbs.security.config.SecurityConfig;
 
 @Configuration
 @EnableWebSecurity

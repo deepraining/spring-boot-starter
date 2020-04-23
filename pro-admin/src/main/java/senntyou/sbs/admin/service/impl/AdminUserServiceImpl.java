@@ -29,6 +29,7 @@ import senntyou.sbs.admin.dao.AdminUserPermissionRelationDao;
 import senntyou.sbs.admin.dao.AdminUserRoleRelationDao;
 import senntyou.sbs.admin.dto.AdminUserParam;
 import senntyou.sbs.admin.dto.UpdateAdminUserPasswordParam;
+import senntyou.sbs.admin.security.util.JwtTokenUtil;
 import senntyou.sbs.admin.service.AdminUserCacheService;
 import senntyou.sbs.admin.service.AdminUserService;
 import senntyou.sbs.mbg.mapper.AdminLoginLogMapper;
@@ -45,7 +46,6 @@ import senntyou.sbs.mbg.model.AdminUserPermissionRelation;
 import senntyou.sbs.mbg.model.AdminUserPermissionRelationExample;
 import senntyou.sbs.mbg.model.AdminUserRoleRelation;
 import senntyou.sbs.mbg.model.AdminUserRoleRelationExample;
-import senntyou.sbs.security.util.JwtTokenUtil;
 
 /** AdminUserService实现类 Created by macro on 2018/4/26. */
 @Service

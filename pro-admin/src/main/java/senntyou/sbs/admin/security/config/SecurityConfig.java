@@ -1,4 +1,4 @@
-package senntyou.sbs.security.config;
+package senntyou.sbs.admin.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -14,8 +14,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import senntyou.sbs.security.component.*;
-import senntyou.sbs.security.util.JwtTokenUtil;
+import senntyou.sbs.admin.security.component.DynamicAccessDecisionManager;
+import senntyou.sbs.admin.security.component.DynamicSecurityFilter;
+import senntyou.sbs.admin.security.component.DynamicSecurityMetadataSource;
+import senntyou.sbs.admin.security.component.DynamicSecurityService;
+import senntyou.sbs.admin.security.component.JwtAuthenticationTokenFilter;
+import senntyou.sbs.admin.security.component.RestAuthenticationEntryPoint;
+import senntyou.sbs.admin.security.component.RestfulAccessDeniedHandler;
+import senntyou.sbs.admin.security.util.JwtTokenUtil;
 
 /** 对SpringSecurity的配置的扩展，支持自定义白名单资源路径和查询用户逻辑 Created by macro on 2019/11/5. */
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
