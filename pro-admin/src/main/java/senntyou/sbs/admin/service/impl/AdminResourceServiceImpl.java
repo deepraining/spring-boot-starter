@@ -2,7 +2,6 @@ package senntyou.sbs.admin.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,22 +11,21 @@ import senntyou.sbs.mbg.mapper.AdminResourceMapper;
 import senntyou.sbs.mbg.model.AdminResource;
 import senntyou.sbs.mbg.model.AdminResourceExample;
 
-/** 后台资源管理Service实现类 Created by macro on 2020/2/2. */
+/** 后台资源管理Service实现类 */
 @Service
 public class AdminResourceServiceImpl implements AdminResourceService {
   @Autowired private AdminResourceMapper resourceMapper;
   @Autowired private AdminUserCacheService adminCacheService;
 
   @Override
-  public int create(AdminResource umsResource) {
-    umsResource.setCreateTime(new Date());
-    return resourceMapper.insert(umsResource);
+  public int create(AdminResource adminResource) {
+    return resourceMapper.insertSelective(adminResource);
   }
 
   @Override
-  public int update(Long id, AdminResource umsResource) {
-    umsResource.setId(id);
-    int count = resourceMapper.updateByPrimaryKeySelective(umsResource);
+  public int update(Long id, AdminResource adminResource) {
+    adminResource.setId(id);
+    int count = resourceMapper.updateByPrimaryKeySelective(adminResource);
     adminCacheService.delResourceListByResource(id);
     return count;
   }

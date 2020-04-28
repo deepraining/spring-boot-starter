@@ -1,6 +1,5 @@
 package senntyou.sbs.admin.service.impl;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;
@@ -12,7 +11,7 @@ import senntyou.sbs.mbg.mapper.AdminPermissionMapper;
 import senntyou.sbs.mbg.model.AdminPermission;
 import senntyou.sbs.mbg.model.AdminPermissionExample;
 
-/** 后台用户权限管理Service实现类 Created by macro on 2018/9/29. */
+/** 后台用户权限管理Service实现类 */
 @Service
 public class AdminPermissionServiceImpl implements AdminPermissionService {
   @Autowired private AdminPermissionMapper permissionMapper;
@@ -20,15 +19,14 @@ public class AdminPermissionServiceImpl implements AdminPermissionService {
   @Override
   public int create(AdminPermission permission) {
     permission.setStatus(1);
-    permission.setCreateTime(new Date());
     permission.setSort(0);
-    return permissionMapper.insert(permission);
+    return permissionMapper.insertSelective(permission);
   }
 
   @Override
   public int update(Long id, AdminPermission permission) {
     permission.setId(id);
-    return permissionMapper.updateByPrimaryKey(permission);
+    return permissionMapper.updateByPrimaryKeySelective(permission);
   }
 
   @Override

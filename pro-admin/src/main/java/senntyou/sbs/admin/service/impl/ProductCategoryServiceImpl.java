@@ -22,7 +22,7 @@ import senntyou.sbs.mbg.model.ProductCategoryAttributeRelationExample;
 import senntyou.sbs.mbg.model.ProductCategoryExample;
 import senntyou.sbs.mbg.model.ProductExample;
 
-/** ProductCategoryService实现类 Created by macro on 2018/4/26. */
+/** ProductCategoryService实现类 */
 @Service
 public class ProductCategoryServiceImpl implements ProductCategoryService {
   @Autowired private ProductCategoryMapper productCategoryMapper;
@@ -32,15 +32,15 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
   @Autowired private ProductCategoryDao productCategoryDao;
 
   @Override
-  public int create(ProductCategoryParam pmsProductCategoryParam) {
+  public int create(ProductCategoryParam productCategoryParam) {
     ProductCategory productCategory = new ProductCategory();
     productCategory.setProductCount(0);
-    BeanUtils.copyProperties(pmsProductCategoryParam, productCategory);
+    BeanUtils.copyProperties(productCategoryParam, productCategory);
     // 没有父分类时为一级分类
     setCategoryLevel(productCategory);
     int count = productCategoryMapper.insertSelective(productCategory);
     // 创建筛选属性关联
-    List<Long> productAttributeIdList = pmsProductCategoryParam.getProductAttributeIdList();
+    List<Long> productAttributeIdList = productCategoryParam.getProductAttributeIdList();
     if (!CollectionUtils.isEmpty(productAttributeIdList)) {
       insertRelationList(productCategory.getId(), productAttributeIdList);
     }
@@ -65,10 +65,10 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
   }
 
   @Override
-  public int update(Long id, ProductCategoryParam pmsProductCategoryParam) {
+  public int update(Long id, ProductCategoryParam productCategoryParam) {
     ProductCategory productCategory = new ProductCategory();
     productCategory.setId(id);
-    BeanUtils.copyProperties(pmsProductCategoryParam, productCategory);
+    BeanUtils.copyProperties(productCategoryParam, productCategory);
     setCategoryLevel(productCategory);
     // 更新商品分类时要更新商品中的名称
     Product product = new Product();
@@ -77,12 +77,12 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     example.createCriteria().andProductCategoryIdEqualTo(id);
     productMapper.updateByExampleSelective(product, example);
     // 同时更新筛选属性的信息
-    if (!CollectionUtils.isEmpty(pmsProductCategoryParam.getProductAttributeIdList())) {
+    if (!CollectionUtils.isEmpty(productCategoryParam.getProductAttributeIdList())) {
       ProductCategoryAttributeRelationExample relationExample =
           new ProductCategoryAttributeRelationExample();
       relationExample.createCriteria().andProductCategoryIdEqualTo(id);
       productCategoryAttributeRelationMapper.deleteByExample(relationExample);
-      insertRelationList(id, pmsProductCategoryParam.getProductAttributeIdList());
+      insertRelationList(id, productCategoryParam.getProductAttributeIdList());
     } else {
       ProductCategoryAttributeRelationExample relationExample =
           new ProductCategoryAttributeRelationExample();

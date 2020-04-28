@@ -14,7 +14,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
-/** 动态权限数据源，用于获取动态权限规则 Created by macro on 2020/2/7. */
+/** 动态权限数据源，用于获取动态权限规则 */
 public class DynamicSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
   private static Map<String, ConfigAttribute> configAttributeMap = null;

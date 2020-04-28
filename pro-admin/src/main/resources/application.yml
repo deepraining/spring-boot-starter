@@ -1,5 +1,5 @@
 server:
-  port: 9005
+  port: 9010
   use-forward-headers: true
   undertow:
     io-threads: 2
@@ -60,6 +60,7 @@ secure:
       - /webjars/springfox-swagger-ui/**
       - /actuator/**
       - /druid/**
+      - /
       - /admin/login
       - /admin/register
       - /admin/info
@@ -74,7 +75,7 @@ logging:
 
 management:
   server:
-    port: 9006
+    port: 9011
 
 jwt:
   tokenHeader: Authorization

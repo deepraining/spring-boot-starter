@@ -13,7 +13,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import senntyou.sbs.admin.security.annotation.CacheException;
 
-/** Redis缓存切面，防止Redis宕机影响正常业务逻辑 Created by macro on 2020/3/17. */
+/** Redis缓存切面，防止Redis宕机影响正常业务逻辑 */
 @Aspect
 @Component
 @Order(2)

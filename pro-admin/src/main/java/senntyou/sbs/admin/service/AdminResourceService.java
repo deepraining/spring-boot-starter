@@ -6,10 +6,10 @@ import senntyou.sbs.mbg.model.AdminResource;
 /** 后台资源管理Service */
 public interface AdminResourceService {
   /** 添加资源 */
-  int create(AdminResource umsResource);
+  int create(AdminResource adminResource);
 
   /** 修改资源 */
-  int update(Long id, AdminResource umsResource);
+  int update(Long id, AdminResource adminResource);
 
   /** 获取资源详情 */
   AdminResource getItem(Long id);

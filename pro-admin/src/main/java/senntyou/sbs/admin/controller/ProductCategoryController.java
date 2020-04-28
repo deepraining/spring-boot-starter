@@ -20,7 +20,7 @@ import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.mbg.model.ProductCategory;
 
-/** 商品分类模块Controller Created by macro on 2018/4/26. */
+/** 商品分类模块Controller */
 @Controller
 @Api(tags = "ProductCategoryController", description = "商品分类管理")
 @RequestMapping("/productCategory")

@@ -13,10 +13,10 @@ import senntyou.sbs.mbg.model.AdminUser;
 /** 后台管理员Service */
 public interface AdminUserService {
   /** 根据用户名获取后台管理员 */
-  AdminUser getAdminByUsername(String username);
+  AdminUser getUserByUsername(String username);
 
   /** 注册功能 */
-  AdminUser register(AdminUserParam umsAdminParam);
+  AdminUser register(AdminUserParam adminUserParam);
 
   /**
    * 登录功能
@@ -41,7 +41,7 @@ public interface AdminUserService {
   List<AdminUser> list(String keyword, Integer pageSize, Integer pageNum);
 
   /** 修改指定用户信息 */
-  int update(Long id, AdminUser admin);
+  int update(Long id, AdminUser adminUser);
 
   /** 删除指定用户 */
   int delete(Long id);

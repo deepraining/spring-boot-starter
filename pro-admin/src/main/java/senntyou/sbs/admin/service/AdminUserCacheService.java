@@ -7,7 +7,7 @@ import senntyou.sbs.mbg.model.AdminUser;
 /** 后台用户缓存操作类 */
 public interface AdminUserCacheService {
   /** 删除后台用户缓存 */
-  void delAdmin(Long userId);
+  void delUser(Long userId);
 
   /** 删除后台用户资源列表缓存 */
   void delResourceList(Long userId);
@@ -22,10 +22,10 @@ public interface AdminUserCacheService {
   void delResourceListByResource(Long resourceId);
 
   /** 获取缓存后台用户信息 */
-  AdminUser getAdmin(String username);
+  AdminUser getUser(String username);
 
   /** 设置缓存后台用户信息 */
-  void setAdmin(AdminUser admin);
+  void setUser(AdminUser adminUser);
 
   /** 获取缓存后台用户资源列表 */
   List<AdminResource> getResourceList(Long userId);

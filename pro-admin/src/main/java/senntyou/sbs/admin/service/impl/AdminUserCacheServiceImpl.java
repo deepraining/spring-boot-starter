@@ -16,7 +16,7 @@ import senntyou.sbs.mbg.model.AdminUser;
 import senntyou.sbs.mbg.model.AdminUserRoleRelation;
 import senntyou.sbs.mbg.model.AdminUserRoleRelationExample;
 
-/** AdminUserCacheService实现类 Created by macro on 2020/3/13. */
+/** AdminUserCacheService实现类 */
 @Service
 public class AdminUserCacheServiceImpl implements AdminUserCacheService {
   @Autowired private AdminUserService adminService;
@@ -37,10 +37,10 @@ public class AdminUserCacheServiceImpl implements AdminUserCacheService {
   private String REDIS_KEY_RESOURCE_LIST;
 
   @Override
-  public void delAdmin(Long userId) {
-    AdminUser admin = adminService.getItem(userId);
-    if (admin != null) {
-      String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + admin.getUsername();
+  public void delUser(Long userId) {
+    AdminUser user = adminService.getItem(userId);
+    if (user != null) {
+      String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + user.getUsername();
       redisService.del(key);
     }
   }
@@ -93,15 +93,15 @@ public class AdminUserCacheServiceImpl implements AdminUserCacheService {
   }
 
   @Override
-  public AdminUser getAdmin(String username) {
+  public AdminUser getUser(String username) {
     String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + username;
     return (AdminUser) redisService.get(key);
   }
 
   @Override
-  public void setAdmin(AdminUser admin) {
-    String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + admin.getUsername();
-    redisService.set(key, admin, REDIS_EXPIRE);
+  public void setUser(AdminUser adminUser) {
+    String key = REDIS_DATABASE + ":" + REDIS_KEY_ADMIN + ":" + adminUser.getUsername();
+    redisService.set(key, adminUser, REDIS_EXPIRE);
   }
 
   @Override

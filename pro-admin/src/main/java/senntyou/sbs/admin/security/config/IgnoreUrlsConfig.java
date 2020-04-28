@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/** 用于配置不需要保护的资源路径 Created by macro on 2018/11/5. */
+/** 用于配置不需要保护的资源路径 */
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "secure.ignored")

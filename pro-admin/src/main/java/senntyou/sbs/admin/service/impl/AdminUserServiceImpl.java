@@ -47,53 +47,52 @@ import senntyou.sbs.mbg.model.AdminUserPermissionRelationExample;
 import senntyou.sbs.mbg.model.AdminUserRoleRelation;
 import senntyou.sbs.mbg.model.AdminUserRoleRelationExample;
 
-/** AdminUserService实现类 Created by macro on 2018/4/26. */
+/** AdminUserService实现类 */
 @Service
 public class AdminUserServiceImpl implements AdminUserService {
   private static final Logger LOGGER = LoggerFactory.getLogger(AdminUserServiceImpl.class);
   @Autowired private JwtTokenUtil jwtTokenUtil;
   @Autowired private PasswordEncoder passwordEncoder;
-  @Autowired private AdminUserMapper adminMapper;
-  @Autowired private AdminUserRoleRelationMapper adminRoleRelationMapper;
-  @Autowired private AdminUserRoleRelationDao adminRoleRelationDao;
-  @Autowired private AdminUserPermissionRelationMapper adminPermissionRelationMapper;
-  @Autowired private AdminUserPermissionRelationDao adminPermissionRelationDao;
+  @Autowired private AdminUserMapper userMapper;
+  @Autowired private AdminUserRoleRelationMapper roleRelationMapper;
+  @Autowired private AdminUserRoleRelationDao roleRelationDao;
+  @Autowired private AdminUserPermissionRelationMapper permissionRelationMapper;
+  @Autowired private AdminUserPermissionRelationDao permissionRelationDao;
   @Autowired private AdminLoginLogMapper loginLogMapper;
-  @Autowired private AdminUserCacheService adminCacheService;
+  @Autowired private AdminUserCacheService userCacheService;
 
   @Override
-  public AdminUser getAdminByUsername(String username) {
-    AdminUser admin = adminCacheService.getAdmin(username);
-    if (admin != null) return admin;
+  public AdminUser getUserByUsername(String username) {
+    AdminUser adminUser = userCacheService.getUser(username);
+    if (adminUser != null) return adminUser;
     AdminUserExample example = new AdminUserExample();
     example.createCriteria().andUsernameEqualTo(username);
-    List<AdminUser> adminList = adminMapper.selectByExample(example);
+    List<AdminUser> adminList = userMapper.selectByExample(example);
     if (adminList != null && adminList.size() > 0) {
-      admin = adminList.get(0);
-      adminCacheService.setAdmin(admin);
-      return admin;
+      adminUser = adminList.get(0);
+      userCacheService.setUser(adminUser);
+      return adminUser;
     }
     return null;
   }
 
   @Override
-  public AdminUser register(AdminUserParam umsAdminParam) {
-    AdminUser umsAdmin = new AdminUser();
-    BeanUtils.copyProperties(umsAdminParam, umsAdmin);
-    umsAdmin.setCreateTime(new Date());
-    umsAdmin.setStatus(1);
+  public AdminUser register(AdminUserParam adminUserParam) {
+    AdminUser adminUser = new AdminUser();
+    BeanUtils.copyProperties(adminUserParam, adminUser);
+    adminUser.setStatus(1);
     // 查询是否有相同用户名的用户
     AdminUserExample example = new AdminUserExample();
-    example.createCriteria().andUsernameEqualTo(umsAdmin.getUsername());
-    List<AdminUser> umsAdminList = adminMapper.selectByExample(example);
-    if (umsAdminList.size() > 0) {
+    example.createCriteria().andUsernameEqualTo(adminUser.getUsername());
+    List<AdminUser> adminUserList = userMapper.selectByExample(example);
+    if (adminUserList.size() > 0) {
       return null;
     }
     // 将密码进行加密操作
-    String encodePassword = passwordEncoder.encode(umsAdmin.getPassword());
-    umsAdmin.setPassword(encodePassword);
-    adminMapper.insert(umsAdmin);
-    return umsAdmin;
+    String encodePassword = passwordEncoder.encode(adminUser.getPassword());
+    adminUser.setPassword(encodePassword);
+    userMapper.insertSelective(adminUser);
+    return adminUser;
   }
 
   @Override
@@ -109,7 +108,7 @@ public class AdminUserServiceImpl implements AdminUserService {
           new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
       SecurityContextHolder.getContext().setAuthentication(authentication);
       token = jwtTokenUtil.generateToken(userDetails);
-      //            updateLoginTimeByUsername(username);
+      updateLoginTimeByUsername(username);
       insertLoginLog(username);
     } catch (AuthenticationException e) {
       LOGGER.warn("登录异常:{}", e.getMessage());
@@ -123,16 +122,15 @@ public class AdminUserServiceImpl implements AdminUserService {
    * @param username 用户名
    */
   private void insertLoginLog(String username) {
-    AdminUser admin = getAdminByUsername(username);
-    if (admin == null) return;
+    AdminUser user = getUserByUsername(username);
+    if (user == null) return;
     AdminLoginLog loginLog = new AdminLoginLog();
-    loginLog.setUserId(admin.getId());
-    loginLog.setCreateTime(new Date());
+    loginLog.setUserId(user.getId());
     ServletRequestAttributes attributes =
         (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
     HttpServletRequest request = attributes.getRequest();
     loginLog.setIp(request.getRemoteAddr());
-    loginLogMapper.insert(loginLog);
+    loginLogMapper.insertSelective(loginLog);
   }
 
   /** 根据用户名修改登录时间 */
@@ -141,7 +139,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     record.setLastLoginTime(new Date());
     AdminUserExample example = new AdminUserExample();
     example.createCriteria().andUsernameEqualTo(username);
-    adminMapper.updateByExampleSelective(record, example);
+    userMapper.updateByExampleSelective(record, example);
   }
 
   @Override
@@ -151,7 +149,7 @@ public class AdminUserServiceImpl implements AdminUserService {
 
   @Override
   public AdminUser getItem(Long id) {
-    return adminMapper.selectByPrimaryKey(id);
+    return userMapper.selectByPrimaryKey(id);
   }
 
   @Override
@@ -163,34 +161,34 @@ public class AdminUserServiceImpl implements AdminUserService {
       criteria.andUsernameLike("%" + keyword + "%");
       example.or(example.createCriteria().andNicknameLike("%" + keyword + "%"));
     }
-    return adminMapper.selectByExample(example);
+    return userMapper.selectByExample(example);
   }
 
   @Override
-  public int update(Long id, AdminUser admin) {
-    admin.setId(id);
-    AdminUser rawAdmin = adminMapper.selectByPrimaryKey(id);
-    if (rawAdmin.getPassword().equals(admin.getPassword())) {
+  public int update(Long id, AdminUser adminUser) {
+    adminUser.setId(id);
+    AdminUser rawUser = userMapper.selectByPrimaryKey(id);
+    if (rawUser.getPassword().equals(adminUser.getPassword())) {
       // 与原加密密码相同的不需要修改
-      admin.setPassword(null);
+      adminUser.setPassword(null);
     } else {
       // 与原加密密码不同的需要加密修改
-      if (StrUtil.isEmpty(admin.getPassword())) {
-        admin.setPassword(null);
+      if (StrUtil.isEmpty(adminUser.getPassword())) {
+        adminUser.setPassword(null);
       } else {
-        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        adminUser.setPassword(passwordEncoder.encode(adminUser.getPassword()));
       }
     }
-    int count = adminMapper.updateByPrimaryKeySelective(admin);
-    adminCacheService.delAdmin(id);
+    int count = userMapper.updateByPrimaryKeySelective(adminUser);
+    userCacheService.delUser(id);
     return count;
   }
 
   @Override
   public int delete(Long id) {
-    adminCacheService.delAdmin(id);
-    int count = adminMapper.deleteByPrimaryKey(id);
-    adminCacheService.delResourceList(id);
+    userCacheService.delUser(id);
+    int count = userMapper.deleteByPrimaryKey(id);
+    userCacheService.delResourceList(id);
     return count;
   }
 
@@ -200,7 +198,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     // 先删除原来的关系
     AdminUserRoleRelationExample adminRoleRelationExample = new AdminUserRoleRelationExample();
     adminRoleRelationExample.createCriteria().andUserIdEqualTo(userId);
-    adminRoleRelationMapper.deleteByExample(adminRoleRelationExample);
+    roleRelationMapper.deleteByExample(adminRoleRelationExample);
     // 建立新关系
     if (!CollectionUtils.isEmpty(roleIds)) {
       List<AdminUserRoleRelation> list = new ArrayList<>();
@@ -210,26 +208,26 @@ public class AdminUserServiceImpl implements AdminUserService {
         roleRelation.setRoleId(roleId);
         list.add(roleRelation);
       }
-      adminRoleRelationDao.insertList(list);
+      roleRelationDao.insertList(list);
     }
-    adminCacheService.delResourceList(userId);
+    userCacheService.delResourceList(userId);
     return count;
   }
 
   @Override
   public List<AdminRole> getRoleList(Long userId) {
-    return adminRoleRelationDao.getRoleList(userId);
+    return roleRelationDao.getRoleList(userId);
   }
 
   @Override
   public List<AdminResource> getResourceList(Long userId) {
-    List<AdminResource> resourceList = adminCacheService.getResourceList(userId);
+    List<AdminResource> resourceList = userCacheService.getResourceList(userId);
     if (CollUtil.isNotEmpty(resourceList)) {
       return resourceList;
     }
-    resourceList = adminRoleRelationDao.getResourceList(userId);
+    resourceList = roleRelationDao.getResourceList(userId);
     if (CollUtil.isNotEmpty(resourceList)) {
-      adminCacheService.setResourceList(userId, resourceList);
+      userCacheService.setResourceList(userId, resourceList);
     }
     return resourceList;
   }
@@ -239,9 +237,9 @@ public class AdminUserServiceImpl implements AdminUserService {
     // 删除原所有权限关系
     AdminUserPermissionRelationExample relationExample = new AdminUserPermissionRelationExample();
     relationExample.createCriteria().andUserIdEqualTo(userId);
-    adminPermissionRelationMapper.deleteByExample(relationExample);
+    permissionRelationMapper.deleteByExample(relationExample);
     // 获取用户所有角色权限
-    List<AdminPermission> permissionList = adminRoleRelationDao.getRolePermissionList(userId);
+    List<AdminPermission> permissionList = roleRelationDao.getRolePermissionList(userId);
     List<Long> rolePermissionList =
         permissionList.stream().map(AdminPermission::getId).collect(Collectors.toList());
     if (!CollectionUtils.isEmpty(permissionIds)) {
@@ -259,7 +257,7 @@ public class AdminUserServiceImpl implements AdminUserService {
       // 插入+-权限关系
       relationList.addAll(convert(userId, 1, addPermissionIdList));
       relationList.addAll(convert(userId, -1, subPermissionIdList));
-      return adminPermissionRelationDao.insertList(relationList);
+      return permissionRelationDao.insertList(relationList);
     }
     return 0;
   }
@@ -283,7 +281,7 @@ public class AdminUserServiceImpl implements AdminUserService {
 
   @Override
   public List<AdminPermission> getPermissionList(Long userId) {
-    return adminRoleRelationDao.getPermissionList(userId);
+    return roleRelationDao.getPermissionList(userId);
   }
 
   @Override
@@ -295,27 +293,27 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
     AdminUserExample example = new AdminUserExample();
     example.createCriteria().andUsernameEqualTo(param.getUsername());
-    List<AdminUser> adminList = adminMapper.selectByExample(example);
+    List<AdminUser> adminList = userMapper.selectByExample(example);
     if (CollUtil.isEmpty(adminList)) {
       return -2;
     }
-    AdminUser umsAdmin = adminList.get(0);
-    if (!passwordEncoder.matches(param.getOldPassword(), umsAdmin.getPassword())) {
+    AdminUser adminUser = adminList.get(0);
+    if (!passwordEncoder.matches(param.getOldPassword(), adminUser.getPassword())) {
       return -3;
     }
-    umsAdmin.setPassword(passwordEncoder.encode(param.getNewPassword()));
-    adminMapper.updateByPrimaryKey(umsAdmin);
-    adminCacheService.delAdmin(umsAdmin.getId());
+    adminUser.setPassword(passwordEncoder.encode(param.getNewPassword()));
+    userMapper.updateByPrimaryKeySelective(adminUser);
+    userCacheService.delUser(adminUser.getId());
     return 1;
   }
 
   @Override
   public UserDetails loadUserByUsername(String username) {
     // 获取用户信息
-    AdminUser admin = getAdminByUsername(username);
-    if (admin != null) {
-      List<AdminResource> resourceList = getResourceList(admin.getId());
-      return new AdminUserDetails(admin, resourceList);
+    AdminUser adminUser = getUserByUsername(username);
+    if (adminUser != null) {
+      List<AdminResource> resourceList = getResourceList(adminUser.getId());
+      return new AdminUserDetails(adminUser, resourceList);
     }
     throw new UsernameNotFoundException("用户名或密码错误");
   }

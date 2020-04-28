@@ -11,7 +11,7 @@ import senntyou.sbs.mbg.mapper.ProductAttributeCategoryMapper;
 import senntyou.sbs.mbg.model.ProductAttributeCategory;
 import senntyou.sbs.mbg.model.ProductAttributeCategoryExample;
 
-/** ProductAttributeCategoryService实现类 Created by macro on 2018/4/26. */
+/** ProductAttributeCategoryService实现类 */
 @Service
 public class ProductAttributeCategoryServiceImpl implements ProductAttributeCategoryService {
   @Autowired private ProductAttributeCategoryMapper productAttributeCategoryMapper;

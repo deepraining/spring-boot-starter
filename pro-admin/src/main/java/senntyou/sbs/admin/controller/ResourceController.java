@@ -17,7 +17,7 @@ import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.mbg.model.AdminResource;
 
-/** 后台资源管理Controller Created by macro on 2020/2/4. */
+/** 后台资源管理Controller */
 @Controller
 @Api(tags = "AdminResourceController", description = "后台资源管理")
 @RequestMapping("/resource")
@@ -29,8 +29,8 @@ public class ResourceController {
   @ApiOperation("添加后台资源")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(@RequestBody AdminResource umsResource) {
-    int count = resourceService.create(umsResource);
+  public CommonResult create(@RequestBody AdminResource adminResource) {
+    int count = resourceService.create(adminResource);
     dynamicSecurityMetadataSource.clearDataSource();
     if (count > 0) {
       return CommonResult.success(count);
@@ -42,8 +42,8 @@ public class ResourceController {
   @ApiOperation("修改后台资源")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(@PathVariable Long id, @RequestBody AdminResource umsResource) {
-    int count = resourceService.update(id, umsResource);
+  public CommonResult update(@PathVariable Long id, @RequestBody AdminResource adminResource) {
+    int count = resourceService.update(id, adminResource);
     dynamicSecurityMetadataSource.clearDataSource();
     if (count > 0) {
       return CommonResult.success(count);
@@ -56,8 +56,8 @@ public class ResourceController {
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<AdminResource> getItem(@PathVariable Long id) {
-    AdminResource umsResource = resourceService.getItem(id);
-    return CommonResult.success(umsResource);
+    AdminResource adminResource = resourceService.getItem(id);
+    return CommonResult.success(adminResource);
   }
 
   @ApiOperation("根据ID删除后台资源")

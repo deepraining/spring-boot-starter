@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/** redis操作Service Created by macro on 2020/3/3. */
+/** redis操作Service */
 public interface RedisService {
 
   /** 保存属性 */

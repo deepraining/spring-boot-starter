@@ -13,7 +13,8 @@ CREATE TABLE `admin_user` (
   `status` int(1) DEFAULT 1 COMMENT '帐号启用状态：0->禁用；1->启用',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `admin_user_idx_username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10000 DEFAULT CHARSET=utf8mb4 COMMENT='后台用户表';
 
 -- ----------------------------
@@ -26,6 +27,7 @@ CREATE TABLE `admin_login_log` (
   `address` varchar(100) DEFAULT NULL COMMENT '地址',
   `user_agent` varchar(100) DEFAULT NULL COMMENT '浏览器登录类型',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='后台用户登录日志表';
 
@@ -49,7 +51,7 @@ CREATE TABLE `admin_role` (
 -- ----------------------------
 CREATE TABLE `admin_permission` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `parent_id` bigint(20) DEFAULT NULL COMMENT '父级权限id',
+  `parent_id` bigint(20) DEFAULT 0 COMMENT '父级权限id',
   `name` varchar(100) NOT NULL COMMENT '名称',
   `value` varchar(200) NOT NULL COMMENT '权限值',
   `icon` varchar(500) DEFAULT NULL COMMENT '图标',
@@ -67,9 +69,10 @@ CREATE TABLE `admin_permission` (
 -- ----------------------------
 CREATE TABLE `admin_user_role_relation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) DEFAULT NULL,
-  `role_id` bigint(20) DEFAULT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `role_id` bigint(20) NOT NULL,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='后台用户和角色关系表';
 
@@ -80,8 +83,9 @@ CREATE TABLE `admin_user_permission_relation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) NOT NULL,
   `permission_id` bigint(20) NOT NULL,
-  `type` int(1) DEFAULT NULL COMMENT '类型：1->增加权限，-1->减少权限',
+  `type` int(1) NOT NULL COMMENT '类型：1->增加权限，-1->减少权限',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='后台用户和权限关系表(除角色中定义的权限以外的加减权限)';
 
@@ -90,9 +94,10 @@ CREATE TABLE `admin_user_permission_relation` (
 -- ----------------------------
 CREATE TABLE `admin_role_permission_relation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `role_id` bigint(20) DEFAULT NULL,
-  `permission_id` bigint(20) DEFAULT NULL,
+  `role_id` bigint(20) NOT NULL,
+  `permission_id` bigint(20) NOT NULL,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='后台用户角色和权限关系表';
 
@@ -101,13 +106,13 @@ CREATE TABLE `admin_role_permission_relation` (
 -- ----------------------------
 CREATE TABLE `admin_menu` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `parent_id` bigint(20) DEFAULT NULL COMMENT '父级ID',
+  `parent_id` bigint(20) DEFAULT 0 COMMENT '父级ID',
   `title` varchar(100) NOT NULL COMMENT '菜单名称',
-  `level` int(4) DEFAULT NULL COMMENT '菜单级数',
+  `level` int(4) DEFAULT 0 COMMENT '菜单级数',
   `sort` int(4) DEFAULT 0 COMMENT '菜单排序',
   `name` varchar(100) DEFAULT NULL COMMENT '前端名称',
   `icon` varchar(200) DEFAULT NULL COMMENT '前端图标',
-  `hidden` int(1) DEFAULT NULL COMMENT '前端隐藏',
+  `hidden` int(1) DEFAULT 0 COMMENT '前端隐藏',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
@@ -144,9 +149,10 @@ CREATE TABLE `admin_resource_category` (
 -- ----------------------------
 CREATE TABLE `admin_role_menu_relation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
-  `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
+  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
+  `menu_id` bigint(20) NOT NULL COMMENT '菜单ID',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='后台角色菜单关系表';
 
@@ -155,8 +161,9 @@ CREATE TABLE `admin_role_menu_relation` (
 -- ----------------------------
 CREATE TABLE `admin_role_resource_relation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
-  `resource_id` bigint(20) DEFAULT NULL COMMENT '资源ID',
+  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
+  `resource_id` bigint(20) NOT NULL COMMENT '资源ID',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='后台角色资源关系表';

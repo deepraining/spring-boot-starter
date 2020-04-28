@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 import senntyou.sbs.admin.security.util.JwtTokenUtil;
 
-/** JWT登录授权过滤器 Created by macro on 2018/4/26. */
+/** JWT登录授权过滤器 */
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
   private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
   @Autowired private UserDetailsService userDetailsService;

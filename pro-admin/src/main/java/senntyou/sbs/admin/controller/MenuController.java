@@ -17,7 +17,7 @@ import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.mbg.model.AdminMenu;
 
-/** 后台菜单管理Controller Created by macro on 2020/2/4. */
+/** 后台菜单管理Controller */
 @Controller
 @Api(tags = "AdminMenuController", description = "后台菜单管理")
 @RequestMapping("/menu")
@@ -28,8 +28,8 @@ public class MenuController {
   @ApiOperation("添加后台菜单")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(@RequestBody AdminMenu umsMenu) {
-    int count = menuService.create(umsMenu);
+  public CommonResult create(@RequestBody AdminMenu adminMenu) {
+    int count = menuService.create(adminMenu);
     if (count > 0) {
       return CommonResult.success(count);
     } else {
@@ -40,8 +40,8 @@ public class MenuController {
   @ApiOperation("修改后台菜单")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(@PathVariable Long id, @RequestBody AdminMenu umsMenu) {
-    int count = menuService.update(id, umsMenu);
+  public CommonResult update(@PathVariable Long id, @RequestBody AdminMenu adminMenu) {
+    int count = menuService.update(id, adminMenu);
     if (count > 0) {
       return CommonResult.success(count);
     } else {
@@ -53,8 +53,8 @@ public class MenuController {
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<AdminMenu> getItem(@PathVariable Long id) {
-    AdminMenu umsMenu = menuService.getItem(id);
-    return CommonResult.success(umsMenu);
+    AdminMenu adminMenu = menuService.getItem(id);
+    return CommonResult.success(adminMenu);
   }
 
   @ApiOperation("根据ID删除后台菜单")

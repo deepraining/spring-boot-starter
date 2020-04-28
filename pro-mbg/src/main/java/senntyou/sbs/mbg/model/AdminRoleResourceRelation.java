@@ -32,6 +32,14 @@ public class AdminRoleResourceRelation implements Serializable {
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
+    /**
+     * 更新时间
+     *
+     * @mbg.generated
+     */
+    @ApiModelProperty(value = "更新时间")
+    private Date updateTime;
+
     private static final long serialVersionUID = 1L;
 
     public Long getId() {
@@ -66,6 +74,14 @@ public class AdminRoleResourceRelation implements Serializable {
         this.createTime = createTime;
     }
 
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -76,6 +92,7 @@ public class AdminRoleResourceRelation implements Serializable {
         sb.append(", roleId=").append(roleId);
         sb.append(", resourceId=").append(resourceId);
         sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

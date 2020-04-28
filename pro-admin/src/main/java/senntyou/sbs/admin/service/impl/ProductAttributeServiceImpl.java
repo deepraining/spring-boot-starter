@@ -15,7 +15,7 @@ import senntyou.sbs.mbg.model.ProductAttribute;
 import senntyou.sbs.mbg.model.ProductAttributeCategory;
 import senntyou.sbs.mbg.model.ProductAttributeExample;
 
-/** 商品属性Service实现类 Created by macro on 2018/4/26. */
+/** 商品属性Service实现类 */
 @Service
 public class ProductAttributeServiceImpl implements ProductAttributeService {
   @Autowired private ProductAttributeMapper productAttributeMapper;
@@ -32,30 +32,29 @@ public class ProductAttributeServiceImpl implements ProductAttributeService {
   }
 
   @Override
-  public int create(ProductAttributeParam pmsProductAttributeParam) {
-    ProductAttribute pmsProductAttribute = new ProductAttribute();
-    BeanUtils.copyProperties(pmsProductAttributeParam, pmsProductAttribute);
-    int count = productAttributeMapper.insertSelective(pmsProductAttribute);
+  public int create(ProductAttributeParam productAttributeParam) {
+    ProductAttribute productAttribute = new ProductAttribute();
+    BeanUtils.copyProperties(productAttributeParam, productAttribute);
+    int count = productAttributeMapper.insertSelective(productAttribute);
     // 新增商品属性以后需要更新商品属性分类数量
-    ProductAttributeCategory pmsProductAttributeCategory =
+    ProductAttributeCategory productAttributeCategory =
         productAttributeCategoryMapper.selectByPrimaryKey(
-            pmsProductAttribute.getProductAttributeCategoryId());
-    if (pmsProductAttribute.getType() == 0) {
-      pmsProductAttributeCategory.setAttributeCount(
-          pmsProductAttributeCategory.getAttributeCount() + 1);
-    } else if (pmsProductAttribute.getType() == 1) {
-      pmsProductAttributeCategory.setParamCount(pmsProductAttributeCategory.getParamCount() + 1);
+            productAttribute.getProductAttributeCategoryId());
+    if (productAttribute.getType() == 0) {
+      productAttributeCategory.setAttributeCount(productAttributeCategory.getAttributeCount() + 1);
+    } else if (productAttribute.getType() == 1) {
+      productAttributeCategory.setParamCount(productAttributeCategory.getParamCount() + 1);
     }
-    productAttributeCategoryMapper.updateByPrimaryKey(pmsProductAttributeCategory);
+    productAttributeCategoryMapper.updateByPrimaryKeySelective(productAttributeCategory);
     return count;
   }
 
   @Override
   public int update(Long id, ProductAttributeParam productAttributeParam) {
-    ProductAttribute pmsProductAttribute = new ProductAttribute();
-    pmsProductAttribute.setId(id);
-    BeanUtils.copyProperties(productAttributeParam, pmsProductAttribute);
-    return productAttributeMapper.updateByPrimaryKeySelective(pmsProductAttribute);
+    ProductAttribute productAttribute = new ProductAttribute();
+    productAttribute.setId(id);
+    BeanUtils.copyProperties(productAttributeParam, productAttribute);
+    return productAttributeMapper.updateByPrimaryKeySelective(productAttribute);
   }
 
   @Override
@@ -66,31 +65,30 @@ public class ProductAttributeServiceImpl implements ProductAttributeService {
   @Override
   public int delete(List<Long> ids) {
     // 获取分类
-    ProductAttribute pmsProductAttribute = productAttributeMapper.selectByPrimaryKey(ids.get(0));
-    Integer type = pmsProductAttribute.getType();
-    ProductAttributeCategory pmsProductAttributeCategory =
+    ProductAttribute productAttribute = productAttributeMapper.selectByPrimaryKey(ids.get(0));
+    Integer type = productAttribute.getType();
+    ProductAttributeCategory productAttributeCategory =
         productAttributeCategoryMapper.selectByPrimaryKey(
-            pmsProductAttribute.getProductAttributeCategoryId());
+            productAttribute.getProductAttributeCategoryId());
     ProductAttributeExample example = new ProductAttributeExample();
     example.createCriteria().andIdIn(ids);
     int count = productAttributeMapper.deleteByExample(example);
     // 删除完成后修改数量
     if (type == 0) {
-      if (pmsProductAttributeCategory.getAttributeCount() >= count) {
-        pmsProductAttributeCategory.setAttributeCount(
-            pmsProductAttributeCategory.getAttributeCount() - count);
+      if (productAttributeCategory.getAttributeCount() >= count) {
+        productAttributeCategory.setAttributeCount(
+            productAttributeCategory.getAttributeCount() - count);
       } else {
-        pmsProductAttributeCategory.setAttributeCount(0);
+        productAttributeCategory.setAttributeCount(0);
       }
     } else if (type == 1) {
-      if (pmsProductAttributeCategory.getParamCount() >= count) {
-        pmsProductAttributeCategory.setParamCount(
-            pmsProductAttributeCategory.getParamCount() - count);
+      if (productAttributeCategory.getParamCount() >= count) {
+        productAttributeCategory.setParamCount(productAttributeCategory.getParamCount() - count);
       } else {
-        pmsProductAttributeCategory.setParamCount(0);
+        productAttributeCategory.setParamCount(0);
       }
     }
-    productAttributeCategoryMapper.updateByPrimaryKey(pmsProductAttributeCategory);
+    productAttributeCategoryMapper.updateByPrimaryKeySelective(productAttributeCategory);
     return count;
   }
 

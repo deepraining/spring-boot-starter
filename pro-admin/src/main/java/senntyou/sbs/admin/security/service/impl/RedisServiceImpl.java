@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import senntyou.sbs.admin.security.service.RedisService;
 
-/** redis操作实现类 Created by macro on 2020/3/3. */
+/** redis操作实现类 */
 @Service
 public class RedisServiceImpl implements RedisService {
   @Autowired private RedisTemplate<String, Object> redisTemplate;

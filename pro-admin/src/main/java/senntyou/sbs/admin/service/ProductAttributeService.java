@@ -6,7 +6,7 @@ import senntyou.sbs.admin.dto.ProductAttrInfo;
 import senntyou.sbs.admin.dto.ProductAttributeParam;
 import senntyou.sbs.mbg.model.ProductAttribute;
 
-/** 商品属性Service Created by macro on 2018/4/26. */
+/** 商品属性Service */
 public interface ProductAttributeService {
   /**
    * 根据分类分页获取商品属性
@@ -18,7 +18,7 @@ public interface ProductAttributeService {
 
   /** 添加商品属性 */
   @Transactional
-  int create(ProductAttributeParam pmsProductAttributeParam);
+  int create(ProductAttributeParam productAttributeParam);
 
   /** 修改商品属性 */
   int update(Long id, ProductAttributeParam productAttributeParam);

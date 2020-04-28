@@ -1,7 +1,6 @@
 package senntyou.sbs.admin.service.impl;
 
 import com.github.pagehelper.PageHelper;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.BeanUtils;
@@ -10,41 +9,41 @@ import org.springframework.stereotype.Service;
 import senntyou.sbs.admin.dto.AdminMenuNode;
 import senntyou.sbs.admin.service.AdminMenuService;
 import senntyou.sbs.mbg.mapper.AdminMenuMapper;
-import senntyou.sbs.mbg.model.*;
+import senntyou.sbs.mbg.model.AdminMenu;
+import senntyou.sbs.mbg.model.AdminMenuExample;
 
-/** 后台菜单管理Service实现类 Created by macro on 2020/2/2. */
+/** 后台菜单管理Service实现类 */
 @Service
 public class AdminMenuServiceImpl implements AdminMenuService {
   @Autowired private AdminMenuMapper menuMapper;
 
   @Override
-  public int create(AdminMenu umsMenu) {
-    umsMenu.setCreateTime(new Date());
-    updateLevel(umsMenu);
-    return menuMapper.insert(umsMenu);
+  public int create(AdminMenu adminMenu) {
+    updateLevel(adminMenu);
+    return menuMapper.insertSelective(adminMenu);
   }
 
   /** 修改菜单层级 */
-  private void updateLevel(AdminMenu umsMenu) {
-    if (umsMenu.getParentId() == 0) {
+  private void updateLevel(AdminMenu adminMenu) {
+    if (adminMenu.getParentId() == 0) {
       // 没有父菜单时为一级菜单
-      umsMenu.setLevel(0);
+      adminMenu.setLevel(0);
     } else {
       // 有父菜单时选择根据父菜单level设置
-      AdminMenu parentMenu = menuMapper.selectByPrimaryKey(umsMenu.getParentId());
+      AdminMenu parentMenu = menuMapper.selectByPrimaryKey(adminMenu.getParentId());
       if (parentMenu != null) {
-        umsMenu.setLevel(parentMenu.getLevel() + 1);
+        adminMenu.setLevel(parentMenu.getLevel() + 1);
       } else {
-        umsMenu.setLevel(0);
+        adminMenu.setLevel(0);
       }
     }
   }
 
   @Override
-  public int update(Long id, AdminMenu umsMenu) {
-    umsMenu.setId(id);
-    updateLevel(umsMenu);
-    return menuMapper.updateByPrimaryKeySelective(umsMenu);
+  public int update(Long id, AdminMenu adminMenu) {
+    adminMenu.setId(id);
+    updateLevel(adminMenu);
+    return menuMapper.updateByPrimaryKeySelective(adminMenu);
   }
 
   @Override
@@ -79,10 +78,10 @@ public class AdminMenuServiceImpl implements AdminMenuService {
 
   @Override
   public int updateHidden(Long id, Integer hidden) {
-    AdminMenu umsMenu = new AdminMenu();
-    umsMenu.setId(id);
-    umsMenu.setHidden(hidden);
-    return menuMapper.updateByPrimaryKeySelective(umsMenu);
+    AdminMenu adminMenu = new AdminMenu();
+    adminMenu.setId(id);
+    adminMenu.setHidden(hidden);
+    return menuMapper.updateByPrimaryKeySelective(adminMenu);
   }
 
   /** 将AdminMenu转化为AdminMenuNode并设置children属性 */

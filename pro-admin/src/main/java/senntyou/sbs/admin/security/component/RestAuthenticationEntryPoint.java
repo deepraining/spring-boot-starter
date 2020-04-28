@@ -9,7 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import senntyou.sbs.common.CommonResult;
 
-/** 自定义返回结果：未登录或登录过期 Created by macro on 2018/5/14. */
+/** 自定义返回结果：未登录或登录过期 */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
   @Override
   public void commence(

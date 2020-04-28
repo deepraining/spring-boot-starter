@@ -1,7 +1,5 @@
 # spring-boot-starter
 
-[English Documentation](./README.en.md)
-
 用于快速创建 [Spring Boot](https://spring.io/projects/spring-boot) 应用的模板脚手架，使用 [Gradle](https://gradle.org/) 构建项目。
 
 ## 特性

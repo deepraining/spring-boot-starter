@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import senntyou.sbs.admin.service.AdminRoleService;
 import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
-import senntyou.sbs.mbg.model.*;
+import senntyou.sbs.mbg.model.AdminMenu;
+import senntyou.sbs.mbg.model.AdminPermission;
+import senntyou.sbs.mbg.model.AdminResource;
+import senntyou.sbs.mbg.model.AdminRole;
 
-/** 后台用户角色管理 Created by macro on 2018/9/30. */
+/** 后台用户角色管理 */
 @Controller
 @Api(tags = "AdminRoleController", description = "后台用户角色管理")
 @RequestMapping("/role")
@@ -100,9 +103,9 @@ public class RoleController {
   @ResponseBody
   public CommonResult updateStatus(
       @PathVariable Long id, @RequestParam(value = "status") Integer status) {
-    AdminRole umsRole = new AdminRole();
-    umsRole.setStatus(status);
-    int count = roleService.update(id, umsRole);
+    AdminRole adminRole = new AdminRole();
+    adminRole.setStatus(status);
+    int count = roleService.update(id, adminRole);
     if (count > 0) {
       return CommonResult.success(count);
     }

@@ -21,7 +21,7 @@ import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.mbg.model.ProductAttribute;
 
-/** 商品属性管理Controller Created by macro on 2018/4/26. */
+/** 商品属性管理Controller */
 @Controller
 @Api(tags = "ProductAttributeController", description = "商品属性管理")
 @RequestMapping("/productAttribute")

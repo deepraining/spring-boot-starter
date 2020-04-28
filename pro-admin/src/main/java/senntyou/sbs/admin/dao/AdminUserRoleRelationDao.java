@@ -7,7 +7,7 @@ import senntyou.sbs.mbg.model.AdminResource;
 import senntyou.sbs.mbg.model.AdminRole;
 import senntyou.sbs.mbg.model.AdminUserRoleRelation;
 
-/** 后台用户与角色管理自定义Dao Created by macro on 2018/10/8. */
+/** 后台用户与角色管理自定义Dao */
 public interface AdminUserRoleRelationDao {
   /** 批量插入用户角色关系 */
   int insertList(@Param("list") List<AdminUserRoleRelation> adminRoleRelationList);

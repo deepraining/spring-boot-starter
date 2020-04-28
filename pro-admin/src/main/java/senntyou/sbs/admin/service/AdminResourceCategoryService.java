@@ -10,10 +10,10 @@ public interface AdminResourceCategoryService {
   List<AdminResourceCategory> listAll();
 
   /** 创建资源分类 */
-  int create(AdminResourceCategory umsResourceCategory);
+  int create(AdminResourceCategory adminResourceCategory);
 
   /** 修改资源分类 */
-  int update(Long id, AdminResourceCategory umsResourceCategory);
+  int update(Long id, AdminResourceCategory adminResourceCategory);
 
   /** 删除资源分类 */
   int delete(Long id);

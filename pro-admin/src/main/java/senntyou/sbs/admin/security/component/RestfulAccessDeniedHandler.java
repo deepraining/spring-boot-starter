@@ -9,7 +9,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import senntyou.sbs.common.CommonResult;
 
-/** 自定义返回结果：没有权限访问时 Created by macro on 2018/4/26. */
+/** 自定义返回结果：没有权限访问时 */
 public class RestfulAccessDeniedHandler implements AccessDeniedHandler {
   @Override
   public void handle(

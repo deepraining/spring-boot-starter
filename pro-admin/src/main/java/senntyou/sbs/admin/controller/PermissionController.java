@@ -16,7 +16,7 @@ import senntyou.sbs.admin.service.AdminPermissionService;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.mbg.model.AdminPermission;
 
-/** 后台用户权限管理 Created by macro on 2018/9/29. */
+/** 后台用户权限管理 */
 @Controller
 @Api(tags = "AdminPermissionController", description = "后台用户权限管理")
 @RequestMapping("/permission")

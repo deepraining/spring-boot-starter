@@ -9,7 +9,7 @@ import senntyou.sbs.admin.dto.ProductQueryParam;
 import senntyou.sbs.admin.dto.ProductResult;
 import senntyou.sbs.mbg.model.Product;
 
-/** 商品管理Service Created by macro on 2018/4/26. */
+/** 商品管理Service */
 public interface ProductService {
   /** 创建商品 */
   @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRED)

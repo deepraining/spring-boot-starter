@@ -28,7 +28,7 @@ import senntyou.sbs.mbg.model.AdminPermission;
 import senntyou.sbs.mbg.model.AdminRole;
 import senntyou.sbs.mbg.model.AdminUser;
 
-/** 后台用户管理 Created by macro on 2018/4/26. */
+/** 后台用户管理 */
 @Controller
 @Api(tags = "AdminUserController", description = "后台用户管理")
 @RequestMapping("/admin")
@@ -46,20 +46,21 @@ public class UserController {
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<AdminUser> register(
-      @RequestBody AdminUserParam umsAdminParam, BindingResult result) {
-    AdminUser umsAdmin = adminService.register(umsAdminParam);
-    if (umsAdmin == null) {
+      @RequestBody AdminUserParam adminUserParam, BindingResult result) {
+    AdminUser adminUser = adminService.register(adminUserParam);
+    if (adminUser == null) {
       CommonResult.failed();
     }
-    return CommonResult.success(umsAdmin);
+    return CommonResult.success(adminUser);
   }
 
   @ApiOperation(value = "登录以后返回token")
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult login(@RequestBody AdminLoginParam umsAdminLoginParam, BindingResult result) {
+  public CommonResult login(
+      @RequestBody AdminLoginParam adminUserLoginParam, BindingResult result) {
     String token =
-        adminService.login(umsAdminLoginParam.getUsername(), umsAdminLoginParam.getPassword());
+        adminService.login(adminUserLoginParam.getUsername(), adminUserLoginParam.getPassword());
     if (token == null) {
       return CommonResult.validateFailed("用户名或密码错误");
     }
@@ -92,12 +93,12 @@ public class UserController {
       return CommonResult.unauthorized(null);
     }
     String username = principal.getName();
-    AdminUser umsAdmin = adminService.getAdminByUsername(username);
+    AdminUser adminUser = adminService.getUserByUsername(username);
     Map<String, Object> data = new HashMap<>();
-    data.put("username", umsAdmin.getUsername());
-    data.put("roles", new String[] {"TEST"});
-    data.put("menus", roleService.getMenuList(umsAdmin.getId()));
-    data.put("icon", umsAdmin.getAvatar());
+    data.put("username", adminUser.getUsername());
+    data.put("roles", new String[] {"NONE"});
+    data.put("menus", roleService.getMenuList(adminUser.getId()));
+    data.put("icon", adminUser.getAvatar());
     return CommonResult.success(data);
   }
 
@@ -123,15 +124,15 @@ public class UserController {
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<AdminUser> getItem(@PathVariable Long id) {
-    AdminUser admin = adminService.getItem(id);
-    return CommonResult.success(admin);
+    AdminUser adminUser = adminService.getItem(id);
+    return CommonResult.success(adminUser);
   }
 
   @ApiOperation("修改指定用户信息")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(@PathVariable Long id, @RequestBody AdminUser admin) {
-    int count = adminService.update(id, admin);
+  public CommonResult update(@PathVariable Long id, @RequestBody AdminUser adminUser) {
+    int count = adminService.update(id, adminUser);
     if (count > 0) {
       return CommonResult.success(count);
     }
@@ -173,9 +174,9 @@ public class UserController {
   @ResponseBody
   public CommonResult updateStatus(
       @PathVariable Long id, @RequestParam(value = "status") Integer status) {
-    AdminUser umsAdmin = new AdminUser();
-    umsAdmin.setStatus(status);
-    int count = adminService.update(id, umsAdmin);
+    AdminUser adminUser = new AdminUser();
+    adminUser.setStatus(status);
+    int count = adminService.update(id, adminUser);
     if (count > 0) {
       return CommonResult.success(count);
     }

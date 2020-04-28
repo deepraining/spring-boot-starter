@@ -3,7 +3,6 @@ package senntyou.sbs.admin.service.impl;
 import com.github.pagehelper.PageHelper;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,18 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import senntyou.sbs.admin.dao.*;
+import senntyou.sbs.admin.dao.ProductAttributeValueDao;
+import senntyou.sbs.admin.dao.ProductDao;
+import senntyou.sbs.admin.dao.ProductVerifyRecordDao;
 import senntyou.sbs.admin.dto.ProductParam;
 import senntyou.sbs.admin.dto.ProductQueryParam;
 import senntyou.sbs.admin.dto.ProductResult;
 import senntyou.sbs.admin.service.ProductService;
-import senntyou.sbs.mbg.mapper.*;
+import senntyou.sbs.mbg.mapper.ProductAttributeValueMapper;
+import senntyou.sbs.mbg.mapper.ProductMapper;
 import senntyou.sbs.mbg.model.Product;
 import senntyou.sbs.mbg.model.ProductAttributeValueExample;
 import senntyou.sbs.mbg.model.ProductExample;
 import senntyou.sbs.mbg.model.ProductVerifyRecord;
 
-/** 商品管理Service实现类 Created by macro on 2018/4/26. */
+/** 商品管理Service实现类 */
 @Service
 public class ProductServiceImpl implements ProductService {
   private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
@@ -104,7 +106,6 @@ public class ProductServiceImpl implements ProductService {
     for (Long id : ids) {
       ProductVerifyRecord record = new ProductVerifyRecord();
       record.setProductId(id);
-      record.setCreateTime(new Date());
       record.setDetail(detail);
       record.setStatus(verifyStatus);
       record.setVerifyMan("test");

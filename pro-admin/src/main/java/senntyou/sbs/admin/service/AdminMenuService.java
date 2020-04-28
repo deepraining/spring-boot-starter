@@ -7,10 +7,10 @@ import senntyou.sbs.mbg.model.AdminMenu;
 /** 后台菜单管理Service */
 public interface AdminMenuService {
   /** 创建后台菜单 */
-  int create(AdminMenu umsMenu);
+  int create(AdminMenu adminMenu);
 
   /** 修改后台菜单 */
-  int update(Long id, AdminMenu umsMenu);
+  int update(Long id, AdminMenu adminMenu);
 
   /** 根据ID获取菜单详情 */
   AdminMenu getItem(Long id);

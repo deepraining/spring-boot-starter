@@ -16,7 +16,7 @@ import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.mbg.model.ProductAttributeCategory;
 
-/** 商品属性分类Controller Created by macro on 2018/4/26. */
+/** 商品属性分类Controller */
 @Controller
 @Api(tags = "ProductAttributeCategoryController", description = "商品属性分类管理")
 @RequestMapping("/productAttribute/category")

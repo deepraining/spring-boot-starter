@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import senntyou.sbs.admin.dto.ProductAttrInfo;
 
-/** 自定义商品属性Dao Created by macro on 2018/5/23. */
+/** 自定义商品属性Dao */
 public interface ProductAttributeDao {
   List<ProductAttrInfo> getProductAttrInfo(@Param("id") Long productCategoryId);
 }

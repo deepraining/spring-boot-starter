@@ -18,7 +18,7 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-/** Redis配置类 Created by macro on 2020/3/2. */
+/** Redis配置类 */
 @EnableCaching
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {

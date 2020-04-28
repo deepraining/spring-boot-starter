@@ -10,7 +10,7 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-/** 动态权限决策管理器，用于判断用户是否有访问权限 Created by macro on 2020/2/7. */
+/** 动态权限决策管理器，用于判断用户是否有访问权限 */
 public class DynamicAccessDecisionManager implements AccessDecisionManager {
 
   @Override

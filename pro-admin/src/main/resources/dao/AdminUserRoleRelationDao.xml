@@ -1,82 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="senntyou.sbs.admin.dao.AdminUserRoleRelationDao">
-    <!--批量新增回写主键支持-->
-    <insert id="insertList">
-        INSERT INTO admin_user_role_relation (user_id, role_id) VALUES
-        <foreach collection="list" separator="," item="item" index="index">
-            (#{item.userId,jdbcType=BIGINT},
-            #{item.roleId,jdbcType=BIGINT})
-        </foreach>
-    </insert>
-    <select id="getRoleList" resultMap="senntyou.sbs.mbg.mapper.AdminRoleMapper.BaseResultMap">
-        select r.*
-        from admin_user_role_relation ar left join admin_role r on ar.role_id = r.id
-        where ar.user_id = #{userId}
-    </select>
-    <select id="getRolePermissionList" resultMap="senntyou.sbs.mbg.mapper.AdminPermissionMapper.BaseResultMap">
-        select p.*
-        from admin_user_role_relation ar left join admin_role r on ar.role_id = r.id
-            left join admin_role_permission_relation rp on r.id = rp.role_id
-            left join admin_permission p on rp.permission_id=p.id
-            where ar.user_id = #{userId} and p.id is not null
-    </select>
-    <select id="getPermissionList" resultMap="senntyou.sbs.mbg.mapper.AdminPermissionMapper.BaseResultMap">
+  <!--批量新增回写主键支持-->
+  <insert id="insertList">
+    INSERT INTO admin_user_role_relation (user_id, role_id) VALUES
+    <foreach collection="list" separator="," item="item" index="index">
+      (#{item.userId,jdbcType=BIGINT},
+      #{item.roleId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+  <select id="getRoleList" resultMap="senntyou.sbs.mbg.mapper.AdminRoleMapper.BaseResultMap">
+    select r.*
+    from admin_user_role_relation ar left join admin_role r on ar.role_id = r.id
+    where ar.user_id = #{userId}
+  </select>
+  <select id="getRolePermissionList"
+          resultMap="senntyou.sbs.mbg.mapper.AdminPermissionMapper.BaseResultMap">
+    select p.*
+    from admin_user_role_relation ar left join admin_role r on ar.role_id = r.id
+      left join admin_role_permission_relation rp on r.id = rp.role_id
+      left join admin_permission p on rp.permission_id=p.id
+      where ar.user_id = #{userId} and p.id is not null
+  </select>
+  <select id="getPermissionList"
+          resultMap="senntyou.sbs.mbg.mapper.AdminPermissionMapper.BaseResultMap">
+    SELECT
+      p.*
+    FROM
+      admin_user_role_relation ar
+      LEFT JOIN admin_role r ON ar.role_id = r.id
+      LEFT JOIN admin_role_permission_relation rp ON r.id = rp.role_id
+      LEFT JOIN admin_permission p ON rp.permission_id = p.id
+    WHERE
+      ar.user_id = #{userId}
+      AND p.id IS NOT NULL
+      AND p.id NOT IN (
         SELECT
-            p.*
+          p.id
         FROM
-            admin_user_role_relation ar
-            LEFT JOIN admin_role r ON ar.role_id = r.id
-            LEFT JOIN admin_role_permission_relation rp ON r.id = rp.role_id
-            LEFT JOIN admin_permission p ON rp.permission_id = p.id
+          admin_user_permission_relation pr
+          LEFT JOIN admin_permission p ON pr.permission_id = p.id
         WHERE
-            ar.user_id = #{userId}
-            AND p.id IS NOT NULL
-            AND p.id NOT IN (
-                SELECT
-                    p.id
-                FROM
-                    admin_user_permission_relation pr
-                    LEFT JOIN admin_permission p ON pr.permission_id = p.id
-                WHERE
-                    pr.type = - 1
-                    AND pr.user_id = #{userId}
-            )
-        UNION
-        SELECT
-            p.*
-        FROM
-            admin_user_permission_relation pr
-            LEFT JOIN admin_permission p ON pr.permission_id = p.id
-        WHERE
-            pr.type = 1
-            AND pr.user_id = #{userId}
-    </select>
-    <select id="getResourceList" resultType="senntyou.sbs.mbg.model.AdminResource">
-        SELECT
-            ur.id id,
-            ur.create_time createTime,
-            ur.name name,
-            ur.url url,
-            ur.description description,
-            ur.category_id categoryId
-        FROM
-            admin_user_role_relation ar
-        LEFT JOIN admin_role r ON ar.role_id = r.id
-        LEFT JOIN admin_role_resource_relation rrr ON r.id = rrr.role_id
-        LEFT JOIN admin_resource ur ON ur.id = rrr.resource_id
-        WHERE
-            ar.user_id = #{userId}
-        AND ur.id IS NOT NULL
-        GROUP BY
-            ur.id
-    </select>
-    <select id="getAdminIdList" resultType="java.lang.Long">
-        SELECT
-            DISTINCT ar.user_id
-        FROM
-            admin_role_resource_relation rr
-                LEFT JOIN admin_user_role_relation ar ON rr.role_id = ar.role_id
-        WHERE rr.resource_id=#{resourceId}
-    </select>
+          pr.type = - 1
+          AND pr.user_id = #{userId}
+      )
+    UNION
+    SELECT
+      p.*
+    FROM
+      admin_user_permission_relation pr
+      LEFT JOIN admin_permission p ON pr.permission_id = p.id
+    WHERE
+      pr.type = 1
+      AND pr.user_id = #{userId}
+  </select>
+  <select id="getResourceList" resultType="senntyou.sbs.mbg.model.AdminResource">
+    SELECT
+      ur.id id,
+      ur.create_time createTime,
+      ur.name name,
+      ur.url url,
+      ur.description description,
+      ur.category_id categoryId
+    FROM
+      admin_user_role_relation ar
+    LEFT JOIN admin_role r ON ar.role_id = r.id
+    LEFT JOIN admin_role_resource_relation rrr ON r.id = rrr.role_id
+    LEFT JOIN admin_resource ur ON ur.id = rrr.resource_id
+    WHERE
+      ar.user_id = #{userId}
+    AND ur.id IS NOT NULL
+    GROUP BY
+      ur.id
+  </select>
+  <select id="getAdminIdList" resultType="java.lang.Long">
+    SELECT
+      DISTINCT ar.user_id
+    FROM
+      admin_role_resource_relation rr
+      LEFT JOIN admin_user_role_relation ar ON rr.role_id = ar.role_id
+    WHERE rr.resource_id=#{resourceId}
+  </select>
 </mapper>

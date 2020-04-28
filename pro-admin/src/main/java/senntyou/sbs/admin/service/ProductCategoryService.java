@@ -6,15 +6,15 @@ import senntyou.sbs.admin.dto.ProductCategoryParam;
 import senntyou.sbs.admin.dto.ProductCategoryWithChildrenItem;
 import senntyou.sbs.mbg.model.ProductCategory;
 
-/** 商品分类Service Created by macro on 2018/4/26. */
+/** 商品分类Service */
 public interface ProductCategoryService {
   /** 创建商品分类 */
   @Transactional
-  int create(ProductCategoryParam pmsProductCategoryParam);
+  int create(ProductCategoryParam productCategoryParam);
 
   /** 修改商品分类 */
   @Transactional
-  int update(Long id, ProductCategoryParam pmsProductCategoryParam);
+  int update(Long id, ProductCategoryParam productCategoryParam);
 
   /** 分页获取商品分类 */
   List<ProductCategory> getList(Long parentId, Integer pageSize, Integer pageNum);

@@ -19,14 +19,14 @@ public class AdminUserParam {
   private String password;
 
   @ApiModelProperty(value = "用户头像")
-  private String icon;
+  private String avatar;
 
   @ApiModelProperty(value = "邮箱")
   @Email(message = "邮箱格式不合法")
   private String email;
 
   @ApiModelProperty(value = "用户昵称")
-  private String nickName;
+  private String nickname;
 
   @ApiModelProperty(value = "备注")
   private String note;

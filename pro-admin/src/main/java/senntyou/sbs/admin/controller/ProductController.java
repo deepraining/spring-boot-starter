@@ -20,7 +20,7 @@ import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.mbg.model.Product;
 
-/** 商品管理Controller Created by macro on 2018/4/26. */
+/** 商品管理Controller */
 @Controller
 @Api(tags = "ProductController", description = "商品管理")
 @RequestMapping("/product")

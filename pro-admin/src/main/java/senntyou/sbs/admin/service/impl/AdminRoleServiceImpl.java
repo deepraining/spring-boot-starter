@@ -2,7 +2,6 @@ package senntyou.sbs.admin.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ import senntyou.sbs.mbg.model.AdminRolePermissionRelationExample;
 import senntyou.sbs.mbg.model.AdminRoleResourceRelation;
 import senntyou.sbs.mbg.model.AdminRoleResourceRelationExample;
 
-/** 后台角色管理Service实现类 Created by macro on 2018/9/30. */
+/** 后台角色管理Service实现类 */
 @Service
 public class AdminRoleServiceImpl implements AdminRoleService {
   @Autowired private AdminRoleMapper roleMapper;
@@ -40,10 +39,9 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 
   @Override
   public int create(AdminRole role) {
-    role.setCreateTime(new Date());
     role.setUserCount(0);
     role.setSort(0);
-    return roleMapper.insert(role);
+    return roleMapper.insertSelective(role);
   }
 
   @Override
@@ -124,7 +122,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
       AdminRoleMenuRelation relation = new AdminRoleMenuRelation();
       relation.setRoleId(roleId);
       relation.setMenuId(menuId);
-      roleMenuRelationMapper.insert(relation);
+      roleMenuRelationMapper.insertSelective(relation);
     }
     return menuIds.size();
   }
@@ -140,7 +138,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
       AdminRoleResourceRelation relation = new AdminRoleResourceRelation();
       relation.setRoleId(roleId);
       relation.setResourceId(resourceId);
-      roleResourceRelationMapper.insert(relation);
+      roleResourceRelationMapper.insertSelective(relation);
     }
     adminCacheService.delResourceListByRole(roleId);
     return resourceIds.size();

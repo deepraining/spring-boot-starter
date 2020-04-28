@@ -14,7 +14,7 @@ import senntyou.sbs.admin.service.AdminResourceCategoryService;
 import senntyou.sbs.common.CommonResult;
 import senntyou.sbs.mbg.model.AdminResourceCategory;
 
-/** 后台资源分类管理Controller Created by macro on 2020/2/5. */
+/** 后台资源分类管理Controller */
 @Controller
 @Api(tags = "AdminResourceCategoryController", description = "后台资源分类管理")
 @RequestMapping("/resourceCategory")
@@ -32,8 +32,8 @@ public class ResourceCategoryController {
   @ApiOperation("添加后台资源分类")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(@RequestBody AdminResourceCategory umsResourceCategory) {
-    int count = resourceCategoryService.create(umsResourceCategory);
+  public CommonResult create(@RequestBody AdminResourceCategory adminResourceCategory) {
+    int count = resourceCategoryService.create(adminResourceCategory);
     if (count > 0) {
       return CommonResult.success(count);
     } else {
@@ -45,8 +45,8 @@ public class ResourceCategoryController {
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult update(
-      @PathVariable Long id, @RequestBody AdminResourceCategory umsResourceCategory) {
-    int count = resourceCategoryService.update(id, umsResourceCategory);
+      @PathVariable Long id, @RequestBody AdminResourceCategory adminResourceCategory) {
+    int count = resourceCategoryService.update(id, adminResourceCategory);
     if (count > 0) {
       return CommonResult.success(count);
     } else {
