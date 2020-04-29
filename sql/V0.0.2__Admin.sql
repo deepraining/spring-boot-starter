@@ -53,7 +53,7 @@ CREATE TABLE `admin_permission` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `parent_id` bigint(20) DEFAULT 0 COMMENT '父级权限id',
   `name` varchar(100) NOT NULL COMMENT '名称',
-  `value` varchar(200) NOT NULL COMMENT '权限值',
+  `value` varchar(200) DEFAULT NULL COMMENT '权限值',
   `icon` varchar(500) DEFAULT NULL COMMENT '图标',
   `type` int(1) DEFAULT NULL COMMENT '权限类型：0->目录；1->菜单；2->按钮（接口绑定权限）',
   `uri` varchar(200) DEFAULT NULL COMMENT '前端资源路径',

@@ -1,4 +1,4 @@
-package senntyou.sbs.admin.security.component;
+package senntyou.sbs.admin.component;
 
 import cn.hutool.core.collection.CollUtil;
 import java.util.Collection;

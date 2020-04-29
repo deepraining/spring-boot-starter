@@ -1,5 +1,5 @@
 server:
-  port: 9010
+  port: 9002
   use-forward-headers: true
   undertow:
     io-threads: 2
@@ -49,6 +49,7 @@ redis:
 secure:
   ignored:
     urls: # 安全路径白名单
+      - /
       - /swagger-ui.html
       - /swagger-resources/**
       - /swagger/**
@@ -60,7 +61,6 @@ secure:
       - /webjars/springfox-swagger-ui/**
       - /actuator/**
       - /druid/**
-      - /
       - /admin/login
       - /admin/register
       - /admin/info
@@ -72,10 +72,6 @@ logging:
     org.springframework.web: ERROR
     senntyou.sbs: DEBUG
   file: ./logs/log.log
-
-management:
-  server:
-    port: 9011
 
 jwt:
   tokenHeader: Authorization

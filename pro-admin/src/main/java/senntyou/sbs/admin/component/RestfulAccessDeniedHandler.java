@@ -1,4 +1,4 @@
-package senntyou.sbs.admin.security.component;
+package senntyou.sbs.admin.component;
 
 import cn.hutool.json.JSONUtil;
 import java.io.IOException;

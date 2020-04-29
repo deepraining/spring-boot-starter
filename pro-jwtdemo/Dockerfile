@@ -3,7 +3,7 @@ FROM openjdk:8-jre-alpine
 VOLUME /tmp
 
 ARG JAR_FILE=build/libs/sbs-jwtdemo.jar
-ARG PORT=9005
+ARG PORT=9001
 ARG TIME_ZONE=Asia/Shanghai
 
 ENV TZ=${TIME_ZONE}

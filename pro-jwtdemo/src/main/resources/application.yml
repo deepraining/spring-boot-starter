@@ -1,5 +1,5 @@
 server:
-  port: 9005
+  port: 9001
   use-forward-headers: true
   undertow:
     io-threads: 2
@@ -43,10 +43,6 @@ logging:
     org.springframework.web: ERROR
     senntyou.sbs: DEBUG
   file: ./logs/log.log
-
-management:
-  server:
-    port: 9006
 
 jwt:
   tokenHeader: Authorization

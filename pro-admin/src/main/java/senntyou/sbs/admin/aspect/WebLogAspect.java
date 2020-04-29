@@ -1,4 +1,4 @@
-package senntyou.sbs.admin.component;
+package senntyou.sbs.admin.aspect;
 
 import io.swagger.annotations.ApiOperation;
 import java.lang.reflect.Method;

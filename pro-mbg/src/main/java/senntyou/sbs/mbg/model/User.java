@@ -30,7 +30,6 @@ public class User implements Serializable {
      * @mbg.generated
      */
     @ApiModelProperty(value = "password(encrypted)")
-    @JsonIgnore
     private String password;
 
     /**

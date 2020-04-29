@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import senntyou.sbs.admin.security.component.DynamicSecurityMetadataSource;
+import senntyou.sbs.admin.component.DynamicSecurityMetadataSource;
 import senntyou.sbs.admin.service.AdminResourceService;
 import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;

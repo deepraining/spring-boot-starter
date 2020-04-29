@@ -1,4 +1,4 @@
-package senntyou.sbs.admin.component;
+package senntyou.sbs.admin.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

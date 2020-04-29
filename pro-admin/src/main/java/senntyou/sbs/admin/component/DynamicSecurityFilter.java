@@ -1,4 +1,4 @@
-package senntyou.sbs.admin.security.component;
+package senntyou.sbs.admin.component;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -16,7 +16,7 @@ import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
-import senntyou.sbs.admin.security.config.IgnoreUrlsConfig;
+import senntyou.sbs.admin.config.IgnoreUrlsConfig;
 
 /** 动态权限过滤器，用于实现基于路径的动态权限过滤 */
 public class DynamicSecurityFilter extends AbstractSecurityInterceptor implements Filter {

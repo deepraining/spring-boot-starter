@@ -57,10 +57,8 @@ public class UserController {
   @ApiOperation(value = "登录以后返回token")
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult login(
-      @RequestBody AdminLoginParam adminUserLoginParam, BindingResult result) {
-    String token =
-        adminService.login(adminUserLoginParam.getUsername(), adminUserLoginParam.getPassword());
+  public CommonResult login(@RequestBody AdminLoginParam adminLoginParam, BindingResult result) {
+    String token = adminService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword());
     if (token == null) {
       return CommonResult.validateFailed("用户名或密码错误");
     }

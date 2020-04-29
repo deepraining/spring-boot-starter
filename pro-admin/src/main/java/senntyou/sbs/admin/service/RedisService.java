@@ -1,4 +1,4 @@
-package senntyou.sbs.admin.security.service;
+package senntyou.sbs.admin.service;
 
 import java.util.List;
 import java.util.Map;

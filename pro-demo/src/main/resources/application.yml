@@ -44,10 +44,6 @@ logging:
     senntyou.sbs: DEBUG
   file: ./logs/log.log
 
-management:
-  server:
-    port: 9001
-
 app:
   # snowflake workerId and dataCenterId, see "hutool IdUtil.createSnowflake(workerId, dataCenterId)"
   workerId: 1

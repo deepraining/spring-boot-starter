@@ -1,4 +1,4 @@
-package senntyou.sbs.admin.security.aspect;
+package senntyou.sbs.admin.aspect;
 
 import java.lang.reflect.Method;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import senntyou.sbs.admin.security.annotation.CacheException;
+import senntyou.sbs.admin.annotation.CacheException;
 
 /** Redis缓存切面，防止Redis宕机影响正常业务逻辑 */
 @Aspect
@@ -21,7 +21,7 @@ public class RedisCacheAspect {
   private static Logger LOGGER = LoggerFactory.getLogger(RedisCacheAspect.class);
 
   @Pointcut(
-      "execution(public * senntyou.sbs.admin.service.*CacheService.*(..)) || execution(public * senntyou.sbs.demo.service.*CacheService.*(..))")
+      "execution(public * senntyou.sbs.admin.service.*CacheService.*(..)) || execution(public * senntyou.sbs.demo.service.*CacheService.*(..)) || execution(public * senntyou.sbs.jwtdemo.service.*CacheService.*(..))")
   public void cacheAspect() {}
 
   @Around("cacheAspect()")

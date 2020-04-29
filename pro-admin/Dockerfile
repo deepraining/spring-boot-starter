@@ -3,7 +3,7 @@ FROM openjdk:8-jre-alpine
 VOLUME /tmp
 
 ARG JAR_FILE=build/libs/sbs-admin.jar
-ARG PORT=9010
+ARG PORT=9002
 ARG TIME_ZONE=Asia/Shanghai
 
 ENV TZ=${TIME_ZONE}

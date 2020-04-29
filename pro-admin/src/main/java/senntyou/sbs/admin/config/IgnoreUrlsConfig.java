@@ -1,4 +1,4 @@
-package senntyou.sbs.admin.security.config;
+package senntyou.sbs.admin.config;
 
 import java.util.ArrayList;
 import java.util.List;

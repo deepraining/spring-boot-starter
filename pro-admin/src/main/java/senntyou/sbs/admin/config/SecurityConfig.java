@@ -1,33 +1,49 @@
-package senntyou.sbs.admin.security.config;
+package senntyou.sbs.admin.config;
 
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import senntyou.sbs.admin.security.component.DynamicAccessDecisionManager;
-import senntyou.sbs.admin.security.component.DynamicSecurityFilter;
-import senntyou.sbs.admin.security.component.DynamicSecurityMetadataSource;
-import senntyou.sbs.admin.security.component.DynamicSecurityService;
-import senntyou.sbs.admin.security.component.JwtAuthenticationTokenFilter;
-import senntyou.sbs.admin.security.component.RestAuthenticationEntryPoint;
-import senntyou.sbs.admin.security.component.RestfulAccessDeniedHandler;
-import senntyou.sbs.admin.security.util.JwtTokenUtil;
+import senntyou.sbs.admin.component.DynamicAccessDecisionManager;
+import senntyou.sbs.admin.component.DynamicSecurityFilter;
+import senntyou.sbs.admin.component.DynamicSecurityMetadataSource;
+import senntyou.sbs.admin.component.DynamicSecurityService;
+import senntyou.sbs.admin.component.JwtAuthenticationTokenFilter;
+import senntyou.sbs.admin.component.RestAuthenticationEntryPoint;
+import senntyou.sbs.admin.component.RestfulAccessDeniedHandler;
+import senntyou.sbs.admin.service.AdminResourceService;
+import senntyou.sbs.admin.service.AdminUserService;
+import senntyou.sbs.admin.util.JwtTokenUtil;
+import senntyou.sbs.mbg.model.AdminResource;
 
 /** 对SpringSecurity的配置的扩展，支持自定义白名单资源路径和查询用户逻辑 */
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
   @Autowired(required = false)
   private DynamicSecurityService dynamicSecurityService;
+
+  @Autowired private AdminUserService adminService;
+  @Autowired private AdminResourceService resourceService;
 
   @Override
   protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -69,6 +85,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
+  }
+
+  @Bean
+  public UserDetailsService userDetailsService() {
+    // 获取登录用户信息
+    return username -> adminService.loadUserByUsername(username);
+  }
+
+  @Bean
+  public DynamicSecurityService dynamicSecurityService() {
+    return new DynamicSecurityService() {
+      @Override
+      public Map<String, ConfigAttribute> loadDataSource() {
+        Map<String, ConfigAttribute> map = new ConcurrentHashMap<>();
+        List<AdminResource> resourceList = resourceService.listAll();
+        for (AdminResource resource : resourceList) {
+          map.put(
+              resource.getUrl(),
+              new org.springframework.security.access.SecurityConfig(
+                  resource.getId() + ":" + resource.getName()));
+        }
+        return map;
+      }
+    };
   }
 
   @Bean

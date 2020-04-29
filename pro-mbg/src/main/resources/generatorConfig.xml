@@ -19,8 +19,9 @@
       <property name="suppressDate" value="true"/>
       <!-- whether add column comment in database to java class fields by @ApiModelProperty -->
       <property name="addRemarkComments" value="true"/>
-      <!-- fields to ignore when serialize object to json string -->
-      <property name="ignoreFields" value="password"/>
+      <!-- fields to ignore when serialize object to json string, and split by "," when need multiple values -->
+      <!-- note: this will cause that password is null when put user model to cache -->
+      <!--<property name="ignoreFields" value="password"/>-->
     </commentGenerator>
 
     <jdbcConnection driverClass="${jdbc.driverClass}"

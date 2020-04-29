@@ -22,7 +22,6 @@ public class AdminUser implements Serializable {
      * @mbg.generated
      */
     @ApiModelProperty(value = "加密密码")
-    @JsonIgnore
     private String password;
 
     /**
