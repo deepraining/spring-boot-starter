@@ -24,7 +24,6 @@ spring:
     timeout: 300ms # 连接超时时间（毫秒）
 
 logging:
-  # path: /var/logs #配置日志生成路径
   level:
     org.springframework.web: ERROR
     senntyou.sbs: ERROR

@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# lastest jar under libs directory
-APP_NAME=`ls libs/*.jar | tail -n 1`
-# server env, modify it as you like
+# Everytime to update project version, you can copy lastest jar under libs directory
+# to current directory, and name it starter.jar(any name is ok as you like).
+APP_NAME=starter.jar
+# Server env, modify it as you like
 SERVER_ENV=prod
 
 usage() {

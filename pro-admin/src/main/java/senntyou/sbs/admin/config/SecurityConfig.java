@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired(required = false)
   private DynamicSecurityService dynamicSecurityService;
 
-  @Autowired private AdminUserService adminService;
+  @Autowired private AdminUserService userService;
   @Autowired private AdminResourceService resourceService;
 
   @Override
@@ -90,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   public UserDetailsService userDetailsService() {
     // 获取登录用户信息
-    return username -> adminService.loadUserByUsername(username);
+    return username -> userService.loadUserByUsername(username);
   }
 
   @Bean

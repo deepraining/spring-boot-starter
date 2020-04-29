@@ -15,7 +15,7 @@ import senntyou.sbs.mbg.model.AdminResourceExample;
 @Service
 public class AdminResourceServiceImpl implements AdminResourceService {
   @Autowired private AdminResourceMapper resourceMapper;
-  @Autowired private AdminUserCacheService adminCacheService;
+  @Autowired private AdminUserCacheService userCacheService;
 
   @Override
   public int create(AdminResource adminResource) {
@@ -26,7 +26,7 @@ public class AdminResourceServiceImpl implements AdminResourceService {
   public int update(Long id, AdminResource adminResource) {
     adminResource.setId(id);
     int count = resourceMapper.updateByPrimaryKeySelective(adminResource);
-    adminCacheService.delResourceListByResource(id);
+    userCacheService.delResourceListByResource(id);
     return count;
   }
 
@@ -38,7 +38,7 @@ public class AdminResourceServiceImpl implements AdminResourceService {
   @Override
   public int delete(Long id) {
     int count = resourceMapper.deleteByPrimaryKey(id);
-    adminCacheService.delResourceListByResource(id);
+    userCacheService.delResourceListByResource(id);
     return count;
   }
 

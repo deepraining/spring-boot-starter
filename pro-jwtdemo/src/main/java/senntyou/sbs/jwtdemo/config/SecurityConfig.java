@@ -43,15 +43,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(
             HttpMethod.GET,
             "/",
-            "/*.html",
-            "/favicon.ico",
-            "/**/*.html",
+            "/account/login",
+            "/account/register",
+            "/swagger-ui.html",
+            "/swagger-resources/**",
+            "/swagger/**",
+            "/**/v2/api-docs",
             "/**/*.css",
             "/**/*.js",
-            "/swagger-resources/**",
-            "/v2/api-docs/**")
-        .permitAll()
-        .antMatchers("/account/login", "/account/register")
+            "/**/*.png",
+            "/**/*.ico",
+            "/webjars/springfox-swagger-ui/**",
+            "/actuator/**",
+            "/druid/**")
         .permitAll()
         // Every cross origin request will make a OPTIONS request before its real request
         .antMatchers(HttpMethod.OPTIONS)

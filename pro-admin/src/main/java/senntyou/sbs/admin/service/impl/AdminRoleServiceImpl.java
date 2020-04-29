@@ -35,7 +35,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
   @Autowired private AdminRoleResourceRelationMapper roleResourceRelationMapper;
   @Autowired private AdminRolePermissionRelationDao rolePermissionRelationDao;
   @Autowired private AdminRoleDao roleDao;
-  @Autowired private AdminUserCacheService adminCacheService;
+  @Autowired private AdminUserCacheService userCacheService;
 
   @Override
   public int create(AdminRole role) {
@@ -55,7 +55,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     AdminRoleExample example = new AdminRoleExample();
     example.createCriteria().andIdIn(ids);
     int count = roleMapper.deleteByExample(example);
-    adminCacheService.delResourceListByRoleIds(ids);
+    userCacheService.delResourceListByRoleIds(ids);
     return count;
   }
 
@@ -140,7 +140,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
       relation.setResourceId(resourceId);
       roleResourceRelationMapper.insertSelective(relation);
     }
-    adminCacheService.delResourceListByRole(roleId);
+    userCacheService.delResourceListByRole(roleId);
     return resourceIds.size();
   }
 }

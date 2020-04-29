@@ -20,7 +20,8 @@
 - `pro-common`: 通用代码
 - `pro-mbg`: Mybatis Generator
 - `pro-demo`: 使用 Session-Cookie 保持登陆状态的 Demo 应用
-- `pro-jwtdemo`: 使用 JWT 保持登陆状态的 Demo 应用
+- `pro-jwtdemo`: 使用 JWT 保持登陆状态的 Demo 应用，示例前端项目 [sbs-jwtdemo-web](https://github.com/senntyou/sbs-jwtdemo-web)
+- `pro-admin`: 使用 JWT 保持登陆状态的后台管理应用，包括基于角色的访问控制（RBAC），示例前端项目 [sbs-admin-web](https://github.com/senntyou/sbs-admin-web)
 
 ## 扩展 Gradle Tasks
 
@@ -60,7 +61,7 @@ rm -rf .git
 git init
 ```
 
-创建数据库与表结构
+创建数据库与表结构（可以自行修改）
 
 ```
 # 本地环境：默认 flyway.conf 配置文件
@@ -111,8 +112,12 @@ flyway migrate -configFiles=flyway-prod.conf
 ```
 - serverDirName/
   - run.sh              # 你可以按实际需要更改 SERVER_ENV 变量的值
+  - sbs-demo.jar        # 复制 libs 下任一版本的 jar 文件到当前目录为 sbs-demo.jar
+                        # 并修改 run.sh 中的 starter.jar 为 sbs-demo.jar
   - libs　
-    - *.jar
+    - sbs-demo-0.1.0.jar
+    - sbs-demo-0.1.1.jar
+    - ...
 ```
 
 ```

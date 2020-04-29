@@ -42,7 +42,7 @@ logging:
   level:
     org.springframework.web: ERROR
     senntyou.sbs: DEBUG
-  file: ./logs/log.log
+  file: ./logs
 
 jwt:
   tokenHeader: Authorization

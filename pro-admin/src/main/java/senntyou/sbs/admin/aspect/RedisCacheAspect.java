@@ -20,8 +20,7 @@ import senntyou.sbs.admin.annotation.CacheException;
 public class RedisCacheAspect {
   private static Logger LOGGER = LoggerFactory.getLogger(RedisCacheAspect.class);
 
-  @Pointcut(
-      "execution(public * senntyou.sbs.admin.service.*CacheService.*(..)) || execution(public * senntyou.sbs.demo.service.*CacheService.*(..)) || execution(public * senntyou.sbs.jwtdemo.service.*CacheService.*(..))")
+  @Pointcut("execution(public * senntyou.sbs.admin.service.*CacheService.*(..))")
   public void cacheAspect() {}
 
   @Around("cacheAspect()")

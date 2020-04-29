@@ -39,7 +39,7 @@ mybatis:
     - classpath*:senntyou/sbs/mbg/mapper/*.xml
 
 redis:
-  database: starter
+  database: sbsAdmin
   key:
     admin: 'admin'
     resourceList: 'resourceList'
@@ -65,13 +65,12 @@ secure:
       - /admin/register
       - /admin/info
       - /admin/logout
-      - /minio/upload
 
 logging:
   level:
     org.springframework.web: ERROR
     senntyou.sbs: DEBUG
-  file: ./logs/log.log
+  file: ./logs
 
 jwt:
   tokenHeader: Authorization

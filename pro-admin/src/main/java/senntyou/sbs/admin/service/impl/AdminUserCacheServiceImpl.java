@@ -19,10 +19,10 @@ import senntyou.sbs.mbg.model.AdminUserRoleRelationExample;
 /** AdminUserCacheService实现类 */
 @Service
 public class AdminUserCacheServiceImpl implements AdminUserCacheService {
-  @Autowired private AdminUserService adminService;
+  @Autowired private AdminUserService userService;
   @Autowired private RedisService redisService;
-  @Autowired private AdminUserRoleRelationMapper adminRoleRelationMapper;
-  @Autowired private AdminUserRoleRelationDao adminRoleRelationDao;
+  @Autowired private AdminUserRoleRelationMapper userRoleRelationMapper;
+  @Autowired private AdminUserRoleRelationDao userRoleRelationDao;
 
   @Value("${redis.database}")
   private String redisDatabase;
@@ -38,7 +38,7 @@ public class AdminUserCacheServiceImpl implements AdminUserCacheService {
 
   @Override
   public void delUser(Long userId) {
-    AdminUser user = adminService.getItem(userId);
+    AdminUser user = userService.getItem(userId);
     if (user != null) {
       String key = redisDatabase + ":" + redisKeyAdmin + ":" + user.getUsername();
       redisService.del(key);
@@ -55,7 +55,7 @@ public class AdminUserCacheServiceImpl implements AdminUserCacheService {
   public void delResourceListByRole(Long roleId) {
     AdminUserRoleRelationExample example = new AdminUserRoleRelationExample();
     example.createCriteria().andRoleIdEqualTo(roleId);
-    List<AdminUserRoleRelation> relationList = adminRoleRelationMapper.selectByExample(example);
+    List<AdminUserRoleRelation> relationList = userRoleRelationMapper.selectByExample(example);
     if (CollUtil.isNotEmpty(relationList)) {
       String keyPrefix = redisDatabase + ":" + redisKeyResourceList + ":";
       List<String> keys =
@@ -70,7 +70,7 @@ public class AdminUserCacheServiceImpl implements AdminUserCacheService {
   public void delResourceListByRoleIds(List<Long> roleIds) {
     AdminUserRoleRelationExample example = new AdminUserRoleRelationExample();
     example.createCriteria().andRoleIdIn(roleIds);
-    List<AdminUserRoleRelation> relationList = adminRoleRelationMapper.selectByExample(example);
+    List<AdminUserRoleRelation> relationList = userRoleRelationMapper.selectByExample(example);
     if (CollUtil.isNotEmpty(relationList)) {
       String keyPrefix = redisDatabase + ":" + redisKeyResourceList + ":";
       List<String> keys =
@@ -83,7 +83,7 @@ public class AdminUserCacheServiceImpl implements AdminUserCacheService {
 
   @Override
   public void delResourceListByResource(Long resourceId) {
-    List<Long> userIdList = adminRoleRelationDao.getAdminIdList(resourceId);
+    List<Long> userIdList = userRoleRelationDao.getAdminIdList(resourceId);
     if (CollUtil.isNotEmpty(userIdList)) {
       String keyPrefix = redisDatabase + ":" + redisKeyResourceList + ":";
       List<String> keys =

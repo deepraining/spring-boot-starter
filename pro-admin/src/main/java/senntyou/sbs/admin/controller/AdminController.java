@@ -30,16 +30,16 @@ import senntyou.sbs.mbg.model.AdminUser;
 
 /** 后台用户管理 */
 @Controller
-@Api(tags = "AdminUserController", description = "后台用户管理")
+@Api(tags = "AdminController", description = "后台用户管理")
 @RequestMapping("/admin")
-public class UserController {
+public class AdminController {
   @Value("${jwt.tokenHeader}")
   private String tokenHeader;
 
   @Value("${jwt.tokenHead}")
   private String tokenHead;
 
-  @Autowired private AdminUserService adminService;
+  @Autowired private AdminUserService userService;
   @Autowired private AdminRoleService roleService;
 
   @ApiOperation(value = "用户注册")
@@ -47,7 +47,7 @@ public class UserController {
   @ResponseBody
   public CommonResult<AdminUser> register(
       @RequestBody AdminUserParam adminUserParam, BindingResult result) {
-    AdminUser adminUser = adminService.register(adminUserParam);
+    AdminUser adminUser = userService.register(adminUserParam);
     if (adminUser == null) {
       CommonResult.failed();
     }
@@ -58,7 +58,7 @@ public class UserController {
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult login(@RequestBody AdminLoginParam adminLoginParam, BindingResult result) {
-    String token = adminService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword());
+    String token = userService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword());
     if (token == null) {
       return CommonResult.validateFailed("用户名或密码错误");
     }
@@ -73,7 +73,7 @@ public class UserController {
   @ResponseBody
   public CommonResult refreshToken(HttpServletRequest request) {
     String token = request.getHeader(tokenHeader);
-    String refreshToken = adminService.refreshToken(token);
+    String refreshToken = userService.refreshToken(token);
     if (refreshToken == null) {
       return CommonResult.failed("token已经过期！");
     }
@@ -91,12 +91,12 @@ public class UserController {
       return CommonResult.unauthorized(null);
     }
     String username = principal.getName();
-    AdminUser adminUser = adminService.getUserByUsername(username);
+    AdminUser adminUser = userService.getUserByUsername(username);
     Map<String, Object> data = new HashMap<>();
     data.put("username", adminUser.getUsername());
     data.put("roles", new String[] {"NONE"});
     data.put("menus", roleService.getMenuList(adminUser.getId()));
-    data.put("icon", adminUser.getAvatar());
+    data.put("avatar", adminUser.getAvatar());
     return CommonResult.success(data);
   }
 
@@ -114,7 +114,7 @@ public class UserController {
       @RequestParam(value = "keyword", required = false) String keyword,
       @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-    List<AdminUser> adminList = adminService.list(keyword, pageSize, pageNum);
+    List<AdminUser> adminList = userService.list(keyword, pageSize, pageNum);
     return CommonResult.success(CommonPage.toPage(adminList));
   }
 
@@ -122,7 +122,7 @@ public class UserController {
   @RequestMapping(value = "/{id}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<AdminUser> getItem(@PathVariable Long id) {
-    AdminUser adminUser = adminService.getItem(id);
+    AdminUser adminUser = userService.getItem(id);
     return CommonResult.success(adminUser);
   }
 
@@ -130,7 +130,7 @@ public class UserController {
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult update(@PathVariable Long id, @RequestBody AdminUser adminUser) {
-    int count = adminService.update(id, adminUser);
+    int count = userService.update(id, adminUser);
     if (count > 0) {
       return CommonResult.success(count);
     }
@@ -142,7 +142,7 @@ public class UserController {
   @ResponseBody
   public CommonResult updatePassword(
       @RequestBody UpdateAdminUserPasswordParam updatePasswordParam) {
-    int status = adminService.updatePassword(updatePasswordParam);
+    int status = userService.updatePassword(updatePasswordParam);
     if (status > 0) {
       return CommonResult.success(status);
     } else if (status == -1) {
@@ -160,7 +160,7 @@ public class UserController {
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult delete(@PathVariable Long id) {
-    int count = adminService.delete(id);
+    int count = userService.delete(id);
     if (count > 0) {
       return CommonResult.success(count);
     }
@@ -174,7 +174,7 @@ public class UserController {
       @PathVariable Long id, @RequestParam(value = "status") Integer status) {
     AdminUser adminUser = new AdminUser();
     adminUser.setStatus(status);
-    int count = adminService.update(id, adminUser);
+    int count = userService.update(id, adminUser);
     if (count > 0) {
       return CommonResult.success(count);
     }
@@ -186,7 +186,7 @@ public class UserController {
   @ResponseBody
   public CommonResult updateRole(
       @RequestParam("userId") Long userId, @RequestParam("roleIds") List<Long> roleIds) {
-    int count = adminService.updateRole(userId, roleIds);
+    int count = userService.updateRole(userId, roleIds);
     if (count >= 0) {
       return CommonResult.success(count);
     }
@@ -197,7 +197,7 @@ public class UserController {
   @RequestMapping(value = "/role/{userId}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<List<AdminRole>> getRoleList(@PathVariable Long userId) {
-    List<AdminRole> roleList = adminService.getRoleList(userId);
+    List<AdminRole> roleList = userService.getRoleList(userId);
     return CommonResult.success(roleList);
   }
 
@@ -206,7 +206,7 @@ public class UserController {
   @ResponseBody
   public CommonResult updatePermission(
       @RequestParam Long userId, @RequestParam("permissionIds") List<Long> permissionIds) {
-    int count = adminService.updatePermission(userId, permissionIds);
+    int count = userService.updatePermission(userId, permissionIds);
     if (count > 0) {
       return CommonResult.success(count);
     }
@@ -217,7 +217,7 @@ public class UserController {
   @RequestMapping(value = "/permission/{userId}", method = RequestMethod.GET)
   @ResponseBody
   public CommonResult<List<AdminPermission>> getPermissionList(@PathVariable Long userId) {
-    List<AdminPermission> permissionList = adminService.getPermissionList(userId);
+    List<AdminPermission> permissionList = userService.getPermissionList(userId);
     return CommonResult.success(permissionList);
   }
 }
