@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 import senntyou.sbs.common.bo.WebLog;
 import senntyou.sbs.common.util.JsonUtil;
 import senntyou.sbs.common.util.RequestUtil;
@@ -106,7 +107,11 @@ public class WebLogAspect {
         if (!StringUtils.isEmpty(requestParam.value())) {
           key = requestParam.value();
         }
-        map.put(key, args[i]);
+        if (args[i] instanceof MultipartFile) {
+          map.put(key, ((MultipartFile) args[i]).getOriginalFilename());
+        } else {
+          map.put(key, args[i]);
+        }
         argList.add(map);
       }
     }
