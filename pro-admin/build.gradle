@@ -4,7 +4,8 @@ plugins {
 }
 
 group = 'senntyou.sbs'
-version = '0.1.0'
+// version should not have '-'
+version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
 archivesBaseName = 'sbs-admin'
 sourceCompatibility = 1.8
 description = 'Spring Boot Starter Admin Application.'

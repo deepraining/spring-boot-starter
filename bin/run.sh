@@ -2,12 +2,13 @@
 
 # Everytime to update project version, you can copy lastest jar under libs directory
 # to current directory, and name it starter.jar(any name is ok as you like).
-APP_NAME=starter.jar
+FILE_NAME=starter
+APP_NAME="${FILE_NAME}.jar"
 # Server env, modify it as you like
 SERVER_ENV=prod
 
 usage() {
-  echo "Usage: sh $0 [start|stop|restart|status]"
+  echo "Usage: sh $0 [start|stop|restart|status|version]"
   exit 1
 }
 
@@ -49,6 +50,37 @@ status(){
   fi
 }
 
+version(){
+  fileSize=`du -k $APP_NAME|awk '{print $1}'`
+  if [ -z "$fileSize" ]; then
+    return 1;
+  fi
+
+  jarFiles=`du -k libs/${FILE_NAME}-*.jar`
+  if [ -z "$jarFiles" ]; then
+    return 1;
+  fi
+
+  lastItem=""
+  findItem=""
+  for item in $jarFiles
+  do
+    if [ "$lastItem" = "$fileSize" ]; then
+      findItem=$item
+    fi
+    lastItem=$item
+  done
+
+  if [ -z "$findItem" ]; then
+    echo "Version not detected."
+    return 1
+  fi
+
+  tempStr=${findItem##*-}
+  v=${tempStr%%.jar}
+  echo $v
+}
+
 restart(){
   stop
   start
@@ -63,6 +95,9 @@ case "$1" in
     ;;
   "status")
     status
+    ;;
+  "version")
+    version
     ;;
   "restart")
     restart

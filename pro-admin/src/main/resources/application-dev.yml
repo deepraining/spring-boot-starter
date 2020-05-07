@@ -25,4 +25,7 @@ spring:
 
   thymeleaf:
     cache: false
-    prefix: classpath:/static/build/
+    prefix: file:../../sbs-admin-web/build/
+
+  resources:
+    static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, file:../../sbs-admin-web/

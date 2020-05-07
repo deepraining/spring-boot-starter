@@ -115,8 +115,8 @@ flyway migrate -configFiles=flyway-prod.conf
   - sbs-demo.jar        # 复制 libs 下任一版本的 jar 文件到当前目录为 sbs-demo.jar
                         # 并修改 run.sh 中的 starter.jar 为 sbs-demo.jar
   - libs　
-    - sbs-demo-0.1.0.jar
-    - sbs-demo-0.1.1.jar
+    - sbs-demo-2020.0501.1001.jar
+    - sbs-demo-2020.0501.1101.jar
     - ...
 ```
 

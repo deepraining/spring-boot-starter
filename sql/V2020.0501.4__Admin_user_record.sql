@@ -2,29 +2,19 @@
 -- 这个文件中的数据可以根据实际情况修改
 -- ----------------------------
 
-
 -- ----------------------------
 -- Records of admin_user
--- ----------------------------
-
--- ----------------------------
--- 方法一
 --
--- 通过 /admin/register 接口，依次注册下面3个用户（可以自己设定密码，可以用 postman 操作）
+-- 通过 /admin/register 接口，依次注册下面3个用户（可以自己设定密码，可以用 postman 或浏览器操作）
 -- username: manager, password: starter123456, nickname: 管理员
 -- username: productManager, password: starter123456, nickname: 商品管理员
 -- username: orderManager, password: starter123456, nickname: 订单管理员
 --
--- 然后更新他们的id
+-- 然后更新他们的id（如果不是下面的id）
 -- UPDATE `admin_user` set id=1 WHERE username='manager';
 -- UPDATE `admin_user` set id=2 WHERE username='productManager';
 -- UPDATE `admin_user` set id=3 WHERE username='orderManager';
 -- ----------------------------
-
--- 方法二：打开下面的注释
-INSERT INTO `admin_user` VALUES ('1', 'manager', '$2y$12$3C4Rqr0Hph4woy4zEXICdeunwsR/nCsfSGSF49bX4/T603Byvr2q2', null , null , '管理员', null, null, '1', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_user` VALUES ('2', 'productManager', '$2y$12$3C4Rqr0Hph4woy4zEXICdeunwsR/nCsfSGSF49bX4/T603Byvr2q2', null , null , '商品管理员', null, null, '1', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_user` VALUES ('3', 'orderManager', '$2y$12$3C4Rqr0Hph4woy4zEXICdeunwsR/nCsfSGSF49bX4/T603Byvr2q2', null , null , '订单管理员', null, null, '1', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 
 -- ----------------------------
 -- Records of admin_role
