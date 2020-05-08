@@ -25,7 +25,10 @@ spring:
 
   thymeleaf:
     cache: false
-    prefix: file:../../sbs-admin-web/build/
+    # run `npm run build` under project `sbs-admin-web` to generate `build` folder
+    # prefix: file:../../sbs-admin-web/build/
+    # run `npm run dev:disk` under project `sbs-admin-web` to generate `dev` folder
+    prefix: file:../../sbs-admin-web/dev/
 
   resources:
     static-locations: classpath:/META-INF/resources/, classpath:/resources/, classpath:/static/, classpath:/public/, file:../../sbs-admin-web/
