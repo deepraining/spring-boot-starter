@@ -134,10 +134,10 @@ INSERT INTO `admin_resource` VALUES ('22', '首页专题推荐管理', '/home/re
 INSERT INTO `admin_resource` VALUES ('23', '商品优选管理', '/prefrenceArea/**', '', '5', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 INSERT INTO `admin_resource` VALUES ('24', '商品专题管理', '/subject/**', '', '5', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 INSERT INTO `admin_resource` VALUES ('25', '后台用户管理', '/admin/**', '', '4', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_resource` VALUES ('26', '后台用户角色管理', '/role/**', '', '4', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_resource` VALUES ('27', '后台菜单管理', '/menu/**', '', '4', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_resource` VALUES ('28', '后台资源分类管理', '/resourceCategory/**', '', '4', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_resource` VALUES ('29', '后台资源管理', '/resource/**', '', '4', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_resource` VALUES ('26', '后台用户角色管理', '/adminRole/**', '', '4', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_resource` VALUES ('27', '后台菜单管理', '/adminMenu/**', '', '4', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_resource` VALUES ('28', '后台资源分类管理', '/adminResourceCategory/**', '', '4', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_resource` VALUES ('29', '后台资源管理', '/adminResource/**', '', '4', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 
 -- ----------------------------
 -- Records of admin_resource_category

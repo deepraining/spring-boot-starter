@@ -20,8 +20,8 @@ import senntyou.sbs.mbg.model.AdminMenu;
 /** 后台菜单管理Controller */
 @Controller
 @Api(tags = "AdminMenuController", description = "后台菜单管理")
-@RequestMapping("/menu")
-public class MenuController {
+@RequestMapping("/adminMenu")
+public class AdminMenuController {
 
   @Autowired private AdminMenuService menuService;
 

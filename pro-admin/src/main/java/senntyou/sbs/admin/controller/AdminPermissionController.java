@@ -19,8 +19,8 @@ import senntyou.sbs.mbg.model.AdminPermission;
 /** 后台用户权限管理 */
 @Controller
 @Api(tags = "AdminPermissionController", description = "后台用户权限管理")
-@RequestMapping("/permission")
-public class PermissionController {
+@RequestMapping("/adminPermission")
+public class AdminPermissionController {
   @Autowired private AdminPermissionService permissionService;
 
   @ApiOperation("添加权限")

@@ -22,8 +22,8 @@ import senntyou.sbs.mbg.model.AdminRole;
 /** 后台用户角色管理 */
 @Controller
 @Api(tags = "AdminRoleController", description = "后台用户角色管理")
-@RequestMapping("/role")
-public class RoleController {
+@RequestMapping("/adminRole")
+public class AdminRoleController {
   @Autowired private AdminRoleService roleService;
 
   @ApiOperation("添加角色")

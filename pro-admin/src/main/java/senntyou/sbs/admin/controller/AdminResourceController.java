@@ -20,8 +20,8 @@ import senntyou.sbs.mbg.model.AdminResource;
 /** 后台资源管理Controller */
 @Controller
 @Api(tags = "AdminResourceController", description = "后台资源管理")
-@RequestMapping("/resource")
-public class ResourceController {
+@RequestMapping("/adminResource")
+public class AdminResourceController {
 
   @Autowired private AdminResourceService resourceService;
   @Autowired private DynamicSecurityMetadataSource dynamicSecurityMetadataSource;

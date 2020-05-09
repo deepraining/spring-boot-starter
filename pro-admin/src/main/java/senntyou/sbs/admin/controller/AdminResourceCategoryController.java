@@ -17,8 +17,8 @@ import senntyou.sbs.mbg.model.AdminResourceCategory;
 /** 后台资源分类管理Controller */
 @Controller
 @Api(tags = "AdminResourceCategoryController", description = "后台资源分类管理")
-@RequestMapping("/resourceCategory")
-public class ResourceCategoryController {
+@RequestMapping("/adminResourceCategory")
+public class AdminResourceCategoryController {
   @Autowired private AdminResourceCategoryService resourceCategoryService;
 
   @ApiOperation("查询所有后台资源分类")
