@@ -102,10 +102,10 @@ INSERT INTO `admin_menu` VALUES ('18', '12', '人气推荐', '1', '0', 'homeHot'
 INSERT INTO `admin_menu` VALUES ('19', '12', '专题推荐', '1', '0', 'homeSubject', 'sms-subject', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 INSERT INTO `admin_menu` VALUES ('20', '12', '广告列表', '1', '0', 'homeAdvertise', 'sms-ad', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 INSERT INTO `admin_menu` VALUES ('21', '0', '权限', '0', '0', 'ums', 'ums', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_menu` VALUES ('22', '21', '用户列表', '1', '0', 'admin', 'ums-admin', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_menu` VALUES ('23', '21', '角色列表', '1', '0', 'role', 'ums-role', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_menu` VALUES ('24', '21', '菜单列表', '1', '0', 'menu', 'ums-menu', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_menu` VALUES ('25', '21', '资源列表', '1', '0', 'resource', 'ums-resource', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_menu` VALUES ('22', '21', '用户列表', '1', '0', 'umsAdmin', 'ums-admin', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_menu` VALUES ('23', '21', '角色列表', '1', '0', 'umsRole', 'ums-role', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_menu` VALUES ('24', '21', '菜单列表', '1', '0', 'umsMenu', 'ums-menu', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_menu` VALUES ('25', '21', '资源列表', '1', '0', 'umsResource', 'ums-resource', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 
 -- ----------------------------
 -- Records of admin_resource
