@@ -129,7 +129,10 @@ task checkJava(type: Checkstyle) {
   }
 }
 
-// Copy git pre-commit hook
-if (FileUtil.exist('.git') && !FileUtil.exist('.git/hooks/pre-commit')) {
-  FileUtil.copyFile('config/hooks/pre-commit-stub', '.git/hooks/pre-commit');
+try {
+  // Copy git pre-commit hook
+  if (FileUtil.exist('.git') && !FileUtil.exist('.git/hooks/pre-commit')) {
+    FileUtil.copyFile('config/hooks/pre-commit-stub', '.git/hooks/pre-commit');
+  }
 }
+catch (e) {}
