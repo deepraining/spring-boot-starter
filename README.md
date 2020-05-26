@@ -107,13 +107,12 @@ flyway migrate -configFiles=flyway-prod.conf
 
 在服务器上，找个合适的地方创建 `serverDirName` 目录
 
-把本地 `pro-demo/build/libs/*.jar, bin/run.sh` 上传到 `serverDirName` 目录
+把本地 `pro-demo/build/libs/*.jar, bin/*.sh` 上传到 `serverDirName` 目录，并按实际需要修改 `run.sh, rerun.sh` 中 SERVER_ENV 与 FILE_NAME 变量的值
 
 ```
 - serverDirName/
-  - run.sh              # 你可以按实际需要更改 SERVER_ENV 变量的值
-  - sbs-demo.jar        # 复制 libs 下任一版本的 jar 文件到当前目录为 sbs-demo.jar
-                        # 并修改 run.sh 中的 starter.jar 为 sbs-demo.jar
+  - run.sh              # 运行、停止、重启、查看程序
+  - rerun.sh            # 运行最新版本的 jar 文件
   - libs　
     - sbs-demo-2020.0501.1001.jar
     - sbs-demo-2020.0501.1101.jar
@@ -127,6 +126,7 @@ sh run.sh start        # 运行程序
 sh run.sh stop         # 停止程序
 sh run.sh restart      # 重启程序
 sh run.sh status       # 查看程序状态
+sh run.sh version      # 查看程序版本
 ```
 
 ## 前端与后端分开部署(html 文件不打包进 jar 文件)
