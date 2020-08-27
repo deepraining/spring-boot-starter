@@ -4,6 +4,8 @@
 # [index]: 运行最近的第几个jar文件，默认是1
 FILE_NAME=starter
 APP_NAME="${FILE_NAME}.jar"
+# 版本文件
+VERSION_FILE='version.txt'
 
 index=0
 if [ -z $1 ]; then
@@ -31,6 +33,11 @@ main(){
 
   echo "sh: cp ${jarFile} ${APP_NAME}"
   cp $jarFile $APP_NAME
+
+  # save current version
+  tempStr=${jarFile##*-}
+  version=${tempStr%%.jar}
+  echo $version > $VERSION_FILE
 
   echo 'sh: sh run.sh restart'
   sh run.sh restart
