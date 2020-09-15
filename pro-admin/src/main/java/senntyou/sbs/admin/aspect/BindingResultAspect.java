@@ -10,7 +10,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import senntyou.sbs.common.CommonResult;
 
-/** global error handling aspect */
+/**
+ * global error handling aspect
+ *
+ * <p>note: `controller`的方法里，用`@Validated`标记需要验证的参数，最后面要有`BindingResult bindingResult`参数，才能生效
+ */
 @Aspect
 @Component
 @Order(2)
