@@ -21,6 +21,10 @@ public class CommentGenerator extends DefaultCommentGenerator {
   private static final String JSON_IGNORE_FULL_CLASS_NAME =
       "com.fasterxml.jackson.annotation.JsonIgnore";
 
+  // to generate position of @ApiModelProperty
+  private String currentTable;
+  private int fieldIndex = 1;
+
   @Override
   public void addConfigurationProperties(Properties properties) {
     super.addConfigurationProperties(properties);
@@ -36,6 +40,14 @@ public class CommentGenerator extends DefaultCommentGenerator {
       Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
     String remarks = introspectedColumn.getRemarks();
 
+    String table = introspectedTable.getFullyQualifiedTable().toString();
+    if (!table.equals(currentTable)) {
+      currentTable = table;
+      fieldIndex = 1;
+    } else {
+      fieldIndex += 1;
+    }
+
     if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
       addFieldJavaDoc(field, remarks);
 
@@ -43,7 +55,8 @@ public class CommentGenerator extends DefaultCommentGenerator {
         remarks = remarks.replace("\"", "'");
       }
 
-      field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
+      field.addJavaDocLine(
+          "@ApiModelProperty(value = \"" + remarks + "\", position = " + fieldIndex + ")");
     }
 
     if (ignoreFields != null && ignoreFields.length > 0) {
