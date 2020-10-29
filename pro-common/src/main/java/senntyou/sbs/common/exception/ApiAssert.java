@@ -3,7 +3,7 @@ package senntyou.sbs.common.exception;
 import senntyou.sbs.common.IErrorCode;
 
 // 断言处理类，用于抛出各种API异常
-public class Asserts {
+public class ApiAssert {
   public static void fail(String message) {
     throw new ApiException(message);
   }
