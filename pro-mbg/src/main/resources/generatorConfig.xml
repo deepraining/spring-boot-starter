@@ -6,6 +6,7 @@
 <generatorConfiguration>
   <properties resource="generator.properties"/>
   <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+    <property name="autoDelimitKeywords" value="true"/>
     <property name="beginningDelimiter" value="`"/>
     <property name="endingDelimiter" value="`"/>
     <property name="javaFileEncoding" value="UTF-8"/>
@@ -38,7 +39,7 @@
     <javaClientGenerator type="XMLMAPPER" targetPackage="senntyou.sbs.mbg.mapper"
                          targetProject="src/main/java"/>
 
-    <table tableName="%">
+    <table tableName="%" delimitIdentifiers="true">
       <!-- to insert id by snowflake, not by auto_increment of mysql -->
       <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
     </table>
