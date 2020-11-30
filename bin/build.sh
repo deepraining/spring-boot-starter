@@ -17,6 +17,7 @@ main(){
   cd ${BUILD_DIR}
 
   # execute script
+  chmod +x gradlew
   echo "sh: ./gradlew ${PROJECT_NAME}:build"
   ./gradlew ${PROJECT_NAME}:build
 
