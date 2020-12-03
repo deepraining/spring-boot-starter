@@ -70,8 +70,10 @@ public class AdminUserServiceImpl implements AdminUserService {
     List<AdminUser> adminList = userMapper.selectByExample(example);
     if (adminList != null && adminList.size() > 0) {
       adminUser = adminList.get(0);
-      userCacheService.setUser(adminUser);
-      return adminUser;
+      if (adminUser.getStatus() == 1) {
+        userCacheService.setUser(adminUser);
+        return adminUser;
+      }
     }
     return null;
   }
@@ -179,6 +181,8 @@ public class AdminUserServiceImpl implements AdminUserService {
         adminUser.setPassword(passwordEncoder.encode(adminUser.getPassword()));
       }
     }
+    // 账户名不能更改
+    adminUser.setUsername(null);
     int count = userMapper.updateByPrimaryKeySelective(adminUser);
     userCacheService.delUser(id);
     return count;
