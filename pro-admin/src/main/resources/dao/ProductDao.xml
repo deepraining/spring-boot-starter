@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="senntyou.sbs.admin.dao.ProductDao">
-  <resultMap id="updateInfoMap" type="senntyou.sbs.admin.dto.ProductResult"
-             extends="senntyou.sbs.mbg.mapper.ProductMapper.ResultMapWithBLOBs">
+<mapper namespace="dr.sbs.admin.dao.ProductDao">
+  <resultMap id="updateInfoMap" type="dr.sbs.admin.dto.ProductResult"
+             extends="dr.sbs.mbg.mapper.ProductMapper.ResultMapWithBLOBs">
     <result column="cateParentId" jdbcType="BIGINT" property="cateParentId"/>
     <collection property="productAttributeValueList" columnPrefix="attribute_"
-                resultMap="senntyou.sbs.mbg.mapper.ProductAttributeValueMapper.BaseResultMap">
+                resultMap="dr.sbs.mbg.mapper.ProductAttributeValueMapper.BaseResultMap">
     </collection>
   </resultMap>
 

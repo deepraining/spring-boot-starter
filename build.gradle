@@ -95,8 +95,8 @@ subprojects {
   }
 }
 
-def mbgMapperExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/mapper/'
-def mbgModelExcludePath = 'pro-mbg/src/main/java/senntyou/sbs/mbg/model/'
+def mbgMapperExcludePath = 'pro-mbg/src/main/java/dr/sbs/mbg/mapper/'
+def mbgModelExcludePath = 'pro-mbg/src/main/java/dr/sbs/mbg/model/'
 
 googleJavaFormat {
   toolVersion = "1.7"

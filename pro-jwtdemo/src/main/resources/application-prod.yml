@@ -19,4 +19,4 @@ spring:
 logging:
   level:
     org.springframework.web: ERROR
-    senntyou.sbs: ERROR
+    dr.sbs: ERROR

@@ -3,14 +3,14 @@ plugins {
   id "io.spring.dependency-management"
 }
 
-group = 'senntyou.sbs'
+group = 'dr.sbs'
 // version should not have '-'
 version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
 archivesBaseName = 'sbs-admin'
 sourceCompatibility = 1.8
 description = 'Spring Boot Starter Admin Application.'
 
-mainClassName = 'senntyou.sbs.admin.App'
+mainClassName = 'dr.sbs.admin.App'
 
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-security:2.1.4.RELEASE'

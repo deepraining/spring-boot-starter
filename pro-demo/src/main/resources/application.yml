@@ -36,12 +36,12 @@ spring:
 mybatis:
   mapper-locations:
     - classpath:dao/**/*.xml
-    - classpath*:senntyou/sbs/mbg/mapper/*.xml
+    - classpath*:dr/sbs/mbg/mapper/*.xml
 
 logging:
   level:
     org.springframework.web: ERROR
-    senntyou.sbs: DEBUG
+    dr.sbs: DEBUG
   file: ./logs
 
 app:

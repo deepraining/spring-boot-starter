@@ -20,8 +20,8 @@
 - `pro-common`: 通用代码
 - `pro-mbg`: Mybatis Generator
 - `pro-demo`: 使用 Session-Cookie 保持登陆状态的 Demo 应用
-- `pro-jwtdemo`: 使用 JWT 保持登陆状态的 Demo 应用，示例前端项目 [sbs-jwtdemo-web](https://github.com/senntyou/sbs-jwtdemo-web)
-- `pro-admin`: 使用 JWT 保持登陆状态的后台管理应用，包括基于角色的访问控制（RBAC），示例前端项目 [sbs-admin-web](https://github.com/senntyou/sbs-admin-web)
+- `pro-jwtdemo`: 使用 JWT 保持登陆状态的 Demo 应用，示例前端项目 [sbs-jwtdemo-web](https://github.com/deepraining/sbs-jwtdemo-web)
+- `pro-admin`: 使用 JWT 保持登陆状态的后台管理应用，包括基于角色的访问控制（RBAC），示例前端项目 [sbs-admin-web](https://github.com/deepraining/sbs-admin-web)
 
 ## 扩展 Gradle Tasks
 
@@ -48,7 +48,7 @@
 克隆代码，然后根据需要调整项目与代码
 
 ```
-git clone https://github.com/senntyou/spring-boot-starter.git yourProName --depth=1
+git clone https://github.com/deepraining/spring-boot-starter.git yourProName --depth=1
 
 cd yourProName
 ```

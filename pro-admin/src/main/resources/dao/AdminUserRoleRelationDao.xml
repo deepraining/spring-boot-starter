@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="senntyou.sbs.admin.dao.AdminUserRoleRelationDao">
+<mapper namespace="dr.sbs.admin.dao.AdminUserRoleRelationDao">
   <!--批量新增回写主键支持-->
   <insert id="insertList">
     INSERT INTO admin_user_role_relation (user_id, role_id) VALUES
@@ -10,13 +10,13 @@
       #{item.roleId,jdbcType=BIGINT})
     </foreach>
   </insert>
-  <select id="getRoleList" resultMap="senntyou.sbs.mbg.mapper.AdminRoleMapper.BaseResultMap">
+  <select id="getRoleList" resultMap="dr.sbs.mbg.mapper.AdminRoleMapper.BaseResultMap">
     select r.*
     from admin_user_role_relation ar left join admin_role r on ar.role_id = r.id
     where ar.user_id = #{userId}
   </select>
   <select id="getRolePermissionList"
-          resultMap="senntyou.sbs.mbg.mapper.AdminPermissionMapper.BaseResultMap">
+          resultMap="dr.sbs.mbg.mapper.AdminPermissionMapper.BaseResultMap">
     select p.*
     from admin_user_role_relation ar left join admin_role r on ar.role_id = r.id
       left join admin_role_permission_relation rp on r.id = rp.role_id
@@ -24,7 +24,7 @@
       where ar.user_id = #{userId} and p.id is not null
   </select>
   <select id="getPermissionList"
-          resultMap="senntyou.sbs.mbg.mapper.AdminPermissionMapper.BaseResultMap">
+          resultMap="dr.sbs.mbg.mapper.AdminPermissionMapper.BaseResultMap">
     SELECT
       p.*
     FROM
@@ -55,7 +55,7 @@
       pr.type = 1
       AND pr.user_id = #{userId}
   </select>
-  <select id="getResourceList" resultType="senntyou.sbs.mbg.model.AdminResource">
+  <select id="getResourceList" resultType="dr.sbs.mbg.model.AdminResource">
     SELECT
       ur.id id,
       ur.create_time createTime,

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="senntyou.sbs.admin.dao.ProductCategoryDao">
-  <resultMap id="listWithChildrenMap" type="senntyou.sbs.admin.dto.ProductCategoryWithChildrenItem"
-             extends="senntyou.sbs.mbg.mapper.ProductCategoryMapper.BaseResultMap">
+<mapper namespace="dr.sbs.admin.dao.ProductCategoryDao">
+  <resultMap id="listWithChildrenMap" type="dr.sbs.admin.dto.ProductCategoryWithChildrenItem"
+             extends="dr.sbs.mbg.mapper.ProductCategoryMapper.BaseResultMap">
     <collection property="children"
-                resultMap="senntyou.sbs.mbg.mapper.ProductCategoryMapper.BaseResultMap"
+                resultMap="dr.sbs.mbg.mapper.ProductCategoryMapper.BaseResultMap"
                 columnPrefix="child_"></collection>
   </resultMap>
   <select id="listWithChildren" resultMap="listWithChildrenMap">

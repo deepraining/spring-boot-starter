@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="senntyou.sbs.demo.dao.ArticleDao">
-  <resultMap id="recordMap" type="senntyou.sbs.mbg.model.Article"
-             extends="senntyou.sbs.mbg.mapper.ArticleMapper.ResultMapWithBLOBs">
+<mapper namespace="ArticleDao">
+  <resultMap id="recordMap" type="dr.sbs.mbg.model.Article"
+             extends="dr.sbs.mbg.mapper.ArticleMapper.ResultMapWithBLOBs">
   </resultMap>
 
   <select id="getRecord" resultMap="recordMap">

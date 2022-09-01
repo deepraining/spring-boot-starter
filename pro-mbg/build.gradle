@@ -1,11 +1,11 @@
-group = 'senntyou.sbs'
+group = 'dr.sbs'
 // version should not have '-'
 version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
 archivesBaseName = 'mbg'
 sourceCompatibility = 1.8
 description = 'Spring Boot Starter Mybatis Generator Application.'
 
-mainClassName = 'senntyou.sbs.mbg.Generator'
+mainClassName = 'dr.sbs.mbg.Generator'
 
 dependencies {
   implementation 'org.mybatis.generator:mybatis-generator-core:1.3.7'
