@@ -38,14 +38,6 @@ mybatis:
     - classpath:dao/**/*.xml
     - classpath*:senntyou/sbs/mbg/mapper/*.xml
 
-redis:
-  database: sbsAdmin
-  key:
-    admin: 'admin'
-    resourceList: 'resourceList'
-  expire:
-    common: 86400 # 24小时
-
 secure:
   ignored:
     urls: # 安全路径白名单

@@ -7,7 +7,7 @@ import senntyou.sbs.mbg.model.AdminResource;
 
 /** 后台用户角色自定义Dao */
 public interface AdminRoleDao {
-  List<AdminMenu> getMenuList(@Param("userId") Long userId);
+  List<AdminMenu> getMenuListByUserId(@Param("userId") Long userId);
 
   List<AdminMenu> getMenuListByRoleId(@Param("roleId") Long roleId);
 

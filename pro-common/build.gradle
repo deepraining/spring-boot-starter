@@ -1,1 +1,10 @@
+group = 'senntyou.sbs'
+// version should not have '-'
+version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
+archivesBaseName = 'common'
+sourceCompatibility = 1.8
+description = 'Spring Boot Starter Common Lib.'
+
+mainClassName = 'senntyou.sbs.common.App'
+
 dependencies {}

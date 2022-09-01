@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import senntyou.sbs.admin.dto.AdminLoginParam;
 import senntyou.sbs.admin.dto.AdminUserParam;
 import senntyou.sbs.admin.dto.UpdateAdminUserPasswordParam;
-import senntyou.sbs.admin.service.AdminRoleService;
 import senntyou.sbs.admin.service.AdminUserService;
 import senntyou.sbs.common.CommonPage;
 import senntyou.sbs.common.CommonResult;
@@ -40,7 +39,6 @@ public class AdminController {
   private String tokenHead;
 
   @Autowired private AdminUserService userService;
-  @Autowired private AdminRoleService roleService;
 
   @ApiOperation(value = "用户注册")
   @RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -95,7 +93,7 @@ public class AdminController {
     Map<String, Object> data = new HashMap<>();
     data.put("username", adminUser.getUsername());
     data.put("roles", new String[] {"NONE"});
-    data.put("menus", roleService.getMenuList(adminUser.getId()));
+    data.put("menus", userService.getMenuList(adminUser.getId()));
     data.put("avatar", adminUser.getAvatar());
     return CommonResult.success(data);
   }

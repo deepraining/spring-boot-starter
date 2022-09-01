@@ -43,7 +43,7 @@ public class AdminPermissionServiceImpl implements AdminPermissionService {
     List<AdminPermissionNode> result =
         permissionList.stream()
             .filter(permission -> permission.getParentId().equals(0L))
-            .map(permission -> covert(permission, permissionList))
+            .map(permission -> convertPermissionNode(permission, permissionList))
             .collect(Collectors.toList());
     return result;
   }
@@ -53,15 +53,15 @@ public class AdminPermissionServiceImpl implements AdminPermissionService {
     return permissionMapper.selectByExample(new AdminPermissionExample());
   }
 
-  /** 将权限转换为带有子级的权限对象 当找不到子级权限的时候map操作不会再递归调用covert */
-  private AdminPermissionNode covert(
+  /** 将权限转换为带有子级的权限对象 当找不到子级权限的时候map操作不会再递归调用convertPermissionNode */
+  private AdminPermissionNode convertPermissionNode(
       AdminPermission permission, List<AdminPermission> permissionList) {
     AdminPermissionNode node = new AdminPermissionNode();
     BeanUtils.copyProperties(permission, node);
     List<AdminPermissionNode> children =
         permissionList.stream()
             .filter(subPermission -> subPermission.getParentId().equals(permission.getId()))
-            .map(subPermission -> covert(subPermission, permissionList))
+            .map(subPermission -> convertPermissionNode(subPermission, permissionList))
             .collect(Collectors.toList());
     node.setChildren(children);
     return node;

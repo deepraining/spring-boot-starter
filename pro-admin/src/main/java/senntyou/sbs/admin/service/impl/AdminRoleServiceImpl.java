@@ -97,11 +97,6 @@ public class AdminRoleServiceImpl implements AdminRoleService {
   }
 
   @Override
-  public List<AdminMenu> getMenuList(Long userId) {
-    return roleDao.getMenuList(userId);
-  }
-
-  @Override
   public List<AdminMenu> listMenu(Long roleId) {
     return roleDao.getMenuListByRoleId(roleId);
   }

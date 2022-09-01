@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 import senntyou.sbs.admin.dto.AdminUserParam;
 import senntyou.sbs.admin.dto.UpdateAdminUserPasswordParam;
+import senntyou.sbs.mbg.model.AdminMenu;
 import senntyou.sbs.mbg.model.AdminPermission;
 import senntyou.sbs.mbg.model.AdminResource;
 import senntyou.sbs.mbg.model.AdminRole;
@@ -55,6 +56,9 @@ public interface AdminUserService {
 
   /** 获取指定用户的可访问资源 */
   List<AdminResource> getResourceList(Long userId);
+
+  /** 根据管理员ID获取对应菜单 */
+  List<AdminMenu> getMenuList(Long userId);
 
   /** 修改用户的+-权限 */
   @Transactional

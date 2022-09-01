@@ -31,9 +31,6 @@ public interface AdminRoleService {
   /** 分页获取角色列表 */
   List<AdminRole> list(String keyword, Integer pageSize, Integer pageNum);
 
-  /** 根据管理员ID获取对应菜单 */
-  List<AdminMenu> getMenuList(Long userId);
-
   /** 获取角色相关菜单 */
   List<AdminMenu> listMenu(Long roleId);
 

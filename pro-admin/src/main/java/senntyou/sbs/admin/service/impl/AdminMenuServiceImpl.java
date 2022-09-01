@@ -67,11 +67,13 @@ public class AdminMenuServiceImpl implements AdminMenuService {
 
   @Override
   public List<AdminMenuNode> treeList() {
-    List<AdminMenu> menuList = menuMapper.selectByExample(new AdminMenuExample());
+    AdminMenuExample example = new AdminMenuExample();
+    example.setOrderByClause("sort desc");
+    List<AdminMenu> menuList = menuMapper.selectByExample(example);
     List<AdminMenuNode> result =
         menuList.stream()
             .filter(menu -> menu.getParentId().equals(0L))
-            .map(menu -> covertMenuNode(menu, menuList))
+            .map(menu -> convertMenuNode(menu, menuList))
             .collect(Collectors.toList());
     return result;
   }
@@ -85,13 +87,13 @@ public class AdminMenuServiceImpl implements AdminMenuService {
   }
 
   /** 将AdminMenu转化为AdminMenuNode并设置children属性 */
-  private AdminMenuNode covertMenuNode(AdminMenu menu, List<AdminMenu> menuList) {
+  private AdminMenuNode convertMenuNode(AdminMenu menu, List<AdminMenu> menuList) {
     AdminMenuNode node = new AdminMenuNode();
     BeanUtils.copyProperties(menu, node);
     List<AdminMenuNode> children =
         menuList.stream()
             .filter(subMenu -> subMenu.getParentId().equals(menu.getId()))
-            .map(subMenu -> covertMenuNode(subMenu, menuList))
+            .map(subMenu -> convertMenuNode(subMenu, menuList))
             .collect(Collectors.toList());
     node.setChildren(children);
     return node;

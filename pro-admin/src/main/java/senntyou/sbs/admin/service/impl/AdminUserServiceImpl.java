@@ -25,6 +25,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import senntyou.sbs.admin.bo.AdminUserDetails;
+import senntyou.sbs.admin.dao.AdminRoleDao;
 import senntyou.sbs.admin.dao.AdminUserPermissionRelationDao;
 import senntyou.sbs.admin.dao.AdminUserRoleRelationDao;
 import senntyou.sbs.admin.dto.AdminUserParam;
@@ -37,6 +38,7 @@ import senntyou.sbs.mbg.mapper.AdminUserMapper;
 import senntyou.sbs.mbg.mapper.AdminUserPermissionRelationMapper;
 import senntyou.sbs.mbg.mapper.AdminUserRoleRelationMapper;
 import senntyou.sbs.mbg.model.AdminLoginLog;
+import senntyou.sbs.mbg.model.AdminMenu;
 import senntyou.sbs.mbg.model.AdminPermission;
 import senntyou.sbs.mbg.model.AdminResource;
 import senntyou.sbs.mbg.model.AdminRole;
@@ -58,6 +60,7 @@ public class AdminUserServiceImpl implements AdminUserService {
   @Autowired private AdminUserRoleRelationDao roleRelationDao;
   @Autowired private AdminUserPermissionRelationMapper permissionRelationMapper;
   @Autowired private AdminUserPermissionRelationDao permissionRelationDao;
+  @Autowired private AdminRoleDao roleDao;
   @Autowired private AdminLoginLogMapper loginLogMapper;
   @Autowired private AdminUserCacheService userCacheService;
 
@@ -237,6 +240,11 @@ public class AdminUserServiceImpl implements AdminUserService {
   }
 
   @Override
+  public List<AdminMenu> getMenuList(Long userId) {
+    return roleDao.getMenuListByUserId(userId);
+  }
+
+  @Override
   public int updatePermission(Long userId, List<Long> permissionIds) {
     // 删除原所有权限关系
     AdminUserPermissionRelationExample relationExample = new AdminUserPermissionRelationExample();
@@ -259,15 +267,15 @@ public class AdminUserServiceImpl implements AdminUserService {
               .filter(permissionId -> !permissionIds.contains(permissionId))
               .collect(Collectors.toList());
       // 插入+-权限关系
-      relationList.addAll(convert(userId, 1, addPermissionIdList));
-      relationList.addAll(convert(userId, -1, subPermissionIdList));
+      relationList.addAll(convertPermissionRelation(userId, 1, addPermissionIdList));
+      relationList.addAll(convertPermissionRelation(userId, -1, subPermissionIdList));
       return permissionRelationDao.insertList(relationList);
     }
     return 0;
   }
 
   /** 将+-权限关系转化为对象 */
-  private List<AdminUserPermissionRelation> convert(
+  private List<AdminUserPermissionRelation> convertPermissionRelation(
       Long userId, Integer type, List<Long> permissionIdList) {
     List<AdminUserPermissionRelation> relationList =
         permissionIdList.stream()

@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollUtil;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import senntyou.sbs.admin.dao.AdminUserRoleRelationDao;
 import senntyou.sbs.admin.service.AdminUserCacheService;
@@ -24,17 +23,11 @@ public class AdminUserCacheServiceImpl implements AdminUserCacheService {
   @Autowired private AdminUserRoleRelationMapper userRoleRelationMapper;
   @Autowired private AdminUserRoleRelationDao userRoleRelationDao;
 
-  @Value("${redis.database}")
-  private String redisDatabase;
-
-  @Value("${redis.expire.common}")
-  private Long redisExpire;
-
-  @Value("${redis.key.admin}")
-  private String redisKeyAdmin;
-
-  @Value("${redis.key.resourceList}")
-  private String redisKeyResourceList;
+  private String redisDatabase = "sbsAdmin";
+  // 24 hours
+  private Long redisExpire = 86400L;
+  private String redisKeyAdmin = "admin";
+  private String redisKeyResourceList = "resourceList";
 
   @Override
   public void delUser(Long userId) {
