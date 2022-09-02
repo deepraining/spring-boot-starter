@@ -8,7 +8,7 @@ import lombok.Setter;
 /** 修改用户名密码参数 */
 @Getter
 @Setter
-public class UpdateAdminUserPasswordParam {
+public class AdminUserUpdatePasswordParam {
   @ApiModelProperty(value = "用户名", required = true)
   @NotEmpty(message = "用户名不能为空")
   private String username;

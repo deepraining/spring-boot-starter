@@ -1,9 +1,8 @@
 package dr.sbs.admin.service;
 
 import dr.sbs.admin.dto.AdminUserParam;
-import dr.sbs.admin.dto.UpdateAdminUserPasswordParam;
+import dr.sbs.admin.dto.AdminUserUpdatePasswordParam;
 import dr.sbs.mbg.model.AdminMenu;
-import dr.sbs.mbg.model.AdminPermission;
 import dr.sbs.mbg.model.AdminResource;
 import dr.sbs.mbg.model.AdminRole;
 import dr.sbs.mbg.model.AdminUser;
@@ -60,15 +59,8 @@ public interface AdminUserService {
   /** 根据管理员ID获取对应菜单 */
   List<AdminMenu> getMenuList(Long userId);
 
-  /** 修改用户的+-权限 */
-  @Transactional
-  int updatePermission(Long userId, List<Long> permissionIds);
-
-  /** 获取用户所有权限（包括角色权限和+-权限） */
-  List<AdminPermission> getPermissionList(Long userId);
-
   /** 修改密码 */
-  int updatePassword(UpdateAdminUserPasswordParam updatePasswordParam);
+  int updatePassword(AdminUserUpdatePasswordParam updatePasswordParam);
 
   /** 获取用户信息 */
   UserDetails loadUserByUsername(String username);

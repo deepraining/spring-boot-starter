@@ -4,7 +4,6 @@ import dr.sbs.admin.service.AdminRoleService;
 import dr.sbs.common.CommonPage;
 import dr.sbs.common.CommonResult;
 import dr.sbs.mbg.model.AdminMenu;
-import dr.sbs.mbg.model.AdminPermission;
 import dr.sbs.mbg.model.AdminResource;
 import dr.sbs.mbg.model.AdminRole;
 import io.swagger.annotations.Api;
@@ -53,26 +52,6 @@ public class AdminRoleController {
   @ResponseBody
   public CommonResult delete(@RequestParam("ids") List<Long> ids) {
     int count = roleService.delete(ids);
-    if (count > 0) {
-      return CommonResult.success(count);
-    }
-    return CommonResult.failed();
-  }
-
-  @ApiOperation("获取相应角色权限")
-  @RequestMapping(value = "/permission/{roleId}", method = RequestMethod.GET)
-  @ResponseBody
-  public CommonResult<List<AdminPermission>> getPermissionList(@PathVariable Long roleId) {
-    List<AdminPermission> permissionList = roleService.getPermissionList(roleId);
-    return CommonResult.success(permissionList);
-  }
-
-  @ApiOperation("修改角色权限")
-  @RequestMapping(value = "/permission/update", method = RequestMethod.POST)
-  @ResponseBody
-  public CommonResult updatePermission(
-      @RequestParam Long roleId, @RequestParam("permissionIds") List<Long> permissionIds) {
-    int count = roleService.updatePermission(roleId, permissionIds);
     if (count > 0) {
       return CommonResult.success(count);
     }

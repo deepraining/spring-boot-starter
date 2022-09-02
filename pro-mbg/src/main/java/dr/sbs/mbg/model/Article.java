@@ -42,12 +42,12 @@ public class Article implements Serializable {
     private String intro;
 
     /**
-     * creator user_id
+     * creator front_user id
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "creator user_id", position = 6)
-    private Long createUserId;
+    @ApiModelProperty(value = "creator front_user id", position = 6)
+    private Long frontUserId;
 
     /**
      * deleted or not
@@ -123,12 +123,12 @@ public class Article implements Serializable {
         this.intro = intro;
     }
 
-    public Long getCreateUserId() {
-        return createUserId;
+    public Long getFrontUserId() {
+        return frontUserId;
     }
 
-    public void setCreateUserId(Long createUserId) {
-        this.createUserId = createUserId;
+    public void setFrontUserId(Long frontUserId) {
+        this.frontUserId = frontUserId;
     }
 
     public Integer getDeleted() {
@@ -174,7 +174,7 @@ public class Article implements Serializable {
         sb.append(", readCount=").append(readCount);
         sb.append(", supportCount=").append(supportCount);
         sb.append(", intro=").append(intro);
-        sb.append(", createUserId=").append(createUserId);
+        sb.append(", frontUserId=").append(frontUserId);
         sb.append(", deleted=").append(deleted);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);

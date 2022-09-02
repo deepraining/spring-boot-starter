@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="dr.sbs.mbg.mapper.AdminPermissionMapper">
-  <resultMap id="BaseResultMap" type="dr.sbs.mbg.model.AdminPermission">
+<mapper namespace="dr.sbs.mbg.mapper.FrontUserMapper">
+  <resultMap id="BaseResultMap" type="dr.sbs.mbg.model.FrontUser">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="value" jdbcType="VARCHAR" property="value" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="uri" jdbcType="VARCHAR" property="uri" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="deleted" jdbcType="INTEGER" property="deleted" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -73,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, parent_id, `name`, `value`, icon, `type`, uri, `status`, sort, create_time, update_time
+    id, username, email, `password`, deleted, create_time, update_time
   </sql>
-  <select id="selectByExample" parameterType="dr.sbs.mbg.model.AdminPermissionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="dr.sbs.mbg.model.FrontUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from `admin_permission`
+    from `front_user`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,58 +88,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from `admin_permission`
+    from `front_user`
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from `admin_permission`
+    delete from `front_user`
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="dr.sbs.mbg.model.AdminPermissionExample">
-    delete from `admin_permission`
+  <delete id="deleteByExample" parameterType="dr.sbs.mbg.model.FrontUserExample">
+    delete from `front_user`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="dr.sbs.mbg.model.AdminPermission">
-    insert into `admin_permission` (id, parent_id, `name`, 
-      `value`, icon, `type`, 
-      uri, `status`, sort, 
-      create_time, update_time)
-    values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{value,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{uri,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="dr.sbs.mbg.model.FrontUser">
+    insert into `front_user` (id, username, email, 
+      `password`, deleted, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{deleted,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="dr.sbs.mbg.model.AdminPermission">
-    insert into `admin_permission`
+  <insert id="insertSelective" parameterType="dr.sbs.mbg.model.FrontUser">
+    insert into `front_user`
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="parentId != null">
-        parent_id,
+      <if test="username != null">
+        username,
       </if>
-      <if test="name != null">
-        `name`,
+      <if test="email != null">
+        email,
       </if>
-      <if test="value != null">
-        `value`,
+      <if test="password != null">
+        `password`,
       </if>
-      <if test="icon != null">
-        icon,
-      </if>
-      <if test="type != null">
-        `type`,
-      </if>
-      <if test="uri != null">
-        uri,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
-      <if test="sort != null">
-        sort,
+      <if test="deleted != null">
+        deleted,
       </if>
       <if test="createTime != null">
         create_time,
@@ -156,29 +138,17 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=BIGINT},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
       </if>
-      <if test="value != null">
-        #{value,jdbcType=VARCHAR},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
       </if>
-      <if test="icon != null">
-        #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="uri != null">
-        #{uri,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
+      <if test="deleted != null">
+        #{deleted,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -188,41 +158,29 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="dr.sbs.mbg.model.AdminPermissionExample" resultType="java.lang.Long">
-    select count(*) from `admin_permission`
+  <select id="countByExample" parameterType="dr.sbs.mbg.model.FrontUserExample" resultType="java.lang.Long">
+    select count(*) from `front_user`
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update `admin_permission`
+    update `front_user`
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.parentId != null">
-        parent_id = #{record.parentId,jdbcType=BIGINT},
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
       </if>
-      <if test="record.name != null">
-        `name` = #{record.name,jdbcType=VARCHAR},
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
       </if>
-      <if test="record.value != null">
-        `value` = #{record.value,jdbcType=VARCHAR},
+      <if test="record.password != null">
+        `password` = #{record.password,jdbcType=VARCHAR},
       </if>
-      <if test="record.icon != null">
-        icon = #{record.icon,jdbcType=VARCHAR},
-      </if>
-      <if test="record.type != null">
-        `type` = #{record.type,jdbcType=INTEGER},
-      </if>
-      <if test="record.uri != null">
-        uri = #{record.uri,jdbcType=VARCHAR},
-      </if>
-      <if test="record.status != null">
-        `status` = #{record.status,jdbcType=INTEGER},
-      </if>
-      <if test="record.sort != null">
-        sort = #{record.sort,jdbcType=INTEGER},
+      <if test="record.deleted != null">
+        deleted = #{record.deleted,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -236,48 +194,32 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update `admin_permission`
+    update `front_user`
     set id = #{record.id,jdbcType=BIGINT},
-      parent_id = #{record.parentId,jdbcType=BIGINT},
-      `name` = #{record.name,jdbcType=VARCHAR},
-      `value` = #{record.value,jdbcType=VARCHAR},
-      icon = #{record.icon,jdbcType=VARCHAR},
-      `type` = #{record.type,jdbcType=INTEGER},
-      uri = #{record.uri,jdbcType=VARCHAR},
-      `status` = #{record.status,jdbcType=INTEGER},
-      sort = #{record.sort,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      deleted = #{record.deleted,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="dr.sbs.mbg.model.AdminPermission">
-    update `admin_permission`
+  <update id="updateByPrimaryKeySelective" parameterType="dr.sbs.mbg.model.FrontUser">
+    update `front_user`
     <set>
-      <if test="parentId != null">
-        parent_id = #{parentId,jdbcType=BIGINT},
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="value != null">
-        `value` = #{value,jdbcType=VARCHAR},
+      <if test="password != null">
+        `password` = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="icon != null">
-        icon = #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        `type` = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="uri != null">
-        uri = #{uri,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
+      <if test="deleted != null">
+        deleted = #{deleted,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -288,16 +230,12 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="dr.sbs.mbg.model.AdminPermission">
-    update `admin_permission`
-    set parent_id = #{parentId,jdbcType=BIGINT},
-      `name` = #{name,jdbcType=VARCHAR},
-      `value` = #{value,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
-      `type` = #{type,jdbcType=INTEGER},
-      uri = #{uri,jdbcType=VARCHAR},
-      `status` = #{status,jdbcType=INTEGER},
-      sort = #{sort,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="dr.sbs.mbg.model.FrontUser">
+    update `front_user`
+    set username = #{username,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      deleted = #{deleted,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

@@ -1,7 +1,6 @@
 package dr.sbs.admin.service;
 
 import dr.sbs.mbg.model.AdminMenu;
-import dr.sbs.mbg.model.AdminPermission;
 import dr.sbs.mbg.model.AdminResource;
 import dr.sbs.mbg.model.AdminRole;
 import java.util.List;
@@ -17,13 +16,6 @@ public interface AdminRoleService {
 
   /** 批量删除角色 */
   int delete(List<Long> ids);
-
-  /** 获取指定角色权限 */
-  List<AdminPermission> getPermissionList(Long roleId);
-
-  /** 修改指定角色的权限 */
-  @Transactional
-  int updatePermission(Long roleId, List<Long> permissionIds);
 
   /** 获取所有角色列表 */
   List<AdminRole> list();

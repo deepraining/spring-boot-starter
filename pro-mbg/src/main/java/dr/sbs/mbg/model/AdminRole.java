@@ -26,19 +26,11 @@ public class AdminRole implements Serializable {
     private String description;
 
     /**
-     * 后台用户数量
-     *
-     * @mbg.generated
-     */
-    @ApiModelProperty(value = "后台用户数量", position = 4)
-    private Integer userCount;
-
-    /**
      * 启用状态：0->禁用；1->启用
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "启用状态：0->禁用；1->启用", position = 5)
+    @ApiModelProperty(value = "启用状态：0->禁用；1->启用", position = 4)
     private Integer status;
 
     /**
@@ -46,7 +38,7 @@ public class AdminRole implements Serializable {
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "排序值", position = 6)
+    @ApiModelProperty(value = "排序值", position = 5)
     private Integer sort;
 
     /**
@@ -54,7 +46,7 @@ public class AdminRole implements Serializable {
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "创建时间", position = 7)
+    @ApiModelProperty(value = "创建时间", position = 6)
     private Date createTime;
 
     /**
@@ -62,7 +54,7 @@ public class AdminRole implements Serializable {
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "更新时间", position = 8)
+    @ApiModelProperty(value = "更新时间", position = 7)
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;
@@ -89,14 +81,6 @@ public class AdminRole implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Integer getUserCount() {
-        return userCount;
-    }
-
-    public void setUserCount(Integer userCount) {
-        this.userCount = userCount;
     }
 
     public Integer getStatus() {
@@ -140,7 +124,6 @@ public class AdminRole implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", description=").append(description);
-        sb.append(", userCount=").append(userCount);
         sb.append(", status=").append(status);
         sb.append(", sort=").append(sort);
         sb.append(", createTime=").append(createTime);

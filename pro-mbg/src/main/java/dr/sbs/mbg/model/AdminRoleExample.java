@@ -305,66 +305,6 @@ public class AdminRoleExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserCountIsNull() {
-            addCriterion("user_count is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountIsNotNull() {
-            addCriterion("user_count is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountEqualTo(Integer value) {
-            addCriterion("user_count =", value, "userCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountNotEqualTo(Integer value) {
-            addCriterion("user_count <>", value, "userCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountGreaterThan(Integer value) {
-            addCriterion("user_count >", value, "userCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("user_count >=", value, "userCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountLessThan(Integer value) {
-            addCriterion("user_count <", value, "userCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountLessThanOrEqualTo(Integer value) {
-            addCriterion("user_count <=", value, "userCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountIn(List<Integer> values) {
-            addCriterion("user_count in", values, "userCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountNotIn(List<Integer> values) {
-            addCriterion("user_count not in", values, "userCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountBetween(Integer value1, Integer value2) {
-            addCriterion("user_count between", value1, value2, "userCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("user_count not between", value1, value2, "userCount");
-            return (Criteria) this;
-        }
-
         public Criteria andStatusIsNull() {
             addCriterion("`status` is null");
             return (Criteria) this;

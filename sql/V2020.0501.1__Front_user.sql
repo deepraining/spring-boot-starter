@@ -17,9 +17,9 @@
 -- CREATE DATABASE `starter` DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
--- Table structure for user
+-- Table structure for front_user
 -- ----------------------------
-CREATE TABLE `user` (
+CREATE TABLE `front_user` (
   `id` bigint(20) NOT NULL,
   `username` varchar(64) NOT NULL COMMENT 'username',
   `email` varchar(64) NOT NULL COMMENT 'email',
@@ -28,9 +28,9 @@ CREATE TABLE `user` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update time',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_idx_username` (`username`),
-  UNIQUE KEY `user_idx_email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='user';
+  UNIQUE KEY `front_user_idx_username` (`username`),
+  UNIQUE KEY `front_user_idx_email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='front_user';
 
 -- ----------------------------
 -- Table structure for article
@@ -42,24 +42,10 @@ CREATE TABLE `article` (
   `support_count` int(11) DEFAULT 0 COMMENT 'support count',
   `intro` varchar(500) DEFAULT NULL COMMENT 'article summary',
   `content` text COMMENT 'article content',
-  `create_user_id` bigint(20) NOT NULL COMMENT 'creator user_id',
+  `front_user_id` bigint(20) NOT NULL COMMENT 'creator front_user id',
   `deleted` int(1) DEFAULT 0 COMMENT 'deleted or not',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update time',
   PRIMARY KEY (`id`),
-  KEY `article_idx_create_user_id` (`create_user_id`)
+  KEY `article_idx_front_user_id` (`front_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='article';
-
--- ----------------------------
--- Table structure for jwt_user
--- ----------------------------
-CREATE TABLE `jwt_user` (
-  `id` bigint(20) NOT NULL,
-  `username` varchar(64) NOT NULL COMMENT 'username',
-  `password` varchar(64) NOT NULL COMMENT 'password(encrypted)',
-  `deleted` int(1) DEFAULT 0 COMMENT 'deleted or not',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'create time',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'update time',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `jwt_user_idx_username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='jwt_user';

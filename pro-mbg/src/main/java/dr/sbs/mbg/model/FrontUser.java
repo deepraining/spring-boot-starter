@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
+public class FrontUser implements Serializable {
     private Long id;
 
     /**

@@ -2,11 +2,10 @@ package dr.sbs.admin.controller;
 
 import dr.sbs.admin.dto.AdminLoginParam;
 import dr.sbs.admin.dto.AdminUserParam;
-import dr.sbs.admin.dto.UpdateAdminUserPasswordParam;
+import dr.sbs.admin.dto.AdminUserUpdatePasswordParam;
 import dr.sbs.admin.service.AdminUserService;
 import dr.sbs.common.CommonPage;
 import dr.sbs.common.CommonResult;
-import dr.sbs.mbg.model.AdminPermission;
 import dr.sbs.mbg.model.AdminRole;
 import dr.sbs.mbg.model.AdminUser;
 import io.swagger.annotations.Api;
@@ -139,7 +138,7 @@ public class AdminController {
   @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult updatePassword(
-      @RequestBody UpdateAdminUserPasswordParam updatePasswordParam) {
+      @RequestBody AdminUserUpdatePasswordParam updatePasswordParam) {
     int status = userService.updatePassword(updatePasswordParam);
     if (status > 0) {
       return CommonResult.success(status);
@@ -197,25 +196,5 @@ public class AdminController {
   public CommonResult<List<AdminRole>> getRoleList(@PathVariable Long userId) {
     List<AdminRole> roleList = userService.getRoleList(userId);
     return CommonResult.success(roleList);
-  }
-
-  @ApiOperation("给用户分配+-权限")
-  @RequestMapping(value = "/permission/update", method = RequestMethod.POST)
-  @ResponseBody
-  public CommonResult updatePermission(
-      @RequestParam Long userId, @RequestParam("permissionIds") List<Long> permissionIds) {
-    int count = userService.updatePermission(userId, permissionIds);
-    if (count > 0) {
-      return CommonResult.success(count);
-    }
-    return CommonResult.failed();
-  }
-
-  @ApiOperation("获取用户所有权限（包括+-权限）")
-  @RequestMapping(value = "/permission/{userId}", method = RequestMethod.GET)
-  @ResponseBody
-  public CommonResult<List<AdminPermission>> getPermissionList(@PathVariable Long userId) {
-    List<AdminPermission> permissionList = userService.getPermissionList(userId);
-    return CommonResult.success(permissionList);
   }
 }

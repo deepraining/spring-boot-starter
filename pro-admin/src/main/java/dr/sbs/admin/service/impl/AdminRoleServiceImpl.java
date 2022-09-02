@@ -2,25 +2,19 @@ package dr.sbs.admin.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import dr.sbs.admin.dao.AdminRoleDao;
-import dr.sbs.admin.dao.AdminRolePermissionRelationDao;
 import dr.sbs.admin.service.AdminRoleService;
 import dr.sbs.admin.service.AdminUserCacheService;
 import dr.sbs.mbg.mapper.AdminRoleMapper;
 import dr.sbs.mbg.mapper.AdminRoleMenuRelationMapper;
-import dr.sbs.mbg.mapper.AdminRolePermissionRelationMapper;
 import dr.sbs.mbg.mapper.AdminRoleResourceRelationMapper;
 import dr.sbs.mbg.model.AdminMenu;
-import dr.sbs.mbg.model.AdminPermission;
 import dr.sbs.mbg.model.AdminResource;
 import dr.sbs.mbg.model.AdminRole;
 import dr.sbs.mbg.model.AdminRoleExample;
 import dr.sbs.mbg.model.AdminRoleMenuRelation;
 import dr.sbs.mbg.model.AdminRoleMenuRelationExample;
-import dr.sbs.mbg.model.AdminRolePermissionRelation;
-import dr.sbs.mbg.model.AdminRolePermissionRelationExample;
 import dr.sbs.mbg.model.AdminRoleResourceRelation;
 import dr.sbs.mbg.model.AdminRoleResourceRelationExample;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,16 +24,13 @@ import org.springframework.util.StringUtils;
 @Service
 public class AdminRoleServiceImpl implements AdminRoleService {
   @Autowired private AdminRoleMapper roleMapper;
-  @Autowired private AdminRolePermissionRelationMapper rolePermissionRelationMapper;
   @Autowired private AdminRoleMenuRelationMapper roleMenuRelationMapper;
   @Autowired private AdminRoleResourceRelationMapper roleResourceRelationMapper;
-  @Autowired private AdminRolePermissionRelationDao rolePermissionRelationDao;
   @Autowired private AdminRoleDao roleDao;
   @Autowired private AdminUserCacheService userCacheService;
 
   @Override
   public int create(AdminRole role) {
-    role.setUserCount(0);
     role.setSort(0);
     return roleMapper.insertSelective(role);
   }
@@ -60,28 +51,6 @@ public class AdminRoleServiceImpl implements AdminRoleService {
   }
 
   @Override
-  public List<AdminPermission> getPermissionList(Long roleId) {
-    return rolePermissionRelationDao.getPermissionList(roleId);
-  }
-
-  @Override
-  public int updatePermission(Long roleId, List<Long> permissionIds) {
-    // 先删除原有关系
-    AdminRolePermissionRelationExample example = new AdminRolePermissionRelationExample();
-    example.createCriteria().andRoleIdEqualTo(roleId);
-    rolePermissionRelationMapper.deleteByExample(example);
-    // 批量插入新关系
-    List<AdminRolePermissionRelation> relationList = new ArrayList<>();
-    for (Long permissionId : permissionIds) {
-      AdminRolePermissionRelation relation = new AdminRolePermissionRelation();
-      relation.setRoleId(roleId);
-      relation.setPermissionId(permissionId);
-      relationList.add(relation);
-    }
-    return rolePermissionRelationDao.insertList(relationList);
-  }
-
-  @Override
   public List<AdminRole> list() {
     return roleMapper.selectByExample(new AdminRoleExample());
   }
@@ -98,12 +67,12 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 
   @Override
   public List<AdminMenu> listMenu(Long roleId) {
-    return roleDao.getMenuListByRoleId(roleId);
+    return roleDao.getMenuList(roleId);
   }
 
   @Override
   public List<AdminResource> listResource(Long roleId) {
-    return roleDao.getResourceListByRoleId(roleId);
+    return roleDao.getResourceList(roleId);
   }
 
   @Override

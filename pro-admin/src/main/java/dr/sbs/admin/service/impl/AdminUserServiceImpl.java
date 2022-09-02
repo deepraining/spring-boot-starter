@@ -5,32 +5,26 @@ import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import dr.sbs.admin.bo.AdminUserDetails;
 import dr.sbs.admin.dao.AdminRoleDao;
-import dr.sbs.admin.dao.AdminUserPermissionRelationDao;
 import dr.sbs.admin.dao.AdminUserRoleRelationDao;
 import dr.sbs.admin.dto.AdminUserParam;
-import dr.sbs.admin.dto.UpdateAdminUserPasswordParam;
+import dr.sbs.admin.dto.AdminUserUpdatePasswordParam;
 import dr.sbs.admin.service.AdminUserCacheService;
 import dr.sbs.admin.service.AdminUserService;
 import dr.sbs.admin.util.JwtTokenUtil;
 import dr.sbs.mbg.mapper.AdminLoginLogMapper;
 import dr.sbs.mbg.mapper.AdminUserMapper;
-import dr.sbs.mbg.mapper.AdminUserPermissionRelationMapper;
 import dr.sbs.mbg.mapper.AdminUserRoleRelationMapper;
 import dr.sbs.mbg.model.AdminLoginLog;
 import dr.sbs.mbg.model.AdminMenu;
-import dr.sbs.mbg.model.AdminPermission;
 import dr.sbs.mbg.model.AdminResource;
 import dr.sbs.mbg.model.AdminRole;
 import dr.sbs.mbg.model.AdminUser;
 import dr.sbs.mbg.model.AdminUserExample;
-import dr.sbs.mbg.model.AdminUserPermissionRelation;
-import dr.sbs.mbg.model.AdminUserPermissionRelationExample;
 import dr.sbs.mbg.model.AdminUserRoleRelation;
 import dr.sbs.mbg.model.AdminUserRoleRelationExample;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,8 +52,6 @@ public class AdminUserServiceImpl implements AdminUserService {
   @Autowired private AdminUserMapper userMapper;
   @Autowired private AdminUserRoleRelationMapper roleRelationMapper;
   @Autowired private AdminUserRoleRelationDao roleRelationDao;
-  @Autowired private AdminUserPermissionRelationMapper permissionRelationMapper;
-  @Autowired private AdminUserPermissionRelationDao permissionRelationDao;
   @Autowired private AdminRoleDao roleDao;
   @Autowired private AdminLoginLogMapper loginLogMapper;
   @Autowired private AdminUserCacheService userCacheService;
@@ -241,63 +233,11 @@ public class AdminUserServiceImpl implements AdminUserService {
 
   @Override
   public List<AdminMenu> getMenuList(Long userId) {
-    return roleDao.getMenuListByUserId(userId);
+    return roleRelationDao.getMenuList(userId);
   }
 
   @Override
-  public int updatePermission(Long userId, List<Long> permissionIds) {
-    // 删除原所有权限关系
-    AdminUserPermissionRelationExample relationExample = new AdminUserPermissionRelationExample();
-    relationExample.createCriteria().andUserIdEqualTo(userId);
-    permissionRelationMapper.deleteByExample(relationExample);
-    // 获取用户所有角色权限
-    List<AdminPermission> permissionList = roleRelationDao.getRolePermissionList(userId);
-    List<Long> rolePermissionList =
-        permissionList.stream().map(AdminPermission::getId).collect(Collectors.toList());
-    if (!CollectionUtils.isEmpty(permissionIds)) {
-      List<AdminUserPermissionRelation> relationList = new ArrayList<>();
-      // 筛选出+权限
-      List<Long> addPermissionIdList =
-          permissionIds.stream()
-              .filter(permissionId -> !rolePermissionList.contains(permissionId))
-              .collect(Collectors.toList());
-      // 筛选出-权限
-      List<Long> subPermissionIdList =
-          rolePermissionList.stream()
-              .filter(permissionId -> !permissionIds.contains(permissionId))
-              .collect(Collectors.toList());
-      // 插入+-权限关系
-      relationList.addAll(convertPermissionRelation(userId, 1, addPermissionIdList));
-      relationList.addAll(convertPermissionRelation(userId, -1, subPermissionIdList));
-      return permissionRelationDao.insertList(relationList);
-    }
-    return 0;
-  }
-
-  /** 将+-权限关系转化为对象 */
-  private List<AdminUserPermissionRelation> convertPermissionRelation(
-      Long userId, Integer type, List<Long> permissionIdList) {
-    List<AdminUserPermissionRelation> relationList =
-        permissionIdList.stream()
-            .map(
-                permissionId -> {
-                  AdminUserPermissionRelation relation = new AdminUserPermissionRelation();
-                  relation.setUserId(userId);
-                  relation.setType(type);
-                  relation.setPermissionId(permissionId);
-                  return relation;
-                })
-            .collect(Collectors.toList());
-    return relationList;
-  }
-
-  @Override
-  public List<AdminPermission> getPermissionList(Long userId) {
-    return roleRelationDao.getPermissionList(userId);
-  }
-
-  @Override
-  public int updatePassword(UpdateAdminUserPasswordParam param) {
+  public int updatePassword(AdminUserUpdatePasswordParam param) {
     if (StrUtil.isEmpty(param.getUsername())
         || StrUtil.isEmpty(param.getOldPassword())
         || StrUtil.isEmpty(param.getNewPassword())) {
