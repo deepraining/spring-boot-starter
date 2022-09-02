@@ -1,14 +1,14 @@
 -- ----------------------------
 -- Generally speaking, if in China, you should append string `default-time-zone = '+08:00'`
 -- to `/etc/mysql/mysql.conf.d/mysqld.cnf` config file.
--- Thus set mysql timezone to `UTC+0800`,
--- for `CST` timezone will cause problem of more or less several hours.
+-- Thus set mysql timezone to `UTC+0800`, to fix that
+-- `CST` timezone will cause problem of more or less several hours.
 -- ----------------------------
 
 -- ----------------------------
 -- 一般而言，需要在 `/etc/mysql/mysql.conf.d/mysqld.cnf` 尾部
 -- 加上 `default-time-zone = '+08:00'`
--- 设定数据库时区为 UTC+0800，CST 时区会导致时间差问题
+-- 设定数据库时区为 UTC+0800，因为CST 时区会导致时间差问题
 -- ----------------------------
 
 -- ----------------------------

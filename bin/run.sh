@@ -1,13 +1,19 @@
 #!/bin/bash
 
-# Usage: sh run.sh [start|stop|restart|status]
-FILE_NAME=starter
-APP_NAME="${FILE_NAME}.jar"
+# Usage: sh run.sh [start|stop|restart|status|version]
+# 运行项目的脚本
+
 # Server env (spring.profiles.active)
 SERVER_ENV=prod
+# jar归档文件基础名称，配置在 build.gradle 中的 archivesBaseName
+ARCHIVE_NAME=starter
+# 实际运行的应用名称
+APP_NAME="${ARCHIVE_NAME}.jar"
+# 版本文件（会将正在运行的版本号放在这个文件中）
+VERSION_FILE='version.txt'
 
 usage() {
-  echo "Usage: sh $0 [start|stop|restart|status]"
+  echo "Usage: sh $0 [start|stop|restart|status|version]"
   exit 1
 }
 
@@ -54,6 +60,14 @@ restart(){
   start
 }
 
+version(){
+  if [ -f $VERSION_FILE ]; then
+    cat $VERSION_FILE
+  else
+    echo "No version found"
+  fi
+}
+
 case "$1" in
   "start")
     start
@@ -66,6 +80,9 @@ case "$1" in
     ;;
   "restart")
     restart
+    ;;
+  "version")
+    version
     ;;
   *)
     usage

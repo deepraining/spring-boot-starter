@@ -35,7 +35,7 @@
 
 ### pro-*:watchJava
 
-用于监听 Java 文件变动，然后自动编译到 `build` 目录下（有些集成开发工具已经自带这个功能）
+本地开发时，用于监听 Java 文件变动，然后自动编译到 `build` 目录下（有些集成开发工具已经自带这个功能），自动刷新应用
 
 (配合 `spring-boot-devtools` 一起用)
 
@@ -61,7 +61,7 @@ rm -rf .git
 git init
 ```
 
-创建数据库与表结构（可以自行修改）
+创建数据库与表结构（数据表文件在 `sql` 目录下，可以自行修改）
 
 ```
 # 本地环境：默认 flyway.conf 配置文件
@@ -73,7 +73,7 @@ flyway migrate -configFiles=flyway-prod.conf
 # 如果你需要配置更多的环境，可以自己添加
 ```
 
-执行自动生成 Mybatis 模型文件的命令
+执行自动生成 `Mybatis` 模型文件的命令
 
 ```
 ./gradlew pro-mbg:run
@@ -81,41 +81,41 @@ flyway migrate -configFiles=flyway-prod.conf
 
 ## 运行项目
 
-以 `pro-demo` 为例:
+以 `pro-admin` 为例:
 
-执行本地开发调试 `pro-demo` 子项目的命令，然后在浏览器中打开 `http://127.0.0.1:9000`
+执行本地开发调试 `pro-admin` 子项目的命令，然后在浏览器中打开 `http://127.0.0.1:9000`
 
 ```
-./gradlew pro-demo:bootRun
+./gradlew pro-admin:bootRun
 ```
 
 如果集成开发工具不支持监听 Java 文件变动并自动编译的功能，可以运行下面的命令
 
 ```
-./gradlew pro-demo:watchJava -t
+./gradlew pro-admin:watchJava -t
 ```
 
 开发完毕之后执行构建(可以使用 shell 脚本把已经构建好的 html 文件复制到 `resources/templates` 目录下)
 
 ```
-./gradlew pro-demo:build
+./gradlew pro-admin:build
 ```
 
 ## 部署项目
 
-以 `pro-demo` 为例:
+以 `pro-admin` 为例:
 
-在服务器上，找个合适的地方创建 `serverDirName` 目录
+在服务器上，找个合适的地方创建 `serverDirName` 目录（`serverDirName` 为使用者自定义目录）
 
-把本地 `pro-demo/build/libs/*.jar, bin/*.sh` 上传到 `serverDirName` 目录，并按实际需要修改 `run.sh, rerun.sh` 中 SERVER_ENV 与 FILE_NAME 变量的值
+把本地 `pro-admin/build/libs/*.jar, bin/*.sh` 上传到 `serverDirName` 目录，并按实际需要修改 `run.sh, select.sh` 中 `SERVER_ENV` 与 `ARCHIVE_NAME` 变量的值
 
 ```
 - serverDirName/
   - run.sh              # 运行、停止、重启、查看程序
-  - rerun.sh            # 运行最新版本的 jar 文件
-  - libs　
-    - sbs-demo-2020.0501.1001.jar
-    - sbs-demo-2020.0501.1101.jar
+  - select.sh           # 运行最新版本的 jar 文件
+  - libs
+    - sbs-admin-2020.0501.1001.jar
+    - sbs-admin-2020.0501.1101.jar
     - ...
 ```
 
@@ -142,11 +142,11 @@ spring:
 
 ## 配置文件与 jar 文件分开部署(yml 文件不打包进 jar 文件)
 
-你可以把配置文件部署到 `~/.sbs-demo/application*.yml`，就可以覆盖 `src/main/resources/application*.yml` 的配置. 
+你可以把配置文件部署到 `~/.sbs-admin/application*.yml`，就可以覆盖 `src/main/resources/application*.yml` 的配置
 
 ## Docker 部署
 
-参看 [pro-demo Dockerfile](./pro-demo/Dockerfile).
+参看 [pro-admin Dockerfile](./pro-admin/Dockerfile)
 
 ## 参考项目
 
