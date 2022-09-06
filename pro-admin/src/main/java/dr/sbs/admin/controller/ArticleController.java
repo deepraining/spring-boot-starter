@@ -47,7 +47,7 @@ public class ArticleController {
   @ApiOperation("添加文章")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(
+  public CommonResult<Integer> create(
       @RequestBody @Validated ArticleCreateParam articleCreateParam, BindingResult bindingResult) {
     int count = articleService.create(articleCreateParam);
     if (count > 0) {
@@ -60,7 +60,7 @@ public class ArticleController {
   @ApiOperation("修改文章")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(
+  public CommonResult<Integer> update(
       @PathVariable Long id,
       @RequestBody @Validated ArticleCreateParam articleCreateParam,
       BindingResult bindingResult) {
@@ -75,7 +75,7 @@ public class ArticleController {
   @ApiOperation("根据ID删除文章")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult delete(@PathVariable Long id) {
+  public CommonResult<Integer> delete(@PathVariable Long id) {
     int count = articleService.delete(id);
     if (count > 0) {
       return CommonResult.success(count);

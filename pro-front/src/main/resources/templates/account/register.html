@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- CSRF -->
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <!-- default header name is X-CSRF-TOKEN -->
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+  <title>Register</title>
+</head>
+<body>
+<p>Email: <input name="email" id="email" type="text"/></p>
+<p>Username: <input name="username" id="username" type="text"/></p>
+<p>Password: <input name="password" id="password" type="password"/></p>
+<p>Confirm Password: <input name="password2" id="password2" type="password"/></p>
+<p>
+  <button type="submit" id="submit">Register</button>
+</p>
+</body>
+<script>
+  const csrf = document.getElementsByName('_csrf')[0].getAttribute('content');
+  const csrfHeader = document.getElementsByName('_csrf_header')[0].getAttribute('content');
+
+  document.getElementById('submit').addEventListener('click', () => {
+    const email = document.getElementById('email').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const password2 = document.getElementById('password2').value;
+
+    let error = '';
+    if (!email) error = 'Email cant be empty.';
+    else if (email.indexOf('@') === -1) error = 'Email is invalid.';
+    else if (!username) error = 'Username cant be empty.';
+    else if (!password) error = 'Password cant be empty.';
+    else if (password !== password2) error = 'Confirm Password is not equal to password.';
+
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    fetch('/api/account/register', {
+      method: 'post',
+      headers: {
+        [csrfHeader]: csrf,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({username, email, password})
+    }).then(res => res.json()).then(res => {
+      if (res.message) {
+        alert(res.message);
+
+        if (res.code === 0) location.href = '/';
+      }
+    });
+  }, !1);
+</script>
+</html>

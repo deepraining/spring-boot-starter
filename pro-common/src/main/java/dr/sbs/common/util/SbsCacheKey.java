@@ -13,6 +13,8 @@ public class SbsCacheKey {
   /** front */
   // 示例
   public static final String FRONT_EXAMPLE = "example";
+  // 用户信息
+  public static final String FRONT_USER = "user";
 
   /** common */
   // 前端用户数据库行

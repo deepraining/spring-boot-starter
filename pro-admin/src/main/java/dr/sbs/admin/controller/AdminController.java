@@ -55,7 +55,7 @@ public class AdminController {
   @ApiOperation(value = "登录以后返回token")
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult login(
+  public CommonResult<Map<String, String>> login(
       @RequestBody @Validated AdminLoginParam adminLoginParam, BindingResult bindingResult) {
     String token = userService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword());
     if (token == null) {
@@ -70,7 +70,7 @@ public class AdminController {
   @ApiOperation(value = "刷新token")
   @RequestMapping(value = "/refreshToken", method = RequestMethod.GET)
   @ResponseBody
-  public CommonResult refreshToken(HttpServletRequest request) {
+  public CommonResult<Map<String, String>> refreshToken(HttpServletRequest request) {
     String token = request.getHeader(tokenHeader);
     String refreshToken = userService.refreshToken(token);
     if (refreshToken == null) {
@@ -85,9 +85,9 @@ public class AdminController {
   @ApiOperation(value = "获取当前登录用户信息")
   @RequestMapping(value = "/info", method = RequestMethod.GET)
   @ResponseBody
-  public CommonResult getAdminInfo(Principal principal) {
+  public CommonResult<Map<String, Object>> getAdminInfo(Principal principal) {
     if (principal == null) {
-      return CommonResult.unauthorized(null);
+      return CommonResult.unauthorized();
     }
     String username = principal.getName();
     AdminUser adminUser = userService.getUserByUsername(username);
@@ -103,7 +103,7 @@ public class AdminController {
   @ApiOperation(value = "登出功能")
   @RequestMapping(value = "/logout", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult logout() {
+  public CommonResult<Object> logout() {
     return CommonResult.success(null);
   }
 
@@ -129,7 +129,7 @@ public class AdminController {
   @ApiOperation("修改指定用户信息")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(
+  public CommonResult<Integer> update(
       @PathVariable Long id,
       @RequestBody @Validated AdminUser adminUser,
       BindingResult bindingResult) {
@@ -143,7 +143,7 @@ public class AdminController {
   @ApiOperation("修改指定用户密码")
   @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult updatePassword(
+  public CommonResult<Integer> updatePassword(
       @RequestBody @Validated AdminUpdatePasswordParam updatePasswordParam,
       BindingResult bindingResult) {
     int status = userService.updatePassword(updatePasswordParam);
@@ -163,7 +163,7 @@ public class AdminController {
   @ApiOperation("删除指定用户信息")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult delete(@PathVariable Long id) {
+  public CommonResult<Integer> delete(@PathVariable Long id) {
     int count = userService.delete(id);
     if (count > 0) {
       return CommonResult.success(count);
@@ -174,7 +174,7 @@ public class AdminController {
   @ApiOperation("修改帐号状态")
   @RequestMapping(value = "/updateStatus/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult updateStatus(
+  public CommonResult<Integer> updateStatus(
       @PathVariable Long id, @RequestParam(value = "status") Integer status) {
     AdminUser adminUser = new AdminUser();
     adminUser.setStatus(status);
@@ -188,7 +188,7 @@ public class AdminController {
   @ApiOperation("给用户分配角色")
   @RequestMapping(value = "/role/update", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult updateRole(
+  public CommonResult<Integer> updateRole(
       @RequestParam("userId") Long userId, @RequestParam("roleIds") List<Long> roleIds) {
     int count = userService.updateRole(userId, roleIds);
     if (count >= 0) {

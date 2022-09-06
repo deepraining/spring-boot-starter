@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- CSRF -->
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <!-- default header name is X-CSRF-TOKEN -->
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+  <title>Create Article</title>
+</head>
+<body>
+<p>Title: <input name="title" id="title" type="text"/></p>
+<p>Article Summary: <textarea name="intro" id="intro" rows="3"></textarea></p>
+<p>Article Content: <textarea name="content" id="content" rows="6"></textarea></p>
+<p>
+  <button type="submit" id="submit">Create</button>
+</p>
+</body>
+<script>
+  const csrf = document.getElementsByName('_csrf')[0].getAttribute('content');
+  const csrfHeader = document.getElementsByName('_csrf_header')[0].getAttribute('content');
+
+  document.getElementById('submit').addEventListener('click', () => {
+    const title = document.getElementById('title').value;
+    const intro = document.getElementById('intro').value;
+    const content = document.getElementById('content').value;
+
+    let error = '';
+    if (!title) error = 'Title cant be empty.';
+    else if (!intro) error = 'Intro cant be empty.';
+    else if (!content) error = 'Content cant be empty.';
+
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    fetch('/api/article/create', {
+      method: 'post',
+      headers: {
+        "Content-Type": "application/json",
+        [csrfHeader]: csrf,
+      },
+      body: JSON.stringify({title, intro, content}),
+    }).then(res => res.json()).then(res => {
+      if (res.message) {
+        alert(res.message);
+
+        if (res.code === 0) location.href = '/';
+      }
+    });
+  }, !1);
+</script>
+</html>

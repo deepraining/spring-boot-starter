@@ -15,6 +15,9 @@ public interface AdminUserService {
   /** 根据用户名获取后台管理员 */
   AdminUser getUserByUsername(String username);
 
+  /** 缓存序列化后会没有password */
+  AdminUser getUserByUsernameRaw(String username);
+
   /** 注册功能 */
   AdminUser register(AdminUserParam adminUserParam);
 
@@ -64,4 +67,7 @@ public interface AdminUserService {
 
   /** 获取用户信息 */
   UserDetails loadUserDetailsByUsername(String username);
+
+  /** 缓存序列化后会没有password */
+  UserDetails loadUserDetailsByUsernameRaw(String username);
 }

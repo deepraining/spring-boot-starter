@@ -30,7 +30,7 @@ public class AdminResourceController {
   @ApiOperation("添加后台资源")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(
+  public CommonResult<Integer> create(
       @RequestBody @Validated AdminResource adminResource, BindingResult bindingResult) {
     int count = resourceService.create(adminResource);
     dynamicSecurityMetadataSource.clearDataSource();
@@ -44,7 +44,7 @@ public class AdminResourceController {
   @ApiOperation("修改后台资源")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(
+  public CommonResult<Integer> update(
       @PathVariable Long id,
       @RequestBody @Validated AdminResource adminResource,
       BindingResult bindingResult) {
@@ -68,7 +68,7 @@ public class AdminResourceController {
   @ApiOperation("根据ID删除后台资源")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult delete(@PathVariable Long id) {
+  public CommonResult<Integer> delete(@PathVariable Long id) {
     int count = resourceService.delete(id);
     dynamicSecurityMetadataSource.clearDataSource();
     if (count > 0) {

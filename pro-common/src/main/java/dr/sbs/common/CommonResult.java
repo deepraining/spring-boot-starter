@@ -31,27 +31,19 @@ public class CommonResult<T> {
     return new CommonResult<T>(ResultCode.SUCCESS.getCode(), message, data);
   }
 
-  /**
-   * Failed
-   *
-   * @param errorCode Error code
-   */
+  /** Failed */
   public static <T> CommonResult<T> failed(IErrorCode errorCode) {
     return new CommonResult<T>(errorCode.getCode(), errorCode.getMessage(), null);
   }
 
-  /**
-   * Failed
-   *
-   * @param message Tip message
-   */
-  public static <T> CommonResult<T> failed(String message) {
-    return new CommonResult<T>(ResultCode.FAILED.getCode(), message, null);
+  /** Failed */
+  public static <T> CommonResult<T> failed() {
+    return new CommonResult<T>(ResultCode.FAILED.getCode(), ResultCode.FAILED.getMessage(), null);
   }
 
   /** Failed */
-  public static <T> CommonResult<T> failed() {
-    return failed(ResultCode.FAILED);
+  public static <T> CommonResult<T> failed(String message) {
+    return new CommonResult<T>(ResultCode.FAILED.getCode(), message, null);
   }
 
   /** Check parameters failed */
@@ -66,14 +58,24 @@ public class CommonResult<T> {
   }
 
   /** Not logged in or token is expired */
-  public static <T> CommonResult<T> unauthorized(T data) {
+  public static <T> CommonResult<T> unauthorized() {
     return new CommonResult<T>(
-        ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), data);
+        ResultCode.UNAUTHORIZED.getCode(), ResultCode.UNAUTHORIZED.getMessage(), null);
+  }
+
+  /** Not logged in or token is expired */
+  public static <T> CommonResult<T> unauthorized(String message) {
+    return new CommonResult<T>(ResultCode.UNAUTHORIZED.getCode(), message, null);
   }
 
   /** No privileges */
-  public static <T> CommonResult<T> forbidden(T data) {
+  public static <T> CommonResult<T> forbidden() {
     return new CommonResult<T>(
-        ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), data);
+        ResultCode.FORBIDDEN.getCode(), ResultCode.FORBIDDEN.getMessage(), null);
+  }
+
+  /** No privileges */
+  public static <T> CommonResult<T> forbidden(String message) {
+    return new CommonResult<T>(ResultCode.FORBIDDEN.getCode(), message, null);
   }
 }

@@ -47,7 +47,7 @@ public class FrontUserController {
   @ApiOperation("添加前端用户")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(
+  public CommonResult<Integer> create(
       @RequestBody @Validated FrontUserCreateParam frontUserCreateParam,
       BindingResult bindingResult) {
     int count = frontUserService.create(frontUserCreateParam);
@@ -61,7 +61,7 @@ public class FrontUserController {
   @ApiOperation("修改前端用户")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(
+  public CommonResult<Integer> update(
       @PathVariable Long id,
       @RequestBody @Validated FrontUserCreateParam frontUserCreateParam,
       BindingResult bindingResult) {
@@ -76,7 +76,7 @@ public class FrontUserController {
   @ApiOperation("根据ID删除前端用户")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult delete(@PathVariable Long id) {
+  public CommonResult<Integer> delete(@PathVariable Long id) {
     int count = frontUserService.delete(id);
     if (count > 0) {
       return CommonResult.success(count);

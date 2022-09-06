@@ -71,6 +71,20 @@ public class AdminUserServiceImpl implements AdminUserService {
   }
 
   @Override
+  public AdminUser getUserByUsernameRaw(String username) {
+    AdminUserExample example = new AdminUserExample();
+    example.createCriteria().andUsernameEqualTo(username);
+    List<AdminUser> adminList = userMapper.selectByExample(example);
+    if (adminList != null && adminList.size() > 0) {
+      AdminUser adminUser = adminList.get(0);
+      if (adminUser.getStatus() == 1) {
+        return adminUser;
+      }
+    }
+    return null;
+  }
+
+  @Override
   public AdminUser register(AdminUserParam adminUserParam) {
     AdminUser adminUser = new AdminUser();
     BeanUtils.copyProperties(adminUserParam, adminUser);
@@ -94,7 +108,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     String token = null;
     // 密码需要客户端加密后传递
     try {
-      UserDetails userDetails = loadUserDetailsByUsername(username);
+      UserDetails userDetails = loadUserDetailsByUsernameRaw(username);
       if (!passwordEncoder.matches(password, userDetails.getPassword())) {
         throw new BadCredentialsException("密码不正确");
       }
@@ -260,6 +274,17 @@ public class AdminUserServiceImpl implements AdminUserService {
   public UserDetails loadUserDetailsByUsername(String username) {
     // 获取用户信息
     AdminUser adminUser = getUserByUsername(username);
+    if (adminUser != null) {
+      List<AdminResource> resourceList = getResourceList(adminUser.getId());
+      return new AdminUserDetails(adminUser, resourceList);
+    }
+    throw new UsernameNotFoundException("用户名或密码错误");
+  }
+
+  @Override
+  public UserDetails loadUserDetailsByUsernameRaw(String username) {
+    // 获取用户信息
+    AdminUser adminUser = getUserByUsernameRaw(username);
     if (adminUser != null) {
       List<AdminResource> resourceList = getResourceList(adminUser.getId());
       return new AdminUserDetails(adminUser, resourceList);

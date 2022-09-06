@@ -34,7 +34,7 @@ public class AdminResourceCategoryController {
   @ApiOperation("添加后台资源分类")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(
+  public CommonResult<Integer> create(
       @RequestBody @Validated AdminResourceCategory adminResourceCategory,
       BindingResult bindingResult) {
     int count = resourceCategoryService.create(adminResourceCategory);
@@ -48,7 +48,7 @@ public class AdminResourceCategoryController {
   @ApiOperation("修改后台资源分类")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(
+  public CommonResult<Integer> update(
       @PathVariable Long id,
       @RequestBody @Validated AdminResourceCategory adminResourceCategory,
       BindingResult bindingResult) {
@@ -63,7 +63,7 @@ public class AdminResourceCategoryController {
   @ApiOperation("根据ID删除后台资源")
   @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult delete(@PathVariable Long id) {
+  public CommonResult<Integer> delete(@PathVariable Long id) {
     int count = resourceCategoryService.delete(id);
     if (count > 0) {
       return CommonResult.success(count);

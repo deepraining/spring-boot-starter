@@ -30,7 +30,8 @@ public class AdminRoleController {
   @ApiOperation("添加角色")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(@RequestBody @Validated AdminRole role, BindingResult bindingResult) {
+  public CommonResult<Integer> create(
+      @RequestBody @Validated AdminRole role, BindingResult bindingResult) {
     int count = roleService.create(role);
     if (count > 0) {
       return CommonResult.success(count);
@@ -41,7 +42,7 @@ public class AdminRoleController {
   @ApiOperation("修改角色")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(
+  public CommonResult<Integer> update(
       @PathVariable Long id, @RequestBody @Validated AdminRole role, BindingResult bindingResult) {
     int count = roleService.update(id, role);
     if (count > 0) {
@@ -53,7 +54,7 @@ public class AdminRoleController {
   @ApiOperation("批量删除角色")
   @RequestMapping(value = "/delete", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult delete(@RequestParam("ids") List<Long> ids) {
+  public CommonResult<Integer> delete(@RequestParam("ids") List<Long> ids) {
     int count = roleService.delete(ids);
     if (count > 0) {
       return CommonResult.success(count);
@@ -83,7 +84,7 @@ public class AdminRoleController {
   @ApiOperation("修改角色状态")
   @RequestMapping(value = "/updateStatus/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult updateStatus(
+  public CommonResult<Integer> updateStatus(
       @PathVariable Long id, @RequestParam(value = "status") Integer status) {
     AdminRole adminRole = new AdminRole();
     adminRole.setStatus(status);
@@ -113,7 +114,8 @@ public class AdminRoleController {
   @ApiOperation("给角色分配菜单")
   @RequestMapping(value = "/allocMenu", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult allocMenu(@RequestParam Long roleId, @RequestParam List<Long> menuIds) {
+  public CommonResult<Integer> allocMenu(
+      @RequestParam Long roleId, @RequestParam List<Long> menuIds) {
     int count = roleService.allocMenu(roleId, menuIds);
     return CommonResult.success(count);
   }
@@ -121,7 +123,7 @@ public class AdminRoleController {
   @ApiOperation("给角色分配资源")
   @RequestMapping(value = "/allocResource", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult allocResource(
+  public CommonResult<Integer> allocResource(
       @RequestParam Long roleId, @RequestParam List<Long> resourceIds) {
     int count = roleService.allocResource(roleId, resourceIds);
     return CommonResult.success(count);
