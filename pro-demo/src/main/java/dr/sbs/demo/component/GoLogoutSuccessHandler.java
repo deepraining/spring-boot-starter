@@ -13,7 +13,7 @@ public class GoLogoutSuccessHandler implements LogoutSuccessHandler {
       HttpServletRequest request, HttpServletResponse response, Authentication authentication)
       throws IOException, ServletException {
     response.setHeader("Content-Type", "application/json;charset=utf-8");
-    response.getWriter().print("{\"code\":200,\"message\":\"Logout succeeded\"}");
+    response.getWriter().print("{\"code\":0,\"message\":\"Logout succeeded\"}");
     response.getWriter().flush();
   }
 }

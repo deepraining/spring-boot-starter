@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dr.sbs.admin.dao.ArticleDao">
+  <resultMap id="ArticleRecordMap" type="dr.sbs.admin.dto.ArticleRecord" extends="dr.sbs.mbg.mapper.ArticleMapper.ResultMapWithBLOBs">
+    <association property="frontUser" resultMap="dr.sbs.mbg.mapper.FrontUserMapper.BaseResultMap" columnPrefix="front_user_item_"/>
+  </resultMap>
+  <select id="getList" resultMap="ArticleRecordMap">
+    SELECT
+      a.*,
+      fu.id front_user_item_id,
+      fu.username front_user_item_username,
+      fu.email front_user_item_email
+    FROM
+      article a
+    LEFT JOIN front_user fu
+      ON fu.id = a.front_user_id
+    WHERE
+      a.status = 1
+      <if test="searchKey != null and searchKey != ''">
+        AND a.title LIKE CONCAT("%", #{searchKey}, "%")
+      </if>
+    ORDER BY
+      a.id DESC
+  </select>
+  <select id="getListTotal" resultType="java.lang.Integer">
+    SELECT
+      COUNT(a.id)
+    FROM
+      article a
+    WHERE
+      a.status = 1
+      <if test="searchKey != null and searchKey != ''">
+        AND a.title LIKE CONCAT("%", #{searchKey}, "%")
+      </if>
+  </select>
+</mapper>

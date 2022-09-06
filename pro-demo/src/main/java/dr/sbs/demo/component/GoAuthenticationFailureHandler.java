@@ -15,7 +15,7 @@ public class GoAuthenticationFailureHandler implements AuthenticationFailureHand
     response.setHeader("Content-Type", "application/json;charset=utf-8");
     response
         .getWriter()
-        .print("{\"code\":500,\"message\":\"" + "Login Failed: " + exception.getMessage() + "\"}");
+        .print("{\"code\":1,\"message\":\"" + "Login Failed: " + exception.getMessage() + "\"}");
     response.getWriter().flush();
   }
 }

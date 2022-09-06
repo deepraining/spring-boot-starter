@@ -1,7 +1,7 @@
 package dr.sbs.admin.service;
 
+import dr.sbs.admin.dto.AdminUpdatePasswordParam;
 import dr.sbs.admin.dto.AdminUserParam;
-import dr.sbs.admin.dto.AdminUserUpdatePasswordParam;
 import dr.sbs.mbg.model.AdminMenu;
 import dr.sbs.mbg.model.AdminResource;
 import dr.sbs.mbg.model.AdminRole;
@@ -60,8 +60,8 @@ public interface AdminUserService {
   List<AdminMenu> getMenuList(Long userId);
 
   /** 修改密码 */
-  int updatePassword(AdminUserUpdatePasswordParam updatePasswordParam);
+  int updatePassword(AdminUpdatePasswordParam updatePasswordParam);
 
   /** 获取用户信息 */
-  UserDetails loadUserByUsername(String username);
+  UserDetails loadUserDetailsByUsername(String username);
 }

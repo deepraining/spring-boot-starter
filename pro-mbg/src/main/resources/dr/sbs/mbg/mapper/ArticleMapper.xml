@@ -8,7 +8,7 @@
     <result column="support_count" jdbcType="INTEGER" property="supportCount" />
     <result column="intro" jdbcType="VARCHAR" property="intro" />
     <result column="front_user_id" jdbcType="BIGINT" property="frontUserId" />
-    <result column="deleted" jdbcType="INTEGER" property="deleted" />
+    <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, read_count, support_count, intro, front_user_id, deleted, create_time, 
+    id, title, read_count, support_count, intro, front_user_id, `status`, create_time, 
     update_time
   </sql>
   <sql id="Blob_Column_List">
@@ -131,11 +131,11 @@
   <insert id="insert" parameterType="dr.sbs.mbg.model.Article">
     insert into `article` (id, title, read_count, 
       support_count, intro, front_user_id, 
-      deleted, create_time, update_time, 
+      `status`, create_time, update_time, 
       content)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{readCount,jdbcType=INTEGER}, 
       #{supportCount,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR}, #{frontUserId,jdbcType=BIGINT}, 
-      #{deleted,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="dr.sbs.mbg.model.Article">
@@ -159,8 +159,8 @@
       <if test="frontUserId != null">
         front_user_id,
       </if>
-      <if test="deleted != null">
-        deleted,
+      <if test="status != null">
+        `status`,
       </if>
       <if test="createTime != null">
         create_time,
@@ -191,8 +191,8 @@
       <if test="frontUserId != null">
         #{frontUserId,jdbcType=BIGINT},
       </if>
-      <if test="deleted != null">
-        #{deleted,jdbcType=INTEGER},
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -232,8 +232,8 @@
       <if test="record.frontUserId != null">
         front_user_id = #{record.frontUserId,jdbcType=BIGINT},
       </if>
-      <if test="record.deleted != null">
-        deleted = #{record.deleted,jdbcType=INTEGER},
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=TINYINT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -257,7 +257,7 @@
       support_count = #{record.supportCount,jdbcType=INTEGER},
       intro = #{record.intro,jdbcType=VARCHAR},
       front_user_id = #{record.frontUserId,jdbcType=BIGINT},
-      deleted = #{record.deleted,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       content = #{record.content,jdbcType=LONGVARCHAR}
@@ -273,7 +273,7 @@
       support_count = #{record.supportCount,jdbcType=INTEGER},
       intro = #{record.intro,jdbcType=VARCHAR},
       front_user_id = #{record.frontUserId,jdbcType=BIGINT},
-      deleted = #{record.deleted,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -298,8 +298,8 @@
       <if test="frontUserId != null">
         front_user_id = #{frontUserId,jdbcType=BIGINT},
       </if>
-      <if test="deleted != null">
-        deleted = #{deleted,jdbcType=INTEGER},
+      <if test="status != null">
+        `status` = #{status,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -320,7 +320,7 @@
       support_count = #{supportCount,jdbcType=INTEGER},
       intro = #{intro,jdbcType=VARCHAR},
       front_user_id = #{frontUserId,jdbcType=BIGINT},
-      deleted = #{deleted,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       content = #{content,jdbcType=LONGVARCHAR}
@@ -333,7 +333,7 @@
       support_count = #{supportCount,jdbcType=INTEGER},
       intro = #{intro,jdbcType=VARCHAR},
       front_user_id = #{frontUserId,jdbcType=BIGINT},
-      deleted = #{deleted,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

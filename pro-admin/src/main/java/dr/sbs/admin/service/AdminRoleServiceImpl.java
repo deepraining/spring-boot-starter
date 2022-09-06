@@ -1,9 +1,7 @@
-package dr.sbs.admin.service.impl;
+package dr.sbs.admin.service;
 
 import com.github.pagehelper.PageHelper;
 import dr.sbs.admin.dao.AdminRoleDao;
-import dr.sbs.admin.service.AdminRoleService;
-import dr.sbs.admin.service.AdminUserCacheService;
 import dr.sbs.mbg.mapper.AdminRoleMapper;
 import dr.sbs.mbg.mapper.AdminRoleMenuRelationMapper;
 import dr.sbs.mbg.mapper.AdminRoleResourceRelationMapper;

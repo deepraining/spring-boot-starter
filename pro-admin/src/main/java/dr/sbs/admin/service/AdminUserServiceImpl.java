@@ -1,16 +1,14 @@
-package dr.sbs.admin.service.impl;
+package dr.sbs.admin.service;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
 import dr.sbs.admin.bo.AdminUserDetails;
-import dr.sbs.admin.dao.AdminRoleDao;
 import dr.sbs.admin.dao.AdminUserRoleRelationDao;
+import dr.sbs.admin.dto.AdminUpdatePasswordParam;
 import dr.sbs.admin.dto.AdminUserParam;
-import dr.sbs.admin.dto.AdminUserUpdatePasswordParam;
-import dr.sbs.admin.service.AdminUserCacheService;
-import dr.sbs.admin.service.AdminUserService;
 import dr.sbs.admin.util.JwtTokenUtil;
+import dr.sbs.common.exception.ApiAssert;
 import dr.sbs.mbg.mapper.AdminLoginLogMapper;
 import dr.sbs.mbg.mapper.AdminUserMapper;
 import dr.sbs.mbg.mapper.AdminUserRoleRelationMapper;
@@ -52,7 +50,6 @@ public class AdminUserServiceImpl implements AdminUserService {
   @Autowired private AdminUserMapper userMapper;
   @Autowired private AdminUserRoleRelationMapper roleRelationMapper;
   @Autowired private AdminUserRoleRelationDao roleRelationDao;
-  @Autowired private AdminRoleDao roleDao;
   @Autowired private AdminLoginLogMapper loginLogMapper;
   @Autowired private AdminUserCacheService userCacheService;
 
@@ -83,7 +80,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     example.createCriteria().andUsernameEqualTo(adminUser.getUsername());
     List<AdminUser> adminUserList = userMapper.selectByExample(example);
     if (adminUserList.size() > 0) {
-      return null;
+      ApiAssert.fail("该用户名已被注册");
     }
     // 将密码进行加密操作
     String encodePassword = passwordEncoder.encode(adminUser.getPassword());
@@ -97,7 +94,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     String token = null;
     // 密码需要客户端加密后传递
     try {
-      UserDetails userDetails = loadUserByUsername(username);
+      UserDetails userDetails = loadUserDetailsByUsername(username);
       if (!passwordEncoder.matches(password, userDetails.getPassword())) {
         throw new BadCredentialsException("密码不正确");
       }
@@ -237,7 +234,7 @@ public class AdminUserServiceImpl implements AdminUserService {
   }
 
   @Override
-  public int updatePassword(AdminUserUpdatePasswordParam param) {
+  public int updatePassword(AdminUpdatePasswordParam param) {
     if (StrUtil.isEmpty(param.getUsername())
         || StrUtil.isEmpty(param.getOldPassword())
         || StrUtil.isEmpty(param.getNewPassword())) {
@@ -260,7 +257,7 @@ public class AdminUserServiceImpl implements AdminUserService {
   }
 
   @Override
-  public UserDetails loadUserByUsername(String username) {
+  public UserDetails loadUserDetailsByUsername(String username) {
     // 获取用户信息
     AdminUser adminUser = getUserByUsername(username);
     if (adminUser != null) {

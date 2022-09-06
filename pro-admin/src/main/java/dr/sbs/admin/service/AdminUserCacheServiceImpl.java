@@ -1,10 +1,7 @@
-package dr.sbs.admin.service.impl;
+package dr.sbs.admin.service;
 
 import cn.hutool.core.collection.CollUtil;
 import dr.sbs.admin.dao.AdminUserRoleRelationDao;
-import dr.sbs.admin.service.AdminUserCacheService;
-import dr.sbs.admin.service.AdminUserService;
-import dr.sbs.admin.service.RedisService;
 import dr.sbs.mbg.mapper.AdminUserRoleRelationMapper;
 import dr.sbs.mbg.model.AdminResource;
 import dr.sbs.mbg.model.AdminUser;

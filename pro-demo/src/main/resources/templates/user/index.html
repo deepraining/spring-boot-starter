@@ -48,7 +48,7 @@
       if (res.message) {
         alert(res.message);
 
-        if (res.code < 300) location.href = '/';
+        if (res.code === 0) location.href = '/';
       }
     });
   }, !1);

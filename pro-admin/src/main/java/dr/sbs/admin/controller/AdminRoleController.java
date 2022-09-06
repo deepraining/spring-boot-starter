@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +30,7 @@ public class AdminRoleController {
   @ApiOperation("添加角色")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(@RequestBody AdminRole role) {
+  public CommonResult create(@RequestBody @Validated AdminRole role, BindingResult bindingResult) {
     int count = roleService.create(role);
     if (count > 0) {
       return CommonResult.success(count);
@@ -39,7 +41,8 @@ public class AdminRoleController {
   @ApiOperation("修改角色")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(@PathVariable Long id, @RequestBody AdminRole role) {
+  public CommonResult update(
+      @PathVariable Long id, @RequestBody @Validated AdminRole role, BindingResult bindingResult) {
     int count = roleService.update(id, role);
     if (count > 0) {
       return CommonResult.success(count);

@@ -1,6 +1,5 @@
-package dr.sbs.admin.service.impl;
+package dr.sbs.admin.service;
 
-import dr.sbs.admin.service.RedisService;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,6 +26,11 @@ public class RedisServiceImpl implements RedisService {
   @Override
   public Object get(String key) {
     return redisTemplate.opsForValue().get(key);
+  }
+
+  @Override
+  public List<Object> multiGet(List<String> keys) {
+    return redisTemplate.opsForValue().multiGet(keys);
   }
 
   @Override
@@ -164,6 +168,16 @@ public class RedisServiceImpl implements RedisService {
   }
 
   @Override
+  public Object lPop(String key) {
+    return redisTemplate.opsForList().rightPop(key);
+  }
+
+  @Override
+  public Object lPopFirst(String key) {
+    return redisTemplate.opsForList().leftPop(key);
+  }
+
+  @Override
   public Long lPush(String key, Object value) {
     return redisTemplate.opsForList().rightPush(key, value);
   }
@@ -171,6 +185,18 @@ public class RedisServiceImpl implements RedisService {
   @Override
   public Long lPush(String key, Object value, long time) {
     Long index = redisTemplate.opsForList().rightPush(key, value);
+    expire(key, time);
+    return index;
+  }
+
+  @Override
+  public Long lPushFirst(String key, Object value) {
+    return redisTemplate.opsForList().leftPush(key, value);
+  }
+
+  @Override
+  public Long lPushFirst(String key, Object value, long time) {
+    Long index = redisTemplate.opsForList().leftPush(key, value);
     expire(key, time);
     return index;
   }

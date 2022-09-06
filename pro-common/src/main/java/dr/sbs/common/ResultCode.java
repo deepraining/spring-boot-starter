@@ -1,16 +1,16 @@
 package dr.sbs.common;
 
 public enum ResultCode implements IErrorCode {
-  SUCCESS(200, "Operation Succeeded"),
-  //  SUCCESS(200, "操作成功"),
-  FAILED(500, "Operation Failed"),
-  //  FAILED(500, "操作失败"),
-  VALIDATE_FAILED(400, "Check parameters Failed"),
-  //  VALIDATE_FAILED(400, "参数检验失败"),
-  UNAUTHORIZED(401, "Not Logged In or Token Is Expired"),
-  //  UNAUTHORIZED(401, "未登录或 token 已经过期"),
-  FORBIDDEN(403, "No Privileges");
-  //  FORBIDDEN(403, "没有相关权限");
+  //  SUCCESS(0, "Operation Succeeded"),
+  SUCCESS(0, "操作成功"),
+  //  FAILED(1, "Operation Failed"),
+  FAILED(1, "操作失败"),
+  //  VALIDATE_FAILED(2, "Check parameters Failed"),
+  VALIDATE_FAILED(2, "参数检验失败"),
+  //  UNAUTHORIZED(3, "Not Logged In or Token Is Expired"),
+  UNAUTHORIZED(3, "未登录或 token 已经过期"),
+  //  FORBIDDEN(4, "No Privileges");
+  FORBIDDEN(4, "没有相关权限");
   private long code;
   private String message;
 

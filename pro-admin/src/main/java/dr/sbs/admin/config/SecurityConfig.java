@@ -90,7 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   public UserDetailsService userDetailsService() {
     // 获取登录用户信息
-    return username -> userService.loadUserByUsername(username);
+    return username -> userService.loadUserDetailsByUsername(username);
   }
 
   @Bean

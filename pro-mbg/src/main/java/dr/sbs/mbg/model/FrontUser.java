@@ -35,12 +35,12 @@ public class FrontUser implements Serializable {
     private String password;
 
     /**
-     * deleted or not
+     * status(1: normal, 0: blocked)
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "deleted or not", position = 5)
-    private Integer deleted;
+    @ApiModelProperty(value = "status(1: normal, 0: blocked)", position = 5)
+    private Byte status;
 
     /**
      * create time
@@ -92,12 +92,12 @@ public class FrontUser implements Serializable {
         this.password = password;
     }
 
-    public Integer getDeleted() {
-        return deleted;
+    public Byte getStatus() {
+        return status;
     }
 
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {
@@ -126,7 +126,7 @@ public class FrontUser implements Serializable {
         sb.append(", username=").append(username);
         sb.append(", email=").append(email);
         sb.append(", password=").append(password);
-        sb.append(", deleted=").append(deleted);
+        sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

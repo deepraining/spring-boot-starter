@@ -1,8 +1,7 @@
-package dr.sbs.admin.service.impl;
+package dr.sbs.admin.service;
 
 import com.github.pagehelper.PageHelper;
 import dr.sbs.admin.dto.AdminMenuNode;
-import dr.sbs.admin.service.AdminMenuService;
 import dr.sbs.mbg.mapper.AdminMenuMapper;
 import dr.sbs.mbg.model.AdminMenu;
 import dr.sbs.mbg.model.AdminMenuExample;

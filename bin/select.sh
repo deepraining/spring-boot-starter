@@ -18,6 +18,7 @@ if [ -z $1 ]; then
   index=1
 elif [ "`echo $1|sed 's/[^0-9]//g'`" != $1 ]; then
   echo '[index] need number'
+  exit 1
 else
   index=$1
 fi

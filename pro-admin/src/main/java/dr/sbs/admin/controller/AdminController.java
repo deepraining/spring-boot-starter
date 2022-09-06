@@ -1,8 +1,8 @@
 package dr.sbs.admin.controller;
 
 import dr.sbs.admin.dto.AdminLoginParam;
+import dr.sbs.admin.dto.AdminUpdatePasswordParam;
 import dr.sbs.admin.dto.AdminUserParam;
-import dr.sbs.admin.dto.AdminUserUpdatePasswordParam;
 import dr.sbs.admin.service.AdminUserService;
 import dr.sbs.common.CommonPage;
 import dr.sbs.common.CommonResult;
@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +44,7 @@ public class AdminController {
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult<AdminUser> register(
-      @RequestBody AdminUserParam adminUserParam, BindingResult result) {
+      @RequestBody @Validated AdminUserParam adminUserParam, BindingResult bindingResult) {
     AdminUser adminUser = userService.register(adminUserParam);
     if (adminUser == null) {
       CommonResult.failed();
@@ -54,7 +55,8 @@ public class AdminController {
   @ApiOperation(value = "登录以后返回token")
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult login(@RequestBody AdminLoginParam adminLoginParam, BindingResult result) {
+  public CommonResult login(
+      @RequestBody @Validated AdminLoginParam adminLoginParam, BindingResult bindingResult) {
     String token = userService.login(adminLoginParam.getUsername(), adminLoginParam.getPassword());
     if (token == null) {
       return CommonResult.validateFailed("用户名或密码错误");
@@ -91,9 +93,10 @@ public class AdminController {
     AdminUser adminUser = userService.getUserByUsername(username);
     Map<String, Object> data = new HashMap<>();
     data.put("username", adminUser.getUsername());
+    data.put("nickname", adminUser.getNickname());
+    data.put("avatar", adminUser.getAvatar());
     data.put("roles", new String[] {"NONE"});
     data.put("menus", userService.getMenuList(adminUser.getId()));
-    data.put("avatar", adminUser.getAvatar());
     return CommonResult.success(data);
   }
 
@@ -126,7 +129,10 @@ public class AdminController {
   @ApiOperation("修改指定用户信息")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(@PathVariable Long id, @RequestBody AdminUser adminUser) {
+  public CommonResult update(
+      @PathVariable Long id,
+      @RequestBody @Validated AdminUser adminUser,
+      BindingResult bindingResult) {
     int count = userService.update(id, adminUser);
     if (count > 0) {
       return CommonResult.success(count);
@@ -138,7 +144,8 @@ public class AdminController {
   @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult updatePassword(
-      @RequestBody AdminUserUpdatePasswordParam updatePasswordParam) {
+      @RequestBody @Validated AdminUpdatePasswordParam updatePasswordParam,
+      BindingResult bindingResult) {
     int status = userService.updatePassword(updatePasswordParam);
     if (status > 0) {
       return CommonResult.success(status);

@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +24,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Api(tags = "AdminResourceController", description = "后台资源管理")
 @RequestMapping("/adminResource")
 public class AdminResourceController {
-
   @Autowired private AdminResourceService resourceService;
   @Autowired private DynamicSecurityMetadataSource dynamicSecurityMetadataSource;
 
   @ApiOperation("添加后台资源")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(@RequestBody AdminResource adminResource) {
+  public CommonResult create(
+      @RequestBody @Validated AdminResource adminResource, BindingResult bindingResult) {
     int count = resourceService.create(adminResource);
     dynamicSecurityMetadataSource.clearDataSource();
     if (count > 0) {
@@ -42,7 +44,10 @@ public class AdminResourceController {
   @ApiOperation("修改后台资源")
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult update(@PathVariable Long id, @RequestBody AdminResource adminResource) {
+  public CommonResult update(
+      @PathVariable Long id,
+      @RequestBody @Validated AdminResource adminResource,
+      BindingResult bindingResult) {
     int count = resourceService.update(id, adminResource);
     dynamicSecurityMetadataSource.clearDataSource();
     if (count > 0) {

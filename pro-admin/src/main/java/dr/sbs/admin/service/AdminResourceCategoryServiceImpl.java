@@ -1,6 +1,5 @@
-package dr.sbs.admin.service.impl;
+package dr.sbs.admin.service;
 
-import dr.sbs.admin.service.AdminResourceCategoryService;
 import dr.sbs.mbg.mapper.AdminResourceCategoryMapper;
 import dr.sbs.mbg.model.AdminResourceCategory;
 import dr.sbs.mbg.model.AdminResourceCategoryExample;

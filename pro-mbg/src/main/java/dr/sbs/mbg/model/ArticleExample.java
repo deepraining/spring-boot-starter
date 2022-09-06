@@ -485,63 +485,63 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andDeletedIsNull() {
-            addCriterion("deleted is null");
+        public Criteria andStatusIsNull() {
+            addCriterion("`status` is null");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedIsNotNull() {
-            addCriterion("deleted is not null");
+        public Criteria andStatusIsNotNull() {
+            addCriterion("`status` is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedEqualTo(Integer value) {
-            addCriterion("deleted =", value, "deleted");
+        public Criteria andStatusEqualTo(Byte value) {
+            addCriterion("`status` =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedNotEqualTo(Integer value) {
-            addCriterion("deleted <>", value, "deleted");
+        public Criteria andStatusNotEqualTo(Byte value) {
+            addCriterion("`status` <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedGreaterThan(Integer value) {
-            addCriterion("deleted >", value, "deleted");
+        public Criteria andStatusGreaterThan(Byte value) {
+            addCriterion("`status` >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedGreaterThanOrEqualTo(Integer value) {
-            addCriterion("deleted >=", value, "deleted");
+        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
+            addCriterion("`status` >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedLessThan(Integer value) {
-            addCriterion("deleted <", value, "deleted");
+        public Criteria andStatusLessThan(Byte value) {
+            addCriterion("`status` <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedLessThanOrEqualTo(Integer value) {
-            addCriterion("deleted <=", value, "deleted");
+        public Criteria andStatusLessThanOrEqualTo(Byte value) {
+            addCriterion("`status` <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedIn(List<Integer> values) {
-            addCriterion("deleted in", values, "deleted");
+        public Criteria andStatusIn(List<Byte> values) {
+            addCriterion("`status` in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedNotIn(List<Integer> values) {
-            addCriterion("deleted not in", values, "deleted");
+        public Criteria andStatusNotIn(List<Byte> values) {
+            addCriterion("`status` not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedBetween(Integer value1, Integer value2) {
-            addCriterion("deleted between", value1, value2, "deleted");
+        public Criteria andStatusBetween(Byte value1, Byte value2) {
+            addCriterion("`status` between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andDeletedNotBetween(Integer value1, Integer value2) {
-            addCriterion("deleted not between", value1, value2, "deleted");
+        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
+            addCriterion("`status` not between", value1, value2, "status");
             return (Criteria) this;
         }
 

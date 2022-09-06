@@ -28,7 +28,7 @@
   const id = location.href.split('/').slice(-1)[0];
 
   fetch(`/api/article/record/${id}`).then(res => res.json()).then(res => {
-    if (res.code < 300) {
+    if (res.code === 0) {
       titleEl.value = res.data.title;
       introEl.value = res.data.intro;
       contentEl.value = res.data.content;
@@ -61,7 +61,7 @@
       if (res.message) {
         alert(res.message);
 
-        if (res.code < 300) location.href = '/user';
+        if (res.code === 0) location.href = '/user';
       }
     });
   }, !1);

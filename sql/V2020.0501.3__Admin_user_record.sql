@@ -26,10 +26,10 @@ INSERT INTO `admin_menu` VALUES ('22', '21', '用户列表', '1', '0', 'umsAdmin
 INSERT INTO `admin_menu` VALUES ('23', '21', '角色列表', '1', '0', 'umsRole', 'ums-role', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 INSERT INTO `admin_menu` VALUES ('24', '21', '菜单列表', '1', '0', 'umsMenu', 'ums-menu', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 INSERT INTO `admin_menu` VALUES ('25', '21', '资源列表', '1', '0', 'umsResource', 'ums-resource', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_menu` VALUES ('26', '0', '前端用户', '0', '0', 'frontUser', 'frontUser', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_menu` VALUES ('27', '26', '前端用户列表', '1', '0', 'frontUserList', 'frontUser-list', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_menu` VALUES ('28', '0', '文章', '0', '0', 'article', 'article', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
-INSERT INTO `admin_menu` VALUES ('29', '28', '文章列表', '1', '0', 'articleList', 'article-list', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_menu` VALUES ('26', '0', '前端用户', '0', '0', 'frontUser', 'angle-right', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_menu` VALUES ('27', '26', '前端用户列表', '1', '0', 'frontUserList', 'angle-double-right', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_menu` VALUES ('28', '0', '文章', '0', '0', 'article', 'angle-right', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
+INSERT INTO `admin_menu` VALUES ('29', '28', '文章列表', '1', '0', 'articleList', 'angle-double-right', '0', '2020-01-01 01:01:01', '2020-01-01 01:01:01');
 
 -- ----------------------------
 -- Records of admin_resource

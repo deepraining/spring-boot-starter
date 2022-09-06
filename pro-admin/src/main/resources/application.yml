@@ -50,6 +50,10 @@ secure:
       - /**/*.css
       - /**/*.png
       - /**/*.ico
+      - /**/*.eot
+      - /**/*.ttf
+      - /**/*.woff
+      - /**/*.woff2
       - /webjars/springfox-swagger-ui/**
       - /actuator/**
       - /druid/**

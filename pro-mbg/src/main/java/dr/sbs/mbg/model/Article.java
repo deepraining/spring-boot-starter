@@ -50,12 +50,12 @@ public class Article implements Serializable {
     private Long frontUserId;
 
     /**
-     * deleted or not
+     * status(1: normal, 0: blocked)
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "deleted or not", position = 7)
-    private Integer deleted;
+    @ApiModelProperty(value = "status(1: normal, 0: blocked)", position = 7)
+    private Byte status;
 
     /**
      * create time
@@ -131,12 +131,12 @@ public class Article implements Serializable {
         this.frontUserId = frontUserId;
     }
 
-    public Integer getDeleted() {
-        return deleted;
+    public Byte getStatus() {
+        return status;
     }
 
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Date getCreateTime() {
@@ -175,7 +175,7 @@ public class Article implements Serializable {
         sb.append(", supportCount=").append(supportCount);
         sb.append(", intro=").append(intro);
         sb.append(", frontUserId=").append(frontUserId);
-        sb.append(", deleted=").append(deleted);
+        sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", content=").append(content);

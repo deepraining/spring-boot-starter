@@ -37,4 +37,16 @@ public class CommonPage<T> {
 
     return result;
   }
+
+  public static <T> CommonPage<T> toPage(PageInfo<T> pageInfo) {
+    CommonPage<T> result = new CommonPage<T>();
+
+    result.setPages(pageInfo.getPages());
+    result.setPageNum(pageInfo.getPageNum());
+    result.setPageSize(pageInfo.getPageSize());
+    result.setTotal(pageInfo.getTotal());
+    result.setList(pageInfo.getList());
+
+    return result;
+  }
 }

@@ -13,7 +13,7 @@ public class GoAuthenticationSuccessHandler implements AuthenticationSuccessHand
       HttpServletRequest request, HttpServletResponse response, Authentication authentication)
       throws IOException, ServletException {
     response.setHeader("Content-Type", "application/json;charset=utf-8");
-    response.getWriter().print("{\"code\":200,\"message\":\"Login succeeded\"}");
+    response.getWriter().print("{\"code\":0,\"message\":\"Login succeeded\"}");
     response.getWriter().flush();
   }
 }

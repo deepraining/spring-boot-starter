@@ -1,9 +1,7 @@
-package dr.sbs.admin.service.impl;
+package dr.sbs.admin.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.github.pagehelper.PageHelper;
-import dr.sbs.admin.service.AdminResourceService;
-import dr.sbs.admin.service.AdminUserCacheService;
 import dr.sbs.mbg.mapper.AdminResourceMapper;
 import dr.sbs.mbg.model.AdminResource;
 import dr.sbs.mbg.model.AdminResourceExample;

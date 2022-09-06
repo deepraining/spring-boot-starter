@@ -8,13 +8,15 @@ import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-/** 后台资源分类管理Controller */
+/** 后台资源分类管理 */
 @Controller
 @Api(tags = "AdminResourceCategoryController", description = "后台资源分类管理")
 @RequestMapping("/adminResourceCategory")
@@ -32,7 +34,9 @@ public class AdminResourceCategoryController {
   @ApiOperation("添加后台资源分类")
   @RequestMapping(value = "/create", method = RequestMethod.POST)
   @ResponseBody
-  public CommonResult create(@RequestBody AdminResourceCategory adminResourceCategory) {
+  public CommonResult create(
+      @RequestBody @Validated AdminResourceCategory adminResourceCategory,
+      BindingResult bindingResult) {
     int count = resourceCategoryService.create(adminResourceCategory);
     if (count > 0) {
       return CommonResult.success(count);
@@ -45,7 +49,9 @@ public class AdminResourceCategoryController {
   @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
   @ResponseBody
   public CommonResult update(
-      @PathVariable Long id, @RequestBody AdminResourceCategory adminResourceCategory) {
+      @PathVariable Long id,
+      @RequestBody @Validated AdminResourceCategory adminResourceCategory,
+      BindingResult bindingResult) {
     int count = resourceCategoryService.update(id, adminResourceCategory);
     if (count > 0) {
       return CommonResult.success(count);

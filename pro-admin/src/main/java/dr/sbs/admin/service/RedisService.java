@@ -16,6 +16,9 @@ public interface RedisService {
   /** 获取属性 */
   Object get(String key);
 
+  /** 批量获取属性 */
+  List<Object> multiGet(List<String> key);
+
   /** 删除属性 */
   Boolean del(String key);
 
@@ -94,11 +97,23 @@ public interface RedisService {
   /** 根据索引获取List中的属性 */
   Object lIndex(String key, long index);
 
+  /** 获取List结构中的属性 */
+  Object lPop(String key);
+
+  /** 获取List结构中的第一个属性 */
+  Object lPopFirst(String key);
+
   /** 向List结构中添加属性 */
   Long lPush(String key, Object value);
 
   /** 向List结构中添加属性 */
   Long lPush(String key, Object value, long time);
+
+  /** 向List结构中添加属性到第一个 */
+  Long lPushFirst(String key, Object value);
+
+  /** 向List结构中添加属性到第一个 */
+  Long lPushFirst(String key, Object value, long time);
 
   /** 向List结构中批量添加属性 */
   Long lPushAll(String key, Object... values);
