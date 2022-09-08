@@ -1,4 +1,4 @@
-package dr.sbs.front.config;
+package dr.sbs.search.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,14 +20,14 @@ public class Swagger2Config {
     return new Docket(DocumentationType.SWAGGER_2)
         .apiInfo(apiInfo())
         .select()
-        .apis(RequestHandlerSelectors.basePackage("dr.sbs.front.controller"))
+        .apis(RequestHandlerSelectors.basePackage("dr.sbs.search.controller"))
         .paths(PathSelectors.any())
         .build();
   }
 
   private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
-        .title("Spring Boot Starter Front Application")
+        .title("Spring Boot Starter Search Application")
         .version("1.0")
         .build();
   }

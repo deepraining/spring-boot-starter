@@ -21,6 +21,7 @@
 - `pro-mbg`: Mybatis Generator
 - `pro-admin`: 使用 JWT 保持登陆状态的后台管理应用，包括基于角色的访问控制（RBAC），示例前端项目 [sbs-admin-web](https://github.com/deepraining/sbs-admin-web)
 - `pro-front`: 使用 Session-Cookie 保持登陆状态的前端应用
+- `pro-search`: 使用 [ElasticSearch](https://www.elastic.co/) 来做文本搜索引擎
 
 ## 扩展 Gradle Tasks
 
@@ -151,3 +152,7 @@ spring:
 
 - [mall](https://github.com/macrozheng/mall)
 - [halo](https://github.com/halo-dev/halo)
+
+## 注意
+
+- 使用 `pro-search` 时，ElasticSearch 服务器与客户端版本最好严格一致，本项目的客户端版本是 `v6.4.3`
