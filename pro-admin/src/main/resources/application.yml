@@ -1,11 +1,6 @@
 server:
   port: 9002
   use-forward-headers: true
-  undertow:
-    io-threads: 2
-    worker-threads: 36
-    buffer-size: 1024
-    directBuffers: true
   servlet:
     session:
       timeout: 86400s
@@ -61,6 +56,8 @@ secure:
       - /admin/register
       - /admin/info
       - /admin/logout
+      - /upload
+      - /uploadUrl
 
 logging:
   level:
@@ -73,6 +70,14 @@ jwt:
   secret: secret
   expiration: 604800
   tokenHead: Bearer
+
+# 腾讯云存储
+qcloudCos:
+  secretId: secretId
+  secretKey: secretKey
+  bucket: bucket
+  region: region
+  domain: domain
 
 app:
   # snowflake workerId and dataCenterId, see "hutool IdUtil.createSnowflake(workerId, dataCenterId)"

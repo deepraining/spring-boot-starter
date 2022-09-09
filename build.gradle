@@ -42,16 +42,13 @@ subprojects {
 
   dependencies {
     // spring boot
-    implementation('org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE') {
-      exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-    }
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:2.1.4.RELEASE'
     implementation 'org.springframework.boot:spring-boot-devtools:2.1.4.RELEASE'
     implementation 'org.springframework.data:spring-data-commons:2.1.4.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-aop:2.1.4.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-logging:2.1.4.RELEASE'
     implementation 'org.springframework.boot:spring-boot-starter-actuator:2.1.4.RELEASE'
-    implementation 'org.springframework.boot:spring-boot-starter-undertow:2.1.4.RELEASE'
 
     // database
     implementation 'org.mybatis:mybatis:3.5.1'

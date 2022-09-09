@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="dr.sbs.mbg.model.Article">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="read_count" jdbcType="INTEGER" property="readCount" />
-    <result column="support_count" jdbcType="INTEGER" property="supportCount" />
     <result column="intro" jdbcType="VARCHAR" property="intro" />
     <result column="front_user_id" jdbcType="BIGINT" property="frontUserId" />
+    <result column="read_count" jdbcType="INTEGER" property="readCount" />
+    <result column="support_count" jdbcType="INTEGER" property="supportCount" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, read_count, support_count, intro, front_user_id, `status`, create_time, 
+    id, title, intro, front_user_id, read_count, support_count, `status`, create_time, 
     update_time
   </sql>
   <sql id="Blob_Column_List">
@@ -129,12 +129,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="dr.sbs.mbg.model.Article">
-    insert into `article` (id, title, read_count, 
-      support_count, intro, front_user_id, 
+    insert into `article` (id, title, intro, 
+      front_user_id, read_count, support_count, 
       `status`, create_time, update_time, 
       content)
-    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{readCount,jdbcType=INTEGER}, 
-      #{supportCount,jdbcType=INTEGER}, #{intro,jdbcType=VARCHAR}, #{frontUserId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{intro,jdbcType=VARCHAR}, 
+      #{frontUserId,jdbcType=BIGINT}, #{readCount,jdbcType=INTEGER}, #{supportCount,jdbcType=INTEGER}, 
       #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{content,jdbcType=LONGVARCHAR})
   </insert>
@@ -147,17 +147,17 @@
       <if test="title != null">
         title,
       </if>
-      <if test="readCount != null">
-        read_count,
-      </if>
-      <if test="supportCount != null">
-        support_count,
-      </if>
       <if test="intro != null">
         intro,
       </if>
       <if test="frontUserId != null">
         front_user_id,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="supportCount != null">
+        support_count,
       </if>
       <if test="status != null">
         `status`,
@@ -179,17 +179,17 @@
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="readCount != null">
-        #{readCount,jdbcType=INTEGER},
-      </if>
-      <if test="supportCount != null">
-        #{supportCount,jdbcType=INTEGER},
-      </if>
       <if test="intro != null">
         #{intro,jdbcType=VARCHAR},
       </if>
       <if test="frontUserId != null">
         #{frontUserId,jdbcType=BIGINT},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="supportCount != null">
+        #{supportCount,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -220,17 +220,17 @@
       <if test="record.title != null">
         title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.readCount != null">
-        read_count = #{record.readCount,jdbcType=INTEGER},
-      </if>
-      <if test="record.supportCount != null">
-        support_count = #{record.supportCount,jdbcType=INTEGER},
-      </if>
       <if test="record.intro != null">
         intro = #{record.intro,jdbcType=VARCHAR},
       </if>
       <if test="record.frontUserId != null">
         front_user_id = #{record.frontUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.readCount != null">
+        read_count = #{record.readCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.supportCount != null">
+        support_count = #{record.supportCount,jdbcType=INTEGER},
       </if>
       <if test="record.status != null">
         `status` = #{record.status,jdbcType=TINYINT},
@@ -253,10 +253,10 @@
     update `article`
     set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
-      read_count = #{record.readCount,jdbcType=INTEGER},
-      support_count = #{record.supportCount,jdbcType=INTEGER},
       intro = #{record.intro,jdbcType=VARCHAR},
       front_user_id = #{record.frontUserId,jdbcType=BIGINT},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      support_count = #{record.supportCount,jdbcType=INTEGER},
       `status` = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
@@ -269,10 +269,10 @@
     update `article`
     set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
-      read_count = #{record.readCount,jdbcType=INTEGER},
-      support_count = #{record.supportCount,jdbcType=INTEGER},
       intro = #{record.intro,jdbcType=VARCHAR},
       front_user_id = #{record.frontUserId,jdbcType=BIGINT},
+      read_count = #{record.readCount,jdbcType=INTEGER},
+      support_count = #{record.supportCount,jdbcType=INTEGER},
       `status` = #{record.status,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
@@ -286,17 +286,17 @@
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="readCount != null">
-        read_count = #{readCount,jdbcType=INTEGER},
-      </if>
-      <if test="supportCount != null">
-        support_count = #{supportCount,jdbcType=INTEGER},
-      </if>
       <if test="intro != null">
         intro = #{intro,jdbcType=VARCHAR},
       </if>
       <if test="frontUserId != null">
         front_user_id = #{frontUserId,jdbcType=BIGINT},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=INTEGER},
+      </if>
+      <if test="supportCount != null">
+        support_count = #{supportCount,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         `status` = #{status,jdbcType=TINYINT},
@@ -316,10 +316,10 @@
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="dr.sbs.mbg.model.Article">
     update `article`
     set title = #{title,jdbcType=VARCHAR},
-      read_count = #{readCount,jdbcType=INTEGER},
-      support_count = #{supportCount,jdbcType=INTEGER},
       intro = #{intro,jdbcType=VARCHAR},
       front_user_id = #{frontUserId,jdbcType=BIGINT},
+      read_count = #{readCount,jdbcType=INTEGER},
+      support_count = #{supportCount,jdbcType=INTEGER},
       `status` = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -329,10 +329,10 @@
   <update id="updateByPrimaryKey" parameterType="dr.sbs.mbg.model.Article">
     update `article`
     set title = #{title,jdbcType=VARCHAR},
-      read_count = #{readCount,jdbcType=INTEGER},
-      support_count = #{supportCount,jdbcType=INTEGER},
       intro = #{intro,jdbcType=VARCHAR},
       front_user_id = #{frontUserId,jdbcType=BIGINT},
+      read_count = #{readCount,jdbcType=INTEGER},
+      support_count = #{supportCount,jdbcType=INTEGER},
       `status` = #{status,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

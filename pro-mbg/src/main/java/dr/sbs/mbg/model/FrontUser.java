@@ -10,52 +10,52 @@ public class FrontUser implements Serializable {
     private Long id;
 
     /**
-     * username
+     * 用户名
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "username", position = 2)
+    @ApiModelProperty(value = "用户名", position = 2)
     private String username;
 
     /**
-     * email
+     * 电子邮箱
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "email", position = 3)
+    @ApiModelProperty(value = "电子邮箱", position = 3)
     private String email;
 
     /**
-     * password(encrypted)
+     * 密码
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "password(encrypted)", position = 4)
+    @ApiModelProperty(value = "密码", position = 4)
     @JsonIgnore
     private String password;
 
     /**
-     * status(1: normal, 0: blocked)
+     * 状态(1: 可用, 0: 禁用)
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "status(1: normal, 0: blocked)", position = 5)
+    @ApiModelProperty(value = "状态(1: 可用, 0: 禁用)", position = 5)
     private Byte status;
 
     /**
-     * create time
+     * 创建时间
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "create time", position = 6)
+    @ApiModelProperty(value = "创建时间", position = 6)
     private Date createTime;
 
     /**
-     * update time
+     * 更新时间
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "update time", position = 7)
+    @ApiModelProperty(value = "更新时间", position = 7)
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;

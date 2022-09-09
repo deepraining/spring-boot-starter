@@ -1,4 +1,15 @@
 -- ----------------------------
+-- 一般而言，需要在 `/etc/mysql/mysql.conf.d/mysqld.cnf` 尾部
+-- 加上 `default-time-zone = '+08:00'`
+-- 设定数据库时区为 UTC+0800，因为CST 时区会导致时间差问题
+-- ----------------------------
+
+-- ----------------------------
+-- Database definition
+-- ----------------------------
+-- CREATE DATABASE `starter` DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
 -- Table structure for admin_user
 -- ----------------------------
 CREATE TABLE `admin_user` (

@@ -10,75 +10,75 @@ public class Article implements Serializable {
     private Long id;
 
     /**
-     * title
+     * 标题
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "title", position = 2)
+    @ApiModelProperty(value = "标题", position = 2)
     private String title;
 
     /**
-     * read count
+     * 简介
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "read count", position = 3)
-    private Integer readCount;
-
-    /**
-     * support count
-     *
-     * @mbg.generated
-     */
-    @ApiModelProperty(value = "support count", position = 4)
-    private Integer supportCount;
-
-    /**
-     * article summary
-     *
-     * @mbg.generated
-     */
-    @ApiModelProperty(value = "article summary", position = 5)
+    @ApiModelProperty(value = "简介", position = 3)
     private String intro;
 
     /**
-     * creator front_user id
+     * 创建者 front_user id
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "creator front_user id", position = 6)
+    @ApiModelProperty(value = "创建者 front_user id", position = 4)
     private Long frontUserId;
 
     /**
-     * status(1: normal, 0: blocked)
+     * 阅读数
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "status(1: normal, 0: blocked)", position = 7)
+    @ApiModelProperty(value = "阅读数", position = 5)
+    private Integer readCount;
+
+    /**
+     * 点赞数
+     *
+     * @mbg.generated
+     */
+    @ApiModelProperty(value = "点赞数", position = 6)
+    private Integer supportCount;
+
+    /**
+     * 状态(1: 可用, 0: 禁用)
+     *
+     * @mbg.generated
+     */
+    @ApiModelProperty(value = "状态(1: 可用, 0: 禁用)", position = 7)
     private Byte status;
 
     /**
-     * create time
+     * 创建时间
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "create time", position = 8)
+    @ApiModelProperty(value = "创建时间", position = 8)
     private Date createTime;
 
     /**
-     * update time
+     * 更新时间
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "update time", position = 9)
+    @ApiModelProperty(value = "更新时间", position = 9)
     private Date updateTime;
 
     /**
-     * article content
+     * 内容
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "article content", position = 10)
+    @ApiModelProperty(value = "内容", position = 10)
     private String content;
 
     private static final long serialVersionUID = 1L;
@@ -99,22 +99,6 @@ public class Article implements Serializable {
         this.title = title;
     }
 
-    public Integer getReadCount() {
-        return readCount;
-    }
-
-    public void setReadCount(Integer readCount) {
-        this.readCount = readCount;
-    }
-
-    public Integer getSupportCount() {
-        return supportCount;
-    }
-
-    public void setSupportCount(Integer supportCount) {
-        this.supportCount = supportCount;
-    }
-
     public String getIntro() {
         return intro;
     }
@@ -129,6 +113,22 @@ public class Article implements Serializable {
 
     public void setFrontUserId(Long frontUserId) {
         this.frontUserId = frontUserId;
+    }
+
+    public Integer getReadCount() {
+        return readCount;
+    }
+
+    public void setReadCount(Integer readCount) {
+        this.readCount = readCount;
+    }
+
+    public Integer getSupportCount() {
+        return supportCount;
+    }
+
+    public void setSupportCount(Integer supportCount) {
+        this.supportCount = supportCount;
     }
 
     public Byte getStatus() {
@@ -171,10 +171,10 @@ public class Article implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", title=").append(title);
-        sb.append(", readCount=").append(readCount);
-        sb.append(", supportCount=").append(supportCount);
         sb.append(", intro=").append(intro);
         sb.append(", frontUserId=").append(frontUserId);
+        sb.append(", readCount=").append(readCount);
+        sb.append(", supportCount=").append(supportCount);
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);

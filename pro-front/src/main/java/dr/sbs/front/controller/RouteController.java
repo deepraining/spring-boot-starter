@@ -32,6 +32,11 @@ public class RouteController {
     return "user/index";
   }
 
+  @RequestMapping(value = "user/chat", method = RequestMethod.GET)
+  public String userChat() {
+    return "user/chat";
+  }
+
   @RequestMapping(value = "article/create", method = RequestMethod.GET)
   public String articleCreate() {
     return "article/create";

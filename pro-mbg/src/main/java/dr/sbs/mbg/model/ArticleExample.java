@@ -235,126 +235,6 @@ public class ArticleExample {
             return (Criteria) this;
         }
 
-        public Criteria andReadCountIsNull() {
-            addCriterion("read_count is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountIsNotNull() {
-            addCriterion("read_count is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountEqualTo(Integer value) {
-            addCriterion("read_count =", value, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountNotEqualTo(Integer value) {
-            addCriterion("read_count <>", value, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountGreaterThan(Integer value) {
-            addCriterion("read_count >", value, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("read_count >=", value, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountLessThan(Integer value) {
-            addCriterion("read_count <", value, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountLessThanOrEqualTo(Integer value) {
-            addCriterion("read_count <=", value, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountIn(List<Integer> values) {
-            addCriterion("read_count in", values, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountNotIn(List<Integer> values) {
-            addCriterion("read_count not in", values, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountBetween(Integer value1, Integer value2) {
-            addCriterion("read_count between", value1, value2, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andReadCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("read_count not between", value1, value2, "readCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountIsNull() {
-            addCriterion("support_count is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountIsNotNull() {
-            addCriterion("support_count is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountEqualTo(Integer value) {
-            addCriterion("support_count =", value, "supportCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountNotEqualTo(Integer value) {
-            addCriterion("support_count <>", value, "supportCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountGreaterThan(Integer value) {
-            addCriterion("support_count >", value, "supportCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("support_count >=", value, "supportCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountLessThan(Integer value) {
-            addCriterion("support_count <", value, "supportCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountLessThanOrEqualTo(Integer value) {
-            addCriterion("support_count <=", value, "supportCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountIn(List<Integer> values) {
-            addCriterion("support_count in", values, "supportCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountNotIn(List<Integer> values) {
-            addCriterion("support_count not in", values, "supportCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountBetween(Integer value1, Integer value2) {
-            addCriterion("support_count between", value1, value2, "supportCount");
-            return (Criteria) this;
-        }
-
-        public Criteria andSupportCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("support_count not between", value1, value2, "supportCount");
-            return (Criteria) this;
-        }
-
         public Criteria andIntroIsNull() {
             addCriterion("intro is null");
             return (Criteria) this;
@@ -482,6 +362,126 @@ public class ArticleExample {
 
         public Criteria andFrontUserIdNotBetween(Long value1, Long value2) {
             addCriterion("front_user_id not between", value1, value2, "frontUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountIsNull() {
+            addCriterion("read_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountIsNotNull() {
+            addCriterion("read_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountEqualTo(Integer value) {
+            addCriterion("read_count =", value, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountNotEqualTo(Integer value) {
+            addCriterion("read_count <>", value, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountGreaterThan(Integer value) {
+            addCriterion("read_count >", value, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("read_count >=", value, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountLessThan(Integer value) {
+            addCriterion("read_count <", value, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountLessThanOrEqualTo(Integer value) {
+            addCriterion("read_count <=", value, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountIn(List<Integer> values) {
+            addCriterion("read_count in", values, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountNotIn(List<Integer> values) {
+            addCriterion("read_count not in", values, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountBetween(Integer value1, Integer value2) {
+            addCriterion("read_count between", value1, value2, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andReadCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("read_count not between", value1, value2, "readCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountIsNull() {
+            addCriterion("support_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountIsNotNull() {
+            addCriterion("support_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountEqualTo(Integer value) {
+            addCriterion("support_count =", value, "supportCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountNotEqualTo(Integer value) {
+            addCriterion("support_count <>", value, "supportCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountGreaterThan(Integer value) {
+            addCriterion("support_count >", value, "supportCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("support_count >=", value, "supportCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountLessThan(Integer value) {
+            addCriterion("support_count <", value, "supportCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountLessThanOrEqualTo(Integer value) {
+            addCriterion("support_count <=", value, "supportCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountIn(List<Integer> values) {
+            addCriterion("support_count in", values, "supportCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountNotIn(List<Integer> values) {
+            addCriterion("support_count not in", values, "supportCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountBetween(Integer value1, Integer value2) {
+            addCriterion("support_count between", value1, value2, "supportCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andSupportCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("support_count not between", value1, value2, "supportCount");
             return (Criteria) this;
         }
 
