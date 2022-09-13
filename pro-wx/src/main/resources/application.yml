@@ -1,0 +1,96 @@
+server:
+  port: 9006
+  use-forward-headers: true
+  servlet:
+    session:
+      timeout: 86400s
+      cookie:
+        http-only: true
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+
+spring:
+  profiles:
+    active: dev
+  output:
+    ansi:
+      enabled: always
+  # thymeleaf:
+    # if you want to deploy html files separately(not in jar files), uncomment below
+    # prefix: file:./templates/
+    # cache: false
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/**/*.xml
+    - classpath*:dr/sbs/mbg/mapper/*.xml
+
+secure:
+  ignored:
+    urls: # 安全路径白名单
+      - /
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /swagger/**
+      - /**/v2/api-docs
+      - /**/*.js
+      - /**/*.css
+      - /**/*.png
+      - /**/*.ico
+      - /**/*.eot
+      - /**/*.ttf
+      - /**/*.woff
+      - /**/*.woff2
+      - /webjars/springfox-swagger-ui/**
+      - /actuator/**
+      - /druid/**
+      - /h5/**
+      - /upload
+      - /uploadUrl
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    dr.sbs: DEBUG
+  file: ./logs
+
+jwt:
+  tokenHeader: Authorization
+  secret: secret
+  expiration: 604800
+  tokenHead: Bearer
+
+# 腾讯云存储
+qcloudCos:
+  secretId: secretId
+  secretKey: secretKey
+  bucket: bucket
+  region: region
+  domain: domain
+
+app:
+  # snowflake workerId and dataCenterId, see "hutool IdUtil.createSnowflake(workerId, dataCenterId)"
+  workerId: 1
+  dataCenterId: 1
+
+  # 微信小程序
+  miniAppId: miniAppId
+  miniAppSecret: miniAppSecret
+  # 微信服务号
+  mpAppId: mpAppId
+  mpAppSecret: mpAppSecret
+
+# 微信支付
+wxPay:
+  mchId: mchId
+  mchKey: mchKey
+  keyPath: classpath:wx_pay_cert/apiclient_cert.p12
+  notifyUrl: notifyUrl

@@ -15,6 +15,9 @@ public class SbsCacheKey {
   public static final String FRONT_EXAMPLE = "example";
   // 用户信息
   public static final String FRONT_USER = "user";
+  // 微信用户信息
+  public static final String FRONT_WX_USER = "wxUser";
+  public static final String FRONT_WX_USER_BY_ID = "wxUserById";
 
   /** common */
   // 前端用户数据库行
