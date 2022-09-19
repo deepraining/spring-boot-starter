@@ -4,5 +4,6 @@ include ':pro-admin'
 include ':pro-front'
 include ':pro-search'
 include ':pro-wx'
+include ':pro-rws'
 
 rootProject.name = 'spring-boot-starter'

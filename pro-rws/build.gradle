@@ -1,0 +1,21 @@
+plugins {
+  id 'org.springframework.boot'
+  id "io.spring.dependency-management"
+}
+
+group = 'dr.sbs'
+// version should not have '-'
+version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
+archivesBaseName = 'sbs-rws'
+sourceCompatibility = 1.8
+description = 'Spring Boot Starter Read Write Splitting Application.'
+
+mainClassName = 'dr.sbs.rws.App'
+
+dependencies {
+  implementation 'net.logstash.logback:logstash-logback-encoder:6.0'
+
+  // projects
+  implementation project(':pro-mbg')
+  implementation project(':pro-common')
+}

@@ -23,6 +23,7 @@
 - `pro-front`: 使用 Session-Cookie 保持登陆状态的前端应用
 - `pro-search`: 使用 [ElasticSearch](https://www.elastic.co/) 来做文本搜索引擎
 - `pro-wx`: 微信登录相关示例项目
+- `pro-rws`: 数据库读写分离示例项目
 
 ## 扩展 Gradle Tasks
 
