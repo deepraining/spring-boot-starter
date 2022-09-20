@@ -1,5 +1,5 @@
 server:
-  port: 9003
+  port: 9005
   use-forward-headers: true
 
 spring:
@@ -20,6 +20,7 @@ mybatis:
   mapper-locations:
     - classpath:dao/**/*.xml
     - classpath*:dr/sbs/mbg/mapper/*.xml
+    - classpath*:dr/sbs/mdbmbg/mapper/*.xml
 
 logging:
   level:

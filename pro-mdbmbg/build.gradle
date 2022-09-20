@@ -1,0 +1,12 @@
+group = 'dr.sbs'
+// version should not have '-'
+version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
+archivesBaseName = 'mdbmbg'
+sourceCompatibility = 1.8
+description = 'Just for pro-mdb'
+
+mainClassName = 'dr.sbs.mdbmbg.Generator'
+
+dependencies {
+  implementation 'org.mybatis.generator:mybatis-generator-core:1.3.7'
+}

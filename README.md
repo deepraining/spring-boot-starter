@@ -24,6 +24,7 @@
 - `pro-search`: 使用 [ElasticSearch](https://www.elastic.co/) 来做文本搜索引擎
 - `pro-wx`: 微信登录相关示例项目
 - `pro-rws`: 数据库读写分离示例项目
+- `pro-mdb`: 多数据库、跨库读写示例项目
 
 ## 扩展 Gradle Tasks
 

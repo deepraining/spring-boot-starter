@@ -1,5 +1,5 @@
 server:
-  port: 9006
+  port: 9002
   use-forward-headers: true
   servlet:
     session:

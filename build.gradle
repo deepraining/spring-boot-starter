@@ -94,11 +94,15 @@ subprojects {
 
 def mbgMapperExcludePath = 'pro-mbg/src/main/java/dr/sbs/mbg/mapper/'
 def mbgModelExcludePath = 'pro-mbg/src/main/java/dr/sbs/mbg/model/'
+def mdbMbgMapperExcludePath = 'pro-mdbmbg/src/main/java/dr/sbs/mdbmbg/mapper/'
+def mdbMbgModelExcludePath = 'pro-mdbmbg/src/main/java/dr/sbs/mdbmbg/model/'
 
 googleJavaFormat {
   toolVersion = "1.7"
   exclude mbgMapperExcludePath
   exclude mbgModelExcludePath
+  exclude mdbMbgMapperExcludePath
+  exclude mdbMbgModelExcludePath
 }
 
 checkstyle {
@@ -118,6 +122,8 @@ task checkJava(type: Checkstyle) {
   source './'
   exclude mbgMapperExcludePath
   exclude mbgModelExcludePath
+  exclude mdbMbgMapperExcludePath
+  exclude mdbMbgModelExcludePath
 
   if (System.properties.checkJavaInclude != null) {
     def s = ((String)System.properties.checkJavaInclude).split(',')
