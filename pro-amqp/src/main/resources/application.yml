@@ -1,0 +1,23 @@
+server:
+  port: 9005
+  use-forward-headers: true
+
+spring:
+  profiles:
+    active: dev
+  output:
+    ansi:
+      enabled: always
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    dr.sbs: DEBUG
+  file: ./logs

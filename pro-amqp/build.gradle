@@ -1,0 +1,22 @@
+plugins {
+  id 'org.springframework.boot'
+  id "io.spring.dependency-management"
+}
+
+group = 'dr.sbs'
+// version should not have '-'
+version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
+archivesBaseName = 'sbs-amqp'
+sourceCompatibility = 1.8
+description = 'Spring Boot Starter AMQP Application.'
+
+mainClassName = 'dr.sbs.amqp.App'
+
+dependencies {
+  implementation 'org.springframework.boot:spring-boot-starter-amqp:2.1.4.RELEASE'
+  implementation 'org.springframework.boot:spring-boot-starter-websocket:2.1.4.RELEASE'
+  implementation 'net.logstash.logback:logstash-logback-encoder:6.0'
+
+  // projects
+  implementation project(':pro-common')
+}

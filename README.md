@@ -25,6 +25,7 @@
 - `pro-wx`: 微信登录相关示例项目
 - `pro-rws`: 数据库读写分离示例项目
 - `pro-mdb`: 多数据库、跨库读写示例项目
+- `pro-amqp`: 异步消息队列(`RabbitMQ`)示例项目
 
 ## 扩展 Gradle Tasks
 
