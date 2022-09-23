@@ -1,0 +1,162 @@
+syntax = "proto3";
+
+package dr.sbs.protogen;
+
+message AdminLoginLogProto {
+  int64 id = 10;
+  int64 userId = 20;
+  string ip = 30;
+  string address = 40;
+  string userAgent = 50;
+  string createTime = 60;
+  string updateTime = 70;
+}
+
+message AdminMenuProto {
+  int64 id = 10;
+  int64 parentId = 20;
+  string title = 30;
+  int32 level = 40;
+  int32 sort = 50;
+  string name = 60;
+  string icon = 70;
+  int32 hidden = 80;
+  string createTime = 90;
+  string updateTime = 100;
+}
+
+message AdminResourceProto {
+  int64 id = 10;
+  string name = 20;
+  string url = 30;
+  string description = 40;
+  int64 categoryId = 50;
+  string createTime = 60;
+  string updateTime = 70;
+}
+
+message AdminResourceCategoryProto {
+  int64 id = 10;
+  string name = 20;
+  int32 sort = 30;
+  string createTime = 40;
+  string updateTime = 50;
+}
+
+message AdminRoleProto {
+  int64 id = 10;
+  string name = 20;
+  string description = 30;
+  int32 status = 40;
+  int32 sort = 50;
+  string createTime = 60;
+  string updateTime = 70;
+}
+
+message AdminRoleMenuRelationProto {
+  int64 id = 10;
+  int64 roleId = 20;
+  int64 menuId = 30;
+  string createTime = 40;
+  string updateTime = 50;
+}
+
+message AdminRoleResourceRelationProto {
+  int64 id = 10;
+  int64 roleId = 20;
+  int64 resourceId = 30;
+  string createTime = 40;
+  string updateTime = 50;
+}
+
+message AdminUserProto {
+  int64 id = 10;
+  string username = 20;
+  string password = 30;
+  string avatar = 40;
+  string email = 50;
+  string nickname = 60;
+  string note = 70;
+  string lastLoginTime = 80;
+  int32 status = 90;
+  string createTime = 100;
+  string updateTime = 110;
+}
+
+message AdminUserRoleRelationProto {
+  int64 id = 10;
+  int64 userId = 20;
+  int64 roleId = 30;
+  string createTime = 40;
+  string updateTime = 50;
+}
+
+message ArticleProto {
+  int64 id = 10;
+  string title = 20;
+  string intro = 30;
+  string content = 40;
+  int64 frontUserId = 50;
+  int32 readCount = 60;
+  int32 supportCount = 70;
+  int32 status = 80;
+  string createTime = 90;
+  string updateTime = 100;
+}
+
+message FlywaySchemaHistoryProto {
+  int32 installedRank = 10;
+  string version = 20;
+  string description = 30;
+  string type = 40;
+  string script = 50;
+  int32 checksum = 60;
+  string installedBy = 70;
+  string installedOn = 80;
+  int32 executionTime = 90;
+  int32 success = 100;
+}
+
+message FrontUserProto {
+  int64 id = 10;
+  string username = 20;
+  string email = 30;
+  string password = 40;
+  int32 status = 50;
+  string createTime = 60;
+  string updateTime = 70;
+}
+
+message WxPayTransProto {
+  string transId = 10;
+  string billNo = 20;
+  string openId = 30;
+  string mchId = 40;
+  string appId = 50;
+  double totalFee = 60;
+  double cashFee = 70;
+  double couponFee = 80;
+  string createTime = 90;
+  string updateTime = 100;
+}
+
+message WxUserProto {
+  int64 id = 10;
+  string nickname = 20;
+  string avatar = 30;
+  int32 gender = 40;
+  string birthday = 50;
+  string province = 60;
+  string city = 70;
+  string district = 80;
+  string phone = 90;
+  string registerDate = 100;
+  string lastLogin = 110;
+  string unionId = 120;
+  string miniOpenId = 130;
+  string mpOpenId = 140;
+  int32 status = 150;
+  string createTime = 160;
+  string updateTime = 170;
+}
+

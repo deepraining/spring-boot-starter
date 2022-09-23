@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package dr.sbs.proto.all;
+
+// 因为Web前端不好处理跨文件、import导入的解析，故为了演示，
+// 把所有需要的 proto 都放到这个文件中，只用这个文件
+
+message ArticleProto {
+  int64 id = 10;
+  string title = 20;
+  string intro = 30;
+  string content = 40;
+  int64 frontUserId = 50;
+  int32 readCount = 60;
+  int32 supportCount = 70;
+  int32 status = 80;
+  string createTime = 90;
+  string updateTime = 100;
+}
+
+message FrontUserProto {
+  int64 id = 10;
+  string username = 20;
+  string email = 30;
+  string password = 40;
+  int32 status = 50;
+  string createTime = 60;
+  string updateTime = 70;
+}
+
+message IntegerResultProto {
+  int64 code = 10;
+  string message = 20;
+  int32 data = 30;
+}
+
+message ArticleResultProto {
+  int64 code = 10;
+  string message = 20;
+  ArticleProto data = 30;
+}
+
+message FrontUserResultProto {
+  int64 code = 10;
+  string message = 20;
+  FrontUserProto data = 30;
+}
+
+message ArticlePageProto {
+  int32 pageNum = 10;
+  int32 pageSize = 20;
+  int32 pages = 30;
+  int64 total = 40;
+  repeated ArticleProto list = 50;
+}
+
+message FrontUserPageProto {
+  int32 pageNum = 10;
+  int32 pageSize = 20;
+  int32 pages = 30;
+  int64 total = 40;
+  repeated FrontUserProto list = 50;
+}
+
+message ArticlePageResultProto {
+  int64 code = 10;
+  string message = 20;
+  ArticlePageProto data = 30;
+}
+
+message FrontUserPageResultProto {
+  int64 code = 10;
+  string message = 20;
+  FrontUserPageProto data = 30;
+}
+
+message LongIdParamProto {
+  int64 id = 10;
+}
+
+message ListQueryParamProto {
+  int32 pageSize = 10;
+  int32 pageNum = 20;
+  string searchKey = 30;
+}
+
+message ArticleCreateParamProto {
+  string title = 10;
+  string intro = 20;
+  string content = 30;
+}
+
+message UpdatePasswordParamProto {
+  string oldPassword = 10;
+  string newPassword = 20;
+}
+
+message UserCreateParamProto {
+  string username = 10;
+  string email = 20;
+  string password = 30;
+}

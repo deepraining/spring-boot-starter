@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package dr.sbs.proto;
+
+// protobuf 不支持继承机制，所以想要扩展 ProtoGen.proto 中的 message，
+// 只能复制代码，并且每次都要增加或者更改字段，都要同步改复制的代码
+
+message ArticleCreateParamProto {
+  string title = 10;
+  string intro = 20;
+  string content = 30;
+}
+
+message UpdatePasswordParamProto {
+  string oldPassword = 10;
+  string newPassword = 20;
+}
+
+message UserCreateParamProto {
+  string username = 10;
+  string email = 20;
+  string password = 30;
+}

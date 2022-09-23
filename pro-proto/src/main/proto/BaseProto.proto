@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package dr.sbs.proto;
+
+import "google/protobuf/any.proto";
+
+message CommonResultProto {
+  int64 code = 10;
+  string message = 20;
+  google.protobuf.Any data = 30;
+}
+
+message CommonPageProto {
+  int32 pageNum = 10;
+  int32 pageSize = 20;
+  int32 pages = 30;
+  int64 total = 40;
+  repeated google.protobuf.Any data = 50;
+}
+
+message LongIdParamProto {
+  int64 id = 10;
+}
+
+message ListQueryParamProto {
+  int32 pageSize = 10;
+  int32 pageNum = 20;
+  string searchKey = 30;
+}

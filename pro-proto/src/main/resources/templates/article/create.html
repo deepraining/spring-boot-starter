@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Article</title>
+  <script src="https://cdn.jsdelivr.net/npm/long@5.2.0/umd/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/protobufjs@7.X.X/dist/protobuf.min.js"></script>
+  <script>
+    // AllProto.root.nested.dr.nested.sbs.nested.proto.nested.all.ArticleCreateParamProto
+    const AllProto = window.protobuf.parse(`
+syntax = "proto3";
+
+package dr.sbs.proto.all;
+
+// 因为Web前端不好处理跨文件、import导入的解析，故为了演示，
+// 把所有需要的 proto 都放到这个文件中，只用这个文件
+
+message ArticleProto {
+  int64 id = 10;
+  string title = 20;
+  string intro = 30;
+  string content = 40;
+  int64 frontUserId = 50;
+  int32 readCount = 60;
+  int32 supportCount = 70;
+  int32 status = 80;
+  string createTime = 90;
+  string updateTime = 100;
+}
+
+message FrontUserProto {
+  int64 id = 10;
+  string username = 20;
+  string email = 30;
+  string password = 40;
+  int32 status = 50;
+  string createTime = 60;
+  string updateTime = 70;
+}
+
+message IntegerResultProto {
+  int64 code = 10;
+  string message = 20;
+  int32 data = 30;
+}
+
+message ArticleResultProto {
+  int64 code = 10;
+  string message = 20;
+  ArticleProto data = 30;
+}
+
+message FrontUserResultProto {
+  int64 code = 10;
+  string message = 20;
+  FrontUserProto data = 30;
+}
+
+message ArticlePageProto {
+  int32 pageNum = 10;
+  int32 pageSize = 20;
+  int32 pages = 30;
+  int64 total = 40;
+  repeated ArticleProto list = 50;
+}
+
+message FrontUserPageProto {
+  int32 pageNum = 10;
+  int32 pageSize = 20;
+  int32 pages = 30;
+  int64 total = 40;
+  repeated FrontUserProto list = 50;
+}
+
+message ArticlePageResultProto {
+  int64 code = 10;
+  string message = 20;
+  ArticlePageProto data = 30;
+}
+
+message FrontUserPageResultProto {
+  int64 code = 10;
+  string message = 20;
+  FrontUserPageProto data = 30;
+}
+
+message LongIdParamProto {
+  int64 id = 10;
+}
+
+message ListQueryParamProto {
+  int32 pageSize = 10;
+  int32 pageNum = 20;
+  string searchKey = 30;
+}
+
+message ArticleCreateParamProto {
+  string title = 10;
+  string intro = 20;
+  string content = 30;
+}
+
+message UpdatePasswordParamProto {
+  string oldPassword = 10;
+  string newPassword = 20;
+}
+
+message UserCreateParamProto {
+  string username = 10;
+  string email = 20;
+  string password = 30;
+}
+    `);
+  </script>
+  <script>
+    const {ArticleProto, FrontUserProto, IntegerResultProto, ArticleResultProto,
+      FrontUserResultProto, ArticlePageProto, FrontUserPageProto, ArticlePageResultProto,
+      FrontUserPageResultProto, LongIdParamProto, ListQueryParamProto,
+      ArticleCreateParamProto, UpdatePasswordParamProto, UserCreateParamProto} = AllProto.root.nested.dr.nested.sbs.nested.proto.nested.all;
+  </script>
+</head>
+<body>
+<p>Title: <input name="title" id="title" type="text"/></p>
+<p>Article Summary: <textarea name="intro" id="intro" rows="3"></textarea></p>
+<p>Article Content: <textarea name="content" id="content" rows="6"></textarea></p>
+<p>
+  <button type="submit" id="submit">Create</button>
+</p>
+</body>
+<script>
+  document.getElementById('submit').addEventListener('click', () => {
+    const title = document.getElementById('title').value;
+    const intro = document.getElementById('intro').value;
+    const content = document.getElementById('content').value;
+
+    let error = '';
+    if (!title) error = 'Title cant be empty.';
+    else if (!intro) error = 'Intro cant be empty.';
+    else if (!content) error = 'Content cant be empty.';
+
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    fetch('/api/article/create', {
+      method: 'post',
+      headers: {'content-type': 'application/octet-stream'},
+      body: ArticleCreateParamProto.encode(ArticleCreateParamProto.create({title, intro, content})).finish(),
+    }).then(res => {
+      const isJson = res.headers.get("content-type").indexOf("application/json") > -1;
+      const p = isJson ? res.json() : res.arrayBuffer();
+      p.then(res => {
+        if (!isJson) {
+          res = new Uint8Array(res);
+          res = IntegerResultProto.decode(res);
+          res = IntegerResultProto.toObject(res, {
+            longs: String,
+            enums: String,
+            bytes: String,
+            defaults: true,
+            arrays: true,
+            objects: true,
+            oneofs: true
+          });
+
+          console.log('proto:/api/article/create', res);
+        }
+
+        if (res.message) {
+          alert(res.message);
+
+          if (res.code === 0) location.href = '/';
+        }
+      });
+    });
+  }, !1);
+</script>
+</html>

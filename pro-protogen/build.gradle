@@ -1,0 +1,30 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    // https://maven.aliyun.com/mvn/view
+    maven { url 'https://maven.aliyun.com/repository/public' }
+    jcenter()
+    mavenCentral()
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+    maven { url 'https://plugins.gradle.org/m2/' }
+  }
+  dependencies {
+    classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.17'
+  }
+}
+
+group = 'dr.sbs'
+// version should not have '-'
+version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
+archivesBaseName = 'protogen'
+sourceCompatibility = 1.8
+description = 'Spring Boot Starter Proto Generator Application.'
+
+mainClassName = 'dr.sbs.protogen.Generator'
+
+apply plugin: 'com.google.protobuf'
+
+dependencies {
+  implementation 'com.google.protobuf:protobuf-java:3.19.1'
+  implementation 'com.google.protobuf:protobuf-java-util:3.19.1'
+}

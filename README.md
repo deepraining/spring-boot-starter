@@ -18,7 +18,7 @@
 ## 子项目
 
 - `pro-common`: 通用代码
-- `pro-mbg`: Mybatis Generator
+- `pro-mbg`: Mybatis Generator，用于自动生成 MyBatis 数据库模型与字段映射
 - `pro-admin`: 使用 JWT 保持登陆状态的后台管理应用，包括基于角色的访问控制（RBAC），示例前端项目 [sbs-admin-web](https://github.com/deepraining/sbs-admin-web)
 - `pro-front`: 使用 Session-Cookie 保持登陆状态的前端应用
 - `pro-search`: 使用 [ElasticSearch](https://www.elastic.co/) 来做文本搜索引擎
@@ -26,6 +26,8 @@
 - `pro-rws`: 数据库读写分离示例项目
 - `pro-mdb`: 多数据库、跨库读写示例项目
 - `pro-amqp`: 异步消息队列(`RabbitMQ`)示例项目
+- `pro-proto`: 使用 [protobuf](https://github.com/protocolbuffers/protobuf) 作为API数据交互格式，替代常用的 `json`
+- `pro-protogen`: 从 MySql 数据库中的生成表对应的 `proto` 文件
 
 ## 扩展 Gradle Tasks
 

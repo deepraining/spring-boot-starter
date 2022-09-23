@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+<p>Username: <input name="username" id="username" type="text"/></p>
+<p>Password: <input name="password" id="password" type="password"/></p>
+<p>
+  <button type="submit" id="submit">Login</button>
+</p>
+</body>
+<script>
+  document.getElementById('submit').addEventListener('click', () => {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    let error = '';
+    if (!username) error = 'Username cant be empty.';
+    else if (!password) error = 'Password cant be empty.';
+
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    fetch('/api/account/login', {
+      method: 'post',
+      body: formData
+    }).then(res => res.json()).then(res => {
+      if (res.message) {
+        alert(res.message);
+
+        if (res.code === 0) location.href = '/';
+      }
+    });
+  }, !1);
+</script>
+</html>
