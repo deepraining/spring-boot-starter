@@ -28,6 +28,7 @@
 - `pro-amqp`: 异步消息队列(`RabbitMQ`)示例项目
 - `pro-proto`: 使用 [protobuf](https://github.com/protocolbuffers/protobuf) 作为API数据交互格式，替代常用的 `json`
 - `pro-protogen`: 从 MySql 数据库中的生成表对应的 `proto` 文件
+- `pro-war`: 去掉 Embed Tomcat，部署到外部的 Tomcat 容器中(以 `pro-front` 项目代码为主)
 
 ## 扩展 Gradle Tasks
 
@@ -153,6 +154,116 @@ spring:
 ## Docker 部署
 
 参看 [pro-admin Dockerfile](./pro-admin/Dockerfile)
+
+## 打包 war 并部署到外部 Tomcat 中
+
+#### 1. `build.gradle` 添加 `war` 插件
+
+```
+plugins {
+  id 'war'
+}
+```
+
+#### 2. `build.gradle` 设置 Embed Tomcat 打包排除
+
+```
+dependencies {
+  providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat:2.1.4.RELEASE'
+}
+``` 
+
+默认情况下，使用 `java -jar xxx.jar` 命令运行的项目是用的 Embed Tomcat。如果是打包成 war，内部结构是
+
+```
+- META-INF
+  - MANIFEST.MF
+- org
+  - springframework
+    - ...
+- WEB-INF
+  - classes
+  - lib
+    - ...
+    - tomcat-embed-core-9.0.17.jar
+    - tomcat-embed-el-9.0.17.jar
+    - tomcat-embed-websocket-9.0.17.jar
+```
+
+而设置了 `providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat:2.1.4.RELEASE'` 排除 Embed Tomcat 后，打包成 war，内部结构就变成
+
+```
+- META-INF
+  - MANIFEST.MF
+- org
+  - springframework
+    - ...
+- WEB-INF
+  - classes
+  - lib
+    - ...
+  - lib-provided
+    - tomcat-embed-core-9.0.17.jar
+    - tomcat-embed-el-9.0.17.jar
+    - tomcat-embed-websocket-9.0.17.jar
+```
+
+`lib-provided` 目录下的 Embed Tomcat 运行时是不会加载的，由外部 Tomcat 代替
+
+另外，需要在 `application.yml` 中设置
+
+```
+spring:
+  jmx:
+    enabled: false
+```
+
+#### 3. 在 Tomcat 根目录下新建 apps 目录
+
+```
+- bin
+- conf
+- lib
+- webapps
+- ...
+
+- apps
+```
+
+主要是与 `webapps` 分开管理
+
+#### 4. 添加虚拟主机配置（以 `sbs-front` 为例）
+
+把 war 文件添加到 apps 目录下
+
+```
+- apps
+  - sbs-front.war
+```
+
+`conf/server.xml` 添加
+
+```
+......
+      <Host name="www.example.com"  appBase="apps"
+            unpackWARs="true" autoDeploy="true">
+
+        <Context path="" docBase="sbs-front" reloadable="true"/>
+
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+               prefix="www.example.com_access_log" suffix=".txt"
+               pattern="%h %l %u %t &quot;%r&quot; %s %b" />
+
+      </Host>
+......
+```
+
+运行或重启 Tomcat 就可以访问 `www.example.com` 了
+
+#### 其他事项
+
+1. `pro-war` 项目只在 Tomcat8 中测试，其他版本没试过
+1. 打包 war 文件可用 `./gradlew pro-war:bootWar` 命令
 
 ## 参考项目
 

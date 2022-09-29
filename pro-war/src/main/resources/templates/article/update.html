@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- CSRF -->
+  <meta name="_csrf" th:content="${_csrf.token}"/>
+  <!-- default header name is X-CSRF-TOKEN -->
+  <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+  <title>Update Article</title>
+</head>
+<body>
+<p>Title: <input name="title" id="title" type="text"/></p>
+<p>Article Summary: <input name="intro" id="intro" type="text"/></p>
+<p>Article Content: <textarea name="content" id="content" rows="3"></textarea></p>
+<p>
+  <button type="submit" id="submit">Update</button>
+</p>
+</body>
+<script>
+  const csrf = document.getElementsByName('_csrf')[0].getAttribute('content');
+  const csrfHeader = document.getElementsByName('_csrf_header')[0].getAttribute('content');
+
+  const titleEl = document.getElementById('title');
+  const introEl = document.getElementById('intro');
+  const contentEl = document.getElementById('content');
+  const id = location.href.split('/').slice(-1)[0];
+
+  fetch(`/api/article/record/${id}`).then(res => res.json()).then(res => {
+    if (res.code === 0) {
+      titleEl.value = res.data.title;
+      introEl.value = res.data.intro;
+      contentEl.value = res.data.content;
+    }
+  });
+
+  document.getElementById('submit').addEventListener('click', () => {
+    const title = document.getElementById('title').value;
+    const intro = document.getElementById('intro').value;
+    const content = document.getElementById('content').value;
+
+    let error = '';
+    if (!title) error = 'Title cant be empty.';
+    else if (!intro) error = 'Intro cant be empty.';
+    else if (!content) error = 'Content cant be empty.';
+
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    fetch(`/api/article/update/${id}`, {
+      method: 'post',
+      headers: {
+        "Content-Type": "application/json",
+        [csrfHeader]: csrf,
+      },
+      body: JSON.stringify({title, intro, content}),
+    }).then(res => res.json()).then(res => {
+      if (res.message) {
+        alert(res.message);
+
+        if (res.code === 0) location.href = '/user';
+      }
+    });
+  }, !1);
+</script>
+</html>
