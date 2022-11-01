@@ -29,6 +29,7 @@
 - `pro-proto`: 使用 [protobuf](https://github.com/protocolbuffers/protobuf) 作为API数据交互格式，替代常用的 `json`
 - `pro-protogen`: 从 MySql 数据库中的生成表对应的 `proto` 文件
 - `pro-war`: 去掉 Embed Tomcat，部署到外部的 Tomcat 容器中(以 `pro-front` 项目代码为主)
+- `pro-cli`: 跟普通命令行程序一样，运行一次就结束（如定时任务）
 
 ## 扩展 Gradle Tasks
 

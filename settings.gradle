@@ -11,5 +11,6 @@ include ':pro-amqp'
 include ':pro-proto'
 include ':pro-protogen'
 include ':pro-war'
+include ':pro-cli'
 
 rootProject.name = 'spring-boot-starter'

@@ -1,0 +1,22 @@
+spring:
+  main:
+    web-application-type: NONE
+  profiles:
+    active: dev
+  output:
+    ansi:
+      enabled: always
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis:
+  mapper-locations:
+    - classpath:dao/**/*.xml
+    - classpath*:dr/sbs/mbg/mapper/*.xml
+
+logging:
+  level:
+    org.springframework.web: ERROR
+    dr.sbs: DEBUG
+  file: ./logs
