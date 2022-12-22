@@ -42,17 +42,6 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public FrontUser getByUsernameRaw(String username) {
-    FrontUserExample example = new FrontUserExample();
-    example.createCriteria().andUsernameEqualTo(username);
-    List<FrontUser> users = userMapper.selectByExample(example);
-    if (users.size() > 0) {
-      return users.get(0);
-    }
-    return null;
-  }
-
-  @Override
   public FrontUser getById(Long id) {
     FrontUser user = userCacheService.getUser(id);
     if (user != null) return user;

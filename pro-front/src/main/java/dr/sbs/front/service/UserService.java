@@ -8,9 +8,6 @@ public interface UserService {
   /** Get user by username */
   FrontUser getByUsername(String username);
 
-  /** 缓存序列化后会没有password */
-  FrontUser getByUsernameRaw(String username);
-
   /** Get user by id */
   FrontUser getById(Long id);
 

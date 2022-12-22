@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     return new UserDetailsService() {
       @Override
       public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        FrontUser user = userService.getByUsernameRaw(username);
+        FrontUser user = userService.getByUsername(username);
         if (user != null) {
           return new UserInfo(user);
         }
