@@ -31,7 +31,7 @@ start(){
   if [ $? -eq "0" ]; then
     echo "${APP_NAME} is running, pid=${pid} ."
   else
-    nohup java -server -Xms256m -Xmx512m -jar $APP_NAME --spring.profiles.active=$SERVER_ENV > /dev/null 2>&1 &
+    nohup java -server -Xms256m -Xmx512m -jar $APP_NAME --spring.profiles.active=$SERVER_ENV > nohup.out 2>&1 &
     echo "${APP_NAME} starts succeeded, and view the logs to confirm that program has already been started."
   fi
 }
