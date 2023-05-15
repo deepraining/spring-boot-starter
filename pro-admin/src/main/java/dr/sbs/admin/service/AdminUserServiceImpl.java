@@ -58,7 +58,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     AdminUser adminUser = userCacheService.getUser(username);
     if (adminUser != null) return adminUser;
     AdminUserExample example = new AdminUserExample();
-    example.createCriteria().andUsernameEqualTo(username);
+    example.createCriteria().andUsernameEqualTo(username).andStatusNotEqualTo(-1);
     List<AdminUser> adminList = userMapper.selectByExample(example);
     if (adminList != null && adminList.size() > 0) {
       adminUser = adminList.get(0);
@@ -73,7 +73,7 @@ public class AdminUserServiceImpl implements AdminUserService {
   @Override
   public AdminUser getUserByUsernameRaw(String username) {
     AdminUserExample example = new AdminUserExample();
-    example.createCriteria().andUsernameEqualTo(username);
+    example.createCriteria().andUsernameEqualTo(username).andStatusNotEqualTo(-1);
     List<AdminUser> adminList = userMapper.selectByExample(example);
     if (adminList != null && adminList.size() > 0) {
       AdminUser adminUser = adminList.get(0);
@@ -91,7 +91,7 @@ public class AdminUserServiceImpl implements AdminUserService {
     adminUser.setStatus(1);
     // 查询是否有相同用户名的用户
     AdminUserExample example = new AdminUserExample();
-    example.createCriteria().andUsernameEqualTo(adminUser.getUsername());
+    example.createCriteria().andUsernameEqualTo(adminUser.getUsername()).andStatusNotEqualTo(-1);
     List<AdminUser> adminUserList = userMapper.selectByExample(example);
     if (adminUserList.size() > 0) {
       ApiAssert.fail("该用户名已被注册");
@@ -138,6 +138,7 @@ public class AdminUserServiceImpl implements AdminUserService {
         (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
     HttpServletRequest request = attributes.getRequest();
     loginLog.setIp(request.getRemoteAddr());
+    loginLog.setUserAgent(request.getHeader("User-Agent"));
     loginLogMapper.insertSelective(loginLog);
   }
 
@@ -165,9 +166,11 @@ public class AdminUserServiceImpl implements AdminUserService {
     PageHelper.startPage(pageNum, pageSize);
     AdminUserExample example = new AdminUserExample();
     AdminUserExample.Criteria criteria = example.createCriteria();
+    criteria.andStatusNotEqualTo(-1);
     if (!StringUtils.isEmpty(keyword)) {
       criteria.andUsernameLike("%" + keyword + "%");
-      example.or(example.createCriteria().andNicknameLike("%" + keyword + "%"));
+      example.or(
+          example.createCriteria().andStatusNotEqualTo(-1).andNicknameLike("%" + keyword + "%"));
     }
     return userMapper.selectByExample(example);
   }
@@ -197,7 +200,10 @@ public class AdminUserServiceImpl implements AdminUserService {
   @Override
   public int delete(Long id) {
     userCacheService.delUser(id);
-    int count = userMapper.deleteByPrimaryKey(id);
+    AdminUser adminUser = new AdminUser();
+    adminUser.setId(id);
+    adminUser.setStatus(-1);
+    int count = userMapper.updateByPrimaryKeySelective(adminUser);
     userCacheService.delResourceList(id);
     return count;
   }
@@ -208,7 +214,9 @@ public class AdminUserServiceImpl implements AdminUserService {
     // 先删除原来的关系
     AdminUserRoleRelationExample adminRoleRelationExample = new AdminUserRoleRelationExample();
     adminRoleRelationExample.createCriteria().andUserIdEqualTo(userId);
-    roleRelationMapper.deleteByExample(adminRoleRelationExample);
+    AdminUserRoleRelation adminUserRoleRelation = new AdminUserRoleRelation();
+    adminUserRoleRelation.setStatus(-1);
+    roleRelationMapper.updateByExampleSelective(adminUserRoleRelation, adminRoleRelationExample);
     // 建立新关系
     if (!CollectionUtils.isEmpty(roleIds)) {
       List<AdminUserRoleRelation> list = new ArrayList<>();
@@ -255,7 +263,7 @@ public class AdminUserServiceImpl implements AdminUserService {
       return -1;
     }
     AdminUserExample example = new AdminUserExample();
-    example.createCriteria().andUsernameEqualTo(param.getUsername());
+    example.createCriteria().andUsernameEqualTo(param.getUsername()).andStatusNotEqualTo(-1);
     List<AdminUser> adminList = userMapper.selectByExample(example);
     if (CollUtil.isEmpty(adminList)) {
       return -2;

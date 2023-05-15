@@ -10,7 +10,9 @@
         LEFT JOIN admin_menu m ON rmr.menu_id = m.id
     WHERE
       rmr.role_id = #{roleId}
+        AND rmr.status = 1
         AND m.id IS NOT NULL
+        AND m.status = 1
     GROUP BY
       m.id
   </select>
@@ -22,7 +24,9 @@
         LEFT JOIN admin_resource r ON rrr.resource_id = r.id
     WHERE
       rrr.role_id = #{roleId}
+        AND rrr.status = 1
         AND r.id IS NOT NULL
+        AND r.status = 1
     GROUP BY
       r.id
   </select>

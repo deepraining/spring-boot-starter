@@ -16,6 +16,7 @@ public class AdminResourceCategoryServiceImpl implements AdminResourceCategorySe
   public List<AdminResourceCategory> listAll() {
     AdminResourceCategoryExample example = new AdminResourceCategoryExample();
     example.setOrderByClause("sort desc");
+    example.createCriteria().andStatusEqualTo(1);
     return resourceCategoryMapper.selectByExample(example);
   }
 
@@ -32,6 +33,9 @@ public class AdminResourceCategoryServiceImpl implements AdminResourceCategorySe
 
   @Override
   public int delete(Long id) {
-    return resourceCategoryMapper.deleteByPrimaryKey(id);
+    AdminResourceCategory adminResourceCategory = new AdminResourceCategory();
+    adminResourceCategory.setId(id);
+    adminResourceCategory.setStatus(-1);
+    return resourceCategoryMapper.updateByPrimaryKeySelective(adminResourceCategory);
   }
 }

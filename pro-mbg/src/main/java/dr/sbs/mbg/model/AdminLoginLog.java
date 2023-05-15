@@ -20,27 +20,11 @@ public class AdminLoginLog implements Serializable {
     private String ip;
 
     /**
-     * 地址
-     *
-     * @mbg.generated
-     */
-    @ApiModelProperty(value = "地址", position = 4)
-    private String address;
-
-    /**
-     * 浏览器登录类型
-     *
-     * @mbg.generated
-     */
-    @ApiModelProperty(value = "浏览器登录类型", position = 5)
-    private String userAgent;
-
-    /**
      * 创建时间
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "创建时间", position = 6)
+    @ApiModelProperty(value = "创建时间", position = 4)
     private Date createTime;
 
     /**
@@ -48,8 +32,16 @@ public class AdminLoginLog implements Serializable {
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "更新时间", position = 7)
+    @ApiModelProperty(value = "更新时间", position = 5)
     private Date updateTime;
+
+    /**
+     * 浏览器登录类型
+     *
+     * @mbg.generated
+     */
+    @ApiModelProperty(value = "浏览器登录类型", position = 6)
+    private String userAgent;
 
     private static final long serialVersionUID = 1L;
 
@@ -77,22 +69,6 @@ public class AdminLoginLog implements Serializable {
         this.ip = ip;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getUserAgent() {
-        return userAgent;
-    }
-
-    public void setUserAgent(String userAgent) {
-        this.userAgent = userAgent;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -109,6 +85,14 @@ public class AdminLoginLog implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -118,10 +102,9 @@ public class AdminLoginLog implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", userId=").append(userId);
         sb.append(", ip=").append(ip);
-        sb.append(", address=").append(address);
-        sb.append(", userAgent=").append(userAgent);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
+        sb.append(", userAgent=").append(userAgent);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

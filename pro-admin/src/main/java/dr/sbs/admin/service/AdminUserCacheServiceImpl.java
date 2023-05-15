@@ -44,7 +44,7 @@ public class AdminUserCacheServiceImpl implements AdminUserCacheService {
   @Override
   public void delResourceListByRole(Long roleId) {
     AdminUserRoleRelationExample example = new AdminUserRoleRelationExample();
-    example.createCriteria().andRoleIdEqualTo(roleId);
+    example.createCriteria().andRoleIdEqualTo(roleId).andStatusEqualTo(1);
     List<AdminUserRoleRelation> relationList = userRoleRelationMapper.selectByExample(example);
     if (CollUtil.isNotEmpty(relationList)) {
       String keyPrefix = redisDatabase + ":" + redisKeyResourceList + ":";
@@ -59,7 +59,7 @@ public class AdminUserCacheServiceImpl implements AdminUserCacheService {
   @Override
   public void delResourceListByRoleIds(List<Long> roleIds) {
     AdminUserRoleRelationExample example = new AdminUserRoleRelationExample();
-    example.createCriteria().andRoleIdIn(roleIds);
+    example.createCriteria().andRoleIdIn(roleIds).andStatusEqualTo(1);
     List<AdminUserRoleRelation> relationList = userRoleRelationMapper.selectByExample(example);
     if (CollUtil.isNotEmpty(relationList)) {
       String keyPrefix = redisDatabase + ":" + redisKeyResourceList + ":";

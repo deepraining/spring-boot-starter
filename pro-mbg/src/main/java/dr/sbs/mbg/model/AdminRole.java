@@ -26,11 +26,11 @@ public class AdminRole implements Serializable {
     private String description;
 
     /**
-     * 启用状态：0->禁用；1->启用
+     * 状态：状态：-1 删除、0 禁用、1 启用
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "启用状态：0->禁用；1->启用", position = 4)
+    @ApiModelProperty(value = "状态：状态：-1 删除、0 禁用、1 启用", position = 4)
     private Integer status;
 
     /**

@@ -50,11 +50,11 @@ public class Article implements Serializable {
     private Integer supportCount;
 
     /**
-     * 状态(1: 可用, 0: 禁用)
+     * 状态：-1 删除、0 禁用、1 启用
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "状态(1: 可用, 0: 禁用)", position = 7)
+    @ApiModelProperty(value = "状态：-1 删除、0 禁用、1 启用", position = 7)
     private Byte status;
 
     /**

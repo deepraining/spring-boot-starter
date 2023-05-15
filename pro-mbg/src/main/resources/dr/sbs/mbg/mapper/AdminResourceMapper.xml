@@ -7,6 +7,7 @@
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, `name`, url, description, category_id, create_time, update_time
+    id, `name`, url, description, category_id, `status`, create_time, update_time
   </sql>
   <select id="selectByExample" parameterType="dr.sbs.mbg.model.AdminResourceExample" resultMap="BaseResultMap">
     select
@@ -103,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="dr.sbs.mbg.model.AdminResource">
     insert into `admin_resource` (id, `name`, url, 
-      description, category_id, create_time, 
-      update_time)
+      description, category_id, `status`, 
+      create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{description,jdbcType=VARCHAR}, #{categoryId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="dr.sbs.mbg.model.AdminResource">
     insert into `admin_resource`
@@ -126,6 +127,9 @@
       </if>
       <if test="categoryId != null">
         category_id,
+      </if>
+      <if test="status != null">
+        `status`,
       </if>
       <if test="createTime != null">
         create_time,
@@ -149,6 +153,9 @@
       </if>
       <if test="categoryId != null">
         #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -182,6 +189,9 @@
       <if test="record.categoryId != null">
         category_id = #{record.categoryId,jdbcType=BIGINT},
       </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -200,6 +210,7 @@
       url = #{record.url,jdbcType=VARCHAR},
       description = #{record.description,jdbcType=VARCHAR},
       category_id = #{record.categoryId,jdbcType=BIGINT},
+      `status` = #{record.status,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -221,6 +232,9 @@
       <if test="categoryId != null">
         category_id = #{categoryId,jdbcType=BIGINT},
       </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -236,6 +250,7 @@
       url = #{url,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       category_id = #{categoryId,jdbcType=BIGINT},
+      `status` = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

@@ -26,11 +26,19 @@ public class AdminRoleMenuRelation implements Serializable {
     private Long menuId;
 
     /**
+     * 状态：-1 删除、1 启用
+     *
+     * @mbg.generated
+     */
+    @ApiModelProperty(value = "状态：-1 删除、1 启用", position = 4)
+    private Integer status;
+
+    /**
      * 创建时间
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "创建时间", position = 4)
+    @ApiModelProperty(value = "创建时间", position = 5)
     private Date createTime;
 
     /**
@@ -38,7 +46,7 @@ public class AdminRoleMenuRelation implements Serializable {
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "更新时间", position = 5)
+    @ApiModelProperty(value = "更新时间", position = 6)
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;
@@ -67,6 +75,14 @@ public class AdminRoleMenuRelation implements Serializable {
         this.menuId = menuId;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -92,6 +108,7 @@ public class AdminRoleMenuRelation implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", roleId=").append(roleId);
         sb.append(", menuId=").append(menuId);
+        sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

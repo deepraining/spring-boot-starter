@@ -52,7 +52,11 @@ public class AdminMenuServiceImpl implements AdminMenuService {
 
   @Override
   public int delete(Long id) {
-    return menuMapper.deleteByPrimaryKey(id);
+    AdminMenu adminMenu = new AdminMenu();
+    adminMenu.setId(id);
+    adminMenu.setStatus(-1);
+
+    return menuMapper.updateByPrimaryKeySelective(adminMenu);
   }
 
   @Override
@@ -60,7 +64,7 @@ public class AdminMenuServiceImpl implements AdminMenuService {
     PageHelper.startPage(pageNum, pageSize);
     AdminMenuExample example = new AdminMenuExample();
     example.setOrderByClause("sort desc");
-    example.createCriteria().andParentIdEqualTo(parentId);
+    example.createCriteria().andParentIdEqualTo(parentId).andStatusEqualTo(1);
     return menuMapper.selectByExample(example);
   }
 
@@ -68,6 +72,7 @@ public class AdminMenuServiceImpl implements AdminMenuService {
   public List<AdminMenuNode> treeList() {
     AdminMenuExample example = new AdminMenuExample();
     example.setOrderByClause("sort desc");
+    example.createCriteria().andStatusEqualTo(1);
     List<AdminMenu> menuList = menuMapper.selectByExample(example);
     List<AdminMenuNode> result =
         menuList.stream()

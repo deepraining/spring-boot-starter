@@ -35,11 +35,11 @@ public class FrontUser implements Serializable {
     private String password;
 
     /**
-     * 状态(1: 可用, 0: 禁用)
+     * 状态：-1 删除、0 禁用、1 启用
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "状态(1: 可用, 0: 禁用)", position = 5)
+    @ApiModelProperty(value = "状态：-1 删除、0 禁用、1 启用", position = 5)
     private Byte status;
 
     /**

@@ -42,11 +42,19 @@ public class AdminResource implements Serializable {
     private Long categoryId;
 
     /**
+     * 状态：-1 删除、1 启用
+     *
+     * @mbg.generated
+     */
+    @ApiModelProperty(value = "状态：-1 删除、1 启用", position = 6)
+    private Integer status;
+
+    /**
      * 创建时间
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "创建时间", position = 6)
+    @ApiModelProperty(value = "创建时间", position = 7)
     private Date createTime;
 
     /**
@@ -54,7 +62,7 @@ public class AdminResource implements Serializable {
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "更新时间", position = 7)
+    @ApiModelProperty(value = "更新时间", position = 8)
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;
@@ -99,6 +107,14 @@ public class AdminResource implements Serializable {
         this.categoryId = categoryId;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -126,6 +142,7 @@ public class AdminResource implements Serializable {
         sb.append(", url=").append(url);
         sb.append(", description=").append(description);
         sb.append(", categoryId=").append(categoryId);
+        sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

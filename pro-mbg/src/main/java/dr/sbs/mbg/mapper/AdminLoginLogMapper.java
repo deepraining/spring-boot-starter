@@ -16,15 +16,21 @@ public interface AdminLoginLogMapper {
 
     int insertSelective(AdminLoginLog record);
 
+    List<AdminLoginLog> selectByExampleWithBLOBs(AdminLoginLogExample example);
+
     List<AdminLoginLog> selectByExample(AdminLoginLogExample example);
 
     AdminLoginLog selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") AdminLoginLog record, @Param("example") AdminLoginLogExample example);
 
+    int updateByExampleWithBLOBs(@Param("record") AdminLoginLog record, @Param("example") AdminLoginLogExample example);
+
     int updateByExample(@Param("record") AdminLoginLog record, @Param("example") AdminLoginLogExample example);
 
     int updateByPrimaryKeySelective(AdminLoginLog record);
+
+    int updateByPrimaryKeyWithBLOBs(AdminLoginLog record);
 
     int updateByPrimaryKey(AdminLoginLog record);
 }

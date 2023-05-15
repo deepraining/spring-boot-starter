@@ -43,22 +43,28 @@ public class AdminRoleServiceImpl implements AdminRoleService {
   public int delete(List<Long> ids) {
     AdminRoleExample example = new AdminRoleExample();
     example.createCriteria().andIdIn(ids);
-    int count = roleMapper.deleteByExample(example);
+    AdminRole adminRole = new AdminRole();
+    adminRole.setStatus(-1);
+    int count = roleMapper.updateByExampleSelective(adminRole, example);
     userCacheService.delResourceListByRoleIds(ids);
     return count;
   }
 
   @Override
   public List<AdminRole> list() {
-    return roleMapper.selectByExample(new AdminRoleExample());
+    AdminRoleExample example = new AdminRoleExample();
+    example.createCriteria().andStatusNotEqualTo(-1);
+    return roleMapper.selectByExample(example);
   }
 
   @Override
   public List<AdminRole> list(String keyword, Integer pageSize, Integer pageNum) {
     PageHelper.startPage(pageNum, pageSize);
     AdminRoleExample example = new AdminRoleExample();
+    AdminRoleExample.Criteria criteria = example.createCriteria();
+    criteria.andStatusNotEqualTo(-1);
     if (!StringUtils.isEmpty(keyword)) {
-      example.createCriteria().andNameLike("%" + keyword + "%");
+      criteria.andNameLike("%" + keyword + "%");
     }
     return roleMapper.selectByExample(example);
   }
@@ -78,7 +84,9 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     // 先删除原有关系
     AdminRoleMenuRelationExample example = new AdminRoleMenuRelationExample();
     example.createCriteria().andRoleIdEqualTo(roleId);
-    roleMenuRelationMapper.deleteByExample(example);
+    AdminRoleMenuRelation adminRoleMenuRelation = new AdminRoleMenuRelation();
+    adminRoleMenuRelation.setStatus(-1);
+    roleMenuRelationMapper.updateByExampleSelective(adminRoleMenuRelation, example);
     // 批量插入新关系
     for (Long menuId : menuIds) {
       AdminRoleMenuRelation relation = new AdminRoleMenuRelation();
@@ -94,7 +102,9 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     // 先删除原有关系
     AdminRoleResourceRelationExample example = new AdminRoleResourceRelationExample();
     example.createCriteria().andRoleIdEqualTo(roleId);
-    roleResourceRelationMapper.deleteByExample(example);
+    AdminRoleResourceRelation adminRoleResourceRelation = new AdminRoleResourceRelation();
+    adminRoleResourceRelation.setStatus(-1);
+    roleResourceRelationMapper.updateByExampleSelective(adminRoleResourceRelation, example);
     // 批量插入新关系
     for (Long resourceId : resourceIds) {
       AdminRoleResourceRelation relation = new AdminRoleResourceRelation();

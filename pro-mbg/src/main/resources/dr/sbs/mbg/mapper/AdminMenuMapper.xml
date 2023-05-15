@@ -10,6 +10,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="hidden" jdbcType="INTEGER" property="hidden" />
+    <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, parent_id, title, `level`, sort, `name`, icon, hidden, create_time, update_time
+    id, parent_id, title, `level`, sort, `name`, icon, hidden, `status`, create_time, 
+    update_time
   </sql>
   <select id="selectByExample" parameterType="dr.sbs.mbg.model.AdminMenuExample" resultMap="BaseResultMap">
     select
@@ -107,12 +109,12 @@
   <insert id="insert" parameterType="dr.sbs.mbg.model.AdminMenu">
     insert into `admin_menu` (id, parent_id, title, 
       `level`, sort, `name`, 
-      icon, hidden, create_time, 
-      update_time)
+      icon, hidden, `status`, 
+      create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, 
       #{level,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{hidden,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{icon,jdbcType=VARCHAR}, #{hidden,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="dr.sbs.mbg.model.AdminMenu">
     insert into `admin_menu`
@@ -140,6 +142,9 @@
       </if>
       <if test="hidden != null">
         hidden,
+      </if>
+      <if test="status != null">
+        `status`,
       </if>
       <if test="createTime != null">
         create_time,
@@ -172,6 +177,9 @@
       </if>
       <if test="hidden != null">
         #{hidden,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -214,6 +222,9 @@
       <if test="record.hidden != null">
         hidden = #{record.hidden,jdbcType=INTEGER},
       </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
@@ -235,6 +246,7 @@
       `name` = #{record.name,jdbcType=VARCHAR},
       icon = #{record.icon,jdbcType=VARCHAR},
       hidden = #{record.hidden,jdbcType=INTEGER},
+      `status` = #{record.status,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -265,6 +277,9 @@
       <if test="hidden != null">
         hidden = #{hidden,jdbcType=INTEGER},
       </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -283,6 +298,7 @@
       `name` = #{name,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
       hidden = #{hidden,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}

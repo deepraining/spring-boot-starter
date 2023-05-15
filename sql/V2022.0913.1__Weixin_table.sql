@@ -1,6 +1,3 @@
--- ----------------------------
--- Table structure for wx_user
--- ----------------------------
 CREATE TABLE `wx_user` (
   `id` bigint(20) NOT NULL COMMENT '主键Id(分布式生成Id)',
   `nickname` varchar(200) DEFAULT NULL COMMENT '昵称',
@@ -16,7 +13,7 @@ CREATE TABLE `wx_user` (
   `union_id` varchar(50) DEFAULT NULL COMMENT '微信unionId',
   `mini_open_id` varchar(50) DEFAULT NULL COMMENT '小程序openId',
   `mp_open_id` varchar(50) DEFAULT NULL COMMENT '公众号openId',
-  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '用户状态（1：可用，0：禁用）',
+  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态：-1 删除、0 禁用、1 启用',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
@@ -26,9 +23,6 @@ CREATE TABLE `wx_user` (
   INDEX `wx_user_idx_mp_open_id`(`mp_open_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='微信用户';
 
--- ----------------------------
--- Table structure for wx_pay_trans
--- ----------------------------
 CREATE TABLE `wx_pay_trans` (
   `trans_id` varchar(50) NOT NULL COMMENT '支付流水号（微信支付回调的 transaction_id 字段）',
   `bill_no` varchar(50) NOT NULL COMMENT '业务单据号（微信支付回调的 out_trade_no 字段）',

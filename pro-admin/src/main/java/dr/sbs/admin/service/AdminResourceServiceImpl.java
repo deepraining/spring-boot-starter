@@ -35,7 +35,10 @@ public class AdminResourceServiceImpl implements AdminResourceService {
 
   @Override
   public int delete(Long id) {
-    int count = resourceMapper.deleteByPrimaryKey(id);
+    AdminResource adminResource = new AdminResource();
+    adminResource.setId(id);
+    adminResource.setStatus(-1);
+    int count = resourceMapper.updateByPrimaryKeySelective(adminResource);
     userCacheService.delResourceListByResource(id);
     return count;
   }
@@ -46,6 +49,7 @@ public class AdminResourceServiceImpl implements AdminResourceService {
     PageHelper.startPage(pageNum, pageSize);
     AdminResourceExample example = new AdminResourceExample();
     AdminResourceExample.Criteria criteria = example.createCriteria();
+    criteria.andStatusEqualTo(1);
     if (categoryId != null) {
       criteria.andCategoryIdEqualTo(categoryId);
     }
@@ -60,6 +64,9 @@ public class AdminResourceServiceImpl implements AdminResourceService {
 
   @Override
   public List<AdminResource> listAll() {
-    return resourceMapper.selectByExample(new AdminResourceExample());
+    AdminResourceExample example = new AdminResourceExample();
+    AdminResourceExample.Criteria criteria = example.createCriteria();
+    criteria.andStatusEqualTo(1);
+    return resourceMapper.selectByExample(example);
   }
 }

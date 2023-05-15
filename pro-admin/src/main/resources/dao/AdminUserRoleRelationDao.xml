@@ -19,7 +19,7 @@
       admin_user_role_relation urr
         LEFT JOIN admin_role r ON urr.role_id = r.id
     WHERE
-      urr.user_id = #{userId}
+      urr.user_id = #{userId} AND urr.status = 1 AND r.status = 1
   </select>
   <select id="getMenuList" resultMap="dr.sbs.mbg.mapper.AdminMenuMapper.BaseResultMap">
     SELECT
@@ -31,7 +31,11 @@
         LEFT JOIN admin_menu m ON rmr.menu_id = m.id
     WHERE
       urr.user_id = #{userId}
+        AND urr.status = 1
+        AND r.status = 1
+        AND rmr.status = 1
         AND m.id IS NOT NULL
+        AND m.status = 1
     GROUP BY
       m.id
   </select>
@@ -40,15 +44,16 @@
       res.*
     FROM
       admin_user_role_relation urr
-        LEFT JOIN
-          admin_role r ON urr.role_id = r.id
-        LEFT JOIN
-          admin_role_resource_relation rrr ON r.id = rrr.role_id
-        LEFT JOIN
-          admin_resource res ON res.id = rrr.resource_id
+        LEFT JOIN admin_role r ON urr.role_id = r.id
+        LEFT JOIN admin_role_resource_relation rrr ON r.id = rrr.role_id
+        LEFT JOIN admin_resource res ON res.id = rrr.resource_id
     WHERE
       urr.user_id = #{userId}
+        AND urr.status = 1
+        AND r.status = 1
+        AND rrr.status = 1
         AND res.id IS NOT NULL
+        AND res.status = 1
     GROUP BY
       res.id
   </select>
@@ -58,6 +63,6 @@
     FROM
       admin_role_resource_relation rrr
         LEFT JOIN admin_user_role_relation urr ON rrr.role_id = urr.role_id
-    WHERE rrr.resource_id=#{resourceId}
+    WHERE rrr.resource_id=#{resourceId} AND rrr.status = 1 AND urr.status = 1
   </select>
 </mapper>

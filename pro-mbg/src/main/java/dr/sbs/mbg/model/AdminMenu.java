@@ -66,11 +66,19 @@ public class AdminMenu implements Serializable {
     private Integer hidden;
 
     /**
+     * 状态：-1 删除、1 启用
+     *
+     * @mbg.generated
+     */
+    @ApiModelProperty(value = "状态：-1 删除、1 启用", position = 9)
+    private Integer status;
+
+    /**
      * 创建时间
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "创建时间", position = 9)
+    @ApiModelProperty(value = "创建时间", position = 10)
     private Date createTime;
 
     /**
@@ -78,7 +86,7 @@ public class AdminMenu implements Serializable {
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "更新时间", position = 10)
+    @ApiModelProperty(value = "更新时间", position = 11)
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;
@@ -147,6 +155,14 @@ public class AdminMenu implements Serializable {
         this.hidden = hidden;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -177,6 +193,7 @@ public class AdminMenu implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", icon=").append(icon);
         sb.append(", hidden=").append(hidden);
+        sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

@@ -67,11 +67,11 @@ public class AdminUser implements Serializable {
     private Date lastLoginTime;
 
     /**
-     * 帐号启用状态：0->禁用；1->启用
+     * 状态：-1 删除、0 禁用、1 启用
      *
      * @mbg.generated
      */
-    @ApiModelProperty(value = "帐号启用状态：0->禁用；1->启用", position = 9)
+    @ApiModelProperty(value = "状态：-1 删除、0 禁用、1 启用", position = 9)
     private Integer status;
 
     /**

@@ -5,10 +5,11 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="user_agent" jdbcType="VARCHAR" property="userAgent" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="dr.sbs.mbg.model.AdminLoginLog">
+    <result column="user_agent" jdbcType="LONGVARCHAR" property="userAgent" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,8 +70,27 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, ip, address, user_agent, create_time, update_time
+    id, user_id, ip, create_time, update_time
   </sql>
+  <sql id="Blob_Column_List">
+    user_agent
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="dr.sbs.mbg.model.AdminLoginLogExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from `admin_login_log`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
   <select id="selectByExample" parameterType="dr.sbs.mbg.model.AdminLoginLogExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -85,9 +105,11 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
     from `admin_login_log`
     where id = #{id,jdbcType=BIGINT}
   </select>
@@ -103,11 +125,11 @@
   </delete>
   <insert id="insert" parameterType="dr.sbs.mbg.model.AdminLoginLog">
     insert into `admin_login_log` (id, user_id, ip, 
-      address, user_agent, create_time, 
-      update_time)
+      create_time, update_time, user_agent
+      )
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{ip,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{userAgent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{userAgent,jdbcType=LONGVARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="dr.sbs.mbg.model.AdminLoginLog">
     insert into `admin_login_log`
@@ -121,17 +143,14 @@
       <if test="ip != null">
         ip,
       </if>
-      <if test="address != null">
-        address,
-      </if>
-      <if test="userAgent != null">
-        user_agent,
-      </if>
       <if test="createTime != null">
         create_time,
       </if>
       <if test="updateTime != null">
         update_time,
+      </if>
+      <if test="userAgent != null">
+        user_agent,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -144,17 +163,14 @@
       <if test="ip != null">
         #{ip,jdbcType=VARCHAR},
       </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="userAgent != null">
-        #{userAgent,jdbcType=VARCHAR},
-      </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAgent != null">
+        #{userAgent,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -176,19 +192,28 @@
       <if test="record.ip != null">
         ip = #{record.ip,jdbcType=VARCHAR},
       </if>
-      <if test="record.address != null">
-        address = #{record.address,jdbcType=VARCHAR},
-      </if>
-      <if test="record.userAgent != null">
-        user_agent = #{record.userAgent,jdbcType=VARCHAR},
-      </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.userAgent != null">
+        user_agent = #{record.userAgent,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update `admin_login_log`
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      user_agent = #{record.userAgent,jdbcType=LONGVARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -198,8 +223,6 @@
     set id = #{record.id,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       ip = #{record.ip,jdbcType=VARCHAR},
-      address = #{record.address,jdbcType=VARCHAR},
-      user_agent = #{record.userAgent,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -215,27 +238,31 @@
       <if test="ip != null">
         ip = #{ip,jdbcType=VARCHAR},
       </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="userAgent != null">
-        user_agent = #{userAgent,jdbcType=VARCHAR},
-      </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="userAgent != null">
+        user_agent = #{userAgent,jdbcType=LONGVARCHAR},
+      </if>
     </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="dr.sbs.mbg.model.AdminLoginLog">
+    update `admin_login_log`
+    set user_id = #{userId,jdbcType=BIGINT},
+      ip = #{ip,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      user_agent = #{userAgent,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="dr.sbs.mbg.model.AdminLoginLog">
     update `admin_login_log`
     set user_id = #{userId,jdbcType=BIGINT},
       ip = #{ip,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      user_agent = #{userAgent,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
