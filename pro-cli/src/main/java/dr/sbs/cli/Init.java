@@ -20,16 +20,21 @@ public class Init implements ApplicationRunner {
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
+    // example: qwe asd --haha 1 --hehe --qqq=123 -e 4
+
+    // 所有值：[qwe asd --haha 1 --hehe --qqq=123 -e 4]
     log.info("args.getSourceArgs()");
     for (String i : args.getSourceArgs()) {
       log.info(i);
     }
 
+    // 仅参数名：[haha hehe qqq]
     log.info("args.getOptionNames()");
     for (String i : args.getOptionNames()) {
       log.info(i);
     }
 
+    // 仅非参数名：[qwe asd 1 -e 4]
     log.info("args.getNonOptionArgs()");
     for (String i : args.getNonOptionArgs()) {
       log.info(i);
