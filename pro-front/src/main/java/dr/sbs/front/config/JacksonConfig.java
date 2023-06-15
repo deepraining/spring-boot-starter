@@ -23,6 +23,13 @@ public class JacksonConfig {
       public void customize(Jackson2ObjectMapperBuilder jacksonObjectMapperBuilder) {
         jacksonObjectMapperBuilder.serializerByType(Long.class, ToStringSerializer.instance);
         jacksonObjectMapperBuilder.serializerByType(BigInteger.class, ToStringSerializer.instance);
+
+        // 一些字段不返回给前端用户
+        //        SimpleBeanPropertyFilter managerFilter =
+        //          SimpleBeanPropertyFilter.serializeAllExcept("createBy", "updateBy");
+        //        FilterProvider filters =
+        //          new SimpleFilterProvider().addFilter("managerFilter", managerFilter);
+        //        jacksonObjectMapperBuilder.filters(filters);
       }
     };
   }
