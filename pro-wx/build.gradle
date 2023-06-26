@@ -20,11 +20,9 @@ dependencies {
   implementation 'io.jsonwebtoken:jjwt:0.9.1'
   implementation 'org.apache.commons:commons-collections4:4.4'
   implementation 'com.qcloud:cos_api:5.6.22'
-  implementation 'com.github.binarywang:weixin-java-miniapp:3.9.0'
-  implementation 'com.github.binarywang:weixin-java-mp:3.9.0'
-  implementation 'com.github.binarywang:weixin-java-pay:3.9.0'
-  implementation 'redis.clients:jedis:3.3.0'
-  implementation 'com.github.jedis-lock:jedis-lock:1.0.0'
+  implementation 'com.github.binarywang:weixin-java-miniapp:4.5.0'
+  implementation 'com.github.binarywang:weixin-java-mp:4.5.0'
+  implementation 'com.github.binarywang:weixin-java-pay:4.5.0'
 
   // projects
   implementation project(':pro-mbg')

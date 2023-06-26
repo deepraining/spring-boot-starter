@@ -14,10 +14,10 @@ import dr.sbs.wx.util.JwtTokenUtil;
 import java.util.Date;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import me.chanjar.weixin.common.bean.WxOAuth2UserInfo;
+import me.chanjar.weixin.common.bean.oauth2.WxOAuth2AccessToken;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpService;
-import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
-import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -215,7 +215,7 @@ public class UserServiceImpl implements UserService {
     WxMpService wxMpService = WxMpConfiguration.getWxMpService();
 
     // 通过code换取网页授权access_token
-    WxMpOAuth2AccessToken result = null;
+    WxOAuth2AccessToken result = null;
     try {
       result = wxMpService.getOAuth2Service().getAccessToken(code);
     } catch (WxErrorException e) {
@@ -242,7 +242,7 @@ public class UserServiceImpl implements UserService {
     WxMpService wxMpService = WxMpConfiguration.getWxMpService();
 
     // 通过code换取网页授权access_token
-    WxMpOAuth2AccessToken result = null;
+    WxOAuth2AccessToken result = null;
     try {
       result = wxMpService.getOAuth2Service().getAccessToken(code);
     } catch (WxErrorException e) {
@@ -256,7 +256,7 @@ public class UserServiceImpl implements UserService {
     if (user != null) return generateToken(user.getUnionId());
 
     // 获取用户信息
-    WxMpUser userInfo = null;
+    WxOAuth2UserInfo userInfo = null;
     try {
       userInfo = wxMpService.getOAuth2Service().getUserInfo(result, "zh_CN");
     } catch (WxErrorException e) {
@@ -273,7 +273,7 @@ public class UserServiceImpl implements UserService {
 
     // 组装用户信息
     WxUser wxUser = new WxUser();
-    wxUser.setMpOpenId(userInfo.getOpenId());
+    wxUser.setMpOpenId(userInfo.getOpenid());
     // 新用户
     if (user == null) {
       id = UuidUtil.nextId();
