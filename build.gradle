@@ -72,6 +72,7 @@ subprojects {
     implementation 'commons-lang:commons-lang:2.6'
     implementation 'cn.hutool:hutool-core:4.5.10'
     implementation 'cn.hutool:hutool-json:4.5.10'
+    implementation 'cn.hutool:hutool-http:4.5.10'
 
     // test
     testImplementation 'junit:junit:4.12'

@@ -25,6 +25,10 @@ main(){
   echo "sh: mv ${PROJECT_NAME}/build/libs/*.jar ../libs"
   mv ${PROJECT_NAME}/build/libs/*.jar ../libs
 
+  # remove distributions
+  echo "sh: rm -rf ${PROJECT_NAME}/build/distributions/*"
+  rm -rf ${PROJECT_NAME}/build/distributions/*
+
   # change to root directory
   echo "sh: cd ../"
   cd ../
