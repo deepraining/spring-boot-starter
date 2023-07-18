@@ -31,7 +31,9 @@ start(){
   if [ $? -eq "0" ]; then
     echo "${APP_NAME} is running, pid=${pid} ."
   else
-    nohup java -server -Xms512m -Xmx512m -jar $APP_NAME --spring.profiles.active=$SERVER_ENV > nohup.out 2>&1 &
+    # 产品环境中，参数-Xms与-Xmx可以设置为相同的值，这样可以减轻伸缩堆大小带来的压力，提高性能
+    # 根据应用的需要可以增加堆内存大小，比如 -Xms4g -Xmx4g
+    nohup java -server -Xms256m -Xmx512m -jar $APP_NAME --spring.profiles.active=$SERVER_ENV > nohup.out 2>&1 &
     echo "${APP_NAME} starts succeeded, and view the logs to confirm that program has already been started."
   fi
 }
