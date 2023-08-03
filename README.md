@@ -266,11 +266,6 @@ spring:
 1. `pro-war` 项目只在 Tomcat8 中测试，其他版本没试过
 1. 打包 war 文件可用 `./gradlew pro-war:bootWar` 命令
 
-## 参考项目
-
-- [mall](https://github.com/macrozheng/mall)
-- [halo](https://github.com/halo-dev/halo)
-
 ## 注意
 
 - 使用 `pro-search` 时，ElasticSearch 服务器与客户端版本最好严格一致，本项目的客户端版本是 `v6.4.3`
