@@ -2,6 +2,8 @@
 
 用于快速创建 [Spring Boot](https://spring.io/projects/spring-boot) 应用的模板脚手架，使用 [Gradle](https://gradle.org/) 构建项目。
 
+以 [mybatis-plus](https://github.com/baomidou/mybatis-plus) 作为数据库驱动层，请查看 [spring-boot-starter v2](https://github.com/deepraining/spring-boot-starter2)
+
 ## 特性
 
 - 使用 [Gradle](https://gradle.org/) 构建整个项目
