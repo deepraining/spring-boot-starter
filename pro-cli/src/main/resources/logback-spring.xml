@@ -13,7 +13,7 @@
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_FILE_PATH}/${APP_NAME}-%d{yyyy-MM-dd}.log</fileNamePattern>
-      <maxHistory>30</maxHistory>
+      <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
       <pattern>${FILE_LOG_PATTERN}</pattern>
@@ -26,7 +26,7 @@
     </filter>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <fileNamePattern>${LOG_FILE_PATH}/${APP_NAME}-%d{yyyy-MM-dd}.error.log</fileNamePattern>
-      <maxHistory>30</maxHistory>
+      <maxHistory>180</maxHistory>
     </rollingPolicy>
     <encoder>
       <pattern>${FILE_LOG_PATTERN}</pattern>
