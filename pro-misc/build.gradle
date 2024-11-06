@@ -1,0 +1,18 @@
+plugins {
+  id 'org.springframework.boot'
+  id "io.spring.dependency-management"
+}
+
+group = 'dr.sbs'
+// version should not have '-'
+version = new Date().format("yyyy.MMdd.HHmm", TimeZone.getTimeZone("GMT+08:00"))
+archivesBaseName = 'sbs-misc'
+sourceCompatibility = 1.8
+description = 'Spring Boot Starter Misc Application.'
+
+mainClassName = 'dr.sbs.misc.App'
+
+dependencies {
+  implementation 'cn.hutool:hutool-crypto:4.5.10'
+  implementation 'net.logstash.logback:logstash-logback-encoder:6.0'
+}
