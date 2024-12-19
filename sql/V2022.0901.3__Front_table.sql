@@ -7,8 +7,8 @@ CREATE TABLE `front_user` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  INDEX `front_user_idx_username` (`username`),
-  INDEX `front_user_idx_email` (`email`)
+  INDEX `idx_username` (`username`),
+  INDEX `idx_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='前端用户';
 
 CREATE TABLE `article` (
@@ -23,5 +23,5 @@ CREATE TABLE `article` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  INDEX `article_idx_front_user_id` (`front_user_id`)
+  INDEX `idx_front_user_id` (`front_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文章';

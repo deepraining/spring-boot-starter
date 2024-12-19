@@ -17,10 +17,10 @@ CREATE TABLE `wx_user` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
-  INDEX `wx_user_idx_phone`(`phone`),
-  INDEX `wx_user_idx_union_id`(`union_id`),
-  INDEX `wx_user_idx_mini_open_id`(`mini_open_id`),
-  INDEX `wx_user_idx_mp_open_id`(`mp_open_id`)
+  INDEX `idx_phone`(`phone`),
+  INDEX `idx_union_id`(`union_id`),
+  INDEX `idx_mini_open_id`(`mini_open_id`),
+  INDEX `idx_mp_open_id`(`mp_open_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='微信用户';
 
 CREATE TABLE `wx_pay_trans` (
@@ -35,5 +35,5 @@ CREATE TABLE `wx_pay_trans` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`trans_id`),
-  INDEX `wx_pay_trans_idx_bill_no`(`bill_no`)
+  INDEX `idx_bill_no`(`bill_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='微信支付流水';
