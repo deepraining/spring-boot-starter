@@ -5,7 +5,7 @@ spring:
 
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://remote-ip:3306/starter?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://127.0.0.1:3306/starter?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: root123456
 
@@ -20,3 +20,4 @@ logging:
   level:
     org.springframework.web: ERROR
     dr.sbs: ERROR
+  file: /var/logs
