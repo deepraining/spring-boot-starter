@@ -23,29 +23,33 @@ else
   index=$1
 fi
 
-if [ $index -lt 1 ]; then
-  echo 'No jar file selected to run'
-  return 1
-fi
-jarFilesCount=`ls libs/${jar_name}-*.jar|wc -l|sed 's/ //g'`
-if [ $jarFilesCount -eq 0 ]; then
-  echo 'No jar files found under libs directory'
-  return 1;
-fi
-if [ $index -gt $jarFilesCount ]; then
-  echo "[index] should be 1-$jarFilesCount"
-  return 1
-fi
+main(){
+  if [ $index -lt 1 ]; then
+    echo 'No jar file selected to run'
+    return 1
+  fi
+  jarFilesCount=`ls libs/${jar_name}-*.jar|wc -l|sed 's/ //g'`
+  if [ $jarFilesCount -eq 0 ]; then
+    echo 'No jar files found under libs directory'
+    return 1;
+  fi
+  if [ $index -gt $jarFilesCount ]; then
+    echo "[index] should be 1-$jarFilesCount"
+    return 1
+  fi
 
-jarFile=`ls libs/${jar_name}-*.jar|tail -${index}|head -1`
+  jarFile=`ls libs/${jar_name}-*.jar|tail -${index}|head -1`
 
-echo "sh: cp ${jarFile} ${app_name}"
-cp $jarFile $app_name
+  echo "sh: cp ${jarFile} ${app_name}"
+  cp $jarFile $app_name
 
-# save current version
-tempStr=${jarFile##*-}
-version=${tempStr%%.jar}
-echo $version > $version_file
+  # save current version
+  tempStr=${jarFile##*-}
+  version=${tempStr%%.jar}
+  echo $version > $version_file
 
-echo 'sh: sh bin/run.sh restart'
-sh bin/run.sh restart
+  echo 'sh: sh bin/run.sh restart'
+  sh bin/run.sh restart
+}
+
+main
