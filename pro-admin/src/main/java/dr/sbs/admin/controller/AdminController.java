@@ -47,7 +47,7 @@ public class AdminController {
       @RequestBody @Validated AdminUserParam adminUserParam, BindingResult bindingResult) {
     AdminUser adminUser = userService.register(adminUserParam);
     if (adminUser == null) {
-      CommonResult.failed();
+      return CommonResult.failed();
     }
     return CommonResult.success(adminUser);
   }
